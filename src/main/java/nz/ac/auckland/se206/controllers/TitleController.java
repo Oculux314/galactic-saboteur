@@ -17,6 +17,6 @@ public class TitleController {
 
   @FXML
   public void onMouseClicked(MouseEvent event) throws IOException {
-    App.setRoot("room");
+    App.setRoot("exposition");
   }
 }

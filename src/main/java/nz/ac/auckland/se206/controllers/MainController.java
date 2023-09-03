@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 
 /** Controller class for the room view. */
-public class RoomController {
+public class MainController {
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
