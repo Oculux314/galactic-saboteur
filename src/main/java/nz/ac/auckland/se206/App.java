@@ -1,38 +1,53 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.controllers.MainController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
  * remain as the class that runs the JavaFX application.
  */
 public class App extends Application {
-
-  private static Scene scene;
+  private static Map<Root.Name, Root> roots = new HashMap<>(); // Stores all FXML/Controller pairs
 
   public static void main(final String[] args) {
     launch();
   }
 
-  public static void setRoot(String fxml) throws IOException {
-    scene.setRoot(loadFxml(fxml));
+  public static Root getRoot(final Root.Name rootName) throws IOException {
+    return roots.get(rootName); // Null if does not exist
   }
 
-  /**
-   * Returns the node associated to the input file. The method expects that the file is located in
-   * "src/main/resources/fxml".
-   *
-   * @param fxml The name of the FXML file (without extension).
-   * @return The node of the input file.
-   * @throws IOException If the file is not found.
-   */
-  private static Parent loadFxml(final String fxml) throws IOException {
-    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
+  public static void setRoot(final Root.Name rootName) throws IOException {
+    if (!roots.containsKey(rootName)) {
+      makeRoot(rootName); // Automatically make root if does not exist
+    }
+
+    Parent fxml = roots.get(rootName).getFxml();
+    Pane panMain = ((MainController) roots.get(Root.Name.MAIN).getController()).getMainPane();
+
+    // Set root as child of main pane
+    if (panMain.getChildren().isEmpty()) {
+      panMain.getChildren().add(fxml);
+    } else {
+      panMain.getChildren().set(0, fxml);
+    }
+
+    fxml.requestFocus();
+  }
+
+  private static void makeRoot(final Root.Name rootName) throws IOException {
+    String fxml = rootName.toString().toLowerCase();
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
+    roots.put(rootName, new Root(loader));
   }
 
   /**
@@ -43,9 +58,13 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("title");
-    scene = new Scene(root, 600, 470);
+    makeRoot(Root.Name.MAIN);
+    Parent root = getRoot(Root.Name.MAIN).getFxml();
+    setRoot(Root.Name.TITLE);
+
+    Scene scene = new Scene(root, 600, 470);
     stage.setScene(scene);
+
     stage.show();
     root.requestFocus();
   }

@@ -2,9 +2,12 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 
 /** Controller class for the room view. */
-public class MainController {
+public class MainController implements Controller {
+
+  @FXML private Pane panMain;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -29,5 +32,9 @@ public class MainController {
   @FXML
   public void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
+  }
+
+  public Pane getMainPane() {
+    return panMain;
   }
 }
