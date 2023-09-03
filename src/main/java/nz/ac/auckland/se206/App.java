@@ -38,11 +38,8 @@ public class App extends Application {
     Pane panMain = ((MainController) roots.get(Root.Name.MAIN).getController()).getMainPane();
 
     // Set root as child of main pane
-    if (panMain.getChildren().isEmpty()) {
-      panMain.getChildren().add(fxml);
-    } else {
-      panMain.getChildren().set(0, fxml);
-    }
+    panMain.getChildren().clear();
+    panMain.getChildren().add(fxml);
 
     fxml.requestFocus();
   }
@@ -71,6 +68,9 @@ public class App extends Application {
     // Link stage/scene/root graph
     Scene scene = new Scene(root, 800, 600);
     stage.setScene(scene);
+
+    // Stylesheet
+    scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
     // Properties
     scene.setFill(Color.BLACK);
