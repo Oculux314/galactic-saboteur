@@ -7,7 +7,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.controllers.MainController;
 
@@ -51,19 +54,31 @@ public class App extends Application {
   }
 
   /**
-   * This method is invoked when the application starts. It loads and shows the "Canvas" scene.
+   * This method is invoked when the application starts. It loads the stage and scene, as well as
+   * the main and title roots.
    *
    * @param stage The primary stage of the application.
-   * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
+   * @throws IOException If either "main.fxml" or "title.fxml" is not found in
+   *     "src/main/resources/fxml/".
    */
   @Override
   public void start(final Stage stage) throws IOException {
+    // Set up root graph
     makeRoot(Root.Name.MAIN);
     Parent root = getRoot(Root.Name.MAIN).getFxml();
     setRoot(Root.Name.TITLE);
 
-    Scene scene = new Scene(root, 600, 470);
+    // Link stage/scene/root graph
+    Scene scene = new Scene(root, 800, 600);
     stage.setScene(scene);
+
+    // Properties
+    scene.setFill(Color.BLACK);
+    stage.setTitle("Galactic Saboteur");
+    stage.getIcons().add(new Image("/images/logo.png"));
+    stage.setResizable(false);
+    stage.setFullScreen(true);
+    stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
     stage.show();
     root.requestFocus();
