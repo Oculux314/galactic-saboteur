@@ -1,0 +1,18 @@
+* {
+  /* Dev only */
+  -fx-border-color: LIME;
+  -fx-border-width: 0.5px;
+}
+
+.root {
+  -fx-background-color: BLACK;
+}
+
+.label {
+  -fx-text-fill: WHITE;
+  -fx-font-size: 20px;
+}
+
+#lblTitle {
+  -fx-font-size: 50px;
+}
