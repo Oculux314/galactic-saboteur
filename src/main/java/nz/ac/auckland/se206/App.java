@@ -77,8 +77,8 @@ public class App extends Application {
     stage.setTitle("Galactic Saboteur");
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setResizable(false);
-    stage.setFullScreen(true);
-    stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+    //stage.setFullScreen(true);
+    //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
     stage.show();
     root.requestFocus();
