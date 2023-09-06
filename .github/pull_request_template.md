@@ -1,13 +1,13 @@
-**Issue**
+### Issue
 
 <!-- Why are you making this change? -->
 
-**Fix**
+### Fix
 
 <!-- What changes did you make? -->
 
-**Risks**
+### Risks
 
 <!-- Key areas for the reviewer to focus on. -->
 
-**Notes**
+### Notes
