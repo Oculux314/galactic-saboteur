@@ -11,14 +11,14 @@ import javafx.scene.shape.Rectangle;
 public class ExpositionController implements Controller {
 
   @FXML private Pane panSpaceship;
-  @FXML private Group panzoomgroup;
+  @FXML private Group grpPanZoom;
   @FXML private Rectangle recTest;
   @FXML private Button btnSettings;
 
   private ZoomAndPanHandler zoomAndPanHandler;
 
   public void initialize() {
-    zoomAndPanHandler = new ZoomAndPanHandler(panzoomgroup);
+    zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
 
   @FXML

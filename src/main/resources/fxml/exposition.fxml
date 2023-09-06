@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane fx:id="panSpaceship" focusTraversable="true" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ExpositionController">
+<Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ExpositionController">
    <children>
-      <Group fx:id="panzoomgroup">
+      <Group fx:id="grpPanZoom" onDragDetected="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
@@ -20,6 +20,6 @@
          </children>
       </Group>
       <Button fx:id="btnSettings" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />
-      <Button layoutX="711.0" layoutY="20.0" mnemonicParsing="false" text="Mute Sound" />
+      <Button layoutX="711.0" layoutY="20.0" mnemonicParsing="false" text="Menu" />
    </children>
 </Pane>
