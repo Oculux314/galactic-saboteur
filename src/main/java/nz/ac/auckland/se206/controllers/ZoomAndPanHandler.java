@@ -21,6 +21,7 @@ public class ZoomAndPanHandler {
   private double minScaleFactor = 1.0;
   private double maxScaleFactor = 2.0;
   private double scaleFactor = 1.0;
+  private double margin = 100.0;
 
   private double imageWidth;
   private double imageHeight;
@@ -48,10 +49,10 @@ public class ZoomAndPanHandler {
     double newY = grpPanZoom.getTranslateY() + deltaY;
 
     // Calculate the image boundaries for the current zoom level
-    double minX = -(scale.getX() - 1) * imageWidth;
-    double minY = -(scale.getY() - 1) * imageHeight;
-    double maxX = 0;
-    double maxY = 0;
+    double minX = -(scale.getX() - 1) * imageWidth - margin;
+    double minY = -(scale.getY() - 1) * imageHeight - margin;
+    double maxX = margin;
+    double maxY = margin;
 
     // Restrict panning within image boundaries
     newX = clamp(newX, minX, maxX);
@@ -83,10 +84,10 @@ public class ZoomAndPanHandler {
             - scaleChange * (pivotY - grpPanZoom.getBoundsInParent().getMinY());
 
     // Calculate the image boundaries for the new zoom level
-    double minX = -(newScaleFactor - 1) * imageWidth;
-    double minY = -(newScaleFactor - 1) * imageHeight;
-    double maxX = 0;
-    double maxY = 0;
+    double minX = -(newScaleFactor - 1) * imageWidth - margin;
+    double minY = -(newScaleFactor - 1) * imageHeight - margin;
+    double maxX = margin;
+    double maxY = margin;
 
     // Adjust translation to stay within image boundaries
     translateX = clamp(translateX, minX, maxX);
