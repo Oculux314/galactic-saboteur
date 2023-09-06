@@ -15,7 +15,11 @@ import nz.ac.auckland.se206.controllers.MainController;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
+
+  /** The primary stage of the application */
   private static Stage stage;
+
+  /** A map of all roots in the application (name -> root) */
   private static Map<Root.Name, Root> roots = new HashMap<>(); // Stores all FXML/Controller pairs
 
   /**
