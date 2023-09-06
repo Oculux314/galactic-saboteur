@@ -7,6 +7,9 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Root;
 
+/** 
+ * Controller class for the title screen.
+ */
 public class TitleController implements Controller {
 
   /** Pane that takes up the entire screen. */
