@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -19,6 +18,7 @@ import nz.ac.auckland.se206.controllers.MainController;
  * remain as the class that runs the JavaFX application.
  */
 public class App extends Application {
+  private static Stage stage;
   private static Map<Root.Name, Root> roots = new HashMap<>(); // Stores all FXML/Controller pairs
 
   public static void main(final String[] args) {
@@ -50,6 +50,14 @@ public class App extends Application {
     roots.put(rootName, new Root(loader));
   }
 
+  public static Stage getStage() {
+    return stage;
+  }
+
+  public static Scene getScene() {
+    return stage.getScene();
+  }
+
   /**
    * This method is invoked when the application starts. It loads the stage and scene, as well as
    * the main and title roots.
@@ -59,7 +67,9 @@ public class App extends Application {
    *     "src/main/resources/fxml/".
    */
   @Override
-  public void start(final Stage stage) throws IOException {
+  public void start(final Stage newStage) throws IOException {
+    App.stage = newStage;
+
     // Set up root graph
     makeRoot(Root.Name.MAIN);
     Parent root = getRoot(Root.Name.MAIN).getFxml();
@@ -72,13 +82,14 @@ public class App extends Application {
     // Stylesheet
     scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
+    // Scene size listeners
+    ((MainController) roots.get(Root.Name.MAIN).getController()).addSceneListeners();
+
     // Properties
     scene.setFill(Color.BLACK);
     stage.setTitle("Galactic Saboteur");
     stage.getIcons().add(new Image("/images/logo.png"));
-    stage.setResizable(false);
-    stage.setFullScreen(true);
-    stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+    stage.setMaximized(true);
 
     stage.show();
     root.requestFocus();
