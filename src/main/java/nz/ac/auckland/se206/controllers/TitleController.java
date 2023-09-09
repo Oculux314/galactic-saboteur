@@ -7,15 +7,20 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Root;
 
+/** 
+ * Controller class for the title screen.
+ */
 public class TitleController implements Controller {
 
+  /** Pane that takes up the entire screen. */
   @FXML Pane panFullScreen;
 
-  /** Initializes the title view */
-  public void initialize() {
-    // Initialization code goes here
-  }
-
+  /**
+   * Called when the mouse is clicked on the full screen pane. Moves game to the exposition screen.
+   *
+   * @param event The mouse event.
+   * @throws IOException If the exposition.fxml file is not found.
+   */
   @FXML
   public void onMouseClicked(MouseEvent event) throws IOException {
     App.setRoot(Root.Name.EXPOSITION);

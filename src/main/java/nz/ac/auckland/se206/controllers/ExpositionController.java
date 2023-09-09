@@ -8,6 +8,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
+/** Controller class for the exposition screens. */
 public class ExpositionController implements Controller {
 
   @FXML private Pane panSpaceship;
