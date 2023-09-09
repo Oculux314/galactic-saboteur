@@ -1,49 +1,26 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Screen;
 
-/** Controller class for the exposition screens. */
+/** Controller class for the title screen. */
 public class ExpositionController implements Controller {
 
-  @FXML private Pane panSpaceship;
-  @FXML private Group grpPanZoom;
-  @FXML private Rectangle recTest;
-  @FXML private Button btnSettings;
+  /** Pane that takes up the entire screen. */
+  @FXML Pane panFullScreen;
 
-  private ZoomAndPanHandler zoomAndPanHandler;
-
-  public void initialize() {
-    zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
-  }
-
+  /**
+   * Called when the mouse is clicked on the full screen pane. Moves control to the game screen.
+   *
+   * @param event The mouse event.
+   * @throws IOException If the game.fxml file is not found.
+   */
   @FXML
-  private void onPress(MouseEvent event) {
-    zoomAndPanHandler.onPress(event);
-  }
-
-  @FXML
-  private void onDrag(MouseEvent event) {
-    zoomAndPanHandler.onDrag(event);
-  }
-
-  @FXML
-  private void onScroll(ScrollEvent event) {
-    zoomAndPanHandler.onScroll(event);
-  }
-
-  @FXML
-  private void settingsClicked() {
-    System.out.println("Settings button clicked");
-  }
-
-  @FXML
-  private void recClicked() {
-    System.out.println("Rectangle clicked");
+  public void onMouseClicked(MouseEvent event) throws IOException {
+    App.setScreen(Screen.Name.GAME);
   }
 }
