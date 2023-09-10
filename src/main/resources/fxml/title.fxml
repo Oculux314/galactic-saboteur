@@ -4,17 +4,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="panFullScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TitleController">
+
+<Pane fx:id="panContainer" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TitleController">
    <children>
-      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="253.0" prefHeight="71.0" prefWidth="800.0" text="Galactic Saboteur" textAlignment="CENTER">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="317.0" prefHeight="31.0" prefWidth="800.0" text="click anywhere to start" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
+      <Pane fx:id="panFullScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="253.0" prefHeight="71.0" prefWidth="800.0" text="Galactic Saboteur" textAlignment="CENTER">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="317.0" prefHeight="31.0" prefWidth="800.0" text="click anywhere to start" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </Pane>
