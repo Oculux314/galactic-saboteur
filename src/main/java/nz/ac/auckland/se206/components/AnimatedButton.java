@@ -1,8 +1,12 @@
 package nz.ac.auckland.se206.components;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 public class AnimatedButton extends ImageView {
 
@@ -40,8 +44,7 @@ public class AnimatedButton extends ImageView {
    * @param event The mouse event.
    */
   public void onMouseEntered(MouseEvent event) {
-    setScaleX(1.1);
-    setScaleY(1.1);
+    animateScale(1.1);
   }
 
   /**
@@ -50,8 +53,7 @@ public class AnimatedButton extends ImageView {
    * @param event The mouse event.
    */
   private void onMouseExited(MouseEvent event) {
-    setScaleX(1);
-    setScaleY(1);
+    animateScale(1);
   }
 
   /**
@@ -60,9 +62,8 @@ public class AnimatedButton extends ImageView {
    * @param event The mouse event.
    */
   private void onMousePressed(MouseEvent event) {
-    setScaleX(1);
-    setScaleY(1);
-    setOpacity(0.6);
+    animateScale(1, 1);
+    animateOpacity(0.6, 1);
   }
 
   /**
@@ -71,8 +72,64 @@ public class AnimatedButton extends ImageView {
    * @param event The mouse event.
    */
   private void onMouseReleased(MouseEvent event) {
-    setScaleX(1.1);
-    setScaleY(1.1);
-    setOpacity(1);
+    animateScale(1.1);
+    animateOpacity(1);
+  }
+
+  /**
+   * Smoothly scale the button to the given value over 25 milliseconds.
+   *
+   * @param scale The scale to transition to.
+   */
+  private void animateScale(double scale) {
+    animateScale(scale, 25);
+  }
+
+  /**
+   * Smoothly scale the button to the given value over the given time.
+   *
+   * @param scale The scale to transition to.
+   * @param millis The time in milliseconds to transition over.
+   */
+  private void animateScale(double scale, double millis) {
+    KeyFrame keyFrame =
+        new KeyFrame(
+            Duration.millis(millis),
+            new KeyValue(scaleXProperty(), scale),
+            new KeyValue(scaleYProperty(), scale));
+
+    animate(keyFrame);
+  }
+
+  /**
+   * Smoothly transition the opacity of the button to the given value over 25 milliseconds.
+   *
+   * @param opacity The opacity to transition to.
+   */
+  private void animateOpacity(double opacity) {
+    animateOpacity(opacity, 25);
+  }
+
+  /**
+   * Smoothly transition the opacity of the button to the given value over the given time.
+   *
+   * @param opacity The opacity to transition to.
+   * @param millis The time in milliseconds to transition over.
+   */
+  private void animateOpacity(double opacity, double millis) {
+    KeyFrame keyFrame =
+        new KeyFrame(Duration.millis(millis), new KeyValue(opacityProperty(), opacity));
+
+    animate(keyFrame);
+  }
+
+  /**
+   * Asynchronously animates a keyframe.
+   *
+   * @param keyFrame The keyframe to animate.
+   */
+  private void animate(KeyFrame keyFrame) {
+    Timeline timeline = new Timeline(keyFrame);
+    timeline.play();
   }
 }
