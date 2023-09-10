@@ -9,6 +9,8 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Screen;
 
 public class ZoomAndPanHandler {
 
@@ -66,7 +68,6 @@ public class ZoomAndPanHandler {
   }
 
   public void onScroll(ScrollEvent event) {
-
     scaleFactor = (event.getDeltaY() < 0) ? 1 / zoomFactor : zoomFactor;
     double currentScaleFactor = scale.getX();
     double newScaleFactor = currentScaleFactor * scaleFactor;
@@ -109,5 +110,32 @@ public class ZoomAndPanHandler {
 
   private double clamp(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
+  }
+
+  /**
+   * Returns the width of the screen. Guaranteed to conform to the aspect ratio of the screen.
+   *
+   * @return The width of the screen.
+   */
+  private double getScreenWidth() {
+    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenWidth();
+  }
+
+  /**
+   * Returns the height of the screen. Guaranteed to conform to the aspect ratio of the screen.
+   *
+   * @return The height of the screen.
+   */
+  private double getScreenHeight() {
+    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenHeight();
+  }
+
+  /**
+   * Returns the zoom of the screen due to window size. This does not include game zoom.
+   *
+   * @return The screen zoom. 1.0 corresponds to the default screen size 600px x 800px.
+   */
+  private double getScreenZoom() {
+    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenZoom();
   }
 }

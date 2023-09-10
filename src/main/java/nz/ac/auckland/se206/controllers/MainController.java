@@ -26,14 +26,9 @@ public class MainController implements Controller {
   /** Innermost pane that stores a reference to the root node of the active screen. */
   @FXML private Pane panMain;
 
-  /**
-   * Returns the main pane. This is the pane that stores the root node of the active screen.
-   *
-   * @return The main pane.
-   */
-  public Pane getMainPane() {
-    return panMain;
-  }
+  private double screenWidth = DEFAULT_WIDTH;
+  private double screenHeight = DEFAULT_HEIGHT;
+  private double zoom = 1;
 
   /** Adds listeners to the scene to keep the screen centered and scaled to the scene dimensions. */
   public void addSceneListeners() {
@@ -62,10 +57,11 @@ public class MainController implements Controller {
   private void updateOuterPaneSize(double sceneWidth, double sceneHeight) {
     // Height to set outer pane to be (maintain aspect ratio)
     double aspectRatio = (double) DEFAULT_WIDTH / DEFAULT_HEIGHT;
-    double requiredPaneWidth = Math.min(sceneWidth, sceneHeight * aspectRatio);
+    screenWidth = Math.min(sceneWidth, sceneHeight * aspectRatio);
+    screenHeight = screenWidth / aspectRatio;
 
     // Set outer pane size
-    double zoom = requiredPaneWidth / DEFAULT_WIDTH;
+    zoom = screenWidth / DEFAULT_WIDTH;
     panScale.setScaleX(zoom);
     panScale.setScaleY(zoom);
 
@@ -74,5 +70,41 @@ public class MainController implements Controller {
     double yShift = (sceneHeight - DEFAULT_HEIGHT) / 2;
     panTranslate.setLayoutX(xShift);
     panTranslate.setLayoutY(yShift);
+  }
+
+  /**
+   * Returns the main pane. This is the pane that stores the root node of the active screen.
+   *
+   * @return The main pane.
+   */
+  public Pane getMainPane() {
+    return panMain;
+  }
+
+  /**
+   * Returns the width of the screen. Guaranteed to conform to the aspect ratio of the screen.
+   *
+   * @return The width of the screen.
+   */
+  public double getScreenWidth() {
+    return screenWidth;
+  }
+
+  /**
+   * Returns the height of the screen. Guaranteed to conform to the aspect ratio of the screen.
+   *
+   * @return The height of the screen.
+   */
+  public double getScreenHeight() {
+    return screenHeight;
+  }
+
+  /**
+   * Returns the zoom of the screen due to window size. This does not include game zoom.
+   *
+   * @return The screen zoom. 1.0 corresponds to the default screen size 600px x 800px.
+   */
+  public double getScreenZoom() {
+    return zoom;
   }
 }
