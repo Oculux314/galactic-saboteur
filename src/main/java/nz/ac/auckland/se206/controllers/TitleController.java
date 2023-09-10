@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
-import nz.ac.auckland.se206.components.IconButton;
+import nz.ac.auckland.se206.components.AnimatedButton;
 
 /** Controller class for the title screen. */
 public class TitleController implements Controller {
@@ -18,7 +18,7 @@ public class TitleController implements Controller {
   @FXML
   private void initialize() {
     // TEMP: Play button
-    IconButton btnPlay = new IconButton("/images/play.png");
+    AnimatedButton btnPlay = new AnimatedButton("/images/play.png");
     btnPlay.setLayoutX(420);
     btnPlay.setLayoutY(420);
     panBackground.getChildren().add(btnPlay);
@@ -34,7 +34,7 @@ public class TitleController implements Controller {
         });
 
     // TEMP: Settings button
-    IconButton btnSettings = new IconButton("/images/settings.png");
+    AnimatedButton btnSettings = new AnimatedButton("/images/settings.png");
     btnSettings.setLayoutX(300);
     btnSettings.setLayoutY(420);
     panBackground.getChildren().add(btnSettings);
