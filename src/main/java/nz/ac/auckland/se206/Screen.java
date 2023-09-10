@@ -12,11 +12,14 @@ public class Screen {
   public enum Name {
     MAIN,
     TITLE,
+    SETTINGS,
     EXPOSITION,
     GAME;
   }
 
-  /** The FXML file for the screen. More precisely, a reference to the screen node of the FXML file. */
+  /**
+   * The FXML file for the screen. More precisely, a reference to the screen node of the FXML file.
+   */
   private Parent fxml;
 
   /** The controller for the screen. */
@@ -34,7 +37,9 @@ public class Screen {
   }
 
   /**
-   * Returns the FXML file for the screen. More precisely, a reference to the screen node of the FXML file.
+   * Returns the FXML file for the screen. More precisely, a reference to the screen node of the
+   * FXML file.
+   *
    * @return The screen node of the FXML file.
    */
   public Parent getFxml() {
@@ -43,6 +48,7 @@ public class Screen {
 
   /**
    * Returns the controller for the screen.
+   *
    * @return The controller for the screen.
    */
   public Controller getController() {
