@@ -20,8 +20,7 @@ public class App extends Application {
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
-  private static Map<Screen.Name, Screen> screens =
-      new HashMap<>(); // Stores all FXML/Controller pairs
+  private static Map<Screen.Name, Screen> screens = new HashMap<>();
 
   /**
    * The entry point of the application.

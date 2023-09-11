@@ -3,33 +3,15 @@ package nz.ac.auckland.se206.components;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 public class AnimatedButton extends ImageView {
 
-  /**
-   * Creates a new icon button with an image given by a URL.
-   *
-   * @param url The URL of the image for the button to display.
-   */
-  public AnimatedButton(String url) {
-    this(new Image(url));
-  }
-
-  /**
-   * Creates a new icon button with an image.
-   *
-   * @param image The image for the button to display.
-   */
-  public AnimatedButton(Image image) {
-    super(image);
-
-    // Fixed size for all buttons
-    setFitHeight(80);
-    setFitWidth(80);
+  /** Creates a new animated button. Add image in SceneBuilder or programmatically. */
+  public AnimatedButton() {
+    super();
 
     // Event listeners
     setOnMouseEntered((event) -> onMouseEntered(event));

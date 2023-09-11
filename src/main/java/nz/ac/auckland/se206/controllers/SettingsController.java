@@ -12,25 +12,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 public class SettingsController implements Controller {
 
   @FXML Pane panBackground;
-
-  // TEMP: Programmatically add buttons
-  @FXML
-  private void initialize() {
-    AnimatedButton btnBack = new AnimatedButton("/images/back.png");
-    btnBack.setLayoutX(100);
-    btnBack.setLayoutY(100);
-    panBackground.getChildren().add(btnBack);
-
-    btnBack.setOnMouseClicked(
-        (event) -> {
-          try {
-            onBackClicked(event);
-          } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
-        });
-  }
+  @FXML AnimatedButton btnBack;
 
   /**
    * Called when the back button is clicked. Moves control to the title screen.
