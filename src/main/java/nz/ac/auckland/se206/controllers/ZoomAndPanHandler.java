@@ -114,24 +114,6 @@ public class ZoomAndPanHandler {
   }
 
   /**
-   * Returns the width of the screen. Guaranteed to conform to the aspect ratio of the screen.
-   *
-   * @return The width of the screen.
-   */
-  private double getScreenWidth() {
-    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenWidth();
-  }
-
-  /**
-   * Returns the height of the screen. Guaranteed to conform to the aspect ratio of the screen.
-   *
-   * @return The height of the screen.
-   */
-  private double getScreenHeight() {
-    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenHeight();
-  }
-
-  /**
    * Returns the zoom of the screen due to window size. This does not include game zoom.
    *
    * @return The screen zoom. 1.0 corresponds to the default screen size 600px x 800px.
