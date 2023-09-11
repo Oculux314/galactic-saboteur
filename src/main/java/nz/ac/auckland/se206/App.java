@@ -19,8 +19,8 @@ public class App extends Application {
   /** The primary stage of the application */
   private static Stage stage;
 
-  /** A map of all roots in the application (name -> root) */
-  private static Map<Root.Name, Root> roots = new HashMap<>(); // Stores all FXML/Controller pairs
+  /** A map of all screens in the application (name -> screen) */
+  private static Map<Screen.Name, Screen> screens = new HashMap<>();
 
   /**
    * The entry point of the application.
@@ -32,31 +32,31 @@ public class App extends Application {
   }
 
   /**
-   * Returns the root with the given name, or null if it does not exist.
+   * Returns the screen with the given name, or null if it does not exist.
    *
-   * @param rootName The name of the root to get.
-   * @return The root with the given name, or null if it does not exist.
+   * @param screenName The name of the screen to get.
+   * @return The screen with the given name, or null if it does not exist.
    */
-  public static Root getRoot(final Root.Name rootName) {
-    return roots.get(rootName); // Null if does not exist
+  public static Screen getScreen(final Screen.Name screenName) {
+    return screens.get(screenName); // Null if does not exist
   }
 
   /**
-   * Sets the root with the given name as the child of the main pane. Creates the root if it does
-   * not exist.
+   * Sets the screen with the given name as the child of the main pane. Creates the screen if it
+   * does not exist.
    *
-   * @param rootName The name of the root to set.
-   * @throws IOException If the root does not exist and the FXML file for the root is not found.
+   * @param screenName The name of the screen to set.
+   * @throws IOException If the screen does not exist and the FXML file for the screen is not found.
    */
-  public static void setRoot(final Root.Name rootName) throws IOException {
-    if (!roots.containsKey(rootName)) {
-      makeRoot(rootName); // Automatically make root if does not exist
+  public static void setScreen(final Screen.Name screenName) throws IOException {
+    if (!screens.containsKey(screenName)) {
+      makeScreen(screenName); // Automatically make screen if does not exist
     }
 
-    Parent fxml = getRoot(rootName).getFxml();
-    Pane panMain = ((MainController) roots.get(Root.Name.MAIN).getController()).getMainPane();
+    Parent fxml = getScreen(screenName).getFxml();
+    Pane panMain = ((MainController) screens.get(Screen.Name.MAIN).getController()).getMainPane();
 
-    // Set root as child of main pane
+    // Set screen as child of main pane
     panMain.getChildren().clear();
     panMain.getChildren().add(fxml);
 
@@ -64,15 +64,15 @@ public class App extends Application {
   }
 
   /**
-   * Creates a root with the given name, and stores it in the roots map.
+   * Creates a screen with the given name, and stores it in the screens map.
    *
-   * @param rootName The name of the root to create.
-   * @throws IOException If the FXML file for the root is not found.
+   * @param screenName The name of the screen to create.
+   * @throws IOException If the FXML file for the screen is not found.
    */
-  private static void makeRoot(final Root.Name rootName) throws IOException {
-    String fxml = rootName.toString().toLowerCase();
+  private static void makeScreen(final Screen.Name screenName) throws IOException {
+    String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
-    roots.put(rootName, new Root(loader));
+    screens.put(screenName, new Screen(loader));
   }
 
   /**
@@ -99,7 +99,7 @@ public class App extends Application {
    *
    * <ul>
    *   <li>Initialise stage and scene
-   *   <li>Set up root graph
+   *   <li>Set up screen graph
    *   <li>Link style sheet and listeners
    *   <li>Set stage properties
    *   <li>Show stage
@@ -113,20 +113,20 @@ public class App extends Application {
   public void start(final Stage newStage) throws IOException {
     App.stage = newStage;
 
-    // Set up root graph
-    makeRoot(Root.Name.MAIN);
-    Parent root = getRoot(Root.Name.MAIN).getFxml();
-    setRoot(Root.Name.TITLE);
+    // Set up screen graph
+    makeScreen(Screen.Name.MAIN);
+    Parent screen = getScreen(Screen.Name.MAIN).getFxml();
+    setScreen(Screen.Name.TITLE);
 
-    // Link stage/scene/root graph
-    Scene scene = new Scene(root, 800, 600);
+    // Link stage/scene/screen graph
+    Scene scene = new Scene(screen, 800, 600);
     stage.setScene(scene);
 
     // Stylesheet
     scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
     // Listeners
-    ((MainController) roots.get(Root.Name.MAIN).getController()).addSceneListeners();
+    ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
 
     // Properties
     scene.setFill(Color.BLACK);
@@ -135,6 +135,6 @@ public class App extends Application {
     stage.setMaximized(true);
 
     stage.show();
-    root.requestFocus();
+    screen.requestFocus();
   }
 }

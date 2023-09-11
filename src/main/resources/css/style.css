@@ -1,8 +1,8 @@
-* {
-  /* Dev only */
+/* * {
+  /* Dev only *
   -fx-border-color: LIME;
   -fx-border-width: 0.5px;
-}
+} */
 
 .root {
   -fx-background-color: BLACK;

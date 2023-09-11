@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
+
+<Pane fx:id="panBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
+   <children>
+      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="253.0" prefHeight="71.0" prefWidth="800.0" text="Settings" textAlignment="CENTER">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="317.0" prefHeight="32.0" prefWidth="800.0" text="placeholder fxml" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnimatedButton fx:id="btnBack" fitHeight="80.0" fitWidth="80.0" layoutX="50.0" layoutY="50.0" onMouseClicked="#onBackClicked">
+         <image>
+            <Image url="@../images/back.png" />
+         </image>
+      </AnimatedButton>
+   </children>
+</Pane>
