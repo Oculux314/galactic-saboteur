@@ -19,6 +19,7 @@ public class ZoomAndPanHandler {
 
   private double pressedX, pressedY;
   private double deltaX, deltaY;
+  private double newX, newY;
   private double zoomFactor = 1.25;
   private double minScaleFactor = 1.0;
   private double maxScaleFactor = 2.0;
@@ -47,9 +48,9 @@ public class ZoomAndPanHandler {
     deltaX = event.getSceneX() - pressedX;
     deltaY = event.getSceneY() - pressedY;
 
-    double newX = grpPanZoom.getTranslateX() + deltaX;
-    double newY = grpPanZoom.getTranslateY() + deltaY;
-
+    newX = grpPanZoom.getTranslateX() + deltaX / getScreenZoom();
+    newY = grpPanZoom.getTranslateY() + deltaY / getScreenZoom();
+    
     // Calculate the image boundaries for the current zoom level
     double minX = -(scale.getX() - 1) * imageWidth - margin;
     double minY = -(scale.getY() - 1) * imageHeight - margin;
