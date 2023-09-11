@@ -23,7 +23,7 @@ public class ZoomAndPanHandler {
   private double minScaleFactor = 1.0;
   private double maxScaleFactor = 2.0;
   private double scaleFactor = 1.0;
-  private double margin = 100.0;
+  private double margin = 0.0;
 
   private double imageWidth;
   private double imageHeight;
