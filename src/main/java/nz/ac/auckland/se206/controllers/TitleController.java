@@ -23,7 +23,7 @@ public class TitleController implements Controller {
    * @throws IOException If the exposition.fxml file is not found.
    */
   @FXML
-  public void onPlayClicked(MouseEvent event) throws IOException {
+  private void onPlayClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.EXPOSITION);
   }
 
@@ -34,7 +34,7 @@ public class TitleController implements Controller {
    * @throws IOException If the settings.fxml file is not found.
    */
   @FXML
-  public void onSettingsClicked(MouseEvent event) throws IOException {
+  private void onSettingsClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.SETTINGS);
   }
 }
