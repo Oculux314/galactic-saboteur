@@ -19,10 +19,25 @@
             <Image url="@../images/back.png" />
          </image>
       </AnimatedButton>
-      <StateButton fx:id="btnTest" fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" text="Difficulty" textAlignment="CENTER" />
+      <StateButton fx:id="btnDifficulty" fitHeight="50.0" fitWidth="150.0" layoutX="105.0" layoutY="305.0">
          <image>
             <Image url="@../images/placeholder.png" />
          </image>
       </StateButton>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="270.0" prefWidth="150.0" text="Time" textAlignment="CENTER" />
+      <StateButton fx:id="btnTime" fitHeight="50.0" fitWidth="150.0" layoutX="325.0" layoutY="305.0">
+         <image>
+            <Image url="@../images/placeholder.png" />
+         </image>
+      </StateButton>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="545.0" layoutY="270.0" prefWidth="150.0" text="Text-to-Speech" textAlignment="CENTER" />
+      <StateButton fx:id="btnTts" fitHeight="50.0" fitWidth="150.0" layoutX="545.0" layoutY="305.0">
+         <image>
+            <Image url="@../images/placeholder.png" />
+         </image>
+      </StateButton>
+      <Label fx:id="lblDifficultyHigh" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="360.0" prefHeight="30.0" prefWidth="150.0" styleClass="highscore" text="High:" textAlignment="CENTER" />
+      <Label fx:id="lblTimeLow" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="360.0" prefHeight="30.0" prefWidth="150.0" styleClass="highscore" text="Low:" textAlignment="CENTER" />
    </children>
 </Pane>

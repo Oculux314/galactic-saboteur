@@ -14,12 +14,22 @@ public class SettingsController implements Controller {
 
   @FXML Pane panBackground;
   @FXML AnimatedButton btnBack;
-  @FXML StateButton btnTest;
+  @FXML StateButton btnDifficulty;
+  @FXML StateButton btnTime;
+  @FXML StateButton btnTts;
 
   @FXML
   private void initialize() {
-    btnTest.addState("state1", "play.png", () -> System.out.println("Now at state 1"), null);
-    btnTest.addState("state2", "settings.png", () -> System.out.println("Now at state 2"), null);
+    btnDifficulty.addState("easy", "placeholder.png");
+    btnDifficulty.addState("medium", "placeholder.png");
+    btnDifficulty.addState("hard", "placeholder.png");
+
+    btnTime.addState("2min", "placeholder.png");
+    btnTime.addState("4min", "placeholder.png");
+    btnTime.addState("6min", "placeholder.png");
+
+    btnTts.addState("off", "placeholder.png");
+    btnTts.addState("on", "placeholder.png");
   }
 
   /**

@@ -1,16 +1,23 @@
-/* * {
-  /* Dev only *
-  -fx-border-color: LIME;
-  -fx-border-width: 0.5px;
-} */
-
 .root {
   -fx-background-color: BLACK;
+
+  -green: #58DD94;
+  -cream: #EBE7D9;
+  -grey: #334855;
+  -icon-grey: #bfbfbf;
 }
 
 .label {
-  -fx-text-fill: WHITE;
   -fx-font-size: 20px;
+  -fx-font-family: Calibri;
+  -fx-font-weight: bold;
+  -fx-font-style: italic;
+  -fx-text-fill: white;
+}
+
+.highscore {
+  -fx-font-size: 15px;
+  -fx-text-fill: -icon-grey;
 }
 
 #lblTitle {

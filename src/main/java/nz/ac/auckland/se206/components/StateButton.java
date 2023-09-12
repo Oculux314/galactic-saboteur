@@ -94,5 +94,6 @@ public class StateButton extends AnimatedButton {
 
   private void onClick() {
     nextState();
+    System.out.println(getState());
   }
 }
