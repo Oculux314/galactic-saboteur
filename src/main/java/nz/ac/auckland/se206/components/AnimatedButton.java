@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.components;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
@@ -16,15 +15,6 @@ public class AnimatedButton extends ImageView {
    */
   public AnimatedButton() {
     super();
-
-    if (getImage() == null) {
-      try {
-        setImage(new Image("images/placeholder.png"));
-      } catch (IllegalArgumentException e) {
-        // Notify user
-        System.out.println(e);
-      }
-    }
 
     // Event listeners
     setOnMouseEntered((event) -> onMouseEntered(event));
