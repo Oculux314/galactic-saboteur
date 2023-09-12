@@ -19,11 +19,12 @@ public class ZoomAndPanHandler {
 
   private double pressedX, pressedY;
   private double deltaX, deltaY;
+  private double newX, newY;
   private double zoomFactor = 1.25;
   private double minScaleFactor = 1.0;
   private double maxScaleFactor = 2.0;
   private double scaleFactor = 1.0;
-  private double margin = 100.0;
+  private double margin = 0.0;
 
   private double imageWidth;
   private double imageHeight;
@@ -47,9 +48,9 @@ public class ZoomAndPanHandler {
     deltaX = event.getSceneX() - pressedX;
     deltaY = event.getSceneY() - pressedY;
 
-    double newX = grpPanZoom.getTranslateX() + deltaX;
-    double newY = grpPanZoom.getTranslateY() + deltaY;
-
+    newX = grpPanZoom.getTranslateX() + deltaX / getScreenZoom();
+    newY = grpPanZoom.getTranslateY() + deltaY / getScreenZoom();
+    
     // Calculate the image boundaries for the current zoom level
     double minX = -(scale.getX() - 1) * imageWidth - margin;
     double minY = -(scale.getY() - 1) * imageHeight - margin;
@@ -110,24 +111,6 @@ public class ZoomAndPanHandler {
 
   private double clamp(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
-  }
-
-  /**
-   * Returns the width of the screen. Guaranteed to conform to the aspect ratio of the screen.
-   *
-   * @return The width of the screen.
-   */
-  private double getScreenWidth() {
-    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenWidth();
-  }
-
-  /**
-   * Returns the height of the screen. Guaranteed to conform to the aspect ratio of the screen.
-   *
-   * @return The height of the screen.
-   */
-  private double getScreenHeight() {
-    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenHeight();
   }
 
   /**
