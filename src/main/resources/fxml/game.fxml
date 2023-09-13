@@ -13,7 +13,7 @@
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/demo4.png" />
+                  <Image url="@../images/ship.png" />
                </image>
             </ImageView>
             <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="401.0" layoutY="245.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
