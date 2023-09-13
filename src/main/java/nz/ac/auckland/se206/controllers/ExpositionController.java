@@ -11,15 +11,20 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
+import javafx.scene.control.Button;
 
 /** Controller class for the title screen. */
 public class ExpositionController implements Controller {
 
   /** Pane that takes up the entire screen. */
   @FXML Pane panFullScreen;
-
+  @FXML Pane replayPane;
+  @FXML Button btnReplay;
+  @FXML Button btnContinue;
   @FXML ImageView imageView = new ImageView();
+
   private int currentImageIndex = 0;
+  private Timeline timeline = new Timeline();
 
   private String[] imagePaths = {
     "/images/expo2.jpg",
@@ -29,8 +34,7 @@ public class ExpositionController implements Controller {
 
   @FXML
   public void initialize() {
-    Image image = new Image("/images/expo1.jpg");
-    imageView.setImage(image);
+    replayPane.setVisible(false);
     startSlideshow();
   }
 
@@ -42,11 +46,14 @@ public class ExpositionController implements Controller {
    */
   @FXML
   public void onMouseClicked(MouseEvent event) throws IOException {
-    App.setScreen(Screen.Name.GAME);
+    
   }
 
   private void startSlideshow() {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> showNextImage()));
+    replayPane.setVisible(false);
+    Image image = new Image("/images/expo1.jpg");
+    imageView.setImage(image);
+    timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> showNextImage()));
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
   }
@@ -58,7 +65,21 @@ public class ExpositionController implements Controller {
       imageView.setImage(image);
       currentImageIndex++;
     } else {
+      timeline.stop();
+      currentImageIndex = 0;
+      replayPane.setVisible(true);
       imageView.setImage(null);
     }
+  }
+
+  @FXML
+  public void onReplayClicked() throws IOException {
+    startSlideshow();
+  }
+
+  @FXML
+  public void onContinueClicked() throws IOException {
+    System.out.println("Continue button clicked");
+    App.setScreen(Screen.Name.GAME);
   }
 }
