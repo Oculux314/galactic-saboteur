@@ -7,8 +7,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.shape.Rectangle?>
@@ -155,9 +157,111 @@
             </Label>
             <Polyline fx:id="shapeClues" fill="#32485400" layoutX="100.0" layoutY="8.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
             <Polyline fx:id="shapeSuspects" fill="#32485400" layoutX="200.0" layoutY="8.0" onMouseClicked="#suspectsBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
+            <Pane fx:id="panSide" layoutX="5.0" layoutY="37.0" prefHeight="398.0" prefWidth="189.0" />
          </children>
       </Group>
       <Button fx:id="btnSettings" layoutX="638.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />
       <Button layoutX="711.0" layoutY="20.0" mnemonicParsing="false" text="Menu" />
+      <VBox fx:id="suspectsContent" layoutY="110.0" prefHeight="317.0" prefWidth="190.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue11" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue21" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue31" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="clueContent" layoutY="110.0" prefHeight="317.0" prefWidth="190.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue12" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue22" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="clue32" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </Pane>

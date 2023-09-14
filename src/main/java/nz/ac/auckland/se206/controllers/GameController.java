@@ -7,10 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Screen;
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
@@ -19,13 +18,17 @@ public class GameController implements Controller {
   @FXML private Group grpPanZoom;
   @FXML private Rectangle recTest;
   @FXML private Button btnSettings;
-  @FXML private Button btnClue;
   @FXML private Polyline shapeClues;
+  @FXML private Polyline shapeSuspects;
+  @FXML private Pane panSide;
+  @FXML private VBox suspectsContent;
+  @FXML private VBox clueContent;
 
   private ZoomAndPanHandler zoomAndPanHandler;
 
   public void initialize() {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+    suspectsContent.setVisible(false);
   }
 
   @FXML
@@ -55,11 +58,13 @@ public class GameController implements Controller {
 
   @FXML
   private void clueBtnPressed() throws IOException {
-    App.addScreen(Screen.Name.CLUES);
+    suspectsContent.setVisible(false);
+    clueContent.setVisible(true);
   }
 
   @FXML
   private void suspectsBtnPressed() throws IOException {
-    App.addScreen(Screen.Name.SUSPECTS);
+    clueContent.setVisible(false);
+    suspectsContent.setVisible(true);
   }
 }
