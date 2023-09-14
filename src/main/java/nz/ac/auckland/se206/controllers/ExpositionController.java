@@ -6,7 +6,6 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -22,21 +21,16 @@ public class ExpositionController implements Controller {
   @FXML AnimatedButton btnReplay;
   @FXML AnimatedButton btnContinue;
   @FXML ImageView imageView = new ImageView();
-  
+
   private int currentImageIndex = 0;
   private Timeline timeline = new Timeline();
-  private String[] imagePaths = {
-    "/images/expo2.jpg",
-    "/images/expo3.jpg",
-    "/images/expo4.jpg"
-  };
+  private String[] imagePaths = {"/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"};
 
   @FXML
   public void initialize() {
     replayPane.setVisible(false);
     startSlideshow();
   }
-
 
   private void startSlideshow() {
     // Runs the slideshow
