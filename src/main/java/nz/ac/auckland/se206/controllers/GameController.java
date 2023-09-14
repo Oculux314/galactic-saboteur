@@ -27,6 +27,9 @@ public class GameController implements Controller {
   @FXML private Polyline colShapeSuspects;
   @FXML private Polyline colShapeClues;
   @FXML private Rectangle colPanel;
+  @FXML private Polyline btnPanelHide;
+  @FXML private Polyline btnPanelShow;
+  @FXML private Group panelContainer;
 
   private ZoomAndPanHandler zoomAndPanHandler;
 
@@ -74,5 +77,17 @@ public class GameController implements Controller {
     suspectsContent.setVisible(true);
     Color green = Color.web("42805e");
     colPanel.setFill(green);
+  }
+
+  @FXML
+  private void btnPanelShowPressed() {
+    panelContainer.setLayoutX(0);
+    btnPanelHide.setVisible(true);
+  }
+
+  @FXML
+  private void btnPanelHidePressed() {
+    panelContainer.setLayoutX(-172);
+    btnPanelHide.setVisible(false);
   }
 }
