@@ -16,6 +16,7 @@
 
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
    <children>
+      <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
       <Group fx:id="grpPanZoom">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
@@ -23,7 +24,6 @@
                   <Image url="@../images/ship.png" />
                </image>
             </ImageView>
-            <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="401.0" layoutY="245.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#334855" height="401.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="196.0" />
             <GridPane gridLinesVisible="true" prefHeight="600.0" prefWidth="800.0" visible="false">
                <columnConstraints>
@@ -150,6 +150,7 @@
                </font>
             </Label>
             <Polyline fx:id="shapeClues" fill="#32485400" layoutX="100.0" layoutY="73.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
+            <Polyline fx:id="shapeSuspects" fill="#32485400" layoutX="198.0" layoutY="73.0" onMouseClicked="#suspectsBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
          </children>
       </Group>
       <Button fx:id="btnSettings" layoutX="638.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />

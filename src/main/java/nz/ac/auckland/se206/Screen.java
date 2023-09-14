@@ -16,6 +16,7 @@ public class Screen {
     EXPOSITION,
     GAME,
     CLUES,
+    SUSPECTS,
   }
 
   /**

@@ -57,4 +57,9 @@ public class GameController implements Controller {
   private void clueBtnPressed() throws IOException {
     App.addScreen(Screen.Name.CLUES);
   }
+
+  @FXML
+  private void suspectsBtnPressed() throws IOException {
+    App.addScreen(Screen.Name.SUSPECTS);
+  }
 }
