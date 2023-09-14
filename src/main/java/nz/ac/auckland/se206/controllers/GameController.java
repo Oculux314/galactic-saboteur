@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 
@@ -23,6 +24,9 @@ public class GameController implements Controller {
   @FXML private Pane panSide;
   @FXML private VBox suspectsContent;
   @FXML private VBox clueContent;
+  @FXML private Polyline colShapeSuspects;
+  @FXML private Polyline colShapeClues;
+  @FXML private Rectangle colPanel;
 
   private ZoomAndPanHandler zoomAndPanHandler;
 
@@ -60,11 +64,15 @@ public class GameController implements Controller {
   private void clueBtnPressed() throws IOException {
     suspectsContent.setVisible(false);
     clueContent.setVisible(true);
+    Color blue = Color.web("334855");
+    colPanel.setFill(blue);
   }
 
   @FXML
   private void suspectsBtnPressed() throws IOException {
     clueContent.setVisible(false);
     suspectsContent.setVisible(true);
+    Color green = Color.web("42805e");
+    colPanel.setFill(green);
   }
 }

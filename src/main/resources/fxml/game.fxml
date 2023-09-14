@@ -18,7 +18,7 @@
 
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
    <children>
-      <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
+      <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="590.0" />
       <Group fx:id="grpPanZoom">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
@@ -140,9 +140,9 @@
       </Group>
       <Group layoutY="65.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#334855" height="401.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="196.0" />
-            <Polyline fill="#334855" layoutX="100.0" layoutY="8.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
-            <Polyline fill="#42805e" layoutX="200.0" layoutY="8.0" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -90.71649169921875, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
+            <Rectangle fx:id="colPanel" arcHeight="5.0" fill="#334855" height="401.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.5" width="196.0" />
+            <Polyline fx:id="colShapeClues" fill="#334855" layoutX="100.0" layoutY="8.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
+            <Polyline fx:id="colShapeSuspects" fill="#42805e" layoutX="200.0" layoutY="8.0" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -90.71649169921875, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
             <Line endX="83.9282455444336" endY="3.716796875" startX="11.602995872497559" startY="3.716796875" strokeWidth="1.5" />
             <Line endX="185.18359375" endY="3.716796875" startX="110.38677215576172" startY="3.716796875" strokeWidth="1.5" />
             <Label layoutX="27.0" layoutY="6.0" text="clues">
