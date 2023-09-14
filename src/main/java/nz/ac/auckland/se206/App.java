@@ -75,6 +75,18 @@ public class App extends Application {
     screens.put(screenName, new Screen(loader));
   }
 
+  public static void addScreen(final Screen.Name screenName) throws IOException {
+    if (!screens.containsKey(screenName)) {
+      makeScreen(screenName); // Automatically make screen if does not exist
+    }
+
+    Parent fxml = getScreen(screenName).getFxml();
+    Pane panMain = ((MainController) screens.get(Screen.Name.MAIN).getController()).getMainPane();
+    panMain.getChildren().add(fxml);
+
+    fxml.requestFocus();
+  }
+
   /**
    * Returns the primary stage of the application.
    *
