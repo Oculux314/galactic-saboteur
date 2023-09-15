@@ -33,6 +33,8 @@ public class GameController implements Controller {
   @FXML private Group panelContainer;
   @FXML private Rectangle clueInformationRectangle;
   @FXML private Label lblClueInformation;
+  @FXML private Rectangle suspectInformationRectangle;
+  @FXML private Label lblSuspectInformation;
 
   private ZoomAndPanHandler zoomAndPanHandler;
 
@@ -128,5 +130,41 @@ public class GameController implements Controller {
   private void clue3InformationHide(MouseEvent event) {
     clueInformationRectangle.setOpacity(0);
     lblClueInformation.setText("");
+  }
+
+  @FXML
+  private void suspect1InformationShow(MouseEvent event) {
+    suspectInformationRectangle.setOpacity(1);
+    lblSuspectInformation.setText("Suspect 1");
+  }
+
+  @FXML
+  private void suspect1InformationHide(MouseEvent event) {
+    suspectInformationRectangle.setOpacity(0);
+    lblSuspectInformation.setText("");
+  }
+
+  @FXML
+  private void suspect2InformationShow(MouseEvent event) {
+    suspectInformationRectangle.setOpacity(1);
+    lblSuspectInformation.setText("Suspect 2");
+  }
+
+  @FXML
+  private void suspect2InformationHide(MouseEvent event) {
+    suspectInformationRectangle.setOpacity(0);
+    lblSuspectInformation.setText("");
+  }
+
+  @FXML
+  private void suspect3InformationShow(MouseEvent event) {
+    suspectInformationRectangle.setOpacity(1);
+    lblSuspectInformation.setText("Suspect 3");
+  }
+
+  @FXML
+  private void suspect3InformationHide(MouseEvent event) {
+    suspectInformationRectangle.setOpacity(0);
+    lblSuspectInformation.setText("");
   }
 }
