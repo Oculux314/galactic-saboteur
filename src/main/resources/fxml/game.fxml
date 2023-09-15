@@ -141,7 +141,7 @@
       <Polyline fx:id="btnPanelShow" fill="#58dd94" layoutX="75.0" layoutY="110.0" onMouseClicked="#btnPanelShowPressed" points="-36.13677978515625, -39.99999237060547, -11.170974731445312, -23.72734832763672, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
       <Group fx:id="panelContainer" layoutY="65.0">
          <children>
-            <Rectangle fx:id="colPanel" arcHeight="5.0" fill="#334855" height="401.0" layoutY="35.0" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" width="196.0" />
+            <Rectangle fx:id="colPanel" arcHeight="5.0" fill="#334855" height="200.0" layoutY="35.0" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" width="196.0" />
             <Polyline fx:id="colShapeClues" fill="#334855" layoutX="100.0" layoutY="8.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
             <Polyline fx:id="colShapeSuspects" fill="#42805e" layoutX="200.0" layoutY="8.0" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -90.36324310302734, -4.283203125" strokeType="INSIDE" strokeWidth="1.5" />
             <Line endX="83.9282455444336" endY="3.716796875" startX="11.602995872497559" startY="3.716796875" stroke="#ebe7d9" strokeWidth="1.5" />
@@ -158,8 +158,8 @@
             </Label>
             <Polyline fx:id="shapeClues" fill="#32485400" layoutX="100.0" layoutY="8.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
             <Polyline fx:id="shapeSuspects" fill="#32485400" layoutX="200.0" layoutY="8.0" onMouseClicked="#suspectsBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -90.36324310302734, -3.533203125" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
-            <Pane fx:id="panSide" layoutX="5.0" layoutY="37.0" prefHeight="398.0" prefWidth="189.0" />
-            <VBox fx:id="clueContent" layoutY="30.0" prefHeight="317.0" prefWidth="190.0">
+            <Pane fx:id="panSide" layoutX="5.0" layoutY="37.0" prefHeight="200.0" prefWidth="189.0" />
+            <VBox fx:id="clueContent" layoutY="30.0" prefHeight="207.0" prefWidth="190.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -194,8 +194,8 @@
                   </HBox>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Rectangle fx:id="clueInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#436e83" height="89.0" layoutX="22.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
-                        <Label fx:id="lblClueInformation" layoutX="28.0" layoutY="13.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
+                        <Rectangle fx:id="clueInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#436e83" height="89.0" layoutX="20.0" layoutY="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+                        <Label fx:id="lblClueInformation" layoutX="28.0" layoutY="70.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -204,7 +204,7 @@
                   </Pane>
                </children>
             </VBox>
-            <VBox fx:id="suspectsContent" layoutY="30.0" prefHeight="317.0" prefWidth="190.0">
+            <VBox fx:id="suspectsContent" layoutY="30.0" prefHeight="204.0" prefWidth="190.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -239,8 +239,8 @@
                   </HBox>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Rectangle fx:id="suspectInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#305b43" height="89.0" layoutX="22.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
-                        <Label fx:id="lblSuspectInformation" layoutX="28.0" layoutY="13.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
+                        <Rectangle fx:id="suspectInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#305b43" height="89.0" layoutX="20.0" layoutY="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+                        <Label fx:id="lblSuspectInformation" layoutX="28.0" layoutY="70.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
                            <font>
                               <Font size="8.0" />
                            </font>
