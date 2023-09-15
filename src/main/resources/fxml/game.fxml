@@ -159,7 +159,7 @@
             <Polyline fx:id="shapeClues" fill="#32485400" layoutX="100.0" layoutY="8.0" onMouseClicked="#clueBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -89.59738159179688, -4.283203125" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
             <Polyline fx:id="shapeSuspects" fill="#32485400" layoutX="200.0" layoutY="8.0" onMouseClicked="#suspectsBtnPressed" points="-14.243629455566406, -4.283203125, -2.679443359375, 27.00000762939453, -99.99999237060547, 27.0, -90.36324310302734, -3.533203125" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
             <Pane fx:id="panSide" layoutX="5.0" layoutY="37.0" prefHeight="398.0" prefWidth="189.0" />
-            <VBox fx:id="suspectsContent" layoutY="30.0" prefHeight="317.0" prefWidth="190.0">
+            <VBox fx:id="suspectsContent" layoutY="30.0" opacity="0.0" prefHeight="317.0" prefWidth="190.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -231,7 +231,7 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue12" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#clue1InformationShow" onMouseExited="#clue1InformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -240,7 +240,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue22" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#clue2InformationShow" onMouseExited="#clue2InformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -249,7 +249,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue32" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#clue3InformationShow" onMouseExited="#clue3InformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -258,6 +258,16 @@
                         </Pane>
                      </children>
                   </HBox>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle fx:id="clueInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#436e83" height="89.0" layoutX="22.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+                        <Label fx:id="lblClueInformation" layoutX="28.0" layoutY="13.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </children>
             </VBox>
          </children>
