@@ -5,7 +5,10 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /** Controller class for the game screens. */
@@ -19,6 +22,10 @@ public class GameController implements Controller {
   private ZoomAndPanHandler zoomAndPanHandler;
 
   public void initialize() {
+    Color backgroundColor = Color.rgb(51, 72, 85);
+    BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
+    Background background = new Background(backgroundFill);
+    panSpaceship.setBackground(background);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
 
