@@ -11,7 +11,7 @@
             <Font size="50.0" />
          </font>
       </Label>
-      <Label fx:id="lblSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="317.0" prefHeight="63.0" prefWidth="800.0" text="placeholder fxml&#10;(click anywhere to continue)" textAlignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="317.0" prefHeight="63.0" prefWidth="800.0" text="placeholder fxml&#10;(click anywhere to continue)" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
