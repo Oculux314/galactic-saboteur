@@ -40,7 +40,7 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#clue1InformationShow" onMouseExited="#clue1InformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -49,7 +49,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#clue2InformationShow" onMouseExited="#clue2InformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -58,7 +58,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#clue3InformationShow" onMouseExited="#clue3InformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -85,7 +85,7 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="suspect1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#suspect1InformationShow" onMouseExited="#suspect1InformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="suspect1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -94,7 +94,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="suspect2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#suspect2InformationShow" onMouseExited="#suspect2InformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="suspect2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -103,7 +103,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="suspect3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#suspect3InformationShow" onMouseExited="#suspect3InformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="suspect3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -114,7 +114,7 @@
                   </HBox>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Rectangle fx:id="suspectInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#305b43" height="89.0" layoutX="20.0" layoutY="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+                        <Rectangle fx:id="suspectInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#305b43" height="89.0" layoutX="20.0" layoutY="47.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
                         <Label fx:id="lblSuspectInformation" layoutX="28.0" layoutY="70.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
                            <font>
                               <Font size="8.0" />
