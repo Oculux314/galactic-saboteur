@@ -21,10 +21,11 @@ public class ExpositionController implements Controller {
   @FXML AnimatedButton btnReplay;
   @FXML AnimatedButton btnContinue;
   @FXML ImageView imageView = new ImageView();
+  @FXML ImageView imvWho = new ImageView();
 
   private int currentImageIndex = 0;
   private Timeline timeline = new Timeline();
-  private String[] imagePaths = {"/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"};
+  private String[] imagePaths = {"/images/expo1.jpg","/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"};
 
   @FXML
   public void initialize() {
@@ -34,9 +35,7 @@ public class ExpositionController implements Controller {
 
   private void startSlideshow() {
     // Runs the slideshow
-    replayPane.setVisible(false);
-    Image image = new Image("/images/expo1.jpg");
-    imageView.setImage(image);
+    showNextImage();
     timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> showNextImage()));
     timeline.setCycleCount(Timeline.INDEFINITE);
     timeline.play();
@@ -58,6 +57,7 @@ public class ExpositionController implements Controller {
 
   @FXML
   public void onReplayClicked() throws IOException {
+    replayPane.setVisible(false);
     startSlideshow();
   }
 
