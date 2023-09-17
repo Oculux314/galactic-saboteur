@@ -3,39 +3,89 @@ package nz.ac.auckland.se206.components;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.Utils;
 
 public class AnimatedButton extends ImageView {
 
-  /** Creates a new animated button. Add image in SceneBuilder or programmatically. */
+  private Image normalImage;
+  private Image hoverImage;
+  protected boolean isHovering;
+
+  /** Creates a new animated button. */
   public AnimatedButton() {
     super();
+    attachEventListeners();
+  }
 
-    // Event listeners
+  private void attachEventListeners() {
     setOnMouseEntered((event) -> onMouseEntered(event));
     setOnMouseExited((event) -> onMouseExited(event));
     setOnMousePressed((event) -> onMousePressed(event));
     setOnMouseReleased((event) -> onMouseReleased(event));
   }
 
-  /**
-   * Called when the mouse enters the button. Scales the button up to hover size.
-   *
-   * @param event The mouse event.
-   */
-  public void onMouseEntered(MouseEvent event) {
-    animateScale(1.1);
+  private void loadImages() {
+    normalImage = getImage();
+    hoverImage = getHoverImage(normalImage);
+  }
+
+  protected Image getHoverImage(Image normal) {
+    String hoverUrl = Utils.appendBeforeExtension(normal.getUrl(), "_hover");
+    Image hover = new Image(hoverUrl);
+
+    if (hover.isError()) {
+      return normal; // Default to normal image if hover image not found
+    }
+
+    return hover;
   }
 
   /**
-   * Called when the mouse exits the button. Scales the button back down to normal size.
+   * Called when the mouse enters the button. Scales the button up to hover size and changes the
+   * image to the hover image.
+   *
+   * @param event The mouse event.
+   */
+  private void onMouseEntered(MouseEvent event) {
+    if (normalImage == null) {
+      loadImages();
+    }
+
+    animateScale(1.1);
+    changeImageToHover();
+    isHovering = true;
+  }
+
+  /**
+   * Called when the mouse exits the button. Scales the button back down to normal size and changes
+   * the image to the normal image.
    *
    * @param event The mouse event.
    */
   private void onMouseExited(MouseEvent event) {
     animateScale(1);
+    changeImageToNormal();
+    isHovering = false;
+  }
+
+  protected void updateImage() {
+    if (isHovering) {
+      changeImageToHover();
+    } else {
+      changeImageToNormal();
+    }
+  }
+
+  protected void changeImageToHover() {
+    setImage(hoverImage);
+  }
+
+  protected void changeImageToNormal() {
+    setImage(normalImage);
   }
 
   /**
