@@ -59,6 +59,8 @@ public class App extends Application {
    * @throws IOException If the screen does not exist and the FXML file for the screen is not found.
    */
   public static void setScreen(final Screen.Name screenName) throws IOException {
+    GameState.currentScreen = screenName;
+
     if (!screens.containsKey(screenName)) {
       makeScreen(screenName); // Automatically make screen if does not exist
     }
@@ -142,7 +144,6 @@ public class App extends Application {
     // Set up screen graph
     makeScreen(Screen.Name.MAIN);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
-    setScreen(Screen.Name.DEFAULT);
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);
@@ -160,7 +161,18 @@ public class App extends Application {
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);
 
+    restart();
     stage.show();
+  }
+
+  private void restart() throws IOException {
+    GameState.reset();
+    clearScreens();
     setScreen(Screen.Name.TITLE);
+  }
+
+  private void clearScreens() throws IOException {
+    screens.clear();
+    setScreen(Screen.Name.DEFAULT);
   }
 }
