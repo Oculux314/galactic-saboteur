@@ -20,9 +20,9 @@ public class SettingsController implements Controller {
 
   @FXML
   private void initialize() {
-    btnDifficulty.addState("easy", "placeholder.png");
-    btnDifficulty.addState("medium", "placeholder.png");
-    btnDifficulty.addState("hard", "placeholder.png");
+    btnDifficulty.addState("easy", "settings_buttons/easy.png");
+    btnDifficulty.addState("medium", "settings_buttons/medium.png");
+    btnDifficulty.addState("hard", "settings_buttons/hard.png");
 
     btnTime.addState("2min", "placeholder.png");
     btnTime.addState("4min", "placeholder.png");

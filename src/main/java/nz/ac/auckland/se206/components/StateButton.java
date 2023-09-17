@@ -3,19 +3,22 @@ package nz.ac.auckland.se206.components;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 
 public class StateButton extends AnimatedButton {
 
   private class State {
     private String name;
-    private Image image;
+    private Image normalImage;
+    private Image hoverImage;
     private Runnable onArrive;
     private Runnable onLeave;
     private int index;
 
     private State(String name, Image image, Runnable onArrive, Runnable onLeave) {
       this.name = name;
-      this.image = image;
+      this.normalImage = image;
+      hoverImage = getHoverImage(image);
       this.onArrive = onArrive;
       this.onLeave = onLeave;
       index = states.size();
@@ -35,11 +38,11 @@ public class StateButton extends AnimatedButton {
     states.add(new State(name, new Image("/images/" + image), onArrive, onLeave));
 
     if (states.size() == 1) {
-      initialise();
+      init();
     }
   }
 
-  private void initialise() {
+  private void init() {
     currentState = states.get(0);
     setState(0);
     setOnMouseClicked((event) -> onClick());
@@ -61,7 +64,7 @@ public class StateButton extends AnimatedButton {
 
     // Update state
     currentState = states.get(index);
-    setImage(currentState.image);
+    updateImage();
 
     // Run onArrive action of new state
     if (currentState.onArrive != null) {
@@ -94,6 +97,15 @@ public class StateButton extends AnimatedButton {
 
   private void onClick() {
     nextState();
-    System.out.println(getState());
+  }
+
+  @Override
+  protected void changeImageToHover() {
+    setImage(currentState.hoverImage);
+  }
+
+  @Override
+  protected void changeImageToNormal() {
+    setImage(currentState.normalImage);
   }
 }

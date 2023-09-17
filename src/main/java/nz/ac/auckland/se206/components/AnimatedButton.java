@@ -11,8 +11,9 @@ import nz.ac.auckland.se206.Utils;
 
 public class AnimatedButton extends ImageView {
 
-  private Image normal;
-  private Image hoverIm;
+  private Image normalImage;
+  private Image hoverImage;
+  protected boolean isHovering;
 
   /** Creates a new animated button. */
   public AnimatedButton() {
@@ -28,17 +29,19 @@ public class AnimatedButton extends ImageView {
   }
 
   private void loadImages() {
-    normal = getImage();
-    setHoverImage();
+    normalImage = getImage();
+    hoverImage = getHoverImage(normalImage);
   }
 
-  private void setHoverImage() {
+  protected Image getHoverImage(Image normal) {
     String hoverUrl = Utils.appendBeforeExtension(normal.getUrl(), "_hover");
-    hoverIm = new Image(hoverUrl);
+    Image hover = new Image(hoverUrl);
 
-    if (hoverIm.isError()) {
-      hoverIm = normal; // Default to normal image if hover image not found
+    if (hover.isError()) {
+      return normal; // Default to normal image if hover image not found
     }
+
+    return hover;
   }
 
   /**
@@ -47,13 +50,14 @@ public class AnimatedButton extends ImageView {
    *
    * @param event The mouse event.
    */
-  protected void onMouseEntered(MouseEvent event) {
-    if (normal == null) {
+  private void onMouseEntered(MouseEvent event) {
+    if (normalImage == null) {
       loadImages();
     }
 
     animateScale(1.1);
-    setImage(hoverIm);
+    changeImageToHover();
+    isHovering = true;
   }
 
   /**
@@ -62,9 +66,26 @@ public class AnimatedButton extends ImageView {
    *
    * @param event The mouse event.
    */
-  protected void onMouseExited(MouseEvent event) {
+  private void onMouseExited(MouseEvent event) {
     animateScale(1);
-    setImage(normal);
+    changeImageToNormal();
+    isHovering = false;
+  }
+
+  protected void updateImage() {
+    if (isHovering) {
+      changeImageToHover();
+    } else {
+      changeImageToNormal();
+    }
+  }
+
+  protected void changeImageToHover() {
+    setImage(hoverImage);
+  }
+
+  protected void changeImageToNormal() {
+    setImage(normalImage);
   }
 
   /**
