@@ -5,7 +5,7 @@
 } */
 
 .root {
-  -fx-background-color: BLACK;
+  -fx-background-color: #000000;
 }
 
 .label {
