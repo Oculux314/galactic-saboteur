@@ -30,6 +30,11 @@ public class SidepanelController implements Controller {
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;
 
+  public void initialize() {
+    suspectsContent.setVisible(false);
+    clueInformationRectangle.setVisible(false);
+  }
+
   @FXML
   private void clueBtnPressed() throws IOException {
     suspectsContent.setVisible(false);
@@ -42,6 +47,7 @@ public class SidepanelController implements Controller {
   private void suspectsBtnPressed() throws IOException {
     clueContent.setVisible(false);
     suspectsContent.setVisible(true);
+    suspectInformationRectangle.setVisible(false);
     Color green = Color.web("42805e");
     colPanel.setFill(green);
   }
@@ -62,7 +68,7 @@ public class SidepanelController implements Controller {
     }
 
     if (informationRectangle != null && informationLabel != null) {
-      informationRectangle.setOpacity(1);
+      informationRectangle.setVisible(true);
       if (event.getSource() == clue1) {
         informationLabel.setText("Clue 1");
       } else if (event.getSource() == clue2) {
@@ -95,7 +101,7 @@ public class SidepanelController implements Controller {
     }
 
     if (informationRectangle != null && informationLabel != null) {
-      informationRectangle.setOpacity(0);
+      informationRectangle.setVisible(false);
       informationLabel.setText("");
     }
   }

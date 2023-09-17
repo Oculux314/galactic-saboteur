@@ -131,7 +131,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="105.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
          </children>
       </Group>
       <Group fx:id="panelContainer">
@@ -141,5 +140,6 @@
       </Group>
       <Button fx:id="btnSettings" layoutX="638.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />
       <Button layoutX="711.0" layoutY="20.0" mnemonicParsing="false" text="Menu" />
+      <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
    </children>
 </Pane>
