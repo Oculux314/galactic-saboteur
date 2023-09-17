@@ -21,13 +21,5 @@
       </Group>
       <Button fx:id="btnSettings" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />
       <Button layoutX="711.0" layoutY="20.0" mnemonicParsing="false" text="Menu" />
-      <Group>
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1000.0" layoutX="800.0" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1000.0" layoutX="-1000.0" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1000.0" layoutX="-1000.0" layoutY="-1000.0" stroke="BLACK" strokeType="INSIDE" width="3000.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="1000.0" layoutX="-1000.0" layoutY="600.0" stroke="BLACK" strokeType="INSIDE" width="3000.0" />
-         </children>
-      </Group>
    </children>
 </Pane>
