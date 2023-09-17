@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 
 /** Controller class for the game screens. */
@@ -15,6 +16,8 @@ public class GameController implements Controller {
   @FXML private Group grpPanZoom;
   @FXML private Rectangle recTest;
   @FXML private Button btnSettings;
+  @FXML private Polyline btnPanelHide;
+  @FXML private Group panelContainer;
 
   private ZoomAndPanHandler zoomAndPanHandler;
 
@@ -45,5 +48,18 @@ public class GameController implements Controller {
   @FXML
   private void recClicked() {
     System.out.println("Rectangle clicked");
+  }
+
+  @FXML
+  private void btnPanelHidePressed() {
+    if (panelContainer.getLayoutX() == 0) {
+      panelContainer.setLayoutX(-180);
+      btnPanelHide.setRotate(180);
+      btnPanelHide.setLayoutX(100);
+    } else {
+      panelContainer.setLayoutX(0);
+      btnPanelHide.setRotate(0);
+      btnPanelHide.setLayoutX(267);
+    }
   }
 }
