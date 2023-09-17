@@ -14,7 +14,8 @@ public class TitleController implements Controller {
   @FXML Pane panBackground;
   @FXML Pane panFullScreen;
   @FXML AnimatedButton btnPlay;
-  @FXML AnimatedButton btnSettings;
+  
+  
 
   /**
    * Called when the play button is clicked. Moves control to the exposition screen.
