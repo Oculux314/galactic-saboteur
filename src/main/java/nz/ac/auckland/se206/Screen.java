@@ -3,6 +3,7 @@ package nz.ac.auckland.se206;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.controllers.Controller;
 
 /** Represents a screen in the application, consisting of an FXML file / controller pair. */
@@ -10,6 +11,7 @@ public class Screen {
 
   /** Represents possible names for a screen. */
   public enum Name {
+    DEFAULT,
     MAIN,
     TITLE,
     SETTINGS,
@@ -32,8 +34,17 @@ public class Screen {
    * @throws IOException If the FXML file is not found.
    */
   public Screen(FXMLLoader loader) throws IOException {
-    fxml = loader.load();
-    controller = loader.getController();
+    try {
+      fxml = loader.load();
+      controller = loader.getController();
+    } catch (IllegalStateException e) {
+      fxml = getDefaultParent();
+      controller = null;
+    }
+  }
+
+  private Parent getDefaultParent() {
+    return (Parent) new Pane();
   }
 
   /**

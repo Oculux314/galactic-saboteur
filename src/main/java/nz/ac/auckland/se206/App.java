@@ -142,7 +142,7 @@ public class App extends Application {
     // Set up screen graph
     makeScreen(Screen.Name.MAIN);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
-    setScreen(Screen.Name.TITLE);
+    setScreen(Screen.Name.DEFAULT);
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);
@@ -161,6 +161,6 @@ public class App extends Application {
     stage.setMaximized(true);
 
     stage.show();
-    screen.requestFocus();
+    setScreen(Screen.Name.TITLE);
   }
 }
