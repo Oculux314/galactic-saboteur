@@ -22,7 +22,7 @@ public class GameController implements Controller {
   private ZoomAndPanHandler zoomAndPanHandler;
 
   public void initialize() {
-    Color backgroundColor = Color.rgb(51, 72, 85);
+    Color backgroundColor = Color.web("#334855");
     BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, null, null);
     Background background = new Background(backgroundFill);
     panSpaceship.setBackground(background);
