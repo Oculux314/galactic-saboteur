@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
-public class ReactorToolboxPuzzle {
+public class ReactorToolboxPuzzle extends Puzzle {
 
   @FXML private ImageView imvHammer;
   @FXML private ImageView imvBottle;

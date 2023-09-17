@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -29,10 +30,15 @@ public class GameController implements Controller {
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
+  private HashMap<String, puzzle> buttonToPuzzleMap;
 
   public void initialize() {
+    buttonToPuzzleMap = new HashMap<>();
+    buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
+
     panPuzzle.setVisible(false);
     grpPuzzleCommons.setVisible(false);
+    
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
@@ -82,9 +88,19 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void onToolboxClicked() throws IOException {
-    grpPuzzleCommons.setVisible(true);
-    panPuzzle.setVisible(true);
-    puzzleLoader.loadPuzzle("/fxml/" + puzzle.reactortoolbox + ".fxml");
+  private void onPuzzleButtonClicked(MouseEvent event) throws IOException {
+
+    // Get the specific puzzle button that was clicked
+    AnimatedButton clickedButton = (AnimatedButton) event.getSource();
+    String buttonId = clickedButton.getId();
+
+    if (buttonToPuzzleMap.containsKey(buttonId)) {
+      // Load the specific puzzle
+      puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
+      puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
+
+      grpPuzzleCommons.setVisible(true);
+      panPuzzle.setVisible(true);
+    }
   }
 }
