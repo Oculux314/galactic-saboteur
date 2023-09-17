@@ -3,14 +3,20 @@ package nz.ac.auckland.se206;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
@@ -31,6 +37,10 @@ public class App extends Application {
     launch();
   }
 
+  private static Pane getPanMain() {
+    return ((MainController) screens.get(Screen.Name.MAIN).getController()).getMainPane();
+  }
+
   /**
    * Returns the screen with the given name, or null if it does not exist.
    *
@@ -43,7 +53,7 @@ public class App extends Application {
 
   /**
    * Sets the screen with the given name as the child of the main pane. Creates the screen if it
-   * does not exist.
+   * does not exist. Assumes there is only one screen currently active.
    *
    * @param screenName The name of the screen to set.
    * @throws IOException If the screen does not exist and the FXML file for the screen is not found.
@@ -53,14 +63,30 @@ public class App extends Application {
       makeScreen(screenName); // Automatically make screen if does not exist
     }
 
-    Parent fxml = getScreen(screenName).getFxml();
-    Pane panMain = ((MainController) screens.get(Screen.Name.MAIN).getController()).getMainPane();
+    ObservableList<Node> activeScreens = getPanMain().getChildren();
+    Parent newScreen = getScreen(screenName).getFxml();
 
-    // Set screen as child of main pane
-    panMain.getChildren().clear();
-    panMain.getChildren().add(fxml);
+    if (activeScreens.size() == 0) {
+      activeScreens.add(newScreen); // First screen
+      return;
+    }
 
-    fxml.requestFocus();
+    Parent oldScreen = (Parent) activeScreens.get(0);
+
+    if (oldScreen == newScreen) {
+      return;
+    }
+
+    Timeline fadeTransition =
+        new Timeline(
+            new KeyFrame(Duration.millis(200), new KeyValue(newScreen.opacityProperty(), 1)));
+
+    activeScreens.add(newScreen);
+    activeScreens.remove(0);
+    newScreen.setOpacity(0);
+    fadeTransition.play();
+
+    newScreen.requestFocus();
   }
 
   /**
