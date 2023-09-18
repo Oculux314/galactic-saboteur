@@ -3,19 +3,23 @@ package nz.ac.auckland.se206.components;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 
+/**
+ * This is an AnimatedButton that has multiple states. Each state has its own name, image (and
+ * optional hover image), and onArrive and onLeave actions. The button cycles through states on
+ * click.
+ */
 public class StateButton extends AnimatedButton {
 
-  private class State {
-    private String name;
-    private Image normalImage;
-    private Image hoverImage;
-    private Runnable onArrive;
-    private Runnable onLeave;
-    private int index;
+  protected class State {
+    String name;
+    Image normalImage;
+    Image hoverImage;
+    Runnable onArrive;
+    Runnable onLeave;
+    int index;
 
-    private State(String name, Image image, Runnable onArrive, Runnable onLeave) {
+    State(String name, Image image, Runnable onArrive, Runnable onLeave) {
       this.name = name;
       this.normalImage = image;
       hoverImage = getHoverImage(image);
@@ -26,7 +30,7 @@ public class StateButton extends AnimatedButton {
   }
 
   private List<State> states;
-  private State currentState;
+  protected State currentState;
 
   public StateButton() {
     super();
@@ -34,22 +38,30 @@ public class StateButton extends AnimatedButton {
     states = new ArrayList<State>();
   }
 
+  public void addState(String name, String image) {
+    addState(name, image, null, null);
+  }
+
+  public void addState(String name, Image image) {
+    addState(name, image, null, null);
+  }
+
   public void addState(String name, String image, Runnable onArrive, Runnable onLeave) {
-    states.add(new State(name, new Image("/images/" + image), onArrive, onLeave));
+    addState(name, new Image("/images/" + image), onArrive, onLeave);
+  }
+
+  public void addState(String name, Image image, Runnable onArrive, Runnable onLeave) {
+    states.add(new State(name, image, onArrive, onLeave));
 
     if (states.size() == 1) {
       init();
     }
   }
 
-  private void init() {
+  protected void init() {
     currentState = states.get(0);
     setState(0);
     setOnMouseClicked((event) -> onClick());
-  }
-
-  public void addState(String name, String image) {
-    addState(name, image, null, null);
   }
 
   private void setState(int index) {
@@ -95,7 +107,7 @@ public class StateButton extends AnimatedButton {
     return currentState.name;
   }
 
-  private void onClick() {
+  protected void onClick() {
     nextState();
   }
 

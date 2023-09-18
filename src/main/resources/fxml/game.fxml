@@ -132,6 +132,11 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <AnimatedButton fx:id="btnComputer" fitHeight="50.0" fitWidth="20.0" layoutX="626.0" layoutY="250.0" onMouseClicked="#onPuzzleButtonClicked">
+               <image>
+                  <Image url="@../images/placeholder.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
       <Group fx:id="panelContainer">
@@ -151,7 +156,7 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Group fx:id="grpPuzzleCommons">
+      <Group fx:id="grpPuzzleCommons" visible="false">
          <children>
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
                <children>

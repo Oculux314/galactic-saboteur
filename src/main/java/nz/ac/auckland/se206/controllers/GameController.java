@@ -35,10 +35,11 @@ public class GameController implements Controller {
   public void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
+    buttonToPuzzleMap.put("btnComputer", puzzle.navigationcomputer);
 
     panPuzzle.setVisible(false);
     grpPuzzleCommons.setVisible(false);
-    
+
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
