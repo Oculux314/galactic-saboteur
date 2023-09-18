@@ -62,13 +62,6 @@ public class ExpositionController implements Controller {
 
   @FXML
   public void onContinueClicked() throws IOException {
-
     App.setScreen(Screen.Name.GAME);
-
-    // create an instance of the GameController associated with the game screen
-    GameController gameController =
-        (GameController) App.getScreen(Screen.Name.GAME).getController();
-    // start the timer in the GameController
-    gameController.startTimer();
   }
 }

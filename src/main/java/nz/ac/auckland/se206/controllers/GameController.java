@@ -1,9 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import java.io.IOException;
 import java.util.HashMap;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -14,6 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
@@ -38,9 +40,6 @@ public class GameController implements Controller {
   private HashMap<String, puzzle> buttonToPuzzleMap;
 
   private Timeline countdownTimer;
-  private int initialMinutes = 2;
-  private int initialSeconds = initialMinutes * 60 + 1;
-
 
   public void initialize() {
     buttonToPuzzleMap = new HashMap<>();
@@ -48,30 +47,66 @@ public class GameController implements Controller {
 
     panPuzzle.setVisible(false);
     grpPuzzleCommons.setVisible(false);
-    
+
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+
+    startTimer();
+  }
+
+  public class TimerData {
+    private int initialSeconds;
+
+    public TimerData(int initialSeconds) {
+      this.initialSeconds = initialSeconds;
+    }
+
+    public int getInitialSeconds() {
+      return initialSeconds;
+    }
+
+    public void decrement() {
+      initialSeconds--;
+    }
   }
 
   public void startTimer() {
-    // initalise timer
+    String timeState =
+        ((SettingsController) App.getScreen(Screen.Name.SETTINGS).getController()).getTimeState();
+    int initialMinutes = extractMinutes(timeState);
+
+    TimerData timerData = new TimerData(initialMinutes * 60 + 1);
+
     countdownTimer =
         new Timeline(
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  initialSeconds--;
-                  if (initialSeconds <= 0) {
+                  timerData.decrement();
+                  if (timerData.getInitialSeconds() <= 0) {
                     countdownTimer.stop();
                   }
-                  updateTimerDisplay();
+                  updateTimerDisplay(timerData.getInitialSeconds());
                 }));
 
     countdownTimer.setCycleCount(Timeline.INDEFINITE);
     countdownTimer.play();
   }
 
-  public void updateTimerDisplay() {
+  public static int extractMinutes(String input) {
+    if (input.contains("min")) {
+      input = input.replace("min", "").trim();
+    }
+
+    // parse the remaining string to an int
+    try {
+      return Integer.parseInt(input);
+    } catch (NumberFormatException e) {
+      return -1;
+    }
+  }
+
+  public void updateTimerDisplay(int initialSeconds) {
     int minutes = initialSeconds / 60;
     int seconds = initialSeconds % 60;
 

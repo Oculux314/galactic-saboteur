@@ -30,6 +30,8 @@ public class SettingsController implements Controller {
 
     btnTts.addState("off", "placeholder.png");
     btnTts.addState("on", "placeholder.png");
+
+    // System.out.println(btnDifficulty.getState());
   }
 
   /**
@@ -41,5 +43,9 @@ public class SettingsController implements Controller {
   @FXML
   private void onBackClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.TITLE);
+  }
+
+  public String getTimeState() {
+    return btnTime.getState();
   }
 }

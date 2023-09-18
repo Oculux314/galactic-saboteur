@@ -115,6 +115,7 @@ public class App extends Application {
 
     // Set up screen graph
     makeScreen(Screen.Name.MAIN);
+    makeScreen(Screen.Name.SETTINGS);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
     setScreen(Screen.Name.TITLE);
 
