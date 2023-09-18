@@ -175,5 +175,14 @@
             </AnimatedButton>
          </children>
       </Group>
+      <Group fx:id="grpReactorRoom1" layoutX="10.0" layoutY="10.0">
+         <children>
+            <AnimatedButton fx:id="btnToTestTubes" fitHeight="29.0" fitWidth="23.0" onMouseClicked="#onPuzzleButtonClicked">
+               <image>
+                  <Image url="@../images/testtubes.png" />
+               </image>
+            </AnimatedButton>
+         </children>
+      </Group>
    </children>
 </Pane>

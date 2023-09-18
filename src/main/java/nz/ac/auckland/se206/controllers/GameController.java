@@ -27,6 +27,7 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
+  @FXML private AnimatedButton btnToTestTubes;
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
@@ -35,10 +36,11 @@ public class GameController implements Controller {
   public void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
+    buttonToPuzzleMap.put("btnToTestTubes", puzzle.testtubes);
 
     panPuzzle.setVisible(false);
     grpPuzzleCommons.setVisible(false);
-    
+
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
@@ -93,6 +95,7 @@ public class GameController implements Controller {
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     String buttonId = clickedButton.getId();
+    System.out.println(buttonId);
 
     if (buttonToPuzzleMap.containsKey(buttonId)) {
       // Load the specific puzzle

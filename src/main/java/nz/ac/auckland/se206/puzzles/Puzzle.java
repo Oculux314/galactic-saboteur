@@ -4,5 +4,6 @@ public class Puzzle {
 
   public enum puzzle {
     reactortoolbox,
+    testtubes,
   }
 }
