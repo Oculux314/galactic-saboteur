@@ -27,11 +27,14 @@ public class GameController implements Controller {
   private ZoomAndPanHandler zoomAndPanHandler;
   private Timeline countdownTimer;
   private int initialMinutes = 2;
-  private int initialSeconds = initialMinutes * 60;
+  private int initialSeconds = initialMinutes * 60 + 1;
 
   public void initialize() {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+  }
 
+  public void startTimer() {
+    // initalise timer
     countdownTimer =
         new Timeline(
             new KeyFrame(
@@ -43,6 +46,7 @@ public class GameController implements Controller {
                   }
                   updateTimerDisplay();
                 }));
+
     countdownTimer.setCycleCount(Timeline.INDEFINITE);
     countdownTimer.play();
   }
