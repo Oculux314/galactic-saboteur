@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorToolboxPuzzle">
+   <children>
+      <ImageView fitHeight="369.0" fitWidth="338.0" layoutX="81.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/toolboxmissingthings.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="99.0" layoutX="107.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" width="39.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="70.0" layoutX="231.0" layoutY="72.0" stroke="BLACK" strokeType="INSIDE" width="39.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="170.0" layoutX="361.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+      <ImageView fx:id="imvBottle" fitHeight="70.0" fitWidth="23.0" layoutX="116.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/toolboxbottle.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imvHammer" fitHeight="152.0" fitWidth="55.0" layoutX="368.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/toolboxhammer.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imvTorch" fitHeight="56.0" fitWidth="24.0" layoutX="239.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/toolboxtorch.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="230.0" layoutY="14.0" text="TOOLS:" />
+      <Label layoutX="202.0" layoutY="216.0" text="Put the tools back" textAlignment="CENTER" />
+   </children>
+</Pane>

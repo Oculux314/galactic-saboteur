@@ -17,17 +17,12 @@ public class ZoomAndPanHandler {
   private final Group grpPanZoom;
   private final Scale scale;
 
-  private double pressedX, pressedY;
-  private double deltaX, deltaY;
-  private double newX, newY;
+  private double pressedX, pressedY, deltaX, deltaY, newX, newY, imageWidth, imageHeight;
   private double zoomFactor = 1.25;
   private double minScaleFactor = 1.0;
   private double maxScaleFactor = 2.0;
   private double scaleFactor = 1.0;
   private double margin = 0.0;
-
-  private double imageWidth;
-  private double imageHeight;
 
   public ZoomAndPanHandler(Group grpPanZoom, Pane panSpaceship) {
     this.grpPanZoom = grpPanZoom;

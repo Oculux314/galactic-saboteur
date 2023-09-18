@@ -129,7 +129,7 @@ public class App extends Application {
     ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
 
     // Properties
-    scene.setFill(Color.BLACK);
+    scene.setFill(Color.web("#131d23"));
     stage.setTitle("Galactic Saboteur");
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);

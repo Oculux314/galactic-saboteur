@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panFullScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onMouseClicked" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ExpositionController">
+<Pane fx:id="panFullScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ExpositionController">
    <children>
-      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="253.0" prefHeight="71.0" prefWidth="800.0" text="Exposition" textAlignment="CENTER">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="317.0" prefHeight="63.0" prefWidth="800.0" text="placeholder fxml&#10;(click anywhere to continue)" textAlignment="CENTER">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
+      <ImageView fx:id="imageView" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/shipinspace.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="replayPane" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="813.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/black.jpg" />
+               </image>
+            </ImageView>
+            <AnimatedButton fx:id="btnContinue" fitHeight="122.0" fitWidth="169.0" layoutX="412.0" layoutY="415.0" onMouseClicked="#onContinueClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../images/continue.png" />
+               </image>
+            </AnimatedButton>
+            <AnimatedButton fx:id="btnReplay" fitHeight="141.0" fitWidth="122.0" layoutX="181.0" layoutY="404.0" onMouseClicked="#onReplayClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../images/replay.png" />
+               </image>
+            </AnimatedButton>
+            <ImageView fx:id="imvPlace" fitHeight="112.0" fitWidth="120.0" layoutX="296.0" layoutY="202.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/where.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imvTime" fitHeight="112.0" fitWidth="120.0" layoutX="96.0" layoutY="202.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/when.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imvWho" fitHeight="112.0" fitWidth="120.0" layoutX="496.0" layoutY="202.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/who.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="73.0" fitWidth="74.0" layoutX="516.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/questionmark.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="122.0" layoutY="314.0" prefHeight="73.0" prefWidth="473.0" text="Figure out when, where and who sabotaged the ship!" textAlignment="CENTER" />
+            <Label fx:id="lblTitle" layoutX="112.0" layoutY="84.0" text="WE NEED YOUR HELP!" />
+            <ImageView fitHeight="73.0" fitWidth="74.0" layoutX="116.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/questionmark.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="73.0" fitWidth="74.0" layoutX="322.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/questionmark.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </Pane>

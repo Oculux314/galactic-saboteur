@@ -14,7 +14,8 @@ public class TitleController implements Controller {
   @FXML Pane panBackground;
   @FXML Pane panFullScreen;
   @FXML AnimatedButton btnPlay;
-  @FXML AnimatedButton btnSettings;
+  
+  
 
   /**
    * Called when the play button is clicked. Moves control to the exposition screen.
@@ -23,7 +24,7 @@ public class TitleController implements Controller {
    * @throws IOException If the exposition.fxml file is not found.
    */
   @FXML
-  public void onPlayClicked(MouseEvent event) throws IOException {
+  private void onPlayClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.EXPOSITION);
   }
 
@@ -34,7 +35,7 @@ public class TitleController implements Controller {
    * @throws IOException If the settings.fxml file is not found.
    */
   @FXML
-  public void onSettingsClicked(MouseEvent event) throws IOException {
+  private void onSettingsClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.SETTINGS);
   }
 }

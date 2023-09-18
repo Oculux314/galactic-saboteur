@@ -1,18 +1,33 @@
-/* * {
-  /* Dev only *
-  -fx-border-color: LIME;
-  -fx-border-width: 0.5px;
-} */
-
 .root {
-  -fx-background-color: BLACK;
+  -white: white;
+  -cream: #EBE7D9;
+  -icon-grey: #BFBFBF;
+  -grey: #334855;
+  -background-grey: #131d23;
+  -black: black;
+  -green: #58DD94;
+
+  -fx-background-color: -background-grey;
+
 }
 
 .label {
-  -fx-text-fill: WHITE;
   -fx-font-size: 20px;
+  -fx-font-family: Consolas;
+  -fx-text-fill: -white;
+}
+
+.highscore {
+  -fx-font-size: 15px;
+  -fx-text-fill: -icon-grey;
 }
 
 #lblTitle {
   -fx-font-size: 50px;
+  -fx-font-weight: bold;
+}
+
+#lblSubtitle {
+  -fx-font-size: 30px;
+  -fx-text-fill: -icon-grey;
 }
