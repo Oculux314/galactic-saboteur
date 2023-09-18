@@ -38,7 +38,7 @@ public class App extends Application {
   }
 
   private static Pane getPanMain() {
-    return ((MainController) screens.get(Screen.Name.MAIN).getController()).getMainPane();
+    return ((MainController) getScreen(Screen.Name.MAIN).getController()).getMainPane();
   }
 
   /**
@@ -69,7 +69,10 @@ public class App extends Application {
     Parent newScreen = getScreen(screenName).getFxml();
 
     if (activeScreens.size() == 0) {
-      activeScreens.add(newScreen); // First screen
+      makeScreen(Screen.Name.DEFAULT);
+      activeScreens.add(getScreen(Screen.Name.DEFAULT).getFxml()); // Black
+
+      setScreen(screenName);
       return;
     }
 
@@ -172,7 +175,8 @@ public class App extends Application {
   }
 
   private void clearScreens() throws IOException {
+    Screen main = getScreen(Screen.Name.MAIN);
     screens.clear();
-    setScreen(Screen.Name.DEFAULT);
+    screens.put(Screen.Name.MAIN, main);
   }
 }
