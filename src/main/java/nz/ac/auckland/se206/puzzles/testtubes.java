@@ -16,13 +16,15 @@ public class TestTubes {
   @FXML private AnimatedButton yellowOption;
   @FXML private AnimatedButton blueOption;
   @FXML private AnimatedButton redOption;
+  @FXML private AnimatedButton btnMix;
+  @FXML private Label confirmationMessage;
 
   private static String colour;
   private boolean yellowSelected;
   private boolean blueSelected;
   private boolean redSelected;
 
-  // private static boolean isPuzzleCorrect;
+  private static boolean isPuzzleCorrect;
 
   @FXML
   private void initialize() {
@@ -85,6 +87,38 @@ public class TestTubes {
       yellowSelected = colourSelected;
     } else if (event.getSource() == redOption) {
       redSelected = colourSelected;
+    }
+  }
+
+  @FXML
+  private void btnMixClicked(MouseEvent event) {
+    if (yellowSelected && blueSelected) {
+      if (colour.equals("green")) {
+        isPuzzleCorrect = true;
+        confirmationMessage.setText("Correct! You have created a green solution");
+      } else {
+        isPuzzleCorrect = false;
+        confirmationMessage.setText("Incorrect!");
+      }
+    } else if (yellowSelected && redSelected) {
+      if (colour.equals("orange")) {
+        isPuzzleCorrect = true;
+        confirmationMessage.setText("Correct! You have created an orange solution");
+      } else {
+        isPuzzleCorrect = false;
+        confirmationMessage.setText("Incorrect!");
+      }
+    } else if (blueSelected && redSelected) {
+      if (colour.equals("purple")) {
+        isPuzzleCorrect = true;
+        confirmationMessage.setText("Correct! You have created a purple solution");
+      } else {
+        isPuzzleCorrect = false;
+        confirmationMessage.setText("Incorrect!");
+      }
+    } else {
+      isPuzzleCorrect = false;
+      confirmationMessage.setText("You need to select 2 solutions");
     }
   }
 }

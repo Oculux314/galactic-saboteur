@@ -30,6 +30,12 @@
                   <Image url="@../images/yellowoption.png" />
                </image>
             </AnimatedButton>
+            <AnimatedButton fx:id="btnMix" fitHeight="73.0" fitWidth="176.0" layoutX="160.0" layoutY="300.0" onMouseClicked="#btnMixClicked">
+               <image>
+                  <Image url="@../images/btnmix.png" />
+               </image>
+            </AnimatedButton>
+            <Label fx:id="confirmationMessage" layoutX="63.0" layoutY="420.0" />
          </children>
       </Pane>
    </children>
