@@ -169,12 +169,12 @@ public class App extends Application {
     restart();
   }
 
-  private void restart() throws IOException {
+  public static void restart() throws IOException {
     GameState.reset();
     resetScreens();
   }
 
-  private void resetScreens() throws IOException {
+  private static void resetScreens() throws IOException {
     Thread screenLoader =
         new Thread(
             () -> {

@@ -10,6 +10,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
@@ -33,13 +34,10 @@ public class GameController implements Controller {
   private HashMap<String, puzzle> buttonToPuzzleMap;
 
   @FXML
-  private  void initialize() {
+  private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
 
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
-    
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
@@ -60,13 +58,8 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void settingsClicked() {
-    System.out.println("Settings button clicked");
-  }
-
-  @FXML
-  private void recClicked() {
-    System.out.println("Rectangle clicked");
+  private void restartClicked() throws IOException {
+    App.restart();
   }
 
   @FXML
