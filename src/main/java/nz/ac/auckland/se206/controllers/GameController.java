@@ -77,8 +77,7 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked() {
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
+    minimisePuzzleWindow();
   }
 
   @FXML
@@ -93,8 +92,15 @@ public class GameController implements Controller {
       puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
 
-      grpPuzzleCommons.setVisible(true);
-      panPuzzle.setVisible(true);
+      restorePuzzleWindow();
     }
+  }
+
+  private void minimisePuzzleWindow() {
+    grpPuzzleCommons.setVisible(false);
+  }
+
+  private void restorePuzzleWindow() {
+    grpPuzzleCommons.setVisible(true);
   }
 }
