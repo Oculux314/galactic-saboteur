@@ -13,13 +13,13 @@ public class ReactorToolboxPuzzle extends Puzzle {
   @FXML private AnimatedButton btnExit;
   @FXML private Pane panReactorToolbox;
 
-
+  @FXML
   public void initialize() {
   }
 
   @FXML
   private void onSolved() {
-    isPuzzleSolved = true;
+    setSolved();
     clearPuzzle(panReactorToolbox);
   }
 }

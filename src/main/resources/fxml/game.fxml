@@ -136,7 +136,7 @@
       </Group>
       <Group fx:id="panelContainer">
          <children>
-            <fx:include fx:id="fullSidePanel" layoutY="65.0" source="SidePanel.fxml" />
+            <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
          </children>
       </Group>
       <Button fx:id="btnSettings" layoutX="638.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />
@@ -180,5 +180,6 @@
             </AnimatedButton>
          </children>
       </Group>
+      <Button fx:id="update" mnemonicParsing="false" onAction="#update" text="Button" />
    </children>
 </Pane>

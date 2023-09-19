@@ -1,5 +1,8 @@
 package nz.ac.auckland.se206.puzzles;
 
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -7,7 +10,8 @@ import javafx.scene.layout.Pane;
 public class Puzzle {
 
   public boolean isPuzzleSolved;
-  private Label solvedLabel = new Label("Puzzle Solved! Go find the other puzzles");
+  private Label solvedLabel = new Label("Puzzle Solved! Clue added to inventory");
+  private Parent root;
 
   public enum puzzle {
     reactortoolbox, reactorbuttonpad,
@@ -20,5 +24,20 @@ public class Puzzle {
       solvedLabel.setLayoutX(30);
       solvedLabel.setLayoutY(250);
     }
+  }
+
+  public boolean isSolved() {
+    return isPuzzleSolved;
+  }
+
+  public void setSolved() {
+    isPuzzleSolved = true;
+  }
+  public Parent getRoot() {
+    return root;
+  }
+
+  public void setRoot(Parent root) {
+    this.root = root;
   }
 }
