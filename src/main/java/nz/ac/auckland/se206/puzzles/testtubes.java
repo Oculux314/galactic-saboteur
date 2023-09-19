@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.puzzles;
 
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Ellipse;
@@ -18,6 +19,8 @@ public class TestTubes {
   @FXML private AnimatedButton redOption;
   @FXML private AnimatedButton btnMix;
   @FXML private Label confirmationMessage;
+  @FXML private Label completedMessage;
+  @FXML private Group gameComponents;
 
   private static String colour;
   private boolean yellowSelected;
@@ -28,19 +31,22 @@ public class TestTubes {
 
   @FXML
   private void initialize() {
-    // generate and store the color only if it hasn't been set before
-    if (colour == null) {
-      colour = RandomColorSelector();
+
+    if (isPuzzleCorrect) {
+      completedMessage.setVisible(true);
+      gameComponents.setVisible(false);
+    } else {
+      // generate and store the color only if it hasn't been set before
+      if (colour == null) {
+        colour = RandomColorSelector();
+      }
+      instructions.setText("Mix two solutions to create a " + colour + " solution");
+      completedMessage.setVisible(false);
+
+      yellowChosen.setVisible(false);
+      blueChosen.setVisible(false);
+      redChosen.setVisible(false);
     }
-    instructions.setText("Mix two solutions to create a " + colour + " solution");
-
-    yellowChosen.setVisible(false);
-    blueChosen.setVisible(false);
-    redChosen.setVisible(false);
-
-    yellowSelected = false;
-    blueSelected = false;
-    redSelected = false;
   }
 
   public String RandomColorSelector() {
@@ -94,7 +100,7 @@ public class TestTubes {
   private void btnMixClicked(MouseEvent event) {
     if (yellowSelected && blueSelected) {
       if (colour.equals("green")) {
-        isPuzzleCorrect = true;
+        success();
         confirmationMessage.setText("Correct! You have created a green solution");
       } else {
         isPuzzleCorrect = false;
@@ -102,7 +108,7 @@ public class TestTubes {
       }
     } else if (yellowSelected && redSelected) {
       if (colour.equals("orange")) {
-        isPuzzleCorrect = true;
+        success();
         confirmationMessage.setText("Correct! You have created an orange solution");
       } else {
         isPuzzleCorrect = false;
@@ -110,7 +116,7 @@ public class TestTubes {
       }
     } else if (blueSelected && redSelected) {
       if (colour.equals("purple")) {
-        isPuzzleCorrect = true;
+        success();
         confirmationMessage.setText("Correct! You have created a purple solution");
       } else {
         isPuzzleCorrect = false;
@@ -120,5 +126,10 @@ public class TestTubes {
       isPuzzleCorrect = false;
       confirmationMessage.setText("You need to select 2 solutions");
     }
+  }
+
+  private void success() {
+    isPuzzleCorrect = true;
+    gameComponents.setDisable(true);
   }
 }
