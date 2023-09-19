@@ -95,7 +95,6 @@ public class GameController implements Controller {
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     String buttonId = clickedButton.getId();
-    System.out.println(buttonId);
 
     if (buttonToPuzzleMap.containsKey(buttonId)) {
       // Load the specific puzzle

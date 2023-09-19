@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.testtubes">
+<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.TestTubes">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: black;">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <Label fx:id="instructions" layoutX="79.0" layoutY="51.0" text="instructions placeholder" textFill="WHITE" />
+            <Label fx:id="instructions" layoutX="79.0" layoutY="51.0" text="instructions placeholder" />
+            <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="167.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
+            <Ellipse fx:id="redChosen" fill="#ffffff00" layoutX="250.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
+            <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="333.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
+            <AnimatedButton fx:id="blueOption" fitHeight="96.0" fitWidth="46.0" layoutX="144.0" layoutY="154.0" onMouseClicked="#TestTubeClicked">
+               <image>
+                  <Image url="@../images/blueoption.png" />
+               </image>
+            </AnimatedButton>
+            <AnimatedButton fx:id="redOption" fitHeight="96.0" fitWidth="46.0" layoutX="227.0" layoutY="154.0" onMouseClicked="#TestTubeClicked">
+               <image>
+                  <Image url="@../images/redoption.png" />
+               </image>
+            </AnimatedButton>
+            <AnimatedButton fx:id="yellowOption" fitHeight="96.0" fitWidth="46.0" layoutX="310.0" layoutY="154.0" onMouseClicked="#TestTubeClicked">
+               <image>
+                  <Image url="@../images/yellowoption.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Pane>
    </children>
