@@ -62,4 +62,9 @@ public class ExpositionController implements Controller {
   private void onContinueClicked() throws IOException {
     App.setScreen(Screen.Name.GAME);
   }
+
+  @FXML
+  private void onBackgroundClicked() {
+    showNextImage();
+  }
 }
