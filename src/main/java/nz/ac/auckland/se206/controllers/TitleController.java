@@ -26,6 +26,7 @@ public class TitleController implements Controller {
   @FXML
   private void onPlayClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.EXPOSITION);
+    ((ExpositionController) App.getScreen(Screen.Name.EXPOSITION).getController()).startSlideshow();
   }
 
   /**

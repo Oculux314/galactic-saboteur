@@ -17,6 +17,7 @@ public class ExpositionController implements Controller {
 
   /** Pane that takes up the entire screen. */
   @FXML Pane panFullScreen;
+
   @FXML Pane replayPane;
   @FXML AnimatedButton btnReplay;
   @FXML AnimatedButton btnContinue;
@@ -25,15 +26,11 @@ public class ExpositionController implements Controller {
 
   private int currentImageIndex = 0;
   private Timeline timeline = new Timeline();
-  private String[] imagePaths = {"/images/expo1.jpg","/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"};
+  private String[] imagePaths = {
+    "/images/expo1.jpg", "/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"
+  };
 
-  @FXML
-  public void initialize() {
-    replayPane.setVisible(false);
-    startSlideshow();
-  }
-
-  private void startSlideshow() {
+  public void startSlideshow() {
     // Runs the slideshow
     showNextImage();
     timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> showNextImage()));

@@ -13,7 +13,7 @@
             <Image url="@../images/shipinspace.jpg" />
          </image>
       </ImageView>
-      <Pane fx:id="replayPane" prefHeight="600.0" prefWidth="800.0">
+      <Pane fx:id="replayPane" prefHeight="600.0" prefWidth="800.0" visible="false">
          <children>
             <ImageView fitHeight="600.0" fitWidth="813.0" pickOnBounds="true" preserveRatio="true">
                <image>
