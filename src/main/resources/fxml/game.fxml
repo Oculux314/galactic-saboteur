@@ -151,6 +151,16 @@
             </AnimatedButton>
          </children>
       </Group>
+      <Group fx:id="grpLabRoom" layoutX="10.0" layoutY="10.0">
+         <children>
+            <Pane layoutX="125.0" layoutY="118.0" prefHeight="289.0" prefWidth="454.0" />
+            <AnimatedButton fx:id="btnToTestTubes" fitHeight="29.0" fitWidth="23.0" layoutX="335.0" layoutY="289.0" onMouseClicked="#onPuzzleButtonClicked">
+               <image>
+                  <Image url="@../images/testtubes.png" />
+               </image>
+            </AnimatedButton>
+         </children>
+      </Group>
       <Group fx:id="grpPuzzleCommons">
          <children>
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
@@ -171,15 +181,6 @@
             <AnimatedButton fx:id="btnExit" fitHeight="41.0" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
                <image>
                   <Image url="@../images/exit.png" />
-               </image>
-            </AnimatedButton>
-         </children>
-      </Group>
-      <Group fx:id="grpReactorRoom1" layoutX="10.0" layoutY="10.0">
-         <children>
-            <AnimatedButton fx:id="btnToTestTubes" fitHeight="29.0" fitWidth="23.0" onMouseClicked="#onPuzzleButtonClicked">
-               <image>
-                  <Image url="@../images/testtubes.png" />
                </image>
             </AnimatedButton>
          </children>
