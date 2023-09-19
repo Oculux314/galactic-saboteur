@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Ellipse;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
-public class TestTubes {
+public class TestTubes extends Puzzle {
 
   @FXML private Label instructions;
   @FXML private Ellipse yellowChosen;
@@ -67,6 +67,7 @@ public class TestTubes {
     Ellipse ellipse = null;
     boolean colourSelected;
 
+    // Determine which ellipse was clicked
     if (event.getSource() == blueOption) {
       ellipse = blueChosen;
       colourSelected = blueSelected;
@@ -78,6 +79,7 @@ public class TestTubes {
       colourSelected = redSelected;
     }
 
+    // Toggle the visibility of the ellipses
     if (ellipse.isVisible()) {
       ellipse.setVisible(false);
       colourSelected = false;
