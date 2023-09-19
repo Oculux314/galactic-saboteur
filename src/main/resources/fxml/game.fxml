@@ -149,6 +149,11 @@
                   <Image url="@../images/toolbox.png" />
                </image>
             </AnimatedButton>
+            <AnimatedButton fx:id="btnButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../images/buttonpad.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
       <Group fx:id="grpPuzzleCommons">

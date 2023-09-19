@@ -13,6 +13,8 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.puzzles.Puzzle;
+
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
@@ -35,6 +37,7 @@ public class GameController implements Controller {
   public void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
+    buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
 
     panPuzzle.setVisible(false);
     grpPuzzleCommons.setVisible(false);
