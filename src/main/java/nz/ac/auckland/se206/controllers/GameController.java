@@ -32,7 +32,8 @@ public class GameController implements Controller {
   private PuzzleLoader puzzleLoader;
   private HashMap<String, puzzle> buttonToPuzzleMap;
 
-  public void initialize() {
+  @FXML
+  private  void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
 

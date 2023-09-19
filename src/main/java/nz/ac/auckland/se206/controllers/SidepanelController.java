@@ -30,7 +30,8 @@ public class SidepanelController implements Controller {
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;
 
-  public void initialize() {
+  @FXML
+  private void initialize() {
     suspectsContent.setVisible(false);
     clueInformationRectangle.setVisible(false);
   }
@@ -105,5 +106,4 @@ public class SidepanelController implements Controller {
       informationLabel.setText("");
     }
   }
-
 }

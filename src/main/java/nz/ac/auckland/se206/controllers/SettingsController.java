@@ -12,11 +12,11 @@ import nz.ac.auckland.se206.components.StateButton;
 /** Controller class for the title screen. */
 public class SettingsController implements Controller {
 
-  @FXML Pane panBackground;
-  @FXML AnimatedButton btnBack;
-  @FXML StateButton btnDifficulty;
-  @FXML StateButton btnTime;
-  @FXML StateButton btnTts;
+  @FXML private Pane panBackground;
+  @FXML private AnimatedButton btnBack;
+  @FXML private StateButton btnDifficulty;
+  @FXML private StateButton btnTime;
+  @FXML private StateButton btnTts;
 
   @FXML
   private void initialize() {

@@ -16,13 +16,13 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 public class ExpositionController implements Controller {
 
   /** Pane that takes up the entire screen. */
-  @FXML Pane panFullScreen;
+  @FXML private Pane panFullScreen;
 
-  @FXML Pane replayPane;
-  @FXML AnimatedButton btnReplay;
-  @FXML AnimatedButton btnContinue;
-  @FXML ImageView imageView = new ImageView();
-  @FXML ImageView imvWho = new ImageView();
+  @FXML private Pane replayPane;
+  @FXML private AnimatedButton btnReplay;
+  @FXML private AnimatedButton btnContinue;
+  @FXML private ImageView imageView = new ImageView();
+  @FXML private ImageView imvWho = new ImageView();
 
   private int currentImageIndex = 0;
   private Timeline timeline = new Timeline();
@@ -53,13 +53,13 @@ public class ExpositionController implements Controller {
   }
 
   @FXML
-  public void onReplayClicked() throws IOException {
+  private void onReplayClicked() throws IOException {
     replayPane.setVisible(false);
     startSlideshow();
   }
 
   @FXML
-  public void onContinueClicked() throws IOException {
+  private void onContinueClicked() throws IOException {
     App.setScreen(Screen.Name.GAME);
   }
 }

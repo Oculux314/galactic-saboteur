@@ -11,11 +11,9 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 /** Controller class for the title screen. */
 public class TitleController implements Controller {
 
-  @FXML Pane panBackground;
-  @FXML Pane panFullScreen;
-  @FXML AnimatedButton btnPlay;
-  
-  
+  @FXML private Pane panBackground;
+  @FXML private Pane panFullScreen;
+  @FXML private AnimatedButton btnPlay;
 
   /**
    * Called when the play button is clicked. Moves control to the exposition screen.
