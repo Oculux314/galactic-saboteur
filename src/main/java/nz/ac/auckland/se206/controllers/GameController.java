@@ -27,6 +27,9 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
+  @FXML private AnimatedButton gptScientist;
+  @FXML private AnimatedButton gptMechanic;
+  @FXML private AnimatedButton gptCaptain;
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
@@ -38,7 +41,7 @@ public class GameController implements Controller {
 
     panPuzzle.setVisible(false);
     grpPuzzleCommons.setVisible(false);
-    
+
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
@@ -103,4 +106,7 @@ public class GameController implements Controller {
       panPuzzle.setVisible(true);
     }
   }
+
+  @FXML
+  private void gptStart() {}
 }

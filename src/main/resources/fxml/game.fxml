@@ -15,8 +15,33 @@
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
    <children>
       <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="590.0" />
+      <Group fx:id="grpPuzzleCommons">
+         <children>
+            <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
+               <children>
+                  <GridPane prefHeight="500.0" prefWidth="500.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+            </Pane>
+            <AnimatedButton fx:id="btnExit" fitHeight="41.0" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exit.png" />
+               </image>
+            </AnimatedButton>
+         </children>
+      </Group>
       <Group fx:id="grpPanZoom">
          <children>
+            <Pane prefHeight="273.0" prefWidth="680.0" />
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/ship.png" />
@@ -132,6 +157,21 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <AnimatedButton fx:id="gptScientist" fitHeight="56.0" fitWidth="39.0" layoutX="400.0" layoutY="237.0" onMouseClicked="#gptStart">
+               <image>
+                  <Image url="@../images/labgpt.png" />
+               </image>
+            </AnimatedButton>
+            <AnimatedButton fx:id="gptCaptain" fitHeight="56.0" fitWidth="39.0" layoutX="554.0" layoutY="329.0">
+               <image>
+                  <Image url="@../images/captain.png" />
+               </image>
+            </AnimatedButton>
+            <AnimatedButton fx:id="gptMechanic" fitHeight="56.0" fitWidth="42.0" layoutX="209.0" layoutY="359.0">
+               <image>
+                  <Image url="@../images/mechanic.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
       <Group fx:id="panelContainer">
@@ -147,30 +187,6 @@
             <AnimatedButton fx:id="btnToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                <image>
                   <Image url="@../images/toolbox.png" />
-               </image>
-            </AnimatedButton>
-         </children>
-      </Group>
-      <Group fx:id="grpPuzzleCommons">
-         <children>
-            <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
-               <children>
-                  <GridPane prefHeight="500.0" prefWidth="500.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
-               </children>
-            </Pane>
-            <AnimatedButton fx:id="btnExit" fitHeight="41.0" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
-               <image>
-                  <Image url="@../images/exit.png" />
                </image>
             </AnimatedButton>
          </children>
