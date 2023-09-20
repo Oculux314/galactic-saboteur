@@ -7,13 +7,15 @@ public class RotateButton extends StateButton {
 
   protected void init() {
     super.init();
-    Image image = currentState.normalImage;
-    addStates();
+    setStates();
   }
 
-  private void addStates() {
+  private void setStates() {
+    Image image = currentState.normalImage;
+    states.clear();
+
     for (int i = 0; i < 4; i++) {
-      addState(String.valueOf(i), currentState.normalImage);
+      addState(String.valueOf(i), image);
     }
   }
 

@@ -29,8 +29,9 @@ public class StateButton extends AnimatedButton {
     }
   }
 
-  private List<State> states;
+  protected List<State> states;
   protected State currentState;
+  private boolean isInitialized = false;
 
   public StateButton() {
     super();
@@ -53,7 +54,8 @@ public class StateButton extends AnimatedButton {
   public void addState(String name, Image image, Runnable onArrive, Runnable onLeave) {
     states.add(new State(name, image, onArrive, onLeave));
 
-    if (states.size() == 1) {
+    if (!isInitialized) {
+      isInitialized = true;
       init();
     }
   }
