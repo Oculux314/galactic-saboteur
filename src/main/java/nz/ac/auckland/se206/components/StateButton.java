@@ -31,7 +31,7 @@ public class StateButton extends AnimatedButton {
 
   protected List<State> states;
   protected State currentState;
-  private boolean isInitialized = false;
+  protected boolean isInitialized = false;
 
   public StateButton() {
     super();

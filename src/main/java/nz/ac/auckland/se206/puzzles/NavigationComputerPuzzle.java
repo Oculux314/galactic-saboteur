@@ -3,7 +3,7 @@ package nz.ac.auckland.se206.puzzles;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import nz.ac.auckland.se206.components.ComputerTile;
-import nz.ac.auckland.se206.components.ComputerTile.Connector;
+import nz.ac.auckland.se206.components.ComputerTile.Type;
 
 public class NavigationComputerPuzzle extends Puzzle {
 
@@ -12,11 +12,11 @@ public class NavigationComputerPuzzle extends Puzzle {
 
   @FXML private Group grpTiles;
   private ComputerTile[][] tiles;
-  private ComputerTile.Connector[][] tileTypes;
+  private ComputerTile.Type[][] tileTypes;
 
   public void initialize() {
     tiles = new ComputerTile[NUM_ROWS][NUM_COLS];
-    tileTypes = new ComputerTile.Connector[NUM_ROWS][NUM_COLS];
+    tileTypes = new ComputerTile.Type[NUM_ROWS][NUM_COLS];
 
     randomizeTileTypes();
     chooseSolution();
@@ -29,7 +29,8 @@ public class NavigationComputerPuzzle extends Puzzle {
   private void randomizeTileTypes() {
     for (int i = 0; i < NUM_ROWS; i++) {
       for (int j = 0; j < NUM_COLS; j++) {
-        tileTypes[i][j] = Connector.RANDOM;
+        int random = (int) (Math.random() * Type.values().length);
+        tileTypes[i][j] = Type.values()[random];
       }
     }
   }
