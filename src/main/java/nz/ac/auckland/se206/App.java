@@ -18,15 +18,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
 
-  /** The primary stage of the application */
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
   private static Map<Screen.Name, Screen> screens = new HashMap<>();
+
+  private static TextToSpeech tts = new TextToSpeech();
 
   /**
    * The entry point of the application.
@@ -161,7 +163,7 @@ public class App extends Application {
 
     // Properties
     scene.setFill(Color.web("#131d23"));
-    stage.setTitle("Galactic Saboteur");
+    stage.setTitle(tts("Galactic Saboteur"));
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);
 
@@ -193,5 +195,29 @@ public class App extends Application {
 
     screenLoader.start();
     setScreen(Screen.Name.TITLE);
+  }
+
+  public static String tts(String text) {
+    if (text == null) {
+      throw new IllegalArgumentException("Text cannot be null.");
+    }
+
+    Thread ttsThread =
+        new Thread(
+            () -> {
+              try {
+                tts.speak(text);
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            });
+
+    ttsThread.start();
+    return text;
+  }
+
+  @Override
+  public void stop() {
+    tts.terminate();
   }
 }
