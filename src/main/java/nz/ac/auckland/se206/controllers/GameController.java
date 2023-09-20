@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
@@ -42,13 +43,11 @@ public class GameController implements Controller {
   private String lastClickedId;
   private Set<String> solvedPuzzles = new HashSet<>();
 
-  public void initialize() throws IOException {
+  @FXML
+  private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
     buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
-
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
 
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
@@ -70,13 +69,8 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void settingsClicked() {
-    System.out.println("Settings button clicked");
-  }
-
-  @FXML
-  private void recClicked() {
-    System.out.println("Rectangle clicked");
+  private void restartClicked() throws IOException {
+    App.restart();
   }
 
   @FXML
@@ -94,8 +88,7 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked() {
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
+    minimisePuzzleWindow();
 
     // If puzzle was solved, get the clue
     if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
@@ -114,9 +107,16 @@ public class GameController implements Controller {
       // Load the specific puzzle
       puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
-      grpPuzzleCommons.setVisible(true);
-      panPuzzle.setVisible(true);
+      restorePuzzleWindow();
     }
+  }
+
+  private void minimisePuzzleWindow() {
+    grpPuzzleCommons.setVisible(false);
+  }
+
+  private void restorePuzzleWindow() {
+    grpPuzzleCommons.setVisible(true);
 
     // Save the last clicked puzzle
     lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();

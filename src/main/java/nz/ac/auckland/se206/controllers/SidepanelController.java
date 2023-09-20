@@ -44,7 +44,8 @@ public class SidepanelController implements Controller {
   
 
   @FXML
-  public void initialize() {
+  @FXML
+  private void initialize() {
     suspectsContent.setVisible(false);
     clueInformationRectangle.setVisible(false);
     selectClues();
