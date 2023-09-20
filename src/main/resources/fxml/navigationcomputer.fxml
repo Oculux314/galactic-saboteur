@@ -12,7 +12,7 @@
             <Image url="@../images/puzzle/terminal.png" />
          </image>
       </ImageView>
-      <Group fx:id="grpTiles" layoutX="131.0" layoutY="130.0" />
+      <Group fx:id="grpTiles" layoutX="131.0" layoutY="130.0" onMouseClicked="#onTilesClicked" />
       <ImageView fx:id="Start" fitHeight="60.0" fitWidth="60.0" layoutX="71.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/puzzle/connector_end.png" />

@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.components;
 
+import java.util.HashMap;
+import java.util.Map;
 import javafx.scene.image.Image;
 
 /** This is a special RotateButton component intended for use in the computer puzzle only. */
@@ -10,38 +12,16 @@ public class ComputerTile extends RotateButton {
     BEND,
   }
 
-  private class ConnectionData {
-    public boolean up;
-    public boolean right;
-    public boolean down;
-    public boolean left;
-
-    public ConnectionData(Type type) {
-      switch (type) {
-        case STRAIGHT:
-          setConnections(false, true, false, true);
-          break;
-        case BEND:
-          setConnections(true, false, false, true);
-          break;
-      }
-    }
-
-    private void setConnections(boolean up, boolean right, boolean down, boolean left) {
-      this.up = up;
-      this.right = right;
-      this.down = down;
-      this.left = left;
-    }
-  }
-
   private Type type;
-  private ConnectionData connections;
+  private Map<Orientation, Boolean> connections;
+  private int row;
+  private int col;
 
   public void setType(Type type) {
     this.type = type;
-    connections = new ConnectionData(type);
+    initalizeConnections();
     recreateStates();
+    setActive(false);
   }
 
   @Override
@@ -61,17 +41,77 @@ public class ComputerTile extends RotateButton {
     cycleConnections();
   }
 
-  private void cycleConnections() {
-    boolean up = connections.up;
-    boolean right = connections.right;
-    boolean down = connections.down;
-    boolean left = connections.left;
+  private void initalizeConnections() {
+    connections = new HashMap<>();
 
-    // Cycle clockwise
-    connections.setConnections(left, up, right, down);
+    switch (type) {
+      case STRAIGHT:
+        setConnections(false, true, false, true);
+        break;
+      case BEND:
+        setConnections(true, false, false, true);
+        break;
+    }
   }
 
-  public ConnectionData getConnections() {
+  private void setConnections(boolean up, boolean right, boolean down, boolean left) {
+    connections.put(Orientation.UP, up);
+    connections.put(Orientation.RIGHT, right);
+    connections.put(Orientation.DOWN, down);
+    connections.put(Orientation.LEFT, left);
+  }
+
+  private void cycleConnections() {
+    boolean up = connections.get(Orientation.UP);
+    boolean right = connections.get(Orientation.RIGHT);
+    boolean down = connections.get(Orientation.DOWN);
+    boolean left = connections.get(Orientation.LEFT);
+
+    // Cycle clockwise
+    setConnections(left, up, right, down);
+  }
+
+  public Map<Orientation, Boolean> getConnections() {
     return connections;
+  }
+
+  public Orientation getOtherConnection(Orientation baseOrientation) {
+    for (Orientation orientation : Orientation.values()) {
+      if (orientation == baseOrientation) {
+        continue;
+      }
+
+      if (connections.get(orientation)) {
+        return orientation;
+      }
+    }
+
+    return null;
+  }
+
+  public void setActive(boolean isActive) {
+    if (isActive) {
+      // TODO
+      setOpacity(1);
+    } else {
+      // TODO
+      setOpacity(0.5);
+    }
+  }
+
+  public int getRow() {
+    return row;
+  }
+
+  public void setRow(int row) {
+    this.row = row;
+  }
+
+  public int getCol() {
+    return col;
+  }
+
+  public void setCol(int col) {
+    this.col = col;
   }
 }
