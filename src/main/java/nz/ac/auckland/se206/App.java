@@ -163,7 +163,7 @@ public class App extends Application {
 
     // Properties
     scene.setFill(Color.web("#131d23"));
-    stage.setTitle(tts("Galactic Saboteur"));
+    stage.setTitle("Galactic Saboteur");
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);
 
@@ -200,6 +200,10 @@ public class App extends Application {
   public static String tts(String text) {
     if (text == null) {
       throw new IllegalArgumentException("Text cannot be null.");
+    }
+
+    if (!GameState.ttsEnabled) {
+      return text;
     }
 
     Thread ttsThread =
