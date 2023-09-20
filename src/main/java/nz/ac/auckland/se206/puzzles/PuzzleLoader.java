@@ -12,7 +12,6 @@ public class PuzzleLoader {
 
   public PuzzleLoader(Pane panPuzzle) {
     this.panPuzzle = panPuzzle;
-    panPuzzle.setVisible(false);
   }
 
   public void loadPuzzle(String fxmlFilePath) throws IOException {

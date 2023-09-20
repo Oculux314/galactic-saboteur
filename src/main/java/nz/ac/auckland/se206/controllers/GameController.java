@@ -47,12 +47,10 @@ public class GameController implements Controller {
   private HashMap<String, puzzle> buttonToPuzzleMap;
   private boolean hintWanted = false;
 
-  public void initialize() {
+  @FXML
+  private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
-
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
 
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
@@ -80,13 +78,8 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void settingsClicked() {
-    System.out.println("Settings button clicked");
-  }
-
-  @FXML
-  private void recClicked() {
-    System.out.println("Rectangle clicked");
+  private void restartClicked() throws IOException {
+    App.restart();
   }
 
   @FXML
@@ -104,8 +97,15 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked() {
-    panPuzzle.setVisible(false);
+    minimisePuzzleWindow();
+  }
+
+  private void minimisePuzzleWindow() {
     grpPuzzleCommons.setVisible(false);
+  }
+
+  private void restorePuzzleWindow() {
+    grpPuzzleCommons.setVisible(true);
   }
 
   @FXML
@@ -122,6 +122,8 @@ public class GameController implements Controller {
 
       grpPuzzleCommons.setVisible(true);
       panPuzzle.setVisible(true);
+
+      restorePuzzleWindow();
     }
   }
 

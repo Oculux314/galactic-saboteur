@@ -11,11 +11,9 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 /** Controller class for the title screen. */
 public class TitleController implements Controller {
 
-  @FXML Pane panBackground;
-  @FXML Pane panFullScreen;
-  @FXML AnimatedButton btnPlay;
-  
-  
+  @FXML private Pane panBackground;
+  @FXML private Pane panFullScreen;
+  @FXML private AnimatedButton btnPlay;
 
   /**
    * Called when the play button is clicked. Moves control to the exposition screen.
@@ -26,6 +24,7 @@ public class TitleController implements Controller {
   @FXML
   private void onPlayClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.EXPOSITION);
+    ((ExpositionController) App.getScreen(Screen.Name.EXPOSITION).getController()).startSlideshow();
   }
 
   /**
