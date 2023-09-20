@@ -14,7 +14,7 @@ public class ReactorButtonPuzzle extends Puzzle {
 
   @FXML
   private void onSolved() {
-    isPuzzleSolved = true;
+    setSolved();
     clearPuzzle(panReactorButtonpad);
   }
 }

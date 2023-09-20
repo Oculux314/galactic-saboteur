@@ -1,14 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
@@ -33,9 +34,6 @@ public class SidepanelController implements Controller {
   @FXML private ImageView suspect1;
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;
-  @FXML private Pane panClue1;
-  @FXML private Pane panClue2;
-  @FXML private Pane panClue3;
 
   private String[] suspects = {
     "/images/suspects/suspect1.jpg",
@@ -43,12 +41,17 @@ public class SidepanelController implements Controller {
     "/images/suspects/suspect3.png"
   };
   private String[] rooms = {
-    "/images/rooms/room1.jpg", "/images/rooms/room2.jpg", "/images/rooms/room3.jpg"
+    "/images/rooms/room1.jpg", 
+    "/images/rooms/room2.jpg", 
+    "/images/rooms/room3.jpg"
   };
   private String[] times = {
-    "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
+    "/images/times/time1.jpg", 
+    "/images/times/time2.jpg", 
+    "/images/times/time3.jpg"
   };
   private String defaultInfo = "Clue not found";
+
   private int random;
   private Image suspect;
   private Image room;
@@ -58,11 +61,13 @@ public class SidepanelController implements Controller {
   private String timeName;
 
   private Set<Image> clues = new HashSet<>();
+  private Map<String, String> clueNameMap = new HashMap<>();
 
   @FXML
   private void initialize() {
     suspectsContent.setVisible(false);
     clueInformationRectangle.setVisible(false);
+    setClueNameMap();
     selectClues();
   }
 
@@ -171,38 +176,19 @@ public class SidepanelController implements Controller {
   }
 
   private String getClueName(String filePath) {
-    if (filePath.contains("suspect")) {
-      if (filePath.contains("1")) {
-        return "Scientist";
-      } else if (filePath.contains("2")) {
-        return "Captain";
-      } else if (filePath.contains("3")) {
-        return "Mechanic";
-      } else {
-        return null;
-      }
-    } else if (filePath.contains("room")) {
-      if (filePath.contains("1")) {
-        return "Navigation";
-      } else if (filePath.contains("2")) {
-        return "Laboratory";
-      } else if (filePath.contains("3")) {
-        return "Reactor Room";
-      } else {
-        return null;
-      }
-    } else if (filePath.contains("time")) {
-      if (filePath.contains("1")) {
-        return "Day";
-      } else if (filePath.contains("2")) {
-        return "Afternoon";
-      } else if (filePath.contains("3")) {
-        return "Night";
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
+    return clueNameMap.get(filePath);
+  }
+
+  private void setClueNameMap() {
+    clueNameMap.put("/images/suspects/suspect1.jpg", "Scientist");
+    clueNameMap.put("/images/suspects/suspect2.jpg", "Captain");
+    clueNameMap.put("/images/suspects/suspect3.png", "Mechanic");
+    clueNameMap.put("/images/rooms/room1.jpg", "Navigation");
+    clueNameMap.put("/images/rooms/room2.jpg", "Laboratory");
+    clueNameMap.put("/images/rooms/room3.jpg", "Reactor Room");
+    clueNameMap.put("/images/times/time1.jpg", "Morning");
+    clueNameMap.put("/images/times/time2.jpg", "Afternoon");
+    clueNameMap.put("/images/times/time3.jpg", "Night");
+    System.out.println("clue map set");
   }
 }

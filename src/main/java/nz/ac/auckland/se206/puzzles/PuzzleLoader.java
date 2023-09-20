@@ -22,6 +22,8 @@ public class PuzzleLoader {
   }
 
   public void loadPuzzle(String fxmlFilePath) throws IOException {
+
+    // If the puzzle is already loaded show it
     if (puzzleMap.containsKey(fxmlFilePath)) {
       Puzzle puzzle = puzzleMap.get(fxmlFilePath);
       panPuzzle.getChildren().clear();
@@ -29,6 +31,7 @@ public class PuzzleLoader {
       return;
     }
 
+    // Otherwise, load the puzzle into panPuzzle
     FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
     Parent puzzle = loader.load();
     Puzzle puzzleController = loader.getController();
@@ -39,11 +42,12 @@ public class PuzzleLoader {
   }
 
   public Puzzle getCurrentPuzzle() {
-
+    // If there is no puzzle loaded, return null
     if (panPuzzle.getChildren().isEmpty()) {
       return null;
     }
 
+    // Otherwise, return the puzzle controller for the loaded puzzle
     Node puzzle = panPuzzle.getChildren().get(0);
     for (Puzzle puzzleController : puzzleMap.values()) {
       if (puzzleController.getRoot() == puzzle) {

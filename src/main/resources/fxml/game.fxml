@@ -191,6 +191,5 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Button fx:id="update" mnemonicParsing="false" onAction="#update" text="Button" />
    </children>
 </Pane>

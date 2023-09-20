@@ -32,7 +32,6 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
-  @FXML private Button update;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
@@ -121,10 +120,5 @@ public class GameController implements Controller {
 
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
-  }
-
-  @FXML
-  private void update() {
-    return;
   }
 }
