@@ -74,15 +74,24 @@ public class GameController implements Controller {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
 
     NarrationBox narrationBox1 =
-        new NarrationBox(paneNarrationScientist, labelNarrationScientist, textResponseScientist);
+        new NarrationBox(
+            paneNarrationScientist,
+            labelNarrationScientist,
+            textResponseScientist,
+            "Spacey's scientist");
     App.scientist = new Assistant(narrationBox1);
 
     NarrationBox narrationBox2 =
-        new NarrationBox(paneNarrationMechanic, labelNarrationMechanic, textResponseMechanic);
+        new NarrationBox(
+            paneNarrationMechanic,
+            labelNarrationMechanic,
+            textResponseMechanic,
+            "Spacey's mechanic");
     App.mechanic = new Assistant(narrationBox2);
 
     NarrationBox narrationBox3 =
-        new NarrationBox(paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain);
+        new NarrationBox(
+            paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain, "Spacey's captain");
     App.captain = new Assistant(narrationBox3);
 
     grpGptScientist.setVisible(false);
