@@ -12,6 +12,16 @@
             <Image url="@../images/puzzle/terminal.png" />
          </image>
       </ImageView>
-      <Group fx:id="grpTiles" layoutX="130.0" layoutY="130.0" />
+      <Group fx:id="grpTiles" layoutX="131.0" layoutY="130.0" />
+      <ImageView fx:id="Start" fitHeight="60.0" fitWidth="60.0" layoutX="71.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/puzzle/connector_end.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Finish" fitHeight="60.0" fitWidth="60.0" layoutX="371.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../images/puzzle/connector_end.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
