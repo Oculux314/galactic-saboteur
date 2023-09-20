@@ -53,16 +53,16 @@ public class SidepanelController implements Controller {
   private Image suspect;
   private Image room;
   private Image time;
+  private String suspectName;
+  private String roomName;
+  private String timeName;
+
   private Set<Image> clues = new HashSet<>();
-  private Set<ImageView> clueDisplays = new HashSet<>();
 
   @FXML
   private void initialize() {
     suspectsContent.setVisible(false);
     clueInformationRectangle.setVisible(false);
-    clueDisplays.add(clue1);
-    clueDisplays.add(clue2);
-    clueDisplays.add(clue3);
     selectClues();
   }
 
@@ -98,21 +98,22 @@ public class SidepanelController implements Controller {
       informationLabel = lblSuspectInformation;
     }
 
+    if (event.getSource() instanceof ImageView) {
+      ImageView imageView = (ImageView) event.getSource();
+      Image image = imageView.getImage();
+      if (image == suspect) {
+        informationLabel.setText("Culprit: " + suspectName);
+      } else if (image == room) {
+        informationLabel.setText("Location: " + roomName);
+      } else if (image == time) {
+        informationLabel.setText("Time: " + timeName);
+      } else {
+        informationLabel.setText(defaultInfo);
+      }
+    }
+
     if (informationRectangle != null && informationLabel != null) {
       informationRectangle.setVisible(true);
-      if (event.getSource() == clue1) {
-        informationLabel.setText(defaultInfo);
-      } else if (event.getSource() == clue2) {
-        informationLabel.setText(defaultInfo);
-      } else if (event.getSource() == clue3) {
-        informationLabel.setText(defaultInfo);
-      } else if (event.getSource() == suspect1) {
-        informationLabel.setText("Suspect 1");
-      } else if (event.getSource() == suspect2) {
-        informationLabel.setText("Suspect 2");
-      } else if (event.getSource() == suspect3) {
-        informationLabel.setText("Suspect 3");
-      }
     }
   }
 
@@ -138,32 +139,70 @@ public class SidepanelController implements Controller {
   }
 
   private void selectClues() {
-    int size = clueDisplays.size();
+    int size = 3;
 
     random = (int) (Math.random() * size);
     suspect = new Image(getClass().getResourceAsStream(suspects[random]));
+    suspectName = getClueName(suspects[random]);
     clues.add(suspect);
 
     random = (int) (Math.random() * size);
     room = new Image(getClass().getResourceAsStream(rooms[random]));
+    roomName = getClueName(rooms[random]);
     clues.add(room);
 
     random = (int) (Math.random() * size);
     time = new Image(getClass().getResourceAsStream(times[random]));
+    timeName = getClueName(times[random]);
     clues.add(time);
   }
 
   public void getClue() {
     int random = (int) (Math.random()) * clues.size();
     Image clue = (Image) clues.toArray()[random];
-    ImageView clueDisplay = (ImageView) clueDisplays.toArray()[random];
-
-    clueDisplay.setImage(clue);
+    if (clue == suspect) {
+      clue1.setImage(clue);
+    } else if (clue == room) {
+      clue2.setImage(clue);
+    } else if (clue == time) {
+      clue3.setImage(clue);
+    }
     clues.remove(clue);
-    clueDisplays.remove(clueDisplay);
   }
 
-  public void setClueInformation(String information) {
-    lblClueInformation.setText(information);
+  private String getClueName(String filePath) {
+    if (filePath.contains("suspect")) {
+      if (filePath.contains("1")) {
+        return "Scientist";
+      } else if (filePath.contains("2")) {
+        return "Captain";
+      } else if (filePath.contains("3")) {
+        return "Mechanic";
+      } else {
+        return null;
+      }
+    } else if (filePath.contains("room")) {
+      if (filePath.contains("1")) {
+        return "Navigation";
+      } else if (filePath.contains("2")) {
+        return "Laboratory";
+      } else if (filePath.contains("3")) {
+        return "Reactor Room";
+      } else {
+        return null;
+      }
+    } else if (filePath.contains("time")) {
+      if (filePath.contains("1")) {
+        return "Day";
+      } else if (filePath.contains("2")) {
+        return "Afternoon";
+      } else if (filePath.contains("3")) {
+        return "Night";
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }
