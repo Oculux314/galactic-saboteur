@@ -7,11 +7,10 @@ public class RotateButton extends StateButton {
 
   protected void init() {
     super.init();
-    setStates();
+    recreateStatesWithImage(currentState.normalImage);
   }
 
-  private void setStates() {
-    Image image = currentState.normalImage;
+  protected void recreateStatesWithImage(Image image) {
     states.clear();
 
     for (int i = 0; i < 4; i++) {

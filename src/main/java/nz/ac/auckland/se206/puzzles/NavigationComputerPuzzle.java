@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.puzzles;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import nz.ac.auckland.se206.components.ComputerTile;
+import nz.ac.auckland.se206.components.ComputerTile.Connector;
 
 public class NavigationComputerPuzzle extends Puzzle {
 
@@ -18,7 +19,7 @@ public class NavigationComputerPuzzle extends Puzzle {
   private void makeTile(int n) {
     ComputerTile tile = new ComputerTile();
     grpTiles.getChildren().add(tile);
-    tile.addState("temp", "placeholder.png");
+    tile.setType(Connector.RANDOM);
 
     // Dimensions
     tile.setFitWidth(60);
