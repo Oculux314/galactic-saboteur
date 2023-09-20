@@ -17,11 +17,22 @@ public class ComputerTile extends RotateButton {
   private int row;
   private int col;
 
+  private boolean isActive;
+  private Image redImage;
+  private Image greenImage;
+
   public void setType(Type type) {
     this.type = type;
-    initalizeConnections();
+    loadImageColourVersions();
     recreateStates();
+    initalizeConnections();
     setActive(false);
+  }
+
+  private void loadImageColourVersions() {
+    String imageName = type.toString().toLowerCase();
+    redImage = new Image("/images/puzzle/connector_" + imageName + "_red.png");
+    greenImage = new Image("/images/puzzle/connector_" + imageName + "_green.png");
   }
 
   @Override
@@ -30,15 +41,32 @@ public class ComputerTile extends RotateButton {
   }
 
   private void recreateStates() {
-    String imageName = type.toString().toLowerCase();
-    Image image = new Image("/images/puzzle/connector_" + imageName + "_red.png");
-    recreateStatesWithImage(image);
+    recreateStatesWithImage(redImage);
   }
 
   @Override
   protected void onClick() {
     super.onClick();
     cycleConnections();
+  }
+
+  @Override
+  protected void updateImage() {
+    if (isActive) {
+      setImage(greenImage);
+    } else {
+      setImage(redImage);
+    }
+  }
+
+  @Override
+  protected void changeImageToHover() {
+    // Nothing: hover image functionality not supported for ComputerTile
+  }
+
+  @Override
+  protected void changeImageToNormal() {
+    // Nothing: hover image functionality not supported for ComputerTile
   }
 
   private void initalizeConnections() {
@@ -90,13 +118,8 @@ public class ComputerTile extends RotateButton {
   }
 
   public void setActive(boolean isActive) {
-    if (isActive) {
-      // TODO
-      setOpacity(1);
-    } else {
-      // TODO
-      setOpacity(0.5);
-    }
+    this.isActive = isActive;
+    updateImage();
   }
 
   public int getRow() {
