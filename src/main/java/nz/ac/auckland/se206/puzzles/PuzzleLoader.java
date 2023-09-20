@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import javafx.scene.Node;
 
 public class PuzzleLoader {
 
@@ -14,10 +15,10 @@ public class PuzzleLoader {
 
   private HashMap<String, Puzzle> puzzleMap;
 
-  public PuzzleLoader(Pane panPuzzle) {
+  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons) {
     this.panPuzzle = panPuzzle;
     puzzleMap = new HashMap<>();
-    panPuzzle.setVisible(false);
+    grpPuzzleCommons.setVisible(false);
   }
 
   public void loadPuzzle(String fxmlFilePath) throws IOException {
@@ -50,6 +51,5 @@ public class PuzzleLoader {
       }
     }
     return null;
-    
   }
 }

@@ -1,8 +1,5 @@
 package nz.ac.auckland.se206.puzzles;
 
-import java.io.IOException;
-
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -14,7 +11,7 @@ public class Puzzle {
   private Parent root;
 
   public enum puzzle {
-    reactortoolbox, reactorbuttonpad,
+    reactortoolbox, reactorbuttonpad, reactorapple,
   }
 
   public void clearPuzzle(Parent puzzlePane) {

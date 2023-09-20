@@ -1,15 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.image.Image;
 
 public class SidepanelController implements Controller {
 
@@ -30,24 +33,36 @@ public class SidepanelController implements Controller {
   @FXML private ImageView suspect1;
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;
+  @FXML private Pane panClue1;
+  @FXML private Pane panClue2;
+  @FXML private Pane panClue3;
 
-  private String[] suspects = {"/images/suspects/suspect1.jpg", "/images/suspects/suspect2.jpg", "/images/suspects/suspect3.png"};
-  private String[] rooms = {"/images/rooms/room1.jpg", "/images/rooms/room2.jpg", "/images/rooms/room3.jpg"};
-  private String[] times = {"/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"};
+  private String[] suspects = {
+    "/images/suspects/suspect1.jpg",
+    "/images/suspects/suspect2.jpg",
+    "/images/suspects/suspect3.png"
+  };
+  private String[] rooms = {
+    "/images/rooms/room1.jpg", "/images/rooms/room2.jpg", "/images/rooms/room3.jpg"
+  };
+  private String[] times = {
+    "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
+  };
   private String defaultInfo = "Clue not found";
+  private int random;
   private Image suspect;
   private Image room;
   private Image time;
-  private Image[] clues = {suspect, room, time};
-  private int clueIndex = 0;
+  private Set<Image> clues = new HashSet<>();
+  private Set<ImageView> clueDisplays = new HashSet<>();
 
-  
-
-  @FXML
   @FXML
   private void initialize() {
     suspectsContent.setVisible(false);
     clueInformationRectangle.setVisible(false);
+    clueDisplays.add(clue1);
+    clueDisplays.add(clue2);
+    clueDisplays.add(clue3);
     selectClues();
   }
 
@@ -123,30 +138,32 @@ public class SidepanelController implements Controller {
   }
 
   private void selectClues() {
-    int random = (int) (Math.random() * 3);
+    int size = clueDisplays.size();
+
+    random = (int) (Math.random() * size);
     suspect = new Image(getClass().getResourceAsStream(suspects[random]));
+    clues.add(suspect);
 
-    random = (int) (Math.random() * 3);
+    random = (int) (Math.random() * size);
     room = new Image(getClass().getResourceAsStream(rooms[random]));
+    clues.add(room);
 
-    random = (int) (Math.random() * 3);
+    random = (int) (Math.random() * size);
     time = new Image(getClass().getResourceAsStream(times[random]));
+    clues.add(time);
   }
-  
+
   public void getClue() {
-    if (clueIndex == 0) {
-      clue1.setImage(suspect);
-  } else if (clueIndex == 1) {
-      clue2.setImage(room);
-  } else if (clueIndex == 2) {
-      clue3.setImage(time);
+    int random = (int) (Math.random()) * clues.size();
+    Image clue = (Image) clues.toArray()[random];
+    ImageView clueDisplay = (ImageView) clueDisplays.toArray()[random];
+
+    clueDisplay.setImage(clue);
+    clues.remove(clue);
+    clueDisplays.remove(clueDisplay);
   }
 
-  // Increment the index, and loop back to 0 if it reaches the end
-  clueIndex++;
-  if (clueIndex >= 3) {
-      clueIndex = 0;
+  public void setClueInformation(String information) {
+    lblClueInformation.setText(information);
   }
-  }
-
 }

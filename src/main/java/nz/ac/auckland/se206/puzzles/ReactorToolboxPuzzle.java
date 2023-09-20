@@ -2,8 +2,8 @@ package nz.ac.auckland.se206.puzzles;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import nz.ac.auckland.se206.components.AnimatedButton;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.components.AnimatedButton;
 
 public class ReactorToolboxPuzzle extends Puzzle {
 
@@ -14,8 +14,7 @@ public class ReactorToolboxPuzzle extends Puzzle {
   @FXML private Pane panReactorToolbox;
 
   @FXML
-  public void initialize() {
-  }
+  public void initialize() {}
 
   @FXML
   private void onSolved() {

@@ -48,8 +48,9 @@ public class GameController implements Controller {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
     buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
+    buttonToPuzzleMap.put("btnApple", puzzle.reactorapple);
 
-    puzzleLoader = new PuzzleLoader(panPuzzle);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
 
@@ -109,6 +110,9 @@ public class GameController implements Controller {
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
       restorePuzzleWindow();
     }
+
+    lastClickedId = buttonId;
+    lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
   }
 
   private void minimisePuzzleWindow() {
@@ -117,10 +121,6 @@ public class GameController implements Controller {
 
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
-
-    // Save the last clicked puzzle
-    lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
-    lastClickedId = buttonId;
   }
 
   @FXML
