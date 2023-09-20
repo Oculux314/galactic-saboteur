@@ -210,6 +210,11 @@
                         <Image url="@../images/btnhint.png" />
                      </image>
                   </StateButton>
+                  <AnimatedButton fx:id="btnGptExit" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/exit.png" />
+                     </image>
+                  </AnimatedButton>
                </children>
             </Pane>
          </children>

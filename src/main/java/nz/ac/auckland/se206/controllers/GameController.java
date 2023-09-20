@@ -41,6 +41,7 @@ public class GameController implements Controller {
   @FXML private TextField textResponse;
   @FXML private Group grpGpt;
   @FXML private StateButton hints;
+  @FXML private AnimatedButton btnGptExit;
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
@@ -96,8 +97,13 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void onExitClicked() {
-    minimisePuzzleWindow();
+  private void onExitClicked(MouseEvent event) {
+    
+    if (event.getSource() == btnExit){
+      minimisePuzzleWindow();
+    } else {
+      grpGpt.setVisible(false);
+    }
   }
 
   private void minimisePuzzleWindow() {
