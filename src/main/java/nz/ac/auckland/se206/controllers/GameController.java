@@ -10,6 +10,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
@@ -32,13 +33,11 @@ public class GameController implements Controller {
   private PuzzleLoader puzzleLoader;
   private HashMap<String, puzzle> buttonToPuzzleMap;
 
-  public void initialize() {
+  @FXML
+  private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
 
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
-    
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
@@ -59,13 +58,8 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void settingsClicked() {
-    System.out.println("Settings button clicked");
-  }
-
-  @FXML
-  private void recClicked() {
-    System.out.println("Rectangle clicked");
+  private void restartClicked() throws IOException {
+    App.restart();
   }
 
   @FXML
@@ -83,8 +77,7 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked() {
-    panPuzzle.setVisible(false);
-    grpPuzzleCommons.setVisible(false);
+    minimisePuzzleWindow();
   }
 
   @FXML
@@ -99,8 +92,15 @@ public class GameController implements Controller {
       puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
 
-      grpPuzzleCommons.setVisible(true);
-      panPuzzle.setVisible(true);
+      restorePuzzleWindow();
     }
+  }
+
+  private void minimisePuzzleWindow() {
+    grpPuzzleCommons.setVisible(false);
+  }
+
+  private void restorePuzzleWindow() {
+    grpPuzzleCommons.setVisible(true);
   }
 }

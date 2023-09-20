@@ -147,6 +147,7 @@ public class App extends Application {
     // Set up screen graph
     makeScreen(Screen.Name.MAIN);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
+    setScreen(Screen.Name.DEFAULT);
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);
@@ -164,19 +165,33 @@ public class App extends Application {
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);
 
-    restart();
     stage.show();
+    restart();
   }
 
-  private void restart() throws IOException {
+  public static void restart() throws IOException {
     GameState.reset();
-    clearScreens();
-    setScreen(Screen.Name.TITLE);
+    resetScreens();
   }
 
-  private void clearScreens() throws IOException {
-    Screen main = getScreen(Screen.Name.MAIN);
-    screens.clear();
-    screens.put(Screen.Name.MAIN, main);
+  private static void resetScreens() throws IOException {
+    Thread screenLoader =
+        new Thread(
+            () -> {
+              for (Screen.Name screenName : Screen.Name.values()) {
+                if (screenName == Screen.Name.MAIN) { // Main screen is persistent
+                  continue;
+                }
+
+                try {
+                  makeScreen(screenName);
+                } catch (IOException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
+
+    screenLoader.start();
+    setScreen(Screen.Name.TITLE);
   }
 }
