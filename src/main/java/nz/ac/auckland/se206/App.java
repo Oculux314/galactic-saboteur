@@ -29,6 +29,8 @@ public class App extends Application {
   /** A map of all screens in the application (name -> screen) */
   private static Map<Screen.Name, Screen> screens = new HashMap<>();
   public static Assistant scientist;
+  public static Assistant mechanic;
+  public static Assistant captain;
 
   /**
    * The entry point of the application.

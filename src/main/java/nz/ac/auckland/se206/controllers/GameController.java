@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -36,17 +37,33 @@ public class GameController implements Controller {
   @FXML private AnimatedButton gptScientist;
   @FXML private AnimatedButton gptMechanic;
   @FXML private AnimatedButton gptCaptain;
-  @FXML private Pane paneNarration;
-  @FXML private TextArea labelNarration;
-  @FXML private TextField textResponse;
+  @FXML private Pane paneNarrationScientist;
+  @FXML private Pane paneNarrationMechanic;
+  @FXML private Pane paneNarrationCaptain;
+  @FXML private TextArea labelNarrationScientist;
+  @FXML private TextArea labelNarrationMechanic;
+  @FXML private TextArea labelNarrationCaptain;
+  @FXML private TextField textResponseScientist;
+  @FXML private TextField textResponseMechanic;
+  @FXML private TextField textResponseCaptain;
+  @FXML private Group grpGptScientist;
+  @FXML private Group grpGptMechanic;
+  @FXML private Group grpGptCaptain;
+  @FXML private StateButton hintsScientist;
+  @FXML private StateButton hintsMechanic;
+  @FXML private StateButton hintsCaptain;
+  @FXML private AnimatedButton btnGptExitCaptain;
+  @FXML private AnimatedButton btnGptExitMechanic;
+  @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
-  @FXML private StateButton hints;
-  @FXML private AnimatedButton btnGptExit;
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
   private HashMap<String, puzzle> buttonToPuzzleMap;
-  private boolean hintWanted = false;
+
+  private boolean captainWelcomeShown = false;
+  private boolean scientistWelcomeShown = false;
+  private boolean mechanicWelcomeShown = false;
 
   @FXML
   private void initialize() {
@@ -56,11 +73,30 @@ public class GameController implements Controller {
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
 
-    NarrationBox narrationBox = new NarrationBox(paneNarration, labelNarration, textResponse);
-    App.scientist = new Assistant(narrationBox);
-    grpGpt.setVisible(false);
-    hints.addState("nohint", "btnhint.png");
-    hints.addState("hint", "yeshint.png");
+    NarrationBox narrationBox1 =
+        new NarrationBox(paneNarrationScientist, labelNarrationScientist, textResponseScientist);
+    App.scientist = new Assistant(narrationBox1);
+
+    NarrationBox narrationBox2 =
+        new NarrationBox(paneNarrationMechanic, labelNarrationMechanic, textResponseMechanic);
+    App.mechanic = new Assistant(narrationBox2);
+
+    NarrationBox narrationBox3 =
+        new NarrationBox(paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain);
+    App.captain = new Assistant(narrationBox3);
+
+    grpGptScientist.setVisible(false);
+    grpGptMechanic.setVisible(false);
+    grpGptCaptain.setVisible(false);
+
+    hintsScientist.addState("nohint", "btnhint.png");
+    hintsScientist.addState("hint", "yeshint.png");
+
+    hintsMechanic.addState("nohint", "btnhint.png");
+    hintsMechanic.addState("hint", "yeshint.png");
+
+    hintsCaptain.addState("nohint", "btnhint.png");
+    hintsCaptain.addState("hint", "yeshint.png");
   }
 
   @FXML
@@ -98,11 +134,15 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked(MouseEvent event) {
-    
-    if (event.getSource() == btnExit){
+
+    if (event.getSource() == btnExit) {
       minimisePuzzleWindow();
-    } else {
-      grpGpt.setVisible(false);
+    } else if (event.getSource() == btnGptExitScientist) {
+      grpGptScientist.setVisible(false);
+    } else if (event.getSource() == btnGptExitMechanic) {
+      grpGptMechanic.setVisible(false);
+    } else if (event.getSource() == btnGptExitCaptain) {
+      grpGptCaptain.setVisible(false);
     }
   }
 
@@ -135,17 +175,36 @@ public class GameController implements Controller {
 
   @FXML
   private void gptStart(MouseEvent event) {
+    if (event.getSource() == gptScientist && !scientistWelcomeShown) {
+      App.scientist.welcome();
+      scientistWelcomeShown = true;
+    } else if (event.getSource() == gptCaptain && !captainWelcomeShown) {
+      App.captain.welcome();
+      captainWelcomeShown = true;
+    } else if (event.getSource() == gptMechanic && !mechanicWelcomeShown) {
+      App.mechanic.welcome();
+      mechanicWelcomeShown = true;
+    }
 
-    event.getSource();
-
-    grpGpt.setVisible(true);
-    App.scientist.welcome();
-    App.scientist.respondToUser();
+    // Set the visibility of the corresponding group
+    if (event.getSource() == gptScientist) {
+      grpGptScientist.setVisible(true);
+    } else if (event.getSource() == gptCaptain) {
+      grpGptCaptain.setVisible(true);
+    } else if (event.getSource() == gptMechanic) {
+      grpGptMechanic.setVisible(true);
+    }
   }
 
   @FXML
-  private void onUserMessage() {
-    App.scientist.respondToUser();
+  private void onUserMessage(ActionEvent event) {
+    System.out.println(event.getSource());
+    if (event.getSource() == textResponseScientist) {
+      App.scientist.respondToUser();
+    } else if (event.getSource() == textResponseCaptain) {
+      App.captain.respondToUser();
+    } else if (event.getSource() == textResponseMechanic) {
+      App.mechanic.respondToUser();
+    }
   }
-
 }
