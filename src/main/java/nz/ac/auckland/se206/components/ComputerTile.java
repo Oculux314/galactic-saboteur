@@ -137,4 +137,8 @@ public class ComputerTile extends RotateButton {
   public void setCol(int col) {
     this.col = col;
   }
+
+  public String toString() {
+    return type.toString();
+  }
 }

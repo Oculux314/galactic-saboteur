@@ -12,12 +12,38 @@ import nz.ac.auckland.se206.components.RotateButton.Orientation;
 
 public class NavigationComputerPuzzle extends Puzzle {
 
+  private class Coordinate {
+    int row;
+    int col;
+
+    Coordinate(int row, int col) {
+      this.row = row;
+      this.col = col;
+    }
+
+    public int getRow() {
+      return row;
+    }
+
+    public int getCol() {
+      return col;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (!(obj instanceof Coordinate)) {
+        return false;
+      }
+
+      Coordinate other = (Coordinate) obj;
+      return row == other.row && col == other.col;
+    }
+  }
+
   private static final int NUM_ROWS = 3;
   private static final int NUM_COLS = 4;
-  private static final int START_ROW = 2;
-  private static final int START_COL = 0;
-  private static final int END_ROW = 0;
-  private static final int END_COL = 3;
+  private final Coordinate START = new Coordinate(2, 0);
+  private final Coordinate END = new Coordinate(0, 3);
 
   @FXML private Group grpTiles;
   @FXML private ImageView tilStart;
@@ -28,6 +54,7 @@ public class NavigationComputerPuzzle extends Puzzle {
   private List<ComputerTile> activeTiles;
 
   public void initialize() {
+
     tiles = new ComputerTile[NUM_ROWS][NUM_COLS];
     tileTypes = new ComputerTile.Type[NUM_ROWS][NUM_COLS];
     activeTiles = new ArrayList<ComputerTile>();
@@ -38,6 +65,8 @@ public class NavigationComputerPuzzle extends Puzzle {
     for (int i = 0; i < (NUM_ROWS * NUM_COLS); i++) {
       makeTile(i);
     }
+
+    updateActiveTiles();
   }
 
   private void randomizeTileTypes() {
@@ -50,7 +79,33 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private void chooseSolution() {
-    // TODO: make randomised choose solution
+    Coordinate here = START;
+    Orientation prevDirection = Orientation.RIGHT;
+
+    while (!here.equals(END)) {
+      int row = here.getRow();
+      int col = here.getCol();
+      Orientation nextDirection = chooseDirection(here);
+
+      if (prevDirection == nextDirection) {
+        tileTypes[row][col] = Type.STRAIGHT;
+      } else {
+        tileTypes[row][col] = Type.BEND;
+      }
+
+      prevDirection = nextDirection;
+      here = getNextCoordinate(new Coordinate(row, col), nextDirection);
+    }
+  }
+
+  private Orientation chooseDirection(Coordinate here) {
+    if (here.getRow() == END.getRow()) {
+      return Orientation.RIGHT;
+    } else if (here.getCol() == END.getCol()) {
+      return Orientation.UP;
+    } else {
+      return Orientation.values()[(int) (Math.random() * 2)];
+    }
   }
 
   private void makeTile(int n) {
@@ -79,7 +134,7 @@ public class NavigationComputerPuzzle extends Puzzle {
 
   public void updateActiveTiles() {
     clearActiveTiles();
-    ComputerTile tile = tiles[START_ROW][START_COL];
+    ComputerTile tile = tiles[START.getRow()][START.getCol()];
     Orientation prevDirection = Orientation.LEFT;
 
     while (tile != null) {
@@ -107,17 +162,23 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private ComputerTile getNextTile(ComputerTile tile, Orientation direction) {
-    int oldRow = tile.getRow();
-    int oldCol = tile.getCol();
+    Coordinate next = getNextCoordinate(new Coordinate(tile.getRow(), tile.getCol()), direction);
+
+    try {
+      return tiles[next.getRow()][next.getCol()];
+    } catch (ArrayIndexOutOfBoundsException e) {
+      return null;
+    }
+  }
+
+  private Coordinate getNextCoordinate(Coordinate here, Orientation direction) {
+    int oldRow = here.getRow();
+    int oldCol = here.getCol();
 
     int changeInRow = direction == Orientation.DOWN ? 1 : direction == Orientation.UP ? -1 : 0;
     int changeInCol = direction == Orientation.RIGHT ? 1 : direction == Orientation.LEFT ? -1 : 0;
 
-    try {
-      return tiles[oldRow + changeInRow][oldCol + changeInCol];
-    } catch (ArrayIndexOutOfBoundsException e) {
-      return null;
-    }
+    return new Coordinate(oldRow + changeInRow, oldCol + changeInCol);
   }
 
   private Orientation getOppositeDirection(Orientation direction) {
@@ -126,9 +187,9 @@ public class NavigationComputerPuzzle extends Puzzle {
 
   private void checkWinConditions() {
     boolean endTileIsActive =
-        activeTiles.get(activeTiles.size() - 1).equals(tiles[END_ROW][END_COL]);
+        activeTiles.get(activeTiles.size() - 1).equals(tiles[END.getRow()][END.getCol()]);
     boolean endTileOrientedCorectly =
-        tiles[END_ROW][END_COL].getConnections().get(Orientation.RIGHT);
+        tiles[END.getRow()][END.getCol()].getConnections().get(Orientation.RIGHT);
 
     if (endTileIsActive && endTileOrientedCorectly) {
       completePuzzle();
@@ -136,6 +197,6 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private void completePuzzle() {
-    tilEnd.setImage(new Image("/images/puzzle/connector_end_red.png"));
+    tilEnd.setImage(new Image("/images/puzzle/connector_end_green.png"));
   }
 }
