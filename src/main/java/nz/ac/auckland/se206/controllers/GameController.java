@@ -5,12 +5,17 @@ import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.gpt.Assistant;
+import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 
@@ -30,6 +35,10 @@ public class GameController implements Controller {
   @FXML private AnimatedButton gptScientist;
   @FXML private AnimatedButton gptMechanic;
   @FXML private AnimatedButton gptCaptain;
+  @FXML private Pane paneNarration;
+  @FXML private TextArea labelNarration;
+  @FXML private TextField textResponse;
+  @FXML private Group grpGpt;
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
@@ -44,6 +53,10 @@ public class GameController implements Controller {
 
     puzzleLoader = new PuzzleLoader(panPuzzle);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+
+    NarrationBox narrationBox = new NarrationBox(paneNarration, labelNarration, textResponse);
+    App.scientist = new Assistant(narrationBox);
+    grpGpt.setVisible(false);
   }
 
   @FXML
@@ -108,5 +121,16 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void gptStart() {}
+  private void gptStart() {
+    // testing the gpt
+    // trying to welcome scientist
+    grpGpt.setVisible(true);
+    App.scientist.welcome();
+    App.scientist.respondToUser();
+  }
+
+  @FXML
+  private void onUserMessageSubmit() {
+    App.scientist.respondToUser();
+  }
 }

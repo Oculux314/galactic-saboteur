@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
+import nz.ac.auckland.se206.gpt.Assistant;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -27,6 +28,7 @@ public class App extends Application {
 
   /** A map of all screens in the application (name -> screen) */
   private static Map<Screen.Name, Screen> screens = new HashMap<>();
+  public static Assistant scientist;
 
   /**
    * The entry point of the application.
