@@ -31,7 +31,7 @@ public class ComputerTile extends RotateButton {
 
   private void recreateStates() {
     String imageName = type.toString().toLowerCase();
-    Image image = new Image("/images/puzzle/connector_" + imageName + ".png");
+    Image image = new Image("/images/puzzle/connector_" + imageName + "_red.png");
     recreateStatesWithImage(image);
   }
 
