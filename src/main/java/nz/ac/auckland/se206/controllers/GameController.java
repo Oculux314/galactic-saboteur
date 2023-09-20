@@ -14,6 +14,7 @@ import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
@@ -39,10 +40,12 @@ public class GameController implements Controller {
   @FXML private TextArea labelNarration;
   @FXML private TextField textResponse;
   @FXML private Group grpGpt;
+  @FXML private StateButton hints;
 
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
   private HashMap<String, puzzle> buttonToPuzzleMap;
+  private boolean hintWanted = false;
 
   public void initialize() {
     buttonToPuzzleMap = new HashMap<>();
@@ -57,6 +60,8 @@ public class GameController implements Controller {
     NarrationBox narrationBox = new NarrationBox(paneNarration, labelNarration, textResponse);
     App.scientist = new Assistant(narrationBox);
     grpGpt.setVisible(false);
+    hints.addState("nohint", "btnhint.png");
+    hints.addState("hint", "yeshint.png");
   }
 
   @FXML
@@ -121,16 +126,18 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void gptStart() {
-    // testing the gpt
-    // trying to welcome scientist
+  private void gptStart(MouseEvent event) {
+
+    event.getSource();
+
     grpGpt.setVisible(true);
     App.scientist.welcome();
     App.scientist.respondToUser();
   }
 
   @FXML
-  private void onUserMessageSubmit() {
+  private void onUserMessage() {
     App.scientist.respondToUser();
   }
+
 }
