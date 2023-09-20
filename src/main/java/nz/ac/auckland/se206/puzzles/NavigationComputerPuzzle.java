@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
 import nz.ac.auckland.se206.components.RotateButton.Orientation;
@@ -18,6 +20,9 @@ public class NavigationComputerPuzzle extends Puzzle {
   private static final int END_COL = 3;
 
   @FXML private Group grpTiles;
+  @FXML private ImageView tilStart;
+  @FXML private ImageView tilEnd;
+
   private ComputerTile[][] tiles;
   private ComputerTile.Type[][] tileTypes;
   private List<ComputerTile> activeTiles;
@@ -89,6 +94,8 @@ public class NavigationComputerPuzzle extends Puzzle {
       tile = getNextTile(tile, nextDirection);
       prevDirection = getOppositeDirection(nextDirection);
     }
+
+    checkWinConditions();
   }
 
   private void clearActiveTiles() {
@@ -117,7 +124,18 @@ public class NavigationComputerPuzzle extends Puzzle {
     return Orientation.values()[(direction.ordinal() + 2) % 4];
   }
 
+  private void checkWinConditions() {
+    boolean endTileIsActive =
+        activeTiles.get(activeTiles.size() - 1).equals(tiles[END_ROW][END_COL]);
+    boolean endTileOrientedCorectly =
+        tiles[END_ROW][END_COL].getConnections().get(Orientation.RIGHT);
+
+    if (endTileIsActive && endTileOrientedCorectly) {
+      completePuzzle();
+    }
+  }
+
   private void completePuzzle() {
-    // TODO: finish
+    tilEnd.setImage(new Image("/images/puzzle/connector_end_red.png"));
   }
 }
