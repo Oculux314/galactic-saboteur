@@ -8,9 +8,9 @@
 <?import javafx.scene.shape.Ellipse?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.TestTubes">
+<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.TestTubesPuzzle">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
+      <Pane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
          <children>
             <Label fx:id="instructions" layoutX="79.0" layoutY="51.0" />
             <Group fx:id="gameComponents">
@@ -41,7 +41,6 @@
                </children>
             </Group>
             <Label fx:id="confirmationMessage" layoutX="63.0" layoutY="420.0" />
-            <Label fx:id="completedMessage" layoutX="118.0" layoutY="224.0" text="GO FIND THE OTHER CLUES" />
          </children>
       </Pane>
    </children>

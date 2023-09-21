@@ -148,6 +148,11 @@
                         <Image url="@../images/apple.png" />
                      </image>
                   </AnimatedButton>
+                  <AnimatedButton fx:id="btnToTestTubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/testtubes.png" />
+                     </image>
+                  </AnimatedButton>
                </children>
             </Group>
          </children>
@@ -156,16 +161,6 @@
       <Group fx:id="panelContainer">
          <children>
             <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
-         </children>
-      </Group>
-      <Group fx:id="grpLabRoom" layoutX="10.0" layoutY="10.0">
-         <children>
-            <Pane layoutX="125.0" layoutY="118.0" prefHeight="289.0" prefWidth="454.0" />
-            <AnimatedButton fx:id="btnToTestTubes" fitHeight="29.0" fitWidth="23.0" layoutX="335.0" layoutY="289.0" onMouseClicked="#onPuzzleButtonClicked">
-               <image>
-                  <Image url="@../images/testtubes.png" />
-               </image>
-            </AnimatedButton>
          </children>
       </Group>
       <Group fx:id="grpPuzzleCommons">
