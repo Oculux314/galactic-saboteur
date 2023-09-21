@@ -40,4 +40,8 @@ public class GameState {
     }
     return hintLimit;
   }
+
+  public static boolean isHintLimitReached() {
+    return numberOfHintsAsked >= getHintLimit();
+  }
 }

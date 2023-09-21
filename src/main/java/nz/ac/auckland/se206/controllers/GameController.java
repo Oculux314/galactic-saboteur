@@ -233,10 +233,16 @@ public class GameController implements Controller {
   private void onUserMessage(ActionEvent event) {
     if (event.getSource() == textResponseScientist) {
       App.scientist.respondToUser();
+      hintsScientist.setState("nohint");
+      hintsScientist.setDisable(GameState.isHintLimitReached());
     } else if (event.getSource() == textResponseCaptain) {
       App.captain.respondToUser();
+      hintsCaptain.setState("nohint");
+      hintsCaptain.setDisable(GameState.isHintLimitReached());
     } else if (event.getSource() == textResponseMechanic) {
       App.mechanic.respondToUser();
+      hintsMechanic.setState("nohint");
+      hintsMechanic.setDisable(GameState.isHintLimitReached());
     }
   }
 
