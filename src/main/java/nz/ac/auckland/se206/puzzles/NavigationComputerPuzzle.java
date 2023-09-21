@@ -2,11 +2,13 @@ package nz.ac.auckland.se206.puzzles;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
@@ -53,6 +55,7 @@ public class NavigationComputerPuzzle extends Puzzle {
   private final Coordinate START = new Coordinate(2, 0);
   private final Coordinate END = new Coordinate(0, 3);
 
+  @FXML private Pane panBackground;
   @FXML private Label lblWarning;
   @FXML private Group grpTiles;
   @FXML private ImageView tilStart;
@@ -93,7 +96,7 @@ public class NavigationComputerPuzzle extends Puzzle {
     Coordinate here = START;
     Orientation prevDirection = Orientation.RIGHT;
 
-    while (!here.equals(END)) {
+    while (here.getCol() <= END.getCol()) {
       int row = here.getRow();
       int col = here.getCol();
       Orientation nextDirection = chooseDirection(here);
@@ -239,8 +242,26 @@ public class NavigationComputerPuzzle extends Puzzle {
     tilEnd.setImage(new Image("/images/puzzle/connector_end_green.png"));
     grpTiles.setDisable(true);
 
-    lblWarning.setText("HISTORY RESTORED");
+    lblWarning.setText("LOGS RESTORED");
     lblWarning.setVisible(true);
     lblWarning.setStyle("-fx-text-fill: #58DD94;");
+
+    Thread completeDelay =
+        new Thread(
+            () -> {
+              try {
+                Thread.sleep(1500);
+              } catch (InterruptedException e) {
+                e.printStackTrace();
+              }
+
+              Platform.runLater(
+                  () -> {
+                    setSolved();
+                    clearPuzzle(panBackground);
+                  });
+            });
+
+    completeDelay.start();
   }
 }
