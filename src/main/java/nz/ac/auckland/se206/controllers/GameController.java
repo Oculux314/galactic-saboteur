@@ -46,10 +46,7 @@ public class GameController implements Controller {
   @FXML private Group grpPuzzleCommons;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
-
-  @FXML private Group grpReactorRoom;
-  @FXML private Group grpLaboratoryRoom;
-  @FXML private Group grpNavigationRoom;
+  @FXML private Group grpMapButtons;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -59,9 +56,7 @@ public class GameController implements Controller {
 
   @FXML
   private void initialize() {
-    RoomGroup rooms = new RoomGroup(grpReactorRoom, grpLaboratoryRoom, grpNavigationRoom);
-
-    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, rooms);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
 

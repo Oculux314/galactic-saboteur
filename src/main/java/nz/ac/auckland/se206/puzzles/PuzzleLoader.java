@@ -1,44 +1,43 @@
 package nz.ac.auckland.se206.puzzles;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.controllers.GameController.RoomGroup;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {
 
   private Pane panPuzzle;
   private Group grpPuzzleCommons;
-  private RoomGroup rooms;
+  private Group grpMapButtons;
 
   private HashMap<PuzzleName, Puzzle> puzzleMap;
   private HashMap<String, PuzzleName> buttonToPuzzleMap;
 
-  private Set<Puzzle> reactorPuzzles;
-  private Set<Puzzle> laboratoryPuzzles;
-  private Set<Puzzle> navigationPuzzles;
+  // TODO: these guys
+  private List<PuzzleName> reactorPuzzles;
+  private List<PuzzleName> laboratoryPuzzles;
+  private List<PuzzleName> navigationPuzzles;
 
-  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, RoomGroup rooms) {
+  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpMapButtons) {
     this.panPuzzle = panPuzzle;
     this.grpPuzzleCommons = grpPuzzleCommons;
-    this.rooms = rooms;
+    this.grpMapButtons = grpMapButtons;
 
     puzzleMap = new HashMap<>();
     buttonToPuzzleMap = new HashMap<>();
-    reactorPuzzles = new HashSet<>();
-    laboratoryPuzzles = new HashSet<>();
-    navigationPuzzles = new HashSet<>();
+    reactorPuzzles = new ArrayList<>();
+    laboratoryPuzzles = new ArrayList<>();
+    navigationPuzzles = new ArrayList<>();
 
     grpPuzzleCommons.setVisible(false);
     loadAllPuzzles();
-    populateButtonToPuzzleMap();
   }
 
   private void loadAllPuzzles() {
@@ -46,15 +45,11 @@ public class PuzzleLoader {
       setPuzzle(PuzzleName.REACTOR_TOOLBOX);
       setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
       setPuzzle(PuzzleName.REACTOR_APPLE);
+      setPuzzle(PuzzleName.LABORATORY_TEST);
+      setPuzzle(PuzzleName.NAVIGATION_TEST);
     } catch (Exception e) {
       // TODO: handle exception
     }
-  }
-
-  private void populateButtonToPuzzleMap() {
-    buttonToPuzzleMap.put("btnToolbox", PuzzleName.REACTOR_TOOLBOX);
-    buttonToPuzzleMap.put("btnButtonpad", PuzzleName.REACTOR_BUTTONPAD);
-    buttonToPuzzleMap.put("btnApple", PuzzleName.REACTOR_APPLE);
   }
 
   public void setPuzzle(PuzzleName name) throws IOException {
@@ -77,11 +72,31 @@ public class PuzzleLoader {
     FXMLLoader loader = new FXMLLoader(getClass().getResource(name.toFxmlUrl()));
     Parent puzzle = loader.load();
     Puzzle puzzleController = loader.getController();
-
     puzzleController.setRoot(puzzle);
+
     puzzleMap.put(name, puzzleController);
-    buttonToPuzzleMap.put(name.toString(), name);
+    buttonToPuzzleMap.put(name.toFxmlButtonId(), name);
+    addToRoom(name);
+
     return puzzle;
+  }
+
+  private void addToRoom(PuzzleName name) {
+    String room = name.toString().split("_")[0].toLowerCase();
+
+    switch (room) {
+      case "reactor":
+        reactorPuzzles.add(name);
+        break;
+      case "laboratory":
+        laboratoryPuzzles.add(name);
+        break;
+      case "navigation":
+        navigationPuzzles.add(name);
+        break;
+      default:
+        break;
+    }
   }
 
   public Puzzle getCurrentPuzzle() {

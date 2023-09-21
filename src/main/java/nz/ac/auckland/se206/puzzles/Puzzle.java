@@ -13,7 +13,7 @@ public class Puzzle {
   public enum PuzzleName {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
-    REACTOR_APPLE;
+    REACTOR_APPLE, LABORATORY_TEST, NAVIGATION_TEST;
 
     private String toCamelCase() {
       String[] words = this.toString().split("_");

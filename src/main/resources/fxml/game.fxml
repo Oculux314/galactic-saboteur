@@ -131,27 +131,25 @@
                </rowConstraints>
             </GridPane>
             <Button layoutX="733.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" text="Restart" />
-            <Group fx:id="grpReactorRoom">
+            <Group fx:id="grpMapButtons">
                <children>
-                  <AnimatedButton fx:id="btnToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                  <AnimatedButton fx:id="btnReactorToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/toolbox.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="btnButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                  <AnimatedButton fx:id="btnReactorButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/buttonpad.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="btnApple" fitWidth="40.0" layoutX="150.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                  <AnimatedButton fx:id="btnReactorApple" fitWidth="40.0" layoutX="150.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/apple.png" />
                      </image>
                   </AnimatedButton>
                </children>
             </Group>
-            <Group fx:id="grpLaboratoryRoom" layoutX="20.0" layoutY="20.0" />
-            <Group fx:id="grpNavigationRoom" layoutX="10.0" layoutY="10.0" />
          </children>
       </Group>
       <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
