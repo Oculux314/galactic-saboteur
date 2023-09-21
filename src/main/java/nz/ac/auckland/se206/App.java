@@ -194,4 +194,6 @@ public class App extends Application {
     screenLoader.start();
     setScreen(Screen.Name.TITLE);
   }
+
+  // TODO: set GameState.isRunning to false when closing
 }

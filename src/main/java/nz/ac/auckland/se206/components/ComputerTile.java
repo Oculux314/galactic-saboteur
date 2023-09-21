@@ -27,6 +27,7 @@ public class ComputerTile extends RotateButton {
     recreateStates();
     initalizeConnections();
     setActive(false);
+    randomiseOrientation();
   }
 
   private void loadImageColourVersions() {
@@ -122,6 +123,20 @@ public class ComputerTile extends RotateButton {
     updateImage();
   }
 
+  private void randomiseOrientation() {
+    int rotations;
+
+    if (row == 2 && col == 0) {
+      rotations = 1;
+    } else {
+      rotations = (int) (Math.random() * 4);
+    }
+
+    for (int i = 0; i < rotations; i++) {
+      onClick();
+    }
+  }
+
   public int getRow() {
     return row;
   }
@@ -136,9 +151,5 @@ public class ComputerTile extends RotateButton {
 
   public void setCol(int col) {
     this.col = col;
-  }
-
-  public String toString() {
-    return type.toString();
   }
 }

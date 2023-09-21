@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
 import nz.ac.auckland.se206.components.RotateButton.Orientation;
 
 public class NavigationComputerPuzzle extends Puzzle {
+
+  private enum State {
+    UNCLICKED,
+    CLICKED,
+    COMPLETE,
+  }
 
   private class Coordinate {
     int row;
@@ -45,6 +53,7 @@ public class NavigationComputerPuzzle extends Puzzle {
   private final Coordinate START = new Coordinate(2, 0);
   private final Coordinate END = new Coordinate(0, 3);
 
+  @FXML private Label lblWarning;
   @FXML private Group grpTiles;
   @FXML private ImageView tilStart;
   @FXML private ImageView tilEnd;
@@ -52,6 +61,7 @@ public class NavigationComputerPuzzle extends Puzzle {
   private ComputerTile[][] tiles;
   private ComputerTile.Type[][] tileTypes;
   private List<ComputerTile> activeTiles;
+  private State state = State.UNCLICKED;
 
   public void initialize() {
 
@@ -67,6 +77,7 @@ public class NavigationComputerPuzzle extends Puzzle {
     }
 
     updateActiveTiles();
+    startFlashing();
   }
 
   private void randomizeTileTypes() {
@@ -127,11 +138,6 @@ public class NavigationComputerPuzzle extends Puzzle {
     tile.setLayoutY(60 * row);
   }
 
-  @FXML
-  private void onTilesClicked() {
-    updateActiveTiles();
-  }
-
   public void updateActiveTiles() {
     clearActiveTiles();
     ComputerTile tile = tiles[START.getRow()][START.getCol()];
@@ -185,6 +191,38 @@ public class NavigationComputerPuzzle extends Puzzle {
     return Orientation.values()[(direction.ordinal() + 2) % 4];
   }
 
+  private void startFlashing() {
+    Thread flashManager =
+        new Thread(
+            () -> {
+              while (state != State.COMPLETE && GameState.isRunning) {
+                lblWarning.setVisible(!lblWarning.isVisible());
+
+                if (state == State.UNCLICKED) {
+                  tilStart.setVisible(!tilStart.isVisible());
+                }
+
+                try {
+                  Thread.sleep(500);
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
+
+    flashManager.start();
+  }
+
+  @FXML
+  private void onTilesClicked() {
+    if (state == State.UNCLICKED) {
+      state = State.CLICKED;
+      tilStart.setVisible(true);
+    }
+
+    updateActiveTiles();
+  }
+
   private void checkWinConditions() {
     boolean endTileIsActive =
         activeTiles.get(activeTiles.size() - 1).equals(tiles[END.getRow()][END.getCol()]);
@@ -197,6 +235,12 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private void completePuzzle() {
+    state = State.COMPLETE;
     tilEnd.setImage(new Image("/images/puzzle/connector_end_green.png"));
+    grpTiles.setDisable(true);
+
+    lblWarning.setText("HISTORY RESTORED");
+    lblWarning.setVisible(true);
+    lblWarning.setStyle("-fx-text-fill: #58DD94;");
   }
 }
