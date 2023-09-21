@@ -8,17 +8,26 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.controllers.GameController.RoomGroup;
+import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {
 
   @FXML private Pane panPuzzle;
 
   private HashMap<String, Puzzle> puzzleMap;
+  HashMap<String, PuzzleName> buttonToPuzzleMap;
+  RoomGroup rooms;
 
-  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons) {
+  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, RoomGroup rooms) {
     this.panPuzzle = panPuzzle;
     puzzleMap = new HashMap<>();
     grpPuzzleCommons.setVisible(false);
+
+    buttonToPuzzleMap = new HashMap<>();
+    this.rooms = rooms;
+
+    populateButtonToPuzzleMap();
   }
 
   public void loadPuzzle(String fxmlFilePath) throws IOException {
@@ -55,5 +64,15 @@ public class PuzzleLoader {
       }
     }
     return null;
+  }
+
+  private void populateButtonToPuzzleMap() {
+    buttonToPuzzleMap.put("btnToolbox", PuzzleName.REACTOR_TOOLBOX);
+    buttonToPuzzleMap.put("btnButtonpad", PuzzleName.REACTOR_BUTTONPAD);
+    buttonToPuzzleMap.put("btnApple", PuzzleName.REACTOR_APPLE);
+  }
+
+  public HashMap<String, PuzzleName> getButtonToPuzzleMap() {
+    return buttonToPuzzleMap;
   }
 }

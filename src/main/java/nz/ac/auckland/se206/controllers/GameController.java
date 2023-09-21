@@ -17,7 +17,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
-import nz.ac.auckland.se206.puzzles.PuzzleHandler;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 
 /** Controller class for the game screens. */
@@ -52,7 +51,6 @@ public class GameController implements Controller {
   @FXML private Group grpLaboratoryRoom;
   @FXML private Group grpNavigationRoom;
 
-  private PuzzleHandler puzzleHandler;
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
@@ -63,8 +61,7 @@ public class GameController implements Controller {
   private void initialize() {
     RoomGroup rooms = new RoomGroup(grpReactorRoom, grpLaboratoryRoom, grpNavigationRoom);
 
-    puzzleHandler = new PuzzleHandler(rooms);
-    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, rooms);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
 
@@ -138,6 +135,6 @@ public class GameController implements Controller {
   }
 
   private HashMap<String, PuzzleName> getButtonToPuzzleMap() {
-    return puzzleHandler.getButtonToPuzzleMap();
+    return puzzleLoader.getButtonToPuzzleMap();
   }
 }
