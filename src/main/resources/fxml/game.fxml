@@ -155,6 +155,12 @@
                   </AnimatedButton>
                </children>
             </Group>
+            <Group fx:id="grpNavigationRoom" layoutX="10.0" layoutY="10.0" />
+            <AnimatedButton fx:id="btnComputer" fitHeight="50.0" fitWidth="20.0" layoutX="626.0" layoutY="253.0" onMouseClicked="#onPuzzleButtonClicked">
+               <image>
+                  <Image url="@../images/placeholder.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
       <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />

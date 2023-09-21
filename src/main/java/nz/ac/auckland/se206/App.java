@@ -222,6 +222,7 @@ public class App extends Application {
 
   @Override
   public void stop() {
+    GameState.isRunning = false;
     tts.terminate();
   }
 }
