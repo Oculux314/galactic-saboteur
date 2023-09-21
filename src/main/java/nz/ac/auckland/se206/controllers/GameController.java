@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.Assistant;
@@ -220,7 +221,6 @@ public class GameController implements Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
-    System.out.println(event.getSource());
     if (event.getSource() == textResponseScientist) {
       App.scientist.respondToUser();
     } else if (event.getSource() == textResponseCaptain) {

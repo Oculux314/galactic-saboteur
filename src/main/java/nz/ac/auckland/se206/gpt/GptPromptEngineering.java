@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.gpt;
 
+import nz.ac.auckland.se206.GameState;
+
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
@@ -21,31 +23,59 @@ public class GptPromptEngineering {
 
   public static String getMainPrompt(String job) {
     String prompt = "";
-    if (job == "Spacey's mechanic") {
+    if (job == "Spacey's mechanic" && GameState.numberOfHintsAsked < GameState.getHintLimit()) {
       prompt =
-          "You are a mechanic onboard the spaceship named Spacey, which is acting as an escape"
-              + " room. The user can only escape when they find out what time, which suspect and in"
-              + " what room in relation to the sabotage of Spacey. Your role is to help the user"
-              + " find the puzzle in the reactor room, but you can't reveal it explicitly, instead"
-              + " use hints.The puzzle can be found in the tool box, and can be solved by putting"
-              + " the tools back in the box.Respond in strictly 10 words or less.";
-    } else if (job == "Spacey's scientist") {
+          "Your role: Mechanic on the Spacey spaceship escape room adventure.Assist users in"
+              + " finding the reactor room puzzle discreetly through hints.The user can only escape"
+              + " when they find out what time, which suspect and in what room the sabotage"
+              + " occured. To find it, users should inspect the toolbox and solve it by placing"
+              + " tools inside.Please respond in 10 words or fewer. Provide hints only if users"
+              + " mention 'hint'.";
+    } else if (job == "Spacey's mechanic"
+        && GameState.numberOfHintsAsked >= GameState.getHintLimit()) {
       prompt =
-          "You are a scientist onboard the spaceship named Spacey, which is acting as an escape"
-              + " room. The user can only escape when they find out what time, which suspect and in"
-              + " what room in relation to the sabotage of Spacey. Your role is to help the user"
-              + " find the puzzle in the labrotory, but you can't reveal it explicitly, instead use"
-              + " hints.The puzzle can be found when looking at the test tubes on the counter, and"
-              + " can be solved by making the correct colour. To make green you mix yellow and"
-              + " blue. Respond in strictly 10 words or less.";
-    } else {
+          "Your role: Mechanic on the Spacey spaceship escape room adventure.Assist users in"
+              + " finding the reactor room puzzle discreetly through hints.The user can only escape"
+              + " when they find out what time, which suspect and in what room the sabotage"
+              + " occured. To find it, users should inspect the toolbox and solve it by placing"
+              + " tools inside. Respond in 10 words or fewer and must not include hints of"
+              + " any form. Do not, for any reason give the user any hints.";
+    } else if (job == "Spacey's scientist"
+        && GameState.numberOfHintsAsked < GameState.getHintLimit()) {
       prompt =
-          "You are the captain onboard the spaceship named Spacey, which is acting as an escape"
-              + " room. The user can only escape when they find out what time, which suspect and in"
-              + " what room in relation to the sabotage of Spacey. Your role is to help the user"
-              + " find the puzzle in the control room, but you can't reveal it explicitly, instead"
-              + " use hints. The puzzle can be found when looking at main screen, and can be solved"
-              + " by finding the path to the exit. Respond in strictly 10 words or less.";
+          "Your role: Scientist on the Spacey spaceship escape room adventure. Assist users in"
+              + " finding the lab puzzle subtly using hints. Users must deduce the time, suspect,"
+              + " and room of sabotage. The puzzle involves mixing test tube colors to create green"
+              + " (yellow + blue). Keep responses concise (10 words max). Provide hints only if"
+              + " users mention 'hint'.";
+    } else if (job == "Spacey's scientist"
+        && GameState.numberOfHintsAsked >= GameState.getHintLimit()) {
+      prompt =
+          "Your role: Scientist on the Spacey spaceship escape room adventure. Assist users in"
+              + " finding the lab puzzle subtly using hints. Users must deduce the time, suspect,"
+              + " and room of sabotage. The puzzle involves mixing test tube colors to create green"
+              + " (yellow + blue). Respond in 10 words or fewer and must not include hints of"
+              + " any form. Do not, for any reason give the user any hints.";
+    } else if (job == "Spacey's captain"
+        && GameState.numberOfHintsAsked < GameState.getHintLimit()) {
+      prompt =
+          "Your role: Captain on the Spacey spaceship escape room adventure. Assist users in"
+              + " finding the control room puzzle subtly using hints. The user can only escape when"
+              + " they find out what time, which suspect and in what room in relation to the"
+              + " sabotage of Spacey. The puzzle can be found at the room's main screen, and can be"
+              + " solved by clicking each line to rotate and then to finding the path to the exit."
+              + " Respond in 10 words or fewer and must not include hints of"
+              + " any form. Do not, for any reason give the user any hints.";
+    } else if (job == "Spacey's captain"
+        && GameState.numberOfHintsAsked >= GameState.getHintLimit()) {
+      prompt =
+          "Your role: Captain on the Spacey spaceship escape room adventure. Assist users in"
+              + " finding the control room puzzle subtly using hints. The user can only escape when"
+              + " they find out what time, which suspect and in what room in relation to the"
+              + " sabotage of Spacey. The puzzle can be found at the room's main screen, and can be"
+              + " solved by clicking each line to rotate and then to finding the path to the exit."
+              + " Keep responses concise (10 words max). Provide hints only if users mention"
+              + " 'hint'.";
     }
 
     return prompt;

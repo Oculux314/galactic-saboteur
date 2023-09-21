@@ -10,8 +10,21 @@ public class GameState {
   public static String reactorRoomGameState = "User hasn't found where the puzzle is yet";
   public static String labRoomGameState = "User hasn't found where the puzzle is yet";
   public static String controlRoomGameState = "User hasn't found where the puzzle is yet";
+  public static int numberOfHintsAsked = 0;
 
   public static void reset() {
     currentScreen = null;
+  }
+
+  public static int getHintLimit() {
+    int hintLimit;
+    if (difficulty == "easy") {
+      hintLimit = 1000;
+    } else if (difficulty == "medium") {
+      hintLimit = 5;
+    } else {
+      hintLimit = 0;
+    }
+    return hintLimit;
   }
 }
