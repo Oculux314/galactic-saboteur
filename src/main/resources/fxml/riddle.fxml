@@ -40,6 +40,8 @@
       <Label fx:id="lblWho" layoutX="77.0" layoutY="354.0" text="Who?" />
       <Label fx:id="lblWhere" layoutX="223.0" layoutY="354.0" text="Where?" />
       <Label fx:id="lblWhen" layoutX="370.0" layoutY="354.0" text="When?" />
-      <Button fx:id="btnAnswer" layoutX="224.0" layoutY="395.0" mnemonicParsing="false" onAction="#answerClicked" text="Answer" />
+      <Button fx:id="btnAnswer" layoutX="216.0" layoutY="395.0" mnemonicParsing="false" onAction="#answerClicked" text="Answer" />
+      <Label layoutX="91.0" layoutY="432.0" style="-fx-font-size: 12;" text="Note: You must find all of the clues to answer" textAlignment="CENTER" />
+      <Label layoutX="101.0" layoutY="463.0" style="-fx-font-size: 12;" text="Click the reactor when your ready to answer" />
    </children>
 </Pane>

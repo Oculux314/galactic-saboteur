@@ -12,10 +12,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.riddle.RiddleController;
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
@@ -48,6 +50,8 @@ public class GameController implements Controller {
   @FXML private Group grpRiddle;
   @FXML private AnimatedButton btnRiddleExit;
   @FXML private AnimatedButton btnReactor;
+
+  @FXML private RiddleController riddleController;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -141,5 +145,10 @@ public class GameController implements Controller {
   @FXML
   private void riddleClicked() throws IOException {
     grpRiddle.setVisible(true);
+    if (GameState.cluesFound == true) {
+        riddleController.disableButton();
+    } else {
+        riddleController.enableButton();
+    }
   }
 }

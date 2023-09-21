@@ -6,6 +6,7 @@ import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 public class GameState {
 
   public static boolean isRunning = true;
+  public static boolean cluesFound = false;
   public static Screen.Name currentScreen;
   public static String correctSuspect;
   public static String correctRoom;

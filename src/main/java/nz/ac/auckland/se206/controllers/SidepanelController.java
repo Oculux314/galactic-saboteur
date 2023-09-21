@@ -181,6 +181,10 @@ public class SidepanelController implements Controller {
       clue3.setImage(clue);
     }
     clues.remove(clue);
+
+    if (clues.size() == 0) {
+      GameState.cluesFound = true;
+    }
   }
 
   private String getClueName(String filePath) {

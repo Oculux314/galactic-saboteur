@@ -81,4 +81,12 @@ public class RiddleController extends StateButton {
     runThread.setDaemon(true);
     runThread.start();
   }
+
+  public void disableButton() {
+    btnAnswer.setDisable(false);
+  }
+
+  public void enableButton() {
+    btnAnswer.setDisable(true);
+  }
 }
