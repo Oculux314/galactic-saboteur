@@ -2,9 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
-import javafx.event.ActionEvent;
 import java.util.HashSet;
 import java.util.Set;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -157,17 +157,17 @@ public class GameController implements Controller {
 
     if (event.getSource() == btnExit) {
       minimisePuzzleWindow();
+      // If puzzle was solved, get the clue
+      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
+        fullSidePanelController.getClue();
+        solvedPuzzles.add(lastClickedId);
+      }
     } else if (event.getSource() == btnGptExitScientist) {
       grpGptScientist.setVisible(false);
     } else if (event.getSource() == btnGptExitMechanic) {
       grpGptMechanic.setVisible(false);
     } else if (event.getSource() == btnGptExitCaptain) {
       grpGptCaptain.setVisible(false);
-    }
-     // If puzzle was solved, get the clue
-    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
-      fullSidePanelController.getClue();
-      solvedPuzzles.add(lastClickedId);
     }
   }
 
@@ -177,8 +177,6 @@ public class GameController implements Controller {
 
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
-
-   
   }
 
   @FXML
