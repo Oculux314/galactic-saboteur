@@ -36,6 +36,7 @@ public class GameController implements Controller {
   @FXML private SidepanelController fullSidePanelController;
   @FXML private Group grpRiddle;
   @FXML private AnimatedButton btnRiddleExit;
+  @FXML private AnimatedButton btnReactor;
 
   private HashMap<String, puzzle> buttonToPuzzleMap;
   private ZoomAndPanHandler zoomAndPanHandler;

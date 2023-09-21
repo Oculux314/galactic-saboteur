@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.components;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 
 public class StateButton extends AnimatedButton {
 

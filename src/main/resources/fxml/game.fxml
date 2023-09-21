@@ -9,12 +9,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Polyline?>
-<?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
+<Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
    <children>
-      <Group fx:id="grpPanZoom">
+      <Group fx:id="grpPanZoom" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
@@ -151,7 +150,11 @@
                   </AnimatedButton>
                </children>
             </Group>
-            <Rectangle fx:id="recRiddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" layoutX="80.0" layoutY="230.0" onMouseClicked="#riddleClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <AnimatedButton fx:id="btnReactor" fitHeight="148.0" fitWidth="93.0" layoutX="77.0" layoutY="234.0" onMouseClicked="#riddleClicked">
+               <image>
+                  <Image url="@../images/reactorcrop.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
       <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
