@@ -9,25 +9,24 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {
 
   private Pane panPuzzle;
-  private Group grpPuzzleCommons;
   private Group grpMapButtons;
 
   private HashMap<PuzzleName, Puzzle> puzzleMap;
-  private HashMap<String, PuzzleName> buttonToPuzzleMap;
+  private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
 
-  // TODO: these guys
   private List<PuzzleName> reactorPuzzles;
   private List<PuzzleName> laboratoryPuzzles;
   private List<PuzzleName> navigationPuzzles;
 
   public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpMapButtons) {
     this.panPuzzle = panPuzzle;
-    this.grpPuzzleCommons = grpPuzzleCommons;
     this.grpMapButtons = grpMapButtons;
 
     puzzleMap = new HashMap<>();
@@ -38,6 +37,8 @@ public class PuzzleLoader {
 
     grpPuzzleCommons.setVisible(false);
     loadAllPuzzles();
+    choosePuzzles();
+    displayChosenPuzzleButtons();
   }
 
   private void loadAllPuzzles() {
@@ -45,11 +46,32 @@ public class PuzzleLoader {
       setPuzzle(PuzzleName.REACTOR_TOOLBOX);
       setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
       setPuzzle(PuzzleName.REACTOR_APPLE);
-      setPuzzle(PuzzleName.LABORATORY_TEST);
-      setPuzzle(PuzzleName.NAVIGATION_TEST);
-    } catch (Exception e) {
-      // TODO: handle exception
+    } catch (IllegalStateException | IOException e) {
+      e.printStackTrace();
     }
+  }
+
+  private void choosePuzzles() {
+    GameState.reactorPuzzle = getRandomPuzzle(reactorPuzzles);
+    // GameState.laboratoryPuzzle = getRandomPuzzle(laboratoryPuzzles);
+    // GameState.navigationPuzzle = getRandomPuzzle(navigationPuzzles);
+  }
+
+  private PuzzleName getRandomPuzzle(List<PuzzleName> room) {
+    if (room.isEmpty()) {
+      throw new IllegalStateException("No puzzles in room.");
+    }
+
+    int random = (int) (Math.random() * room.size());
+    return room.get(random);
+  }
+
+  private void displayChosenPuzzleButtons() {
+    grpMapButtons.getChildren().forEach(button -> button.setVisible(false));
+
+    getButtonFromName(GameState.reactorPuzzle).setVisible(true);
+    // getButtonFromName(GameState.laboratoryPuzzle).setVisible(true);
+    // getButtonFromName(GameState.navigationPuzzle).setVisible(true);
   }
 
   public void setPuzzle(PuzzleName name) throws IOException {
@@ -75,7 +97,7 @@ public class PuzzleLoader {
     puzzleController.setRoot(puzzle);
 
     puzzleMap.put(name, puzzleController);
-    buttonToPuzzleMap.put(name.toFxmlButtonId(), name);
+    buttonToPuzzleMap.put(getButtonFromName(name), name);
     addToRoom(name);
 
     return puzzle;
@@ -115,7 +137,11 @@ public class PuzzleLoader {
     return null;
   }
 
-  public HashMap<String, PuzzleName> getButtonToPuzzleMap() {
+  public HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return buttonToPuzzleMap;
+  }
+
+  private AnimatedButton getButtonFromName(PuzzleName name) {
+    return (AnimatedButton) grpMapButtons.lookup(name.toFxmlButtonId());
   }
 }

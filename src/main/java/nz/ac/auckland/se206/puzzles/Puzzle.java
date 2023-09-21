@@ -1,19 +1,24 @@
 package nz.ac.auckland.se206.puzzles;
 
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.TextAlignment;
 
 public class Puzzle {
 
   public boolean isPuzzleSolved;
-  private Label solvedLabel = new Label("Puzzle Solved! Clue added to inventory");
+  private Label solvedLabel =
+      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private Parent root;
 
   public enum PuzzleName {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
-    REACTOR_APPLE, LABORATORY_TEST, NAVIGATION_TEST;
+    REACTOR_APPLE,
+    LABORATORY_TEST,
+    NAVIGATION_TEST;
 
     private String toCamelCase() {
       String[] words = this.toString().split("_");
@@ -29,7 +34,7 @@ public class Puzzle {
     }
 
     public String toFxmlButtonId() {
-      return ("btn" + this.toCamelCase());
+      return ("#btn" + this.toCamelCase());
     }
   }
 
@@ -37,8 +42,11 @@ public class Puzzle {
     if (puzzlePane instanceof Pane) {
       ((Pane) puzzlePane).getChildren().clear();
       ((Pane) puzzlePane).getChildren().add(solvedLabel);
-      solvedLabel.setLayoutX(30);
-      solvedLabel.setLayoutY(250);
+      solvedLabel.setLayoutX(0);
+      solvedLabel.setLayoutY(230);
+      solvedLabel.setPrefWidth(500);
+      solvedLabel.setAlignment(Pos.CENTER);
+      solvedLabel.setTextAlignment(TextAlignment.CENTER);
     }
   }
 

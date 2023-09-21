@@ -51,8 +51,7 @@ public class GameController implements Controller {
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
-  private String lastClickedId;
-  private Set<String> solvedPuzzles = new HashSet<>();
+  private Set<Puzzle> solvedPuzzles = new HashSet<>();
 
   @FXML
   private void initialize() {
@@ -98,9 +97,9 @@ public class GameController implements Controller {
     minimisePuzzleWindow();
 
     // If puzzle was solved, get the clue
-    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
+    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
       fullSidePanelController.getClue();
-      solvedPuzzles.add(lastClickedId);
+      solvedPuzzles.add(lastClickedPuzzle);
     }
   }
 
@@ -108,16 +107,14 @@ public class GameController implements Controller {
   private void onPuzzleButtonClicked(MouseEvent event) throws IOException {
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
-    String buttonId = clickedButton.getId();
 
-    if (getButtonToPuzzleMap().containsKey(buttonId)) {
+    if (getButtonToPuzzleMap().containsKey(clickedButton)) {
       // Load the specific puzzle
-      PuzzleName puzzleName = getButtonToPuzzleMap().get(buttonId);
+      PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
       puzzleLoader.setPuzzle(puzzleName);
       restorePuzzleWindow();
     }
 
-    lastClickedId = buttonId;
     lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
   }
 
@@ -129,7 +126,7 @@ public class GameController implements Controller {
     grpPuzzleCommons.setVisible(true);
   }
 
-  private HashMap<String, PuzzleName> getButtonToPuzzleMap() {
+  private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return puzzleLoader.getButtonToPuzzleMap();
   }
 }
