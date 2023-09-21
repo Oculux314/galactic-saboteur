@@ -10,37 +10,37 @@
 <?import nz.ac.auckland.se206.components.StateButton?>
 
 
-<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.riddle.RiddleController">
+<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.riddle.RiddleController">
    <children>
-      <Label layoutX="230.0" layoutY="14.0" text="Reactor" />
-      <Group>
+      <AnchorPane layoutY="-2.0" prefHeight="249.0" prefWidth="500.0" stylesheets="@../css/style.css">
          <children>
-            <StateButton fx:id="btnWho" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="250.0">
-               <image>
-                  <Image url="@../images/suspects/suspect1.jpg" />
-               </image>
-            </StateButton>
-            <StateButton fx:id="btnWhere" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="250.0">
-               <image>
-                  <Image url="@../images/rooms/room1.jpg" />
-               </image>
-            </StateButton>
-            <StateButton fx:id="btnWhen" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="250.0">
-               <image>
-                  <Image url="@../images/times/time1.jpg" />
-               </image>
-            </StateButton>
+            <TextArea fx:id="gptTextArea" layoutX="50.0" layoutY="50.0" prefHeight="185.0" prefWidth="400.0" />
+            <Label layoutX="162.0" layoutY="21.0" text="SPACEY THE SHIP AI" />
+            <Group>
+               <children>
+                  <StateButton fx:id="btnWho" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="250.0">
+                     <image>
+                        <Image url="@../images/suspects/suspect1.jpg" />
+                     </image>
+                  </StateButton>
+                  <StateButton fx:id="btnWhere" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="250.0">
+                     <image>
+                        <Image url="@../images/rooms/room1.jpg" />
+                     </image>
+                  </StateButton>
+                  <StateButton fx:id="btnWhen" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="250.0">
+                     <image>
+                        <Image url="@../images/times/time1.jpg" />
+                     </image>
+                  </StateButton>
+               </children>
+            </Group>
          </children>
-      </Group>
+      </AnchorPane>
       <AnimatedButton fx:id="btnAnswer" fitHeight="91.0" fitWidth="122.0" layoutX="176.0" layoutY="381.0" onMouseClicked="#answerClicked" preserveRatio="true">
          <image>
             <Image url="@../images/continue.png" />
          </image>
       </AnimatedButton>
-      <AnchorPane layoutY="-2.0" prefHeight="249.0" prefWidth="500.0" stylesheets="@../css/style.css">
-         <children>
-            <TextArea fx:id="gptTextArea" layoutX="50.0" layoutY="50.0" prefHeight="150.0" prefWidth="400.0" />
-         </children>
-      </AnchorPane>
    </children>
 </Pane>

@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -18,10 +21,6 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-
-
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
@@ -39,7 +38,6 @@ public class GameController implements Controller {
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
   @FXML private Group grpRiddle;
-  @FXML private Pane panRiddle;
 
   private HashMap<String, puzzle> buttonToPuzzleMap;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -59,7 +57,6 @@ public class GameController implements Controller {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
 
     grpRiddle.setVisible(false);
-
   }
 
   @FXML
@@ -134,12 +131,5 @@ public class GameController implements Controller {
   @FXML
   private void riddleClicked() throws IOException {
     grpRiddle.setVisible(true);
-    panRiddle.setVisible(true);
-
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/riddle.fxml"));
-    Parent riddle = loader.load();
-    panRiddle.getChildren().clear();
-    panRiddle.getChildren().add(riddle);
   }
-
 }

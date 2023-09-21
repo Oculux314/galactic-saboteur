@@ -68,7 +68,18 @@ public class RiddleController implements Controller {
   private void generateRiddle() throws ApiProxyException, IOException {
     String riddle = GptPromptEngineering.getRiddle();
     ChatMessage msg = new ChatMessage("user", riddle);
-    ChatMessage response = runGpt(msg);
-    gptTextArea.appendText(response.getContent());
+
+    Thread runThread =
+        new Thread(
+            () -> {
+              try {
+                ChatMessage response = runGpt(msg);
+                gptTextArea.appendText(response.getContent());
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+            });
+    runThread.setDaemon(true);
+    runThread.start();
   }
 }

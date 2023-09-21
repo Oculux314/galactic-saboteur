@@ -186,7 +186,7 @@
       </Group>
       <Group fx:id="grpRiddle">
          <children>
-            <Pane fx:id="panRiddle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" />
+            <fx:include fx:id="riddleInclude" layoutX="150.0" layoutY="50.0" source="riddle.fxml" />
          </children>
       </Group>
    </children>
