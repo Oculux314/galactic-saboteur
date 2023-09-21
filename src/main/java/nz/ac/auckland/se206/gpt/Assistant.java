@@ -136,7 +136,9 @@ public class Assistant {
   public void respondToUser() {
     narrationBox.disableUserResponse();
     String userMessage = narrationBox.getUserResponse() + GameState.reactorRoomGameState;
-    if (userMessage.toLowerCase().contains("hint")) {
+    if (userMessage.toLowerCase().contains("hint")
+        || userMessage.toLowerCase().contains("advice")
+        || userMessage.toLowerCase().contains("help")) {
       GameState.numberOfHintsAsked++;
       System.out.println(GameState.numberOfHintsAsked);
       System.out.println();
