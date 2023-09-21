@@ -16,11 +16,24 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
-import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
+import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
+import nz.ac.auckland.se206.puzzles.PuzzleHandler;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
+
+  public class RoomGroup {
+    public Group reactorRoom;
+    public Group laboratoryRoom;
+    public Group navigationRoom;
+
+    public RoomGroup(Group reactorRoom, Group laboratoryRoom, Group navigationRoom) {
+      this.reactorRoom = reactorRoom;
+      this.laboratoryRoom = laboratoryRoom;
+      this.navigationRoom = navigationRoom;
+    }
+  }
 
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
@@ -35,20 +48,22 @@ public class GameController implements Controller {
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
-  private HashMap<String, puzzle> buttonToPuzzleMap;
-  private ZoomAndPanHandler zoomAndPanHandler;
+  @FXML private Group grpReactorRoom;
+  @FXML private Group grpLaboratoryRoom;
+  @FXML private Group grpNavigationRoom;
+
+  private PuzzleHandler puzzleHandler;
   private PuzzleLoader puzzleLoader;
+  private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
   private String lastClickedId;
   private Set<String> solvedPuzzles = new HashSet<>();
 
   @FXML
   private void initialize() {
-    buttonToPuzzleMap = new HashMap<>();
-    buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
-    buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
-    buttonToPuzzleMap.put("btnApple", puzzle.reactorapple);
+    RoomGroup rooms = new RoomGroup(grpReactorRoom, grpLaboratoryRoom, grpNavigationRoom);
 
+    puzzleHandler = new PuzzleHandler(rooms);
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
@@ -103,9 +118,9 @@ public class GameController implements Controller {
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     String buttonId = clickedButton.getId();
 
-    if (buttonToPuzzleMap.containsKey(buttonId)) {
+    if (getButtonToPuzzleMap().containsKey(buttonId)) {
       // Load the specific puzzle
-      puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
+      PuzzleName puzzleName = getButtonToPuzzleMap().get(buttonId);
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
       restorePuzzleWindow();
     }
@@ -120,5 +135,9 @@ public class GameController implements Controller {
 
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
+  }
+
+  private HashMap<String, PuzzleName> getButtonToPuzzleMap() {
+    return puzzleHandler.getButtonToPuzzleMap();
   }
 }

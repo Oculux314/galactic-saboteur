@@ -10,8 +10,15 @@ public class Puzzle {
   private Label solvedLabel = new Label("Puzzle Solved! Clue added to inventory");
   private Parent root;
 
-  public enum puzzle {
-    reactortoolbox, reactorbuttonpad, reactorapple,
+  public enum PuzzleName {
+    REACTOR_TOOLBOX,
+    REACTOR_BUTTONPAD,
+    REACTOR_APPLE;
+
+    @Override
+    public String toString() {
+      return this.name().toLowerCase().replace("_", "");
+    }
   }
 
   public void clearPuzzle(Parent puzzlePane) {
@@ -30,6 +37,7 @@ public class Puzzle {
   public void setSolved() {
     isPuzzleSolved = true;
   }
+
   public Parent getRoot() {
     return root;
   }
