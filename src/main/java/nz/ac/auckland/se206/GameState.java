@@ -13,6 +13,8 @@ public class GameState {
   public static String reactorRoomGameState = "User hasn't found where the puzzle is yet";
   public static String labRoomGameState = "User hasn't found where the puzzle is yet";
   public static String controlRoomGameState = "User hasn't found where the puzzle is yet";
+  public static String puzzleSolvedMessage = "User has solved the puzzle in this room already. They have got a clue which is located in the side panel, under clues.";
+  public static String puzzleOpenedMessage = "User has opened the puzzle, but has not completed it yet.";
   public static int numberOfHintsAsked = 0;
 
   public static PuzzleName reactorPuzzle;

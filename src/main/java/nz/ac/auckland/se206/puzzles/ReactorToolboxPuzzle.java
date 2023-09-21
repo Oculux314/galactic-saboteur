@@ -21,8 +21,6 @@ public class ReactorToolboxPuzzle extends Puzzle {
   private void onSolved() {
     setSolved();
     clearPuzzle(panReactorToolbox);
-    GameState.reactorRoomGameState =
-        "User has solved the puzzle in this room already. They have got a clue.";
   }
 
   @FXML
@@ -30,4 +28,3 @@ public class ReactorToolboxPuzzle extends Puzzle {
     GameState.reactorRoomGameState = "User has opened the puzzle, but has not completed it yet.";
   }
 }
-
