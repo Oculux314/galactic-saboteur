@@ -6,7 +6,6 @@ import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
-import nz.ac.auckland.se206.controllers.Controller;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -14,7 +13,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
-public class RiddleController implements Controller {
+public class RiddleController extends StateButton {
 
   @FXML private StateButton btnWho = new StateButton();
   @FXML private StateButton btnWhere = new StateButton();

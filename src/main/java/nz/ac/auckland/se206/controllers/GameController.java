@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -38,6 +35,7 @@ public class GameController implements Controller {
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
   @FXML private Group grpRiddle;
+  @FXML private AnimatedButton btnRiddleExit;
 
   private HashMap<String, puzzle> buttonToPuzzleMap;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -93,13 +91,18 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void onExitClicked() {
-    minimisePuzzleWindow();
+  private void onExitClicked(MouseEvent event) throws IOException {
 
-    // If puzzle was solved, get the clue
-    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
-      fullSidePanelController.getClue();
-      solvedPuzzles.add(lastClickedId);
+    if (event.getSource() == btnExit) {
+      
+      minimisePuzzleWindow();
+      // If puzzle was solved, get the clue
+      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
+        fullSidePanelController.getClue();
+        solvedPuzzles.add(lastClickedId);
+      }
+    } else if (event.getSource() == btnRiddleExit) {
+      grpRiddle.setVisible(false);
     }
   }
 

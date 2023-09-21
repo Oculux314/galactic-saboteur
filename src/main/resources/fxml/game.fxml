@@ -187,6 +187,11 @@
       <Group fx:id="grpRiddle">
          <children>
             <fx:include fx:id="riddleInclude" layoutX="150.0" layoutY="50.0" source="riddle.fxml" />
+            <AnimatedButton fx:id="btnRiddleExit" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exit.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
    </children>

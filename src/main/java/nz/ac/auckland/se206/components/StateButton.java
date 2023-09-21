@@ -95,7 +95,7 @@ public class StateButton extends AnimatedButton {
     return currentState.name;
   }
 
-  private void onClick() {
+  protected void onClick() {
     nextState();
   }
 

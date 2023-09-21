@@ -9,12 +9,11 @@
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 <?import nz.ac.auckland.se206.components.StateButton?>
 
-
 <Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.riddle.RiddleController">
    <children>
       <AnchorPane layoutY="-2.0" prefHeight="249.0" prefWidth="500.0" stylesheets="@../css/style.css">
          <children>
-            <TextArea fx:id="gptTextArea" layoutX="50.0" layoutY="50.0" prefHeight="185.0" prefWidth="400.0" />
+            <TextArea fx:id="gptTextArea" layoutX="60.0" layoutY="50.0" prefHeight="185.0" prefWidth="380.0" />
             <Label layoutX="162.0" layoutY="21.0" text="SPACEY THE SHIP AI" />
             <Group>
                <children>
@@ -37,10 +36,14 @@
             </Group>
          </children>
       </AnchorPane>
-      <AnimatedButton fx:id="btnAnswer" fitHeight="91.0" fitWidth="122.0" layoutX="176.0" layoutY="381.0" onMouseClicked="#answerClicked" preserveRatio="true">
+      <Group />
+      <AnimatedButton fx:id="btnAnswer" fitHeight="91.0" fitWidth="122.0" layoutX="200.0" layoutY="400.0" onMouseClicked="#answerClicked" preserveRatio="true">
          <image>
             <Image url="@../images/continue.png" />
          </image>
       </AnimatedButton>
+      <Label fx:id="lblWho" layoutX="77.0" layoutY="354.0" text="Who" />
+      <Label fx:id="lblWhere" layoutX="223.0" layoutY="354.0" text="Where" />
+      <Label fx:id="lblWhen" layoutX="370.0" layoutY="354.0" text="When" />
    </children>
 </Pane>
