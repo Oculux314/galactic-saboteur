@@ -4,17 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
-public class ReactorButtonPuzzle extends Puzzle {
+public class ReactorApplePuzzle extends Puzzle {
 
   @FXML private Button btnSolve;
-  @FXML private Pane panReactorButtonpad;
-
-  @FXML
-  private void initialize() {}
+  @FXML private Pane panReactorApple;
 
   @FXML
   private void onSolved() {
     setSolved();
-    clearPuzzle(panReactorButtonpad);
+    clearPuzzle(panReactorApple);
   }
 }
