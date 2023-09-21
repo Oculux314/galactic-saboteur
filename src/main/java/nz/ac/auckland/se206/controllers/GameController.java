@@ -118,7 +118,7 @@ public class GameController implements Controller {
     if (getButtonToPuzzleMap().containsKey(buttonId)) {
       // Load the specific puzzle
       PuzzleName puzzleName = getButtonToPuzzleMap().get(buttonId);
-      puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
+      puzzleLoader.setPuzzle(puzzleName);
       restorePuzzleWindow();
     }
 
