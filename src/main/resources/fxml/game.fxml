@@ -148,6 +148,11 @@
                         <Image url="@../images/apple.png" />
                      </image>
                   </AnimatedButton>
+                  <AnimatedButton fx:id="btnToTestTubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/testtubes.png" />
+                     </image>
+                  </AnimatedButton>
                </children>
             </Group>
             <Group fx:id="grpNavigationRoom" layoutX="10.0" layoutY="10.0" />

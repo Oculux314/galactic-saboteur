@@ -15,6 +15,8 @@ public class Puzzle {
     reactortoolbox,
     reactorbuttonpad,
     reactorapple,
+    testtubes,
+
   }
 
   public void clearPuzzle(Parent puzzlePane) {
@@ -40,5 +42,6 @@ public class Puzzle {
 
   public void setRoot(Parent root) {
     this.root = root;
+
   }
 }

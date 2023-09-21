@@ -32,6 +32,7 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
+  @FXML private AnimatedButton btnToTestTubes;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
@@ -49,6 +50,7 @@ public class GameController implements Controller {
     buttonToPuzzleMap.put("btnComputer", puzzle.navigationcomputer);
     buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
     buttonToPuzzleMap.put("btnApple", puzzle.reactorapple);
+    buttonToPuzzleMap.put("btnToTestTubes", puzzle.testtubes);
 
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
