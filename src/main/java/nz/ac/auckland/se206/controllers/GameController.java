@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -18,6 +21,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
+import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 
@@ -56,10 +60,15 @@ public class GameController implements Controller {
   @FXML private AnimatedButton btnGptExitMechanic;
   @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
+  @FXML private StackPane fullSidePanel;
+  @FXML private SidepanelController fullSidePanelController;
 
+  private HashMap<String, puzzle> buttonToPuzzleMap;
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
-  private HashMap<String, puzzle> buttonToPuzzleMap;
+  private Puzzle lastClickedPuzzle;
+  private String lastClickedId;
+  private Set<String> solvedPuzzles = new HashSet<>();
 
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
@@ -69,8 +78,10 @@ public class GameController implements Controller {
   private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
+    buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
+    buttonToPuzzleMap.put("btnApple", puzzle.reactorapple);
 
-    puzzleLoader = new PuzzleLoader(panPuzzle);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
 
     NarrationBox narrationBox1 =
@@ -153,6 +164,11 @@ public class GameController implements Controller {
     } else if (event.getSource() == btnGptExitCaptain) {
       grpGptCaptain.setVisible(false);
     }
+     // If puzzle was solved, get the clue
+    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
+      fullSidePanelController.getClue();
+      solvedPuzzles.add(lastClickedId);
+    }
   }
 
   private void minimisePuzzleWindow() {
@@ -161,11 +177,12 @@ public class GameController implements Controller {
 
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
+
+   
   }
 
   @FXML
   private void onPuzzleButtonClicked(MouseEvent event) throws IOException {
-
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     String buttonId = clickedButton.getId();
@@ -174,12 +191,10 @@ public class GameController implements Controller {
       // Load the specific puzzle
       puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
-
-      grpPuzzleCommons.setVisible(true);
-      panPuzzle.setVisible(true);
-
       restorePuzzleWindow();
     }
+    lastClickedId = buttonId;
+    lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
   }
 
   @FXML
