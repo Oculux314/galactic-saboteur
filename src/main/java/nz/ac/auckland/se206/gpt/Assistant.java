@@ -8,6 +8,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class Assistant {
 
@@ -138,9 +139,11 @@ public class Assistant {
     String userMessage = narrationBox.getUserResponse() + GameState.reactorRoomGameState;
     if (userMessage.toLowerCase().contains("hint")
         || userMessage.toLowerCase().contains("advice")
-        || userMessage.toLowerCase().contains("help")) {
+        || userMessage.toLowerCase().contains("help")
+        || userMessage.toLowerCase().contains("clue")) {
       GameState.numberOfHintsAsked++;
       System.out.println(GameState.numberOfHintsAsked);
+      System.out.println(PuzzleName.REACTOR_APPLE);
       System.out.println();
       System.out.println();
     }

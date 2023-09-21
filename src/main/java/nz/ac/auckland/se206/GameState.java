@@ -24,6 +24,7 @@ public class GameState {
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
+    numberOfHintsAsked = 0;
   }
 
   public static int getHintLimit() {

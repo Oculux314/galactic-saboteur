@@ -74,8 +74,6 @@ public class GameController implements Controller {
   @FXML private AnimatedButton btnGptExitMechanic;
   @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
-  @FXML private StackPane fullSidePanel;
-  @FXML private SidepanelController fullSidePanelController;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
