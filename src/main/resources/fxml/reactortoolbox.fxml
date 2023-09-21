@@ -35,5 +35,6 @@
       <Label layoutX="230.0" layoutY="14.0" text="TOOLS:" />
       <Label layoutX="202.0" layoutY="216.0" text="Put the tools back" textAlignment="CENTER" />
       <Button fx:id="btnSolve" layoutX="29.0" layoutY="233.0" mnemonicParsing="false" onAction="#onSolved" text="Solve" />
+      <Button fx:id="btnOpen" layoutX="21.0" layoutY="271.0" mnemonicParsing="false" onAction="#onOpen" text="Open Puzzle" />
    </children>
 </Pane>

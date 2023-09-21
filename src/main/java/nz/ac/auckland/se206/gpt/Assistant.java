@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
@@ -86,7 +87,7 @@ public class Assistant {
 
   private Thread executeApiCall() {
     ChatCompletionRequest request =
-        new ChatCompletionRequest().setTemperature(1).setTopP(1).setMaxTokens(100);
+        new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(100);
 
     if (!onlySystemMessage) {
       for (ChatMessage message : chatMessages) {
@@ -134,9 +135,11 @@ public class Assistant {
 
   public void respondToUser() {
     narrationBox.disableUserResponse();
-    String userMessage = narrationBox.getUserResponse();
+    String userMessage = narrationBox.getUserResponse() + GameState.reactorRoomGameState;
     narrationBox.clearUserResponse();
-
+    System.out.println();
+    System.out.println("userMessage: " + userMessage);
+    System.out.println();
     if (userMessage.equals("")) {
       narrationBox.enableUserResponse();
       return;

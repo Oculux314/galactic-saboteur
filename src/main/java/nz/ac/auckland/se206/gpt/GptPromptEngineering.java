@@ -20,13 +20,35 @@ public class GptPromptEngineering {
   }
 
   public static String getMainPrompt(String job) {
-    return "You are "
-        + job
-        + " onboard the spaceship named Spacey, which is acting as an escape"
-        + " room. The user can only escape when they find out what time, which suspect and"
-        + " in what room in relation to the stealing of the spaceship's access card. Respond"
-        + " in strictly 10 words or less."
-        + System.lineSeparator();
+    String prompt = "";
+    if (job == "Spacey's mechanic") {
+      prompt =
+          "You are a mechanic onboard the spaceship named Spacey, which is acting as an escape"
+              + " room. The user can only escape when they find out what time, which suspect and in"
+              + " what room in relation to the sabotage of Spacey. Your role is to help the user"
+              + " find the puzzle in the reactor room, but you can't reveal it explicitly, instead"
+              + " use hints.The puzzle can be found in the tool box, and can be solved by putting"
+              + " the tools back in the box.Respond in strictly 10 words or less.";
+    } else if (job == "Spacey's scientist") {
+      prompt =
+          "You are a scientist onboard the spaceship named Spacey, which is acting as an escape"
+              + " room. The user can only escape when they find out what time, which suspect and in"
+              + " what room in relation to the sabotage of Spacey. Your role is to help the user"
+              + " find the puzzle in the labrotory, but you can't reveal it explicitly, instead use"
+              + " hints.The puzzle can be found when looking at the test tubes on the counter, and"
+              + " can be solved by making the correct colour. To make green you mix yellow and"
+              + " blue. Respond in strictly 10 words or less.";
+    } else {
+      prompt =
+          "You are the captain onboard the spaceship named Spacey, which is acting as an escape"
+              + " room. The user can only escape when they find out what time, which suspect and in"
+              + " what room in relation to the sabotage of Spacey. Your role is to help the user"
+              + " find the puzzle in the control room, but you can't reveal it explicitly, instead"
+              + " use hints. The puzzle can be found when looking at main screen, and can be solved"
+              + " by finding the path to the exit. Respond in strictly 10 words or less.";
+    }
+
+    return prompt;
   }
 
   public static String getUserInteractionPrompt(String job) {
