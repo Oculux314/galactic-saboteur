@@ -18,6 +18,10 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+
+
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
@@ -34,6 +38,8 @@ public class GameController implements Controller {
   @FXML private Group grpPuzzleCommons;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
+  @FXML private Group grpRiddle;
+  @FXML private Pane panRiddle;
 
   private HashMap<String, puzzle> buttonToPuzzleMap;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -51,6 +57,9 @@ public class GameController implements Controller {
 
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+
+    grpRiddle.setVisible(false);
+
   }
 
   @FXML
@@ -121,4 +130,16 @@ public class GameController implements Controller {
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
   }
+
+  @FXML
+  private void riddleClicked() throws IOException {
+    grpRiddle.setVisible(true);
+    panRiddle.setVisible(true);
+
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/riddle.fxml"));
+    Parent riddle = loader.load();
+    panRiddle.getChildren().clear();
+    panRiddle.getChildren().add(riddle);
+  }
+
 }

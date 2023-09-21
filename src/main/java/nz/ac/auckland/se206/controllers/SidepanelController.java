@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState; 
 
 public class SidepanelController implements Controller {
 
@@ -69,6 +70,10 @@ public class SidepanelController implements Controller {
     clueInformationRectangle.setVisible(false);
     setClueNameMap();
     selectClues();
+    System.out.println("side panel initialized");
+    System.out.println(suspectName);
+    System.out.println(roomName);
+    System.out.println(timeName);
   }
 
   @FXML
@@ -149,16 +154,19 @@ public class SidepanelController implements Controller {
     random = (int) (Math.random() * size);
     suspect = new Image(getClass().getResourceAsStream(suspects[random]));
     suspectName = getClueName(suspects[random]);
+    GameState.correctSuspect = suspectName;
     clues.add(suspect);
 
     random = (int) (Math.random() * size);
     room = new Image(getClass().getResourceAsStream(rooms[random]));
     roomName = getClueName(rooms[random]);
+    GameState.correctRoom = roomName;
     clues.add(room);
 
     random = (int) (Math.random() * size);
     time = new Image(getClass().getResourceAsStream(times[random]));
     timeName = getClueName(times[random]);
+    GameState.correctTime = timeName;
     clues.add(time);
   }
 

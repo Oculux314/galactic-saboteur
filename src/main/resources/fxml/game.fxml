@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Polyline?>
+<?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
@@ -150,6 +151,7 @@
                   </AnimatedButton>
                </children>
             </Group>
+            <Rectangle fx:id="recRiddle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" layoutX="80.0" layoutY="230.0" onMouseClicked="#riddleClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
          </children>
       </Group>
       <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
@@ -180,6 +182,11 @@
                   <Image url="@../images/exit.png" />
                </image>
             </AnimatedButton>
+         </children>
+      </Group>
+      <Group fx:id="grpRiddle">
+         <children>
+            <Pane fx:id="panRiddle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" />
          </children>
       </Group>
    </children>

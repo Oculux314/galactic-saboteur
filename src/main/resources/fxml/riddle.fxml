@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.Pane?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
+<?import nz.ac.auckland.se206.components.StateButton?>
+
+
+<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.riddle.RiddleController">
+   <children>
+      <Label layoutX="230.0" layoutY="50.0" text="Reactor" />
+      <Group>
+         <children>
+            <StateButton fx:id="btnWho" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="250.0">
+               <image>
+                  <Image url="@../images/suspects/suspect1.jpg" />
+               </image>
+            </StateButton>
+            <StateButton fx:id="btnWhere" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="250.0">
+               <image>
+                  <Image url="@../images/rooms/room1.jpg" />
+               </image>
+            </StateButton>
+            <StateButton fx:id="btnWhen" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="250.0">
+               <image>
+                  <Image url="@../images/times/time1.jpg" />
+               </image>
+            </StateButton>
+         </children>
+      </Group>
+      <AnimatedButton fx:id="btnAnswer" fitHeight="91.0" fitWidth="122.0" layoutX="176.0" layoutY="381.0" onMouseClicked="#answerClicked" preserveRatio="true">
+         <image>
+            <Image url="@../images/continue.png" />
+         </image>
+      </AnimatedButton>
+   </children>
+</Pane>
