@@ -194,6 +194,13 @@ public class GameController implements Controller {
       PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
       puzzleLoader.setPuzzle(puzzleName);
       restorePuzzleWindow();
+      if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
+        GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
+      } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzleName)) {
+        GameState.labRoomGameState = GameState.puzzleOpenedMessage;
+      } else if (PuzzleLoader.navigationPuzzles.contains(puzzleName)) {
+        GameState.controlRoomGameState = GameState.puzzleOpenedMessage;
+      }
     }
 
     lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
@@ -236,6 +243,4 @@ public class GameController implements Controller {
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return puzzleLoader.getButtonToPuzzleMap();
   }
-
-
 }

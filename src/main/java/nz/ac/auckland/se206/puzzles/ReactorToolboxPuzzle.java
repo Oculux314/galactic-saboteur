@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.puzzles;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
 public class ReactorToolboxPuzzle extends Puzzle {
@@ -21,10 +20,5 @@ public class ReactorToolboxPuzzle extends Puzzle {
   private void onSolved() {
     setSolved();
     clearPuzzle(panReactorToolbox);
-  }
-
-  @FXML
-  private void onOpen() {
-    GameState.reactorRoomGameState = "User has opened the puzzle, but has not completed it yet.";
   }
 }
