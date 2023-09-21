@@ -2,16 +2,20 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.puzzle;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 
@@ -28,18 +32,25 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
+  @FXML private StackPane fullSidePanel;
+  @FXML private SidepanelController fullSidePanelController;
 
+  private HashMap<String, puzzle> buttonToPuzzleMap;
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
-  private HashMap<String, puzzle> buttonToPuzzleMap;
+  private Puzzle lastClickedPuzzle;
+  private String lastClickedId;
+  private Set<String> solvedPuzzles = new HashSet<>();
 
   @FXML
   private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
     buttonToPuzzleMap.put("btnComputer", puzzle.navigationcomputer);
+    buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
+    buttonToPuzzleMap.put("btnApple", puzzle.reactorapple);
 
-    puzzleLoader = new PuzzleLoader(panPuzzle);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
   }
 
@@ -79,11 +90,16 @@ public class GameController implements Controller {
   @FXML
   private void onExitClicked() {
     minimisePuzzleWindow();
+
+    // If puzzle was solved, get the clue
+    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedId)) {
+      fullSidePanelController.getClue();
+      solvedPuzzles.add(lastClickedId);
+    }
   }
 
   @FXML
   private void onPuzzleButtonClicked(MouseEvent event) throws IOException {
-
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     String buttonId = clickedButton.getId();
@@ -92,9 +108,11 @@ public class GameController implements Controller {
       // Load the specific puzzle
       puzzle puzzleName = buttonToPuzzleMap.get(buttonId);
       puzzleLoader.loadPuzzle("/fxml/" + puzzleName + ".fxml");
-
       restorePuzzleWindow();
     }
+
+    lastClickedId = buttonId;
+    lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
   }
 
   private void minimisePuzzleWindow() {

@@ -38,27 +38,27 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
+                        <Pane fx:id="panClue1" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="suspect1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="suspect1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
                               </ImageView>
                            </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
+                        <Pane fx:id="panClue2" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="suspect2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="suspect2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
                               </ImageView>
                            </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
+                        <Pane fx:id="panClue3" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="suspect3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="suspect3" fitHeight="61.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true">
                                  <image>
                                     <Image url="@../images/logo.png" />
                                  </image>
@@ -85,27 +85,27 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue1" fitHeight="61.0" fitWidth="55.0" layoutX="4.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/logo.png" />
+                                    <Image url="@../images/missingclue.jpg" />
                                  </image>
                               </ImageView>
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue2" fitHeight="58.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue2" fitHeight="61.0" fitWidth="55.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/logo.png" />
+                                    <Image url="@../images/missingclue.jpg" />
                                  </image>
                               </ImageView>
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView fx:id="clue3" fitHeight="70.0" fitWidth="54.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="clue3" fitHeight="61.0" fitWidth="55.0" layoutX="5.0" layoutY="23.0" onMouseEntered="#itemInformationShow" onMouseExited="#itemInformationHide" pickOnBounds="true">
                                  <image>
-                                    <Image url="@../images/logo.png" />
+                                    <Image url="@../images/missingclue.jpg" />
                                  </image>
                               </ImageView>
                            </children>
@@ -115,7 +115,7 @@
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Rectangle fx:id="clueInformationRectangle" arcHeight="15.0" arcWidth="15.0" fill="#436e83" height="89.0" layoutX="20.0" layoutY="45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
-                        <Label fx:id="lblClueInformation" layoutX="28.0" layoutY="70.0" prefHeight="26.0" prefWidth="134.0" textOverrun="CLIP">
+                        <Label fx:id="lblClueInformation" layoutX="28.0" layoutY="70.0" prefHeight="26.0" prefWidth="134.0" style="-fx-font-size: 10;" textOverrun="CLIP">
                            <font>
                               <Font size="8.0" />
                            </font>
