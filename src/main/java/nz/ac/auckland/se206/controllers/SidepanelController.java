@@ -189,6 +189,5 @@ public class SidepanelController implements Controller {
     clueNameMap.put("/images/times/time1.jpg", "Morning");
     clueNameMap.put("/images/times/time2.jpg", "Afternoon");
     clueNameMap.put("/images/times/time3.jpg", "Night");
-    System.out.println("clue map set");
   }
 }

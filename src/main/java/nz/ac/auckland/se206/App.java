@@ -206,16 +206,7 @@ public class App extends Application {
       return text;
     }
 
-    Thread ttsThread =
-        new Thread(
-            () -> {
-              try {
-                tts.speak(text);
-              } catch (Exception e) {
-                e.printStackTrace();
-              }
-            });
-
+    Thread ttsThread = new Thread(() -> tts.speak(text));
     ttsThread.start();
     return text;
   }
