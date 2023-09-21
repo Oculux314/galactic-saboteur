@@ -96,13 +96,18 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void onExitClicked() {
-    minimisePuzzleWindow();
+  private void onExitClicked(MouseEvent event) {
 
-    // If puzzle was solved, get the clue
-    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-      fullSidePanelController.getClue();
-      solvedPuzzles.add(lastClickedPuzzle);
+    if (event.getSource() == btnExit) {
+      minimisePuzzleWindow();
+
+      // If puzzle was solved, get the clue
+      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
+        fullSidePanelController.getClue();
+        solvedPuzzles.add(lastClickedPuzzle);
+      }
+    } else {
+      grpRiddle.setVisible(false);
     }
   }
 
