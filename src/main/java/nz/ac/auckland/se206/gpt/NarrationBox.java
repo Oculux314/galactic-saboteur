@@ -18,7 +18,10 @@ public class NarrationBox {
 
       while (textResponse.isDisabled()) {
         int numberOfDots = i;
-        Platform.runLater(() -> textResponse.setText(waitingMessage + " is considering what you said" + ellipsisAnimation[numberOfDots]));
+        Platform.runLater(
+            () ->
+                textResponse.setText(
+                    waitingMessage + " is thinking" + ellipsisAnimation[numberOfDots]));
 
         i = (i + 1) % ellipsisAnimation.length;
         Thread.sleep(200);
@@ -34,11 +37,16 @@ public class NarrationBox {
   private TextField textResponse;
   private String waitingMessage;
 
-  public NarrationBox(Pane paneNarration, TextArea labelNarration, TextField textResponse, String waitingMessage) {
+  public NarrationBox(
+      Pane paneNarration, TextArea labelNarration, TextField textResponse, String waitingMessage) {
     this.paneNarration = paneNarration;
     this.labelNarration = labelNarration;
     this.textResponse = textResponse;
     this.waitingMessage = waitingMessage;
+  }
+
+  public String getWaitingMessage(){
+    return waitingMessage;
   }
 
   public void hidePane() {

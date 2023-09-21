@@ -19,20 +19,22 @@ public class GptPromptEngineering {
         + " the answer";
   }
 
-  public static String getMainPrompt() {
-    return "You are scientist onboard the spaceship named Spacy, which is acting as an escape room."
-        + " The user can only escape when they find out what time, which suspect and in"
-        + " what room in relation to the stealing of the spaceship's access card. Respond in"
-        + " strictly 15 words or less."
+  public static String getMainPrompt(String job) {
+    return "You are "
+        + job
+        + " onboard the spaceship named Spacey, which is acting as an escape"
+        + " room. The user can only escape when they find out what time, which suspect and"
+        + " in what room in relation to the stealing of the spaceship's access card. Respond"
+        + " in strictly 10 words or less."
         + System.lineSeparator();
   }
 
-  public static String getUserInteractionPrompt() {
-    return getMainPrompt() + "Respond to the user's latest query.";
+  public static String getUserInteractionPrompt(String job) {
+    return getMainPrompt(job) + "Respond to the user's latest query.";
   }
 
-  public static String getWelcomePrompt() {
-    return getMainPrompt() + "Welcome the user.";
+  public static String getWelcomePrompt(String job) {
+    return getMainPrompt(job) + "Introduce yourself and welcome the user.";
   }
 
   public static String getInternetErrorMessage() {

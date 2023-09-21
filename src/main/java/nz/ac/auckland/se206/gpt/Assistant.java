@@ -7,7 +7,6 @@ import javafx.concurrent.Task;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class Assistant {
 
@@ -58,10 +57,14 @@ public class Assistant {
   private boolean onlySystemMessage = false;
   private String responseText = "";
   private boolean isWaitingForResponse = false;
+  public String job;
 
   public Assistant(NarrationBox narrationBox) {
     this.narrationBox = narrationBox;
-    chatMessages.add(new ChatMessage("system", GptPromptEngineering.getMainPrompt()));
+    this.job = narrationBox.getWaitingMessage();
+    chatMessages.add(
+        new ChatMessage(
+            "system", GptPromptEngineering.getMainPrompt(narrationBox.getWaitingMessage())));
   }
 
   public void addChatMessage(ChatMessage message) {
@@ -125,6 +128,10 @@ public class Assistant {
     narrationBox.enableUserResponse();
   }
 
+  public NarrationBox getNarrationBox() {
+    return narrationBox;
+  }
+
   public void respondToUser() {
     narrationBox.disableUserResponse();
     String userMessage = narrationBox.getUserResponse();
@@ -135,13 +142,13 @@ public class Assistant {
       return;
     }
 
-    setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(), false);
+    setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
     executeApiCallWithCallback(this::renderNarrationBox);
   }
 
   public void welcome() {
-    setSystemMessage(GptPromptEngineering.getWelcomePrompt());
+    setSystemMessage(GptPromptEngineering.getWelcomePrompt(job));
     executeApiCallWithCallback(
         () -> {
           renderNarrationBox();
