@@ -2,7 +2,9 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 <?import nz.ac.auckland.se206.components.StateButton?>
@@ -10,7 +12,7 @@
 
 <Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.riddle.RiddleController">
    <children>
-      <Label layoutX="230.0" layoutY="50.0" text="Reactor" />
+      <Label layoutX="230.0" layoutY="14.0" text="Reactor" />
       <Group>
          <children>
             <StateButton fx:id="btnWho" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="250.0">
@@ -35,5 +37,10 @@
             <Image url="@../images/continue.png" />
          </image>
       </AnimatedButton>
+      <AnchorPane layoutY="-2.0" prefHeight="249.0" prefWidth="500.0" stylesheets="@../css/style.css">
+         <children>
+            <TextArea fx:id="gptTextArea" layoutX="50.0" layoutY="50.0" prefHeight="150.0" prefWidth="400.0" />
+         </children>
+      </AnchorPane>
    </children>
 </Pane>
