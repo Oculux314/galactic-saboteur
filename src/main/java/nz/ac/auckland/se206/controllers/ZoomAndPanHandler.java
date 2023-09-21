@@ -22,7 +22,7 @@ public class ZoomAndPanHandler {
   private double minScaleFactor = 1.0;
   private double maxScaleFactor = 2.0;
   private double scaleFactor = 1.0;
-  private double margin = 0.0;
+  private double margin = 300.0;
 
   public ZoomAndPanHandler(Group grpPanZoom, Pane panSpaceship) {
     this.grpPanZoom = grpPanZoom;
