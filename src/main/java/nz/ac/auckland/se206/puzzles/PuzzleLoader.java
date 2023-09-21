@@ -46,6 +46,8 @@ public class PuzzleLoader {
       setPuzzle(PuzzleName.REACTOR_TOOLBOX);
       setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
       setPuzzle(PuzzleName.REACTOR_APPLE);
+      setPuzzle(PuzzleName.LABORATORY_TESTTUBES);
+      setPuzzle(PuzzleName.NAVIGATION_COMPUTER);
     } catch (IllegalStateException | IOException e) {
       e.printStackTrace();
     }
@@ -53,8 +55,8 @@ public class PuzzleLoader {
 
   private void choosePuzzles() {
     GameState.reactorPuzzle = getRandomPuzzle(reactorPuzzles);
-    // GameState.laboratoryPuzzle = getRandomPuzzle(laboratoryPuzzles);
-    // GameState.navigationPuzzle = getRandomPuzzle(navigationPuzzles);
+    GameState.laboratoryPuzzle = getRandomPuzzle(laboratoryPuzzles);
+    GameState.navigationPuzzle = getRandomPuzzle(navigationPuzzles);
   }
 
   private PuzzleName getRandomPuzzle(List<PuzzleName> room) {
@@ -70,8 +72,8 @@ public class PuzzleLoader {
     grpMapButtons.getChildren().forEach(button -> button.setVisible(false));
 
     getButtonFromName(GameState.reactorPuzzle).setVisible(true);
-    // getButtonFromName(GameState.laboratoryPuzzle).setVisible(true);
-    // getButtonFromName(GameState.navigationPuzzle).setVisible(true);
+    getButtonFromName(GameState.laboratoryPuzzle).setVisible(true);
+    getButtonFromName(GameState.navigationPuzzle).setVisible(true);
   }
 
   public void setPuzzle(PuzzleName name) throws IOException {

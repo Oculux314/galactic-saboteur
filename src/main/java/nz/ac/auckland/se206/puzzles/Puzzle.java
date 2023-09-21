@@ -17,8 +17,8 @@ public class Puzzle {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
     REACTOR_APPLE,
-    LABORATORY_TEST,
-    NAVIGATION_TEST;
+    LABORATORY_TESTTUBES,
+    NAVIGATION_COMPUTER;
 
     private String toCamelCase() {
       String[] words = this.toString().split("_");

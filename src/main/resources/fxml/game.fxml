@@ -130,7 +130,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button layoutX="733.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" text="Restart" />
             <Group fx:id="grpMapButtons">
                <children>
                   <AnimatedButton fx:id="btnReactorToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
@@ -148,6 +147,16 @@
                         <Image url="@../images/apple.png" />
                      </image>
                   </AnimatedButton>
+                  <AnimatedButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/testtubes.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="btnNavigationComputer" fitHeight="50.0" fitWidth="20.0" layoutX="625.0" layoutY="250.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/placeholder.png" />
+                     </image>
+                  </AnimatedButton>
                </children>
             </Group>
          </children>
@@ -158,7 +167,7 @@
             <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
          </children>
       </Group>
-      <Group fx:id="grpPuzzleCommons">
+      <Group fx:id="grpPuzzleCommons" visible="false">
          <children>
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
                <children>
@@ -182,5 +191,6 @@
             </AnimatedButton>
          </children>
       </Group>
+      <Button layoutX="726.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" prefWidth="60.0" text="Restart" />
    </children>
 </Pane>

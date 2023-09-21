@@ -6,13 +6,11 @@ import java.util.HashSet;
 import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
-import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
@@ -35,18 +33,18 @@ public class GameController implements Controller {
   }
 
   @FXML private Pane panSpaceship;
+
   @FXML private Group grpPanZoom;
-  @FXML private Rectangle recTest;
-  @FXML private Button btnSettings;
+  @FXML private Group grpMapButtons;
+
   @FXML private Polyline btnPanelHide;
   @FXML private Group panelContainer;
-  @FXML private AnimatedButton btnToolbox;
+  @FXML private StackPane fullSidePanel;
+  @FXML private SidepanelController fullSidePanelController;
+
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
-  @FXML private StackPane fullSidePanel;
-  @FXML private SidepanelController fullSidePanelController;
-  @FXML private Group grpMapButtons;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
