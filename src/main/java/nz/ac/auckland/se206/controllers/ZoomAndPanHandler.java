@@ -91,7 +91,7 @@ public class ZoomAndPanHandler {
     translateY = clamp(translateY, minY, maxY);
 
     // Smoothly animate the zoom
-    Timeline timeline =
+    Timeline zoomTransition =
         new Timeline(
             new KeyFrame(
                 Duration.millis(50),
@@ -100,7 +100,7 @@ public class ZoomAndPanHandler {
                 new KeyValue(grpPanZoom.translateXProperty(), translateX),
                 new KeyValue(grpPanZoom.translateYProperty(), translateY)));
 
-    timeline.play();
+    zoomTransition.play();
     event.consume();
   }
 

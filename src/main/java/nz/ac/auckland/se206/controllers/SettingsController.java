@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
@@ -12,24 +13,44 @@ import nz.ac.auckland.se206.components.StateButton;
 /** Controller class for the title screen. */
 public class SettingsController implements Controller {
 
-  @FXML Pane panBackground;
-  @FXML AnimatedButton btnBack;
-  @FXML StateButton btnDifficulty;
-  @FXML StateButton btnTime;
-  @FXML StateButton btnTts;
+  @FXML private Pane panBackground;
+  @FXML private AnimatedButton btnBack;
+  @FXML private StateButton btnDifficulty;
+  @FXML private StateButton btnTime;
+  @FXML private StateButton btnTts;
 
   @FXML
   private void initialize() {
-    btnDifficulty.addState("easy", "settings_buttons/easy.png");
-    btnDifficulty.addState("medium", "settings_buttons/medium.png");
-    btnDifficulty.addState("hard", "settings_buttons/hard.png");
+    String difficulty = GameState.difficulty;
+    String timeLimit = Integer.toString(GameState.timeLimit);
+    String ttsEnabled = GameState.ttsEnabled ? "on" : "off";
 
-    btnTime.addState("2min", "placeholder.png");
-    btnTime.addState("4min", "placeholder.png");
-    btnTime.addState("6min", "placeholder.png");
+    btnDifficulty.addState("easy", "settings_buttons/easy.png", this::updateDifficulty, null);
+    btnDifficulty.addState("medium", "settings_buttons/medium.png", this::updateDifficulty, null);
+    btnDifficulty.addState("hard", "settings_buttons/hard.png", this::updateDifficulty, null);
 
-    btnTts.addState("off", "placeholder.png");
-    btnTts.addState("on", "placeholder.png");
+    btnTime.addState("2", "placeholder.png", this::updateTime, null);
+    btnTime.addState("4", "placeholder.png", this::updateTime, null);
+    btnTime.addState("6", "placeholder.png", this::updateTime, null);
+
+    btnTts.addState("off", "placeholder.png", this::updateTts, null);
+    btnTts.addState("on", "placeholder.png", this::updateTts, null);
+
+    btnDifficulty.setState(difficulty);
+    btnTime.setState(timeLimit);
+    btnTts.setState(ttsEnabled);
+  }
+
+  private void updateDifficulty() {
+    GameState.difficulty = btnDifficulty.getState();
+  }
+
+  private void updateTime() {
+    GameState.timeLimit = Integer.parseInt(btnTime.getState());
+  }
+
+  private void updateTts() {
+    GameState.ttsEnabled = btnTts.getState().equals("on");
   }
 
   /**
