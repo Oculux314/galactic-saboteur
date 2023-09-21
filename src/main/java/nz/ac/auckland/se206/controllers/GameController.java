@@ -46,6 +46,7 @@ public class GameController implements Controller {
   private void initialize() {
     buttonToPuzzleMap = new HashMap<>();
     buttonToPuzzleMap.put("btnToolbox", puzzle.reactortoolbox);
+    buttonToPuzzleMap.put("btnComputer", puzzle.navigationcomputer);
     buttonToPuzzleMap.put("btnButtonpad", puzzle.reactorbuttonpad);
     buttonToPuzzleMap.put("btnApple", puzzle.reactorapple);
 

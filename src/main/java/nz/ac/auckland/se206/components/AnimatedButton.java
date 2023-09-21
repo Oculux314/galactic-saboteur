@@ -9,6 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.Utils;
 
+/**
+ * This is an ImageView-based button that displays an image and has nice animations on hover and
+ * click. Optional separate hover image.
+ */
 public class AnimatedButton extends ImageView {
 
   private Image normalImage;

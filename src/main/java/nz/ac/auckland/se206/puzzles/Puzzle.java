@@ -11,7 +11,10 @@ public class Puzzle {
   private Parent root;
 
   public enum puzzle {
-    reactortoolbox, reactorbuttonpad, reactorapple,
+    navigationcomputer,
+    reactortoolbox,
+    reactorbuttonpad,
+    reactorapple,
   }
 
   public void clearPuzzle(Parent puzzlePane) {
@@ -30,6 +33,7 @@ public class Puzzle {
   public void setSolved() {
     isPuzzleSolved = true;
   }
+
   public Parent getRoot() {
     return root;
   }
