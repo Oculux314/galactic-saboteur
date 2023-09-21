@@ -18,15 +18,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
 
-  /** The primary stage of the application */
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
   private static Map<Screen.Name, Screen> screens = new HashMap<>();
+
+  private static TextToSpeech tts = new TextToSpeech();
 
   /**
    * The entry point of the application.
@@ -195,5 +197,32 @@ public class App extends Application {
     setScreen(Screen.Name.TITLE);
   }
 
-  // TODO: set GameState.isRunning to false when closing
+  public static String tts(String text) {
+    if (text == null) {
+      throw new IllegalArgumentException("Text cannot be null.");
+    }
+
+    if (!GameState.ttsEnabled) {
+      return text;
+    }
+
+    Thread ttsThread =
+        new Thread(
+            () -> {
+              try {
+                tts.speak(text);
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            });
+
+    ttsThread.start();
+    return text;
+  }
+
+  @Override
+  public void stop() {
+    GameState.isRunning = false;
+    tts.terminate();
+  }
 }
