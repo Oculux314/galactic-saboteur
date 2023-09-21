@@ -15,9 +15,21 @@ public class Puzzle {
     REACTOR_BUTTONPAD,
     REACTOR_APPLE;
 
-    @Override
-    public String toString() {
-      return this.name().toLowerCase().replace("_", "");
+    private String toCamelCase() {
+      String[] words = this.toString().split("_");
+      StringBuilder camelCase = new StringBuilder();
+      for (String word : words) {
+        camelCase.append(word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
+      }
+      return camelCase.toString();
+    }
+
+    public String toFxmlUrl() {
+      return ("/fxml/puzzles/" + this.toString().toLowerCase().replace("_", "") + ".fxml");
+    }
+
+    public String toFxmlButtonId() {
+      return ("btn" + this.toCamelCase());
     }
   }
 

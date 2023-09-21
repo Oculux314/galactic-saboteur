@@ -18,7 +18,7 @@ public class PuzzleLoader {
   private Group grpPuzzleCommons;
   private RoomGroup rooms;
 
-  private HashMap<String, Puzzle> puzzleMap;
+  private HashMap<PuzzleName, Puzzle> puzzleMap;
   private HashMap<String, PuzzleName> buttonToPuzzleMap;
 
   private Set<Puzzle> reactorPuzzles;
@@ -42,9 +42,13 @@ public class PuzzleLoader {
   }
 
   private void loadAllPuzzles() {
-    setPuzzle(PuzzleName.REACTOR_TOOLBOX);
-    setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
-    setPuzzle(PuzzleName.REACTOR_APPLE);
+    try {
+      setPuzzle(PuzzleName.REACTOR_TOOLBOX);
+      setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
+      setPuzzle(PuzzleName.REACTOR_APPLE);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
   }
 
   private void populateButtonToPuzzleMap() {
@@ -53,37 +57,30 @@ public class PuzzleLoader {
     buttonToPuzzleMap.put("btnApple", PuzzleName.REACTOR_APPLE);
   }
 
-  public void setPuzzle(PuzzleName name) {
-    try {
-      setPuzzle(getFxmlUrl(name));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private void setPuzzle(String fxmlFilePath) throws IOException {
-    Parent puzzleFxml = getFxml(fxmlFilePath);
+  public void setPuzzle(PuzzleName name) throws IOException {
+    Parent puzzleFxml = getFxml(name);
     panPuzzle.getChildren().clear();
     panPuzzle.getChildren().add(puzzleFxml);
   }
 
-  private Parent getFxml(String fxmlFilePath) throws IOException {
-    if (puzzleMap.containsKey(fxmlFilePath)) {
+  private Parent getFxml(PuzzleName name) throws IOException {
+    if (puzzleMap.containsKey(name)) {
       // If the puzzle is already loaded show it
-      return puzzleMap.get(fxmlFilePath).getRoot();
+      return puzzleMap.get(name).getRoot();
     } else {
       // Otherwise, load the puzzle into panPuzzle
-      return loadPuzzle(fxmlFilePath);
+      return loadPuzzle(name);
     }
   }
 
-  private Parent loadPuzzle(String fxmlFilePath) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
+  private Parent loadPuzzle(PuzzleName name) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(name.toFxmlUrl()));
     Parent puzzle = loader.load();
     Puzzle puzzleController = loader.getController();
 
     puzzleController.setRoot(puzzle);
-    puzzleMap.put(fxmlFilePath, puzzleController);
+    puzzleMap.put(name, puzzleController);
+    buttonToPuzzleMap.put(name.toString(), name);
     return puzzle;
   }
 
@@ -101,10 +98,6 @@ public class PuzzleLoader {
       }
     }
     return null;
-  }
-
-  private String getFxmlUrl(PuzzleName name) {
-    return ("/fxml/" + name.toString() + ".fxml");
   }
 
   public HashMap<String, PuzzleName> getButtonToPuzzleMap() {
