@@ -4,18 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -25,9 +18,6 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
-import nz.ac.auckland.se206.components.StateButton;
-import nz.ac.auckland.se206.gpt.Assistant;
-import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
@@ -49,44 +39,16 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
-  @FXML private AnimatedButton gptScientist;
-  @FXML private AnimatedButton gptMechanic;
-  @FXML private AnimatedButton gptCaptain;
-  @FXML private Pane paneNarrationScientist;
-  @FXML private Pane paneNarrationMechanic;
-  @FXML private Pane paneNarrationCaptain;
-  @FXML private TextArea labelNarrationScientist;
-  @FXML private TextArea labelNarrationMechanic;
-  @FXML private TextArea labelNarrationCaptain;
-  @FXML private TextField textResponseScientist;
-  @FXML private TextField textResponseMechanic;
-  @FXML private TextField textResponseCaptain;
-  @FXML private Group grpGptScientist;
-  @FXML private Group grpGptMechanic;
-  @FXML private Group grpGptCaptain;
-  @FXML private StateButton hintsScientist;
-  @FXML private StateButton hintsMechanic;
-  @FXML private StateButton hintsCaptain;
-  @FXML private AnimatedButton btnGptExitCaptain;
-  @FXML private AnimatedButton btnGptExitMechanic;
-  @FXML private AnimatedButton btnGptExitScientist;
-  @FXML private Group grpGpt;
-
   @FXML private Group grpRiddle;
   @FXML private AnimatedButton btnRiddleExit;
   @FXML private AnimatedButton btnReactor;
 
   @FXML private RiddleController riddleController;
 
-
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
   private Set<Puzzle> solvedPuzzles = new HashSet<>();
-
-  private boolean captainWelcomeShown = false;
-  private boolean scientistWelcomeShown = false;
-  private boolean mechanicWelcomeShown = false;
 
   private Timeline countdownTimer;
 
@@ -107,45 +69,10 @@ public class GameController implements Controller {
     }
   }
 
-
   @FXML
   private void initialize() {
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
-
-    NarrationBox narrationBox1 =
-        new NarrationBox(
-            paneNarrationScientist,
-            labelNarrationScientist,
-            textResponseScientist,
-            "Spacey's scientist");
-    App.scientist = new Assistant(narrationBox1);
-
-    NarrationBox narrationBox2 =
-        new NarrationBox(
-            paneNarrationMechanic,
-            labelNarrationMechanic,
-            textResponseMechanic,
-            "Spacey's mechanic");
-    App.mechanic = new Assistant(narrationBox2);
-
-    NarrationBox narrationBox3 =
-        new NarrationBox(
-            paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain, "Spacey's captain");
-    App.captain = new Assistant(narrationBox3);
-
-    grpGptScientist.setVisible(false);
-    grpGptMechanic.setVisible(false);
-    grpGptCaptain.setVisible(false);
-
-    hintsScientist.addState("nohint", "btnhint.png");
-    hintsScientist.addState("hint", "yeshint.png");
-
-    hintsMechanic.addState("nohint", "btnhint.png");
-    hintsMechanic.addState("hint", "yeshint.png");
-
-    hintsCaptain.addState("nohint", "btnhint.png");
-    hintsCaptain.addState("hint", "yeshint.png");
 
     grpRiddle.setVisible(false);
   }
@@ -181,7 +108,6 @@ public class GameController implements Controller {
     String formattedSeconds = String.format("%02d", seconds);
 
     timer.setText(formattedMinutes + ":" + formattedSeconds);
-
   }
 
   @FXML
@@ -222,28 +148,15 @@ public class GameController implements Controller {
 
     if (event.getSource() == btnExit) {
       minimisePuzzleWindow();
-      // If puzzle was solved, get the clue
-      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-        fullSidePanelController.getClue();
-        solvedPuzzles.add(lastClickedPuzzle);
-      }
-    } else if (event.getSource() == btnGptExitScientist) {
-      grpGptScientist.setVisible(false);
-    } else if (event.getSource() == btnGptExitMechanic) {
-      grpGptMechanic.setVisible(false);
-    } else if (event.getSource() == btnGptExitCaptain) {
-      grpGptCaptain.setVisible(false);
+
+    // If puzzle was solved, get the clue
+    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
+      fullSidePanelController.getRandomClue();
+      solvedPuzzles.add(lastClickedPuzzle);
     } else {
       grpRiddle.setVisible(false);
+
     }
-  }
-
-  private void minimisePuzzleWindow() {
-    grpPuzzleCommons.setVisible(false);
-  }
-
-  private void restorePuzzleWindow() {
-    grpPuzzleCommons.setVisible(true);
   }
 
   @FXML
@@ -256,56 +169,17 @@ public class GameController implements Controller {
       PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
       puzzleLoader.setPuzzle(puzzleName);
       restorePuzzleWindow();
-      if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
-        GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
-      } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzleName)) {
-        GameState.labRoomGameState = GameState.puzzleOpenedMessage;
-      } else if (PuzzleLoader.navigationPuzzles.contains(puzzleName)) {
-        GameState.controlRoomGameState = GameState.puzzleOpenedMessage;
-      }
     }
 
     lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
   }
 
-  @FXML
-  private void gptStart(MouseEvent event) {
-    if (event.getSource() == gptScientist && !scientistWelcomeShown) {
-      App.scientist.welcome();
-      scientistWelcomeShown = true;
-    } else if (event.getSource() == gptCaptain && !captainWelcomeShown) {
-      App.captain.welcome();
-      captainWelcomeShown = true;
-    } else if (event.getSource() == gptMechanic && !mechanicWelcomeShown) {
-      App.mechanic.welcome();
-      mechanicWelcomeShown = true;
-    }
-
-    // Set the visibility of the corresponding group
-    if (event.getSource() == gptScientist) {
-      grpGptScientist.setVisible(true);
-    } else if (event.getSource() == gptCaptain) {
-      grpGptCaptain.setVisible(true);
-    } else if (event.getSource() == gptMechanic) {
-      grpGptMechanic.setVisible(true);
-    }
+  private void minimisePuzzleWindow() {
+    grpPuzzleCommons.setVisible(false);
   }
 
-  @FXML
-  private void onUserMessage(ActionEvent event) {
-    if (event.getSource() == textResponseScientist) {
-      App.scientist.respondToUser();
-      hintsScientist.setState("nohint");
-      hintsScientist.setDisable(GameState.isHintLimitReached());
-    } else if (event.getSource() == textResponseCaptain) {
-      App.captain.respondToUser();
-      hintsCaptain.setState("nohint");
-      hintsCaptain.setDisable(GameState.isHintLimitReached());
-    } else if (event.getSource() == textResponseMechanic) {
-      App.mechanic.respondToUser();
-      hintsMechanic.setState("nohint");
-      hintsMechanic.setDisable(GameState.isHintLimitReached());
-    }
+  private void restorePuzzleWindow() {
+    grpPuzzleCommons.setVisible(true);
   }
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
