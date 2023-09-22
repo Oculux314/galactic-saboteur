@@ -14,12 +14,6 @@ public class GameState {
   public static String difficulty = "easy";
   public static int timeLimit = 2; // In minutes
   public static boolean ttsEnabled = false;
-  public static String reactorRoomGameState = "User hasn't found where the puzzle is yet";
-  public static String labRoomGameState = "User hasn't found where the puzzle is yet";
-  public static String controlRoomGameState = "User hasn't found where the puzzle is yet";
-  public static String puzzleSolvedMessage = "User has solved the puzzle in this room already. They have got a clue which is located in the side panel, under clues.";
-  public static String puzzleOpenedMessage = "User has opened the puzzle, but has not completed it yet.";
-  public static int numberOfHintsAsked = 0;
 
   public static PuzzleName reactorPuzzle;
   public static PuzzleName laboratoryPuzzle;
@@ -30,22 +24,6 @@ public class GameState {
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
-    numberOfHintsAsked = 0;
-  }
-
-  public static int getHintLimit() {
-    int hintLimit;
-    if (difficulty == "easy") {
-      hintLimit = 1000;
-    } else if (difficulty == "medium") {
-      hintLimit = 5;
-    } else {
-      hintLimit = 0;
-    }
-    return hintLimit;
-  }
-
-  public static boolean isHintLimitReached() {
-    return numberOfHintsAsked >= getHintLimit();
+    timeLimit = 2;
   }
 }

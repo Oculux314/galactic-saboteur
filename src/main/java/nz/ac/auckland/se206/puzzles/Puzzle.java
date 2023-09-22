@@ -5,15 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
-import nz.ac.auckland.se206.GameState;
 
 public class Puzzle {
-  
-  public boolean isPuzzleSolved;
-  private Label solvedLabel =
-      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
-  private Parent root;
-  private PuzzleName puzzleName;
 
   public enum PuzzleName {
     REACTOR_TOOLBOX,
@@ -40,15 +33,10 @@ public class Puzzle {
     }
   }
 
-  public void setPuzzleName(PuzzleName puzzleName) {
-    this.puzzleName = puzzleName;
-  }
-
   private static final Label solvedLabel =
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private boolean isPuzzleSolved;
   private Parent root;
-
 
   public void clearPuzzle(Parent puzzlePane) {
     if (puzzlePane instanceof Pane) {
@@ -68,13 +56,6 @@ public class Puzzle {
 
   public void setSolved() {
     isPuzzleSolved = true;
-    if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
-      GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
-    } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
-      GameState.labRoomGameState = GameState.puzzleSolvedMessage;
-    } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
-      GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
-    }
   }
 
   public Parent getRoot() {
