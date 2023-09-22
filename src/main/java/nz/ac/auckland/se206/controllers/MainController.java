@@ -33,12 +33,16 @@ public class MainController implements Controller {
   /** Adds listeners to the scene to keep the screen centered and scaled to the scene dimensions. */
   public void addSceneListeners() {
     Scene scene = App.getScene();
+
+    // Height change listener
     scene
         .heightProperty()
         .addListener(
             (obs, oldVal, newVal) -> {
               updateOuterPaneSize(scene.getWidth(), newVal.doubleValue());
             });
+
+    // Width change listener
     scene
         .widthProperty()
         .addListener(
@@ -66,10 +70,10 @@ public class MainController implements Controller {
     panScale.setScaleY(zoom);
 
     // Center content (workaround)
-    double xShift = (sceneWidth - DEFAULT_WIDTH) / 2;
-    double yShift = (sceneHeight - DEFAULT_HEIGHT) / 2;
-    panTranslate.setLayoutX(xShift);
-    panTranslate.setLayoutY(yShift);
+    double horizontalShift = (sceneWidth - DEFAULT_WIDTH) / 2;
+    double verticalShift = (sceneHeight - DEFAULT_HEIGHT) / 2;
+    panTranslate.setLayoutX(horizontalShift);
+    panTranslate.setLayoutY(verticalShift);
   }
 
   /**

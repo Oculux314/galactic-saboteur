@@ -9,11 +9,19 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
@@ -23,29 +31,18 @@ import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.riddle.RiddleController;
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
 
-  public class RoomGroup {
-    public Group reactorRoom;
-    public Group laboratoryRoom;
-    public Group navigationRoom;
-
-    public RoomGroup(Group reactorRoom, Group laboratoryRoom, Group navigationRoom) {
-      this.reactorRoom = reactorRoom;
-      this.laboratoryRoom = laboratoryRoom;
-      this.navigationRoom = navigationRoom;
-    }
-  }
-
   @FXML private Pane panSpaceship;
-
   @FXML private Group grpPanZoom;
   @FXML private Group grpMapButtons;
 
   @FXML private Polyline btnPanelHide;
   @FXML private Group panelContainer;
+  @FXML private Label timer;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
@@ -75,6 +72,13 @@ public class GameController implements Controller {
   @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
 
+  @FXML private Group grpRiddle;
+  @FXML private AnimatedButton btnRiddleExit;
+  @FXML private AnimatedButton btnReactor;
+
+  @FXML private RiddleController riddleController;
+
+
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
@@ -83,6 +87,26 @@ public class GameController implements Controller {
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
   private boolean mechanicWelcomeShown = false;
+
+  private Timeline countdownTimer;
+
+  private class TimerData {
+    private int initialSeconds;
+
+    // Constructor of TimerDate class
+    public TimerData(int initialSeconds) {
+      this.initialSeconds = initialSeconds;
+    }
+
+    public int getInitialSeconds() {
+      return initialSeconds;
+    }
+
+    public void decrement() {
+      initialSeconds--;
+    }
+  }
+
 
   @FXML
   private void initialize() {
@@ -122,6 +146,42 @@ public class GameController implements Controller {
 
     hintsCaptain.addState("nohint", "btnhint.png");
     hintsCaptain.addState("hint", "yeshint.png");
+
+    grpRiddle.setVisible(false);
+  }
+
+  public void startTimer() {
+    // Get the initial time limit in seconds
+    int initialMinutes = GameState.timeLimit;
+
+    TimerData timerData = new TimerData(initialMinutes * 60 + 1);
+
+    // Create a timer that decrements every second
+    countdownTimer =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  timerData.decrement();
+                  if (timerData.getInitialSeconds() <= 0) {
+                    countdownTimer.stop();
+                  }
+                  updateTimerDisplay(timerData.getInitialSeconds());
+                }));
+
+    countdownTimer.setCycleCount(Timeline.INDEFINITE);
+    countdownTimer.play();
+  }
+
+  public void updateTimerDisplay(int initialSeconds) {
+    int minutes = initialSeconds / 60;
+    int seconds = initialSeconds % 60;
+
+    String formattedMinutes = String.format("%02d", minutes);
+    String formattedSeconds = String.format("%02d", seconds);
+
+    timer.setText(formattedMinutes + ":" + formattedSeconds);
+
   }
 
   @FXML
@@ -140,7 +200,7 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void restartClicked() throws IOException {
+  private void onRestartClicked() throws IOException {
     App.restart();
   }
 
@@ -173,6 +233,8 @@ public class GameController implements Controller {
       grpGptMechanic.setVisible(false);
     } else if (event.getSource() == btnGptExitCaptain) {
       grpGptCaptain.setVisible(false);
+    } else {
+      grpRiddle.setVisible(false);
     }
   }
 
@@ -248,5 +310,15 @@ public class GameController implements Controller {
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return puzzleLoader.getButtonToPuzzleMap();
+  }
+
+  @FXML
+  private void riddleClicked() throws IOException {
+    grpRiddle.setVisible(true);
+    if (GameState.cluesFound == true) {
+        riddleController.disableButton();
+    } else {
+        riddleController.enableButton();
+    }
   }
 }

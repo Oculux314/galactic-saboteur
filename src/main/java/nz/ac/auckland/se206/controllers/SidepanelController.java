@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 
 public class SidepanelController implements Controller {
 
@@ -28,9 +29,9 @@ public class SidepanelController implements Controller {
   @FXML private Label lblClueInformation;
   @FXML private Rectangle suspectInformationRectangle;
   @FXML private Label lblSuspectInformation;
-  @FXML public ImageView clue1;
-  @FXML public ImageView clue2;
-  @FXML public ImageView clue3;
+  @FXML private ImageView clue1;
+  @FXML private ImageView clue2;
+  @FXML private ImageView clue3;
   @FXML private ImageView suspect1;
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;
@@ -41,14 +42,10 @@ public class SidepanelController implements Controller {
     "/images/suspects/suspect3.png"
   };
   private String[] rooms = {
-    "/images/rooms/room1.jpg", 
-    "/images/rooms/room2.jpg", 
-    "/images/rooms/room3.jpg"
+    "/images/rooms/room1.jpg", "/images/rooms/room2.jpg", "/images/rooms/room3.jpg"
   };
   private String[] times = {
-    "/images/times/time1.jpg", 
-    "/images/times/time2.jpg", 
-    "/images/times/time3.jpg"
+    "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
   };
   private String defaultInfo = "Clue not found";
 
@@ -146,25 +143,37 @@ public class SidepanelController implements Controller {
   private void selectClues() {
     int size = 3;
 
+    // Suspect
     random = (int) (Math.random() * size);
     suspect = new Image(getClass().getResourceAsStream(suspects[random]));
     suspectName = getClueName(suspects[random]);
+    GameState.correctSuspect = suspectName;
     clues.add(suspect);
 
+    // Room
     random = (int) (Math.random() * size);
     room = new Image(getClass().getResourceAsStream(rooms[random]));
     roomName = getClueName(rooms[random]);
+    GameState.correctRoom = roomName;
     clues.add(room);
 
+    // Time
     random = (int) (Math.random() * size);
     time = new Image(getClass().getResourceAsStream(times[random]));
     timeName = getClueName(times[random]);
+    GameState.correctTime = timeName;
     clues.add(time);
   }
 
-  public void getClue() {
+  public void getRandomClue() {
     int random = (int) (Math.random()) * clues.size();
-    Image clue = (Image) clues.toArray()[random];
+    Image clue = (Image) (clues.toArray()[random]);
+
+    displayClue(clue);
+    clues.remove(clue);
+  }
+
+  private void displayClue(Image clue) {
     if (clue == suspect) {
       clue1.setImage(clue);
     } else if (clue == room) {
@@ -173,6 +182,10 @@ public class SidepanelController implements Controller {
       clue3.setImage(clue);
     }
     clues.remove(clue);
+
+    if (clues.size() == 0) {
+      GameState.cluesFound = true;
+    }
   }
 
   private String getClueName(String filePath) {
@@ -180,12 +193,17 @@ public class SidepanelController implements Controller {
   }
 
   private void setClueNameMap() {
+    // Suspects
     clueNameMap.put("/images/suspects/suspect1.jpg", "Scientist");
     clueNameMap.put("/images/suspects/suspect2.jpg", "Captain");
     clueNameMap.put("/images/suspects/suspect3.png", "Mechanic");
+
+    // Rooms
     clueNameMap.put("/images/rooms/room1.jpg", "Navigation");
     clueNameMap.put("/images/rooms/room2.jpg", "Laboratory");
     clueNameMap.put("/images/rooms/room3.jpg", "Reactor Room");
+
+    // Times
     clueNameMap.put("/images/times/time1.jpg", "Morning");
     clueNameMap.put("/images/times/time2.jpg", "Afternoon");
     clueNameMap.put("/images/times/time3.jpg", "Night");

@@ -14,7 +14,7 @@ public class GptPromptEngineering {
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
     return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
-        + " spaceship namedSpacey. tell me a riddle with answer "
+               + " spaceship named Spacey. tell me a riddle with answer "
         + wordToGuess
         + ". You should answer with the word Correct when is correct, if the user asks for hints"
         + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
@@ -139,6 +139,17 @@ public class GptPromptEngineering {
               + " green when the user has solved it.";
     }
     return puzzle;
+  }
+
+  public static String getRiddle() {
+    return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
+               + " spaceship named Spacey."
+               + "Tell me a riddle in the style of a space themed poem in a modern tone. This riddle should explicitly tell"
+               + " the user to select a suspect, a room and a time. It"
+               + "also has to to tell the user to answer correctly to save the ship. It has to tell the user to"
+               + "solve the puzzles to get the clues."
+               + "Keep the riddle short and simple (under 80 words).";
+
   }
 }
 // setPuzzle(PuzzleName.REACTOR_TOOLBOX);

@@ -8,7 +8,7 @@ import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.GameState;
 
 public class Puzzle {
-
+  
   public boolean isPuzzleSolved;
   private Label solvedLabel =
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
@@ -43,6 +43,12 @@ public class Puzzle {
   public void setPuzzleName(PuzzleName puzzleName) {
     this.puzzleName = puzzleName;
   }
+
+  private static final Label solvedLabel =
+      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
+  private boolean isPuzzleSolved;
+  private Parent root;
+
 
   public void clearPuzzle(Parent puzzlePane) {
     if (puzzlePane instanceof Pane) {

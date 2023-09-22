@@ -18,12 +18,12 @@
                   <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="167.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
                   <Ellipse fx:id="redChosen" fill="#ffffff00" layoutX="250.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
                   <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="333.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
-                  <AnimatedButton fx:id="blueOption" fitHeight="96.0" fitWidth="46.0" layoutX="144.0" layoutY="155.0" onMouseClicked="#TestTubeClicked">
+                  <AnimatedButton fx:id="blueOption" fitHeight="96.0" fitWidth="46.0" layoutX="144.0" layoutY="155.0" onMouseClicked="#onTestTubeClicked">
                      <image>
                         <Image url="@../../images/blueoption.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="yellowOption" fitHeight="96.0" fitWidth="46.0" layoutX="310.0" layoutY="154.0" onMouseClicked="#TestTubeClicked">
+                  <AnimatedButton fx:id="yellowOption" fitHeight="96.0" fitWidth="46.0" layoutX="310.0" layoutY="154.0" onMouseClicked="#onTestTubeClicked">
                      <image>
                         <Image url="@../../images/yellowoption.png" />
                      </image>
@@ -33,7 +33,7 @@
                         <Image url="@../../images/btnmix.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="redOption" fitHeight="96.0" fitWidth="46.0" layoutX="227.0" layoutY="154.0" onMouseClicked="#TestTubeClicked">
+                  <AnimatedButton fx:id="redOption" fitHeight="96.0" fitWidth="46.0" layoutX="227.0" layoutY="154.0" onMouseClicked="#onTestTubeClicked">
                      <image>
                         <Image url="@../../images/redoption.png" />
                      </image>

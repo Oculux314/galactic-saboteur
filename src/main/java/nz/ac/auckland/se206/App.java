@@ -27,7 +27,7 @@ public class App extends Application {
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
-  private static Map<Screen.Name, Screen> screens = new HashMap<>();
+  public static Map<Screen.Name, Screen> screens = new HashMap<>();
 
   private static TextToSpeech tts = new TextToSpeech();
   public static Assistant scientist;
@@ -130,6 +130,59 @@ public class App extends Application {
     return stage.getScene();
   }
 
+  public static void restart() throws IOException {
+    GameState.reset();
+    resetScreens();
+  }
+
+  private static void resetScreens() throws IOException {
+    Thread screenLoader =
+        new Thread(
+            () -> {
+              for (Screen.Name screenName : Screen.Name.values()) {
+                if (screenName == Screen.Name.MAIN) { // Main screen is persistent
+                  continue;
+                }
+                
+                try {
+                  makeScreen(screenName);
+                } catch (IOException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
+
+    screenLoader.start();
+    setScreen(Screen.Name.TITLE);
+  }
+
+  /**
+   * Ansyncronously speaks the given text if tts is enabled in GameState. Returns the same text
+   * afterwards so this function can wrap existing strings.
+   *
+   * @param text The text to speak.
+   * @return The same text that was passed in.
+   */
+  public static String speak(String text) {
+    if (text == null) {
+      throw new IllegalArgumentException("Text cannot be null.");
+    }
+
+    if (!GameState.ttsEnabled) {
+      return text;
+    }
+
+    Thread ttsThread = new Thread(() -> tts.speak(text));
+    ttsThread.start();
+    return text;
+  }
+
+  @Override
+  public void stop() {
+    GameState.isRunning = false;
+    tts.terminate();
+  }
+
   /**
    * This method is invoked when the application starts. It performs all neccessary setup,
    * including:
@@ -173,51 +226,5 @@ public class App extends Application {
 
     stage.show();
     restart();
-  }
-
-  public static void restart() throws IOException {
-    GameState.reset();
-    resetScreens();
-  }
-
-  private static void resetScreens() throws IOException {
-    Thread screenLoader =
-        new Thread(
-            () -> {
-              for (Screen.Name screenName : Screen.Name.values()) {
-                if (screenName == Screen.Name.MAIN) { // Main screen is persistent
-                  continue;
-                }
-
-                try {
-                  makeScreen(screenName);
-                } catch (IOException e) {
-                  e.printStackTrace();
-                }
-              }
-            });
-
-    screenLoader.start();
-    setScreen(Screen.Name.TITLE);
-  }
-
-  public static String tts(String text) {
-    if (text == null) {
-      throw new IllegalArgumentException("Text cannot be null.");
-    }
-
-    if (!GameState.ttsEnabled) {
-      return text;
-    }
-
-    Thread ttsThread = new Thread(() -> tts.speak(text));
-    ttsThread.start();
-    return text;
-  }
-
-  @Override
-  public void stop() {
-    GameState.isRunning = false;
-    tts.terminate();
   }
 }
