@@ -63,13 +63,10 @@ public class TestTubesPuzzle extends Puzzle {
     // Determine which ellipse was clicked
     if (event.getSource() == blueOption) {
       ellipse = blueChosen;
-      colourSelected = blueSelected;
     } else if (event.getSource() == yellowOption) {
       ellipse = yellowChosen;
-      colourSelected = yellowSelected;
     } else if (event.getSource() == redOption) {
       ellipse = redChosen;
-      colourSelected = redSelected;
     }
 
     // Toggle the visibility of the ellipses

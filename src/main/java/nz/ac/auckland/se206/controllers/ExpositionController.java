@@ -20,8 +20,7 @@ public class ExpositionController implements Controller {
   @FXML private Pane replayPane;
   @FXML private AnimatedButton btnReplay;
   @FXML private AnimatedButton btnContinue;
-  @FXML private ImageView imageView = new ImageView();
-  @FXML private ImageView imvWho = new ImageView();
+  @FXML private ImageView imageView;
 
   private int currentImageIndex = 0;
   private String[] imagePaths = {

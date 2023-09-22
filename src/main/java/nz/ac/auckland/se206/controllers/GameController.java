@@ -60,7 +60,7 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void restartClicked() throws IOException {
+  private void onRestartClicked() throws IOException {
     App.restart();
   }
 

@@ -163,7 +163,7 @@ public class SidepanelController implements Controller {
 
   public void getRandomClue() {
     int random = (int) (Math.random()) * clues.size();
-    Image clue = (Image) clues.toArray()[random];
+    Image clue = (Image) (clues.toArray()[random]);
 
     displayClue(clue);
     clues.remove(clue);
