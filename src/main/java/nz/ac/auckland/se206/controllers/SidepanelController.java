@@ -28,9 +28,9 @@ public class SidepanelController implements Controller {
   @FXML private Label lblClueInformation;
   @FXML private Rectangle suspectInformationRectangle;
   @FXML private Label lblSuspectInformation;
-  @FXML public ImageView clue1;
-  @FXML public ImageView clue2;
-  @FXML public ImageView clue3;
+  @FXML private ImageView clue1;
+  @FXML private ImageView clue2;
+  @FXML private ImageView clue3;
   @FXML private ImageView suspect1;
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;

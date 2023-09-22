@@ -23,8 +23,8 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private class Coordinate {
-    int row;
-    int col;
+    private int row;
+    private int col;
 
     Coordinate(int row, int col) {
       this.row = row;

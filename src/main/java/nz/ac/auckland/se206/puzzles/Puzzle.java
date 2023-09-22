@@ -8,7 +8,7 @@ import javafx.scene.text.TextAlignment;
 
 public class Puzzle {
 
-  public boolean isPuzzleSolved;
+  private boolean isPuzzleSolved;
   private Label solvedLabel =
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private Parent root;

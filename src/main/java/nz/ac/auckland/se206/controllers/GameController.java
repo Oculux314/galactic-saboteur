@@ -20,20 +20,7 @@ import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 /** Controller class for the game screens. */
 public class GameController implements Controller {
 
-  public class RoomGroup {
-    public Group reactorRoom;
-    public Group laboratoryRoom;
-    public Group navigationRoom;
-
-    public RoomGroup(Group reactorRoom, Group laboratoryRoom, Group navigationRoom) {
-      this.reactorRoom = reactorRoom;
-      this.laboratoryRoom = laboratoryRoom;
-      this.navigationRoom = navigationRoom;
-    }
-  }
-
   @FXML private Pane panSpaceship;
-
   @FXML private Group grpPanZoom;
   @FXML private Group grpMapButtons;
 
