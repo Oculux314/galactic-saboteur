@@ -72,4 +72,8 @@ public class SettingsController implements Controller {
   private void onBackClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.TITLE);
   }
+
+  public String getTimeState() {
+    return btnTime.getState();
+  }
 }

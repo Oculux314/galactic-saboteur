@@ -26,7 +26,7 @@ public class App extends Application {
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
-  private static Map<Screen.Name, Screen> screens = new HashMap<>();
+  public static Map<Screen.Name, Screen> screens = new HashMap<>();
 
   private static TextToSpeech tts = new TextToSpeech();
 
@@ -139,7 +139,7 @@ public class App extends Application {
                 if (screenName == Screen.Name.MAIN) { // Main screen is persistent
                   continue;
                 }
-
+                
                 try {
                   makeScreen(screenName);
                 } catch (IOException e) {
