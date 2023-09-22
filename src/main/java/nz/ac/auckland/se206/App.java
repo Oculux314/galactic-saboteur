@@ -185,7 +185,7 @@ public class App extends Application {
                 if (screenName == Screen.Name.MAIN) { // Main screen is persistent
                   continue;
                 }
-
+                
                 try {
                   makeScreen(screenName);
                 } catch (IOException e) {

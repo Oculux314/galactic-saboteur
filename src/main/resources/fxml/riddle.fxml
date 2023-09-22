@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import nz.ac.auckland.se206.components.StateButton?>
+
+<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.riddle.RiddleController">
+   <children>
+      <AnchorPane layoutY="-2.0" prefHeight="265.0" prefWidth="500.0" stylesheets="@../css/style.css">
+         <children>
+            <TextArea fx:id="gptTextArea" layoutX="60.0" layoutY="50.0" prefHeight="185.0" prefWidth="380.0" />
+            <Label layoutX="102.0" layoutY="14.0" style="-fx-font-size: 30;" text="SPACEY THE SHIP AI" />
+            <Group>
+               <children>
+                  <StateButton fx:id="btnWho" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="250.0">
+                     <image>
+                        <Image url="@../images/suspects/suspect1.jpg" />
+                     </image>
+                  </StateButton>
+                  <StateButton fx:id="btnWhere" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="250.0">
+                     <image>
+                        <Image url="@../images/rooms/room1.jpg" />
+                     </image>
+                  </StateButton>
+                  <StateButton fx:id="btnWhen" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="250.0">
+                     <image>
+                        <Image url="@../images/times/time1.jpg" />
+                     </image>
+                  </StateButton>
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
+      <Group />
+      <Label fx:id="lblWho" layoutX="77.0" layoutY="354.0" text="Who?" />
+      <Label fx:id="lblWhere" layoutX="223.0" layoutY="354.0" text="Where?" />
+      <Label fx:id="lblWhen" layoutX="370.0" layoutY="354.0" text="When?" />
+      <Button fx:id="btnAnswer" layoutX="216.0" layoutY="395.0" mnemonicParsing="false" onAction="#answerClicked" text="Answer" />
+      <Label layoutX="91.0" layoutY="432.0" style="-fx-font-size: 12;" text="Note: You must find all of the clues to answer" textAlignment="CENTER" />
+      <Label layoutX="101.0" layoutY="463.0" style="-fx-font-size: 12;" text="Click the reactor when your ready to answer" />
+   </children>
+</Pane>

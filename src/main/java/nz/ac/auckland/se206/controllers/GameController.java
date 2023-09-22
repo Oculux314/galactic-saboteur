@@ -21,6 +21,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.riddle.RiddleController;
 
 /** Controller class for the game screens. */
 public class GameController implements Controller {
@@ -51,6 +52,11 @@ public class GameController implements Controller {
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
   @FXML private Group grpPuzzleCommons;
+  @FXML private Group grpRiddle;
+  @FXML private AnimatedButton btnRiddleExit;
+  @FXML private AnimatedButton btnReactor;
+
+  @FXML private RiddleController riddleController;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -80,6 +86,8 @@ public class GameController implements Controller {
   private void initialize() {
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+
+    grpRiddle.setVisible(false);
   }
 
   public void startTimer() {
@@ -149,13 +157,18 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void onExitClicked() {
-    minimisePuzzleWindow();
+  private void onExitClicked(MouseEvent event) {
 
-    // If puzzle was solved, get the clue
-    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-      fullSidePanelController.getClue();
-      solvedPuzzles.add(lastClickedPuzzle);
+    if (event.getSource() == btnExit) {
+      minimisePuzzleWindow();
+
+      // If puzzle was solved, get the clue
+      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
+        fullSidePanelController.getClue();
+        solvedPuzzles.add(lastClickedPuzzle);
+      }
+    } else {
+      grpRiddle.setVisible(false);
     }
   }
 
@@ -184,5 +197,15 @@ public class GameController implements Controller {
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return puzzleLoader.getButtonToPuzzleMap();
+  }
+
+  @FXML
+  private void riddleClicked() throws IOException {
+    grpRiddle.setVisible(true);
+    if (GameState.cluesFound == true) {
+        riddleController.disableButton();
+    } else {
+        riddleController.enableButton();
+    }
   }
 }
