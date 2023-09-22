@@ -323,8 +323,10 @@ public class GameController implements Controller {
     panEnd.setVisible(true);
 
     if (!isWon) {
-      lblEnd.setText("Gameover. You lost.");
+      lblEnd.setText(App.speak("Gameover. You lost."));
       imageEnd.setImage(new Image("gameover.png"));
+    } else {
+      App.speak("You win!");
     }
   }
 }
