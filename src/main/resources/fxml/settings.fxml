@@ -32,12 +32,10 @@
          </image>
       </StateButton>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="545.0" layoutY="270.0" prefWidth="150.0" text="Text-to-Speech" textAlignment="CENTER" />
-      <StateButton fx:id="btnTts" fitHeight="50.0" fitWidth="150.0" layoutX="545.0" layoutY="305.0">
+      <StateButton fx:id="btnTts" fitHeight="89.0" fitWidth="150.0" layoutX="545.0" layoutY="305.0">
          <image>
             <Image url="@../images/placeholder.png" />
          </image>
       </StateButton>
-      <Label fx:id="lblDifficultyHigh" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="360.0" prefHeight="30.0" prefWidth="150.0" styleClass="highscore" text="High:" textAlignment="CENTER" />
-      <Label fx:id="lblTimeLow" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="360.0" prefHeight="30.0" prefWidth="150.0" styleClass="highscore" text="Low:" textAlignment="CENTER" />
    </children>
 </Pane>

@@ -69,16 +69,16 @@ public class GameController implements Controller {
   @FXML private AnimatedButton btnGptExitMechanic;
   @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
-
   @FXML private Group grpRiddle;
   @FXML private AnimatedButton btnRiddleExit;
   @FXML private AnimatedButton btnReactor;
-
   @FXML private RiddleController riddleController;
 
   @FXML private Pane panEnd;
   @FXML private ImageView imageEnd;
   @FXML private Label lblEnd;
+
+  @FXML private Label labelHintsLeft;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -146,6 +146,8 @@ public class GameController implements Controller {
     hintsCaptain.addState("hint", "yeshint.png");
 
     grpRiddle.setVisible(false);
+
+    labelHintsLeft.setText("Hints left: ");
   }
 
   public void startTimer() {
@@ -303,6 +305,7 @@ public class GameController implements Controller {
       hintsMechanic.setState("nohint");
       hintsMechanic.setDisable(GameState.isHintLimitReached());
     }
+    labelHintsLeft.setText("Hints left: " + GameState.getHintLimitRemaining());
   }
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
