@@ -62,6 +62,7 @@ public class GameController implements Controller {
   private class TimerData {
     private int initialSeconds;
 
+    // Constructor of TimerDate class
     public TimerData(int initialSeconds) {
       this.initialSeconds = initialSeconds;
     }
@@ -82,10 +83,12 @@ public class GameController implements Controller {
   }
 
   public void startTimer() {
+    // Get the initial time limit in seconds
     int initialMinutes = GameState.timeLimit;
 
     TimerData timerData = new TimerData(initialMinutes * 60 + 1);
 
+    // Create a timer that decrements every second
     countdownTimer =
         new Timeline(
             new KeyFrame(
