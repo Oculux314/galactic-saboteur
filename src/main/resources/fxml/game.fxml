@@ -154,6 +154,11 @@
             
             <Group fx:id="grpMapButtons">
                <children>
+               <AnimatedButton fx:id="btnReactorToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/toolbox.png" />
+                     </image>
+                  </AnimatedButton>
                   <AnimatedButton fx:id="btnReactorButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/buttonpad.png" />
@@ -215,6 +220,7 @@
             </AnimatedButton>
          </children>
       </Group>
+
        <Group fx:id="grpGpt">
          <children>
             <Group fx:id="grpGptCaptain">
@@ -303,7 +309,6 @@
             </Group>
          </children>
       </Group>
-      <Button layoutX="726.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" prefWidth="60.0" text="Restart" />
       <Group fx:id="grpRiddle">
          <children>
             <Pane fx:id="panBlockRiddlBackground" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
@@ -315,7 +320,6 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Button layoutX="726.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" prefWidth="60.0" text="Restart" />
       <Group fx:id="grpTimer" layoutX="-10.0">
          <children>
             <ImageView fitHeight="130.0" fitWidth="90.0" layoutX="612.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">

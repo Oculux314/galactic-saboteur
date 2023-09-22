@@ -30,6 +30,8 @@ public class GameState {
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
+    timeLimit = 2;
+    
     numberOfHintsAsked = 0;
   }
 
@@ -47,5 +49,6 @@ public class GameState {
 
   public static boolean isHintLimitReached() {
     return numberOfHintsAsked >= getHintLimit();
+    
   }
 }
