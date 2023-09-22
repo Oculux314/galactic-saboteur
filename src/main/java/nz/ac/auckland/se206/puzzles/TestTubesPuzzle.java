@@ -11,6 +11,11 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 
 public class TestTubesPuzzle extends Puzzle {
 
+  private static String colour;
+  private boolean yellowSelected;
+  private boolean blueSelected;
+  private boolean redSelected;
+
   @FXML private Label instructions;
   @FXML private Ellipse yellowChosen;
   @FXML private Ellipse blueChosen;
@@ -22,11 +27,6 @@ public class TestTubesPuzzle extends Puzzle {
   @FXML private Label confirmationMessage;
   @FXML private Group gameComponents;
   @FXML private Pane puzzlePane;
-
-  private static String colour;
-  private boolean yellowSelected;
-  private boolean blueSelected;
-  private boolean redSelected;
 
   @FXML
   private void initialize() {

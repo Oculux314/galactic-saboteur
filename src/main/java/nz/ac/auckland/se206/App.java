@@ -126,51 +126,6 @@ public class App extends Application {
     return stage.getScene();
   }
 
-  /**
-   * This method is invoked when the application starts. It performs all neccessary setup,
-   * including:
-   *
-   * <ul>
-   *   <li>Initialise stage and scene
-   *   <li>Set up screen graph
-   *   <li>Link style sheet and listeners
-   *   <li>Set stage properties
-   *   <li>Show stage
-   * </ul>
-   *
-   * @param newStage The primary stage of the application.
-   * @throws IOException If either "main.fxml" or "title.fxml" is not found in
-   *     "src/main/resources/fxml/".
-   */
-  @Override
-  public void start(final Stage newStage) throws IOException {
-    App.stage = newStage;
-
-    // Set up screen graph
-    makeScreen(Screen.Name.MAIN);
-    Parent screen = getScreen(Screen.Name.MAIN).getFxml();
-    setScreen(Screen.Name.DEFAULT);
-
-    // Link stage/scene/screen graph
-    Scene scene = new Scene(screen, 800, 600);
-    stage.setScene(scene);
-
-    // Stylesheet
-    scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-
-    // Listeners
-    ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
-
-    // Properties
-    scene.setFill(Color.web("#131d23"));
-    stage.setTitle("Galactic Saboteur");
-    stage.getIcons().add(new Image("/images/logo.png"));
-    stage.setMaximized(true);
-
-    stage.show();
-    restart();
-  }
-
   public static void restart() throws IOException {
     GameState.reset();
     resetScreens();
@@ -222,5 +177,50 @@ public class App extends Application {
   public void stop() {
     GameState.isRunning = false;
     tts.terminate();
+  }
+
+  /**
+   * This method is invoked when the application starts. It performs all neccessary setup,
+   * including:
+   *
+   * <ul>
+   *   <li>Initialise stage and scene
+   *   <li>Set up screen graph
+   *   <li>Link style sheet and listeners
+   *   <li>Set stage properties
+   *   <li>Show stage
+   * </ul>
+   *
+   * @param newStage The primary stage of the application.
+   * @throws IOException If either "main.fxml" or "title.fxml" is not found in
+   *     "src/main/resources/fxml/".
+   */
+  @Override
+  public void start(final Stage newStage) throws IOException {
+    App.stage = newStage;
+
+    // Set up screen graph
+    makeScreen(Screen.Name.MAIN);
+    Parent screen = getScreen(Screen.Name.MAIN).getFxml();
+    setScreen(Screen.Name.DEFAULT);
+
+    // Link stage/scene/screen graph
+    Scene scene = new Scene(screen, 800, 600);
+    stage.setScene(scene);
+
+    // Stylesheet
+    scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+    // Listeners
+    ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
+
+    // Properties
+    scene.setFill(Color.web("#131d23"));
+    stage.setTitle("Galactic Saboteur");
+    stage.getIcons().add(new Image("/images/logo.png"));
+    stage.setMaximized(true);
+
+    stage.show();
+    restart();
   }
 }
