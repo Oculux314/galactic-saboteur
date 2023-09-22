@@ -24,7 +24,7 @@ public class ExpositionController implements Controller {
 
   private int currentImageIndex = 0;
   private String[] imagePaths = {
-    "/images/expo1.jpg", "/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"
+    "/images/expo1.png", "/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"
   };
   private Thread delayManager;
 

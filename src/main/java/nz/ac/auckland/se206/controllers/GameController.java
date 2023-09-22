@@ -12,6 +12,8 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -71,6 +73,11 @@ public class GameController implements Controller {
   @FXML private AnimatedButton btnRiddleExit;
   @FXML private AnimatedButton btnReactor;
   @FXML private RiddleController riddleController;
+
+  @FXML private Pane panEnd;
+  @FXML private ImageView imageEnd;
+  @FXML private Label lblEnd;
+
   @FXML private Label labelHintsLeft;
 
   private PuzzleLoader puzzleLoader;
@@ -312,6 +319,17 @@ public class GameController implements Controller {
       riddleController.disableButton();
     } else {
       riddleController.enableButton();
+    }
+  }
+
+  public void showEndScreen(boolean isWon) {
+    panEnd.setVisible(true);
+
+    if (!isWon) {
+      lblEnd.setText(App.speak("Gameover. You lost."));
+      imageEnd.setImage(new Image("gameover.png"));
+    } else {
+      App.speak("You win!");
     }
   }
 }
