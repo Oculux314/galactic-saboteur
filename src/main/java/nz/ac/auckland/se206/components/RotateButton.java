@@ -19,7 +19,7 @@ public class RotateButton extends StateButton {
   }
 
   protected void createStates() {
-    recreateStatesWithImage(currentState.normalImage);
+    recreateStatesWithImage(currentState.getNormalImage());
   }
 
   protected void recreateStatesWithImage(Image image) {
@@ -38,6 +38,6 @@ public class RotateButton extends StateButton {
   }
 
   protected Orientation getOrientation() {
-    return Orientation.values()[currentState.index];
+    return Orientation.values()[currentState.getIndex()];
   }
 }

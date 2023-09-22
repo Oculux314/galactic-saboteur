@@ -26,20 +26,7 @@ import nz.ac.auckland.se206.riddle.RiddleController;
 /** Controller class for the game screens. */
 public class GameController implements Controller {
 
-  public class RoomGroup {
-    public Group reactorRoom;
-    public Group laboratoryRoom;
-    public Group navigationRoom;
-
-    public RoomGroup(Group reactorRoom, Group laboratoryRoom, Group navigationRoom) {
-      this.reactorRoom = reactorRoom;
-      this.laboratoryRoom = laboratoryRoom;
-      this.navigationRoom = navigationRoom;
-    }
-  }
-
   @FXML private Pane panSpaceship;
-
   @FXML private Group grpPanZoom;
   @FXML private Group grpMapButtons;
 
@@ -139,7 +126,7 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void restartClicked() throws IOException {
+  private void onRestartClicked() throws IOException {
     App.restart();
   }
 
@@ -162,13 +149,13 @@ public class GameController implements Controller {
     if (event.getSource() == btnExit) {
       minimisePuzzleWindow();
 
-      // If puzzle was solved, get the clue
-      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-        fullSidePanelController.getClue();
-        solvedPuzzles.add(lastClickedPuzzle);
-      }
+    // If puzzle was solved, get the clue
+    if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
+      fullSidePanelController.getRandomClue();
+      solvedPuzzles.add(lastClickedPuzzle);
     } else {
       grpRiddle.setVisible(false);
+
     }
   }
 

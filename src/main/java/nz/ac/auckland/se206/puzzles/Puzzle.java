@@ -8,11 +8,6 @@ import javafx.scene.text.TextAlignment;
 
 public class Puzzle {
 
-  public boolean isPuzzleSolved;
-  private Label solvedLabel =
-      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
-  private Parent root;
-
   public enum PuzzleName {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
@@ -37,6 +32,11 @@ public class Puzzle {
       return ("#btn" + this.toCamelCase());
     }
   }
+
+  private static final Label solvedLabel =
+      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
+  private boolean isPuzzleSolved;
+  private Parent root;
 
   public void clearPuzzle(Parent puzzlePane) {
     if (puzzlePane instanceof Pane) {

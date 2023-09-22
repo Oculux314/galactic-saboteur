@@ -12,12 +12,12 @@ import javafx.scene.image.Image;
 public class StateButton extends AnimatedButton {
 
   protected class State {
-    String name;
-    Image normalImage;
-    Image hoverImage;
-    Runnable onArrive;
-    Runnable onLeave;
-    int index;
+    private String name;
+    private Image normalImage;
+    private Image hoverImage;
+    private Runnable onArrive;
+    private Runnable onLeave;
+    private int index;
 
     State(String name, Image image, Runnable onArrive, Runnable onLeave) {
       this.name = name;
@@ -26,6 +26,14 @@ public class StateButton extends AnimatedButton {
       this.onArrive = onArrive;
       this.onLeave = onLeave;
       index = states.size();
+    }
+
+    protected Image getNormalImage() {
+      return normalImage;
+    }
+
+    protected int getIndex() {
+      return index;
     }
   }
 
