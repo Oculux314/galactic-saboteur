@@ -52,8 +52,8 @@ public class NavigationComputerPuzzle extends Puzzle {
 
   private static final int NUM_ROWS = 3;
   private static final int NUM_COLS = 4;
-  private final Coordinate START = new Coordinate(2, 0);
-  private final Coordinate END = new Coordinate(0, 3);
+  private final Coordinate start = new Coordinate(2, 0);
+  private final Coordinate end = new Coordinate(0, 3);
 
   @FXML private Pane panBackground;
   @FXML private Label lblWarning;
@@ -93,10 +93,10 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private void chooseSolution() {
-    Coordinate here = START;
+    Coordinate here = start;
     Orientation prevDirection = Orientation.RIGHT;
 
-    while (here.getCol() <= END.getCol()) {
+    while (here.getCol() <= end.getCol()) {
       int row = here.getRow();
       int col = here.getCol();
       Orientation nextDirection = chooseDirection(here);
@@ -113,9 +113,9 @@ public class NavigationComputerPuzzle extends Puzzle {
   }
 
   private Orientation chooseDirection(Coordinate here) {
-    if (here.getRow() == END.getRow()) {
+    if (here.getRow() == end.getRow()) {
       return Orientation.RIGHT;
-    } else if (here.getCol() == END.getCol()) {
+    } else if (here.getCol() == end.getCol()) {
       return Orientation.UP;
     } else {
       return Orientation.values()[(int) (Math.random() * 2)];
@@ -143,7 +143,7 @@ public class NavigationComputerPuzzle extends Puzzle {
 
   public void updateActiveTiles() {
     clearActiveTiles();
-    ComputerTile tile = tiles[START.getRow()][START.getCol()];
+    ComputerTile tile = tiles[start.getRow()][start.getCol()];
     Orientation prevDirection = Orientation.LEFT;
 
     while (tile != null) {
@@ -228,9 +228,9 @@ public class NavigationComputerPuzzle extends Puzzle {
 
   private void checkWinConditions() {
     boolean endTileIsActive =
-        activeTiles.get(activeTiles.size() - 1).equals(tiles[END.getRow()][END.getCol()]);
+        activeTiles.get(activeTiles.size() - 1).equals(tiles[end.getRow()][end.getCol()]);
     boolean endTileOrientedCorectly =
-        tiles[END.getRow()][END.getCol()].getConnections().get(Orientation.RIGHT);
+        tiles[end.getRow()][end.getCol()].getConnections().get(Orientation.RIGHT);
 
     if (endTileIsActive && endTileOrientedCorectly) {
       completePuzzle();

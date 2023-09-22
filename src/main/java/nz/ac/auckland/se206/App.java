@@ -197,7 +197,14 @@ public class App extends Application {
     setScreen(Screen.Name.TITLE);
   }
 
-  public static String tts(String text) {
+  /**
+   * Ansyncronously speaks the given text if tts is enabled in GameState. Returns the same text
+   * afterwards so this function can wrap existing strings.
+   *
+   * @param text The text to speak.
+   * @return The same text that was passed in.
+   */
+  public static String speak(String text) {
     if (text == null) {
       throw new IllegalArgumentException("Text cannot be null.");
     }

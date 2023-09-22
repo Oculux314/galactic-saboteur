@@ -96,7 +96,7 @@ public class GameController implements Controller {
 
     // If puzzle was solved, get the clue
     if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-      fullSidePanelController.getClue();
+      fullSidePanelController.getRandomClue();
       solvedPuzzles.add(lastClickedPuzzle);
     }
   }

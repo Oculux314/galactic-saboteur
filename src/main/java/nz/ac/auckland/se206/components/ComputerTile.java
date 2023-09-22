@@ -126,7 +126,7 @@ public class ComputerTile extends RotateButton {
   private void randomiseOrientation() {
     int rotations;
 
-    if (row == 2 && col == 0) {
+    if (row == 2 && col == 0) { // Start tile at (2, 0)
       rotations = 1;
     } else {
       rotations = (int) (Math.random() * 4);

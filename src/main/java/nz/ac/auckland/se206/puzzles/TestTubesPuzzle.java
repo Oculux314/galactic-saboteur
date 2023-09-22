@@ -33,7 +33,7 @@ public class TestTubesPuzzle extends Puzzle {
 
     // generate and store the color only if it hasn't been set before
     if (colour == null) {
-      colour = RandomColorSelector();
+      colour = selectRandomColor();
     }
     instructions.setText("Mix two solutions to create a " + colour + " solution");
 
@@ -42,7 +42,7 @@ public class TestTubesPuzzle extends Puzzle {
     redChosen.setVisible(false);
   }
 
-  public String RandomColorSelector() {
+  public String selectRandomColor() {
     // Create an array of colors
     String[] colours = {"purple", "orange", "green"};
     Random random = new Random();
@@ -55,7 +55,7 @@ public class TestTubesPuzzle extends Puzzle {
   }
 
   @FXML
-  private void TestTubeClicked(MouseEvent event) {
+  private void onTestTubeClicked(MouseEvent event) {
 
     Ellipse ellipse = null;
     boolean colourSelected;
@@ -93,23 +93,23 @@ public class TestTubesPuzzle extends Puzzle {
 
   @FXML
   private void btnMixClicked(MouseEvent event) {
-    if (yellowSelected && blueSelected) {
+    if (yellowSelected && blueSelected) { // Yellow + blue = green
       if (colour.equals("green")) {
-        success();
+        completePuzzle();
         confirmationMessage.setText("Correct! You have created a green solution");
       } else {
         confirmationMessage.setText("Incorrect!");
       }
-    } else if (yellowSelected && redSelected) {
+    } else if (yellowSelected && redSelected) { // Yellow + red = orange
       if (colour.equals("orange")) {
-        success();
+        completePuzzle();
         confirmationMessage.setText("Correct! You have created an orange solution");
       } else {
         confirmationMessage.setText("Incorrect!");
       }
-    } else if (blueSelected && redSelected) {
+    } else if (blueSelected && redSelected) { // Blue + red = purple
       if (colour.equals("purple")) {
-        success();
+        completePuzzle();
         confirmationMessage.setText("Correct! You have created a purple solution");
       } else {
         confirmationMessage.setText("Incorrect!");
@@ -119,7 +119,7 @@ public class TestTubesPuzzle extends Puzzle {
     }
   }
 
-  private void success() {
+  private void completePuzzle() {
     setSolved();
     clearPuzzle(puzzlePane);
   }
