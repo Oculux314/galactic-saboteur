@@ -4,14 +4,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.puzzles.Puzzle;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
@@ -39,6 +44,7 @@ public class GameController implements Controller {
 
   @FXML private Polyline btnPanelHide;
   @FXML private Group panelContainer;
+  @FXML private Label timer;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
@@ -51,10 +57,62 @@ public class GameController implements Controller {
   private Puzzle lastClickedPuzzle;
   private Set<Puzzle> solvedPuzzles = new HashSet<>();
 
+  private Timeline countdownTimer;
+
+  private class TimerData {
+    private int initialSeconds;
+
+    // Constructor of TimerDate class
+    public TimerData(int initialSeconds) {
+      this.initialSeconds = initialSeconds;
+    }
+
+    public int getInitialSeconds() {
+      return initialSeconds;
+    }
+
+    public void decrement() {
+      initialSeconds--;
+    }
+  }
+
   @FXML
   private void initialize() {
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+  }
+
+  public void startTimer() {
+    // Get the initial time limit in seconds
+    int initialMinutes = GameState.timeLimit;
+
+    TimerData timerData = new TimerData(initialMinutes * 60 + 1);
+
+    // Create a timer that decrements every second
+    countdownTimer =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  timerData.decrement();
+                  if (timerData.getInitialSeconds() <= 0) {
+                    countdownTimer.stop();
+                  }
+                  updateTimerDisplay(timerData.getInitialSeconds());
+                }));
+
+    countdownTimer.setCycleCount(Timeline.INDEFINITE);
+    countdownTimer.play();
+  }
+
+  public void updateTimerDisplay(int initialSeconds) {
+    int minutes = initialSeconds / 60;
+    int seconds = initialSeconds % 60;
+
+    String formattedMinutes = String.format("%02d", minutes);
+    String formattedSeconds = String.format("%02d", seconds);
+
+    timer.setText(formattedMinutes + ":" + formattedSeconds);
   }
 
   @FXML
