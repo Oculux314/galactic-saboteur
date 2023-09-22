@@ -41,13 +41,13 @@ public class SettingsController implements Controller {
     btnDifficulty.addState("hard", "settings_buttons/hard.png", this::updateDifficulty, null);
 
     // Time
-    btnTime.addState("2", "placeholder.png", this::updateTime, null);
-    btnTime.addState("4", "placeholder.png", this::updateTime, null);
-    btnTime.addState("6", "placeholder.png", this::updateTime, null);
+    btnTime.addState("2", "settings_buttons/2.png", this::updateTime, null);
+    btnTime.addState("4", "settings_buttons/4.png", this::updateTime, null);
+    btnTime.addState("6", "settings_buttons/6.png", this::updateTime, null);
 
     // Text-to-speech
-    btnTts.addState("off", "placeholder.png", this::updateTts, null);
-    btnTts.addState("on", "placeholder.png", this::updateTts, null);
+    btnTts.addState("off", "settings_buttons/off.png", this::updateTts, null);
+    btnTts.addState("on", "settings_buttons/on.png", this::updateTts, null);
   }
 
   private void updateDifficulty() {
