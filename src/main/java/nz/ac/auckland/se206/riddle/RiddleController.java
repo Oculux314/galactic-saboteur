@@ -4,8 +4,11 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.StateButton;
+import nz.ac.auckland.se206.controllers.GameController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -45,12 +48,16 @@ public class RiddleController extends StateButton {
 
   @FXML
   private void answerClicked() {
+    GameController gameController =
+        ((GameController) App.getScreen(Screen.Name.GAME).getController());
+
     if (btnWho.getState().equals(GameState.correctSuspect)
         && btnWhere.getState().equals(GameState.correctRoom)
         && btnWhen.getState().equals(GameState.correctTime)) {
-      System.out.println("Correct!");
+
+      gameController.showEndScreen(true);
     } else {
-      System.out.println("Incorrect!");
+      gameController.showEndScreen(false);
     }
   }
 
