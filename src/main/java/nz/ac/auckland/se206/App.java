@@ -3,24 +3,32 @@ package nz.ac.auckland.se206;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
 
-  /** The primary stage of the application */
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
   private static Map<Screen.Name, Screen> screens = new HashMap<>();
+
+  private static TextToSpeech tts = new TextToSpeech();
 
   /**
    * The entry point of the application.
@@ -29,6 +37,10 @@ public class App extends Application {
    */
   public static void main(final String[] args) {
     launch();
+  }
+
+  private static Pane getPanMain() {
+    return ((MainController) getScreen(Screen.Name.MAIN).getController()).getMainPane();
   }
 
   /**
@@ -43,24 +55,45 @@ public class App extends Application {
 
   /**
    * Sets the screen with the given name as the child of the main pane. Creates the screen if it
-   * does not exist.
+   * does not exist. Assumes there is only one screen currently active.
    *
    * @param screenName The name of the screen to set.
    * @throws IOException If the screen does not exist and the FXML file for the screen is not found.
    */
   public static void setScreen(final Screen.Name screenName) throws IOException {
+    GameState.currentScreen = screenName;
+
     if (!screens.containsKey(screenName)) {
       makeScreen(screenName); // Automatically make screen if does not exist
     }
 
-    Parent fxml = getScreen(screenName).getFxml();
-    Pane panMain = ((MainController) screens.get(Screen.Name.MAIN).getController()).getMainPane();
+    ObservableList<Node> activeScreens = getPanMain().getChildren();
+    Parent newScreen = getScreen(screenName).getFxml();
 
-    // Set screen as child of main pane
-    panMain.getChildren().clear();
-    panMain.getChildren().add(fxml);
+    if (activeScreens.size() == 0) {
+      makeScreen(Screen.Name.DEFAULT);
+      activeScreens.add(getScreen(Screen.Name.DEFAULT).getFxml()); // Black
 
-    fxml.requestFocus();
+      setScreen(screenName);
+      return;
+    }
+
+    Parent oldScreen = (Parent) activeScreens.get(0);
+
+    if (oldScreen == newScreen) {
+      return;
+    }
+
+    Timeline fadeTransition =
+        new Timeline(
+            new KeyFrame(Duration.millis(200), new KeyValue(newScreen.opacityProperty(), 1)));
+
+    activeScreens.add(newScreen);
+    activeScreens.remove(0);
+    newScreen.setOpacity(0);
+    fadeTransition.play();
+
+    newScreen.requestFocus();
   }
 
   /**
@@ -117,7 +150,7 @@ public class App extends Application {
     makeScreen(Screen.Name.MAIN);
     makeScreen(Screen.Name.SETTINGS);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
-    setScreen(Screen.Name.TITLE);
+    setScreen(Screen.Name.DEFAULT);
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);
@@ -136,6 +169,52 @@ public class App extends Application {
     stage.setMaximized(true);
 
     stage.show();
-    screen.requestFocus();
+    restart();
+  }
+
+  public static void restart() throws IOException {
+    GameState.reset();
+    resetScreens();
+  }
+
+  private static void resetScreens() throws IOException {
+    Thread screenLoader =
+        new Thread(
+            () -> {
+              for (Screen.Name screenName : Screen.Name.values()) {
+                if (screenName == Screen.Name.MAIN) { // Main screen is persistent
+                  continue;
+                }
+
+                try {
+                  makeScreen(screenName);
+                } catch (IOException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
+
+    screenLoader.start();
+    setScreen(Screen.Name.TITLE);
+  }
+
+  public static String tts(String text) {
+    if (text == null) {
+      throw new IllegalArgumentException("Text cannot be null.");
+    }
+
+    if (!GameState.ttsEnabled) {
+      return text;
+    }
+
+    Thread ttsThread = new Thread(() -> tts.speak(text));
+    ttsThread.start();
+    return text;
+  }
+
+  @Override
+  public void stop() {
+    GameState.isRunning = false;
+    tts.terminate();
   }
 }

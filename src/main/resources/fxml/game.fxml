@@ -10,13 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Polyline?>
-<?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
+<Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
    <children>
-      <Rectangle fx:id="recTest" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" onMouseClicked="#recClicked" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="590.0" />
-      <Group fx:id="grpPanZoom">
+      <Group fx:id="grpPanZoom" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
@@ -133,28 +131,47 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <Group fx:id="grpMapButtons">
+               <children>
+                  <AnimatedButton fx:id="btnReactorToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/toolbox.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="btnReactorButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/buttonpad.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="btnReactorApple" fitWidth="40.0" layoutX="150.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/apple.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/testtubes.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="btnNavigationComputer" fitHeight="50.0" fitWidth="20.0" layoutX="625.0" layoutY="250.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/placeholder.png" />
+                     </image>
+                  </AnimatedButton>
+               </children>
+            </Group>
          </children>
       </Group>
+      <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
       <Group fx:id="panelContainer">
          <children>
-            <fx:include fx:id="fullSidePanel" layoutY="65.0" source="SidePanel.fxml" />
+            <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
          </children>
       </Group>
-      <Label fx:id="timer" layoutX="580.0" layoutY="21.0" />
-      <Button fx:id="btnSettings" layoutX="638.0" layoutY="20.0" mnemonicParsing="false" onAction="#settingsClicked" text="Settings" />
-      <Button layoutX="711.0" layoutY="20.0" mnemonicParsing="false" text="Menu" />
-
-      <Group fx:id="grpReactorRoom">
+      <Button layoutX="726.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" prefWidth="60.0" text="Restart" />
+      <Group fx:id="grpPuzzleCommons" visible="false">
          <children>
-            <AnimatedButton fx:id="btnToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
-               <image>
-                  <Image url="@../images/toolbox.png" />
-               </image>
-            </AnimatedButton>
-         </children>
-      </Group>
-      <Group fx:id="grpPuzzleCommons">
-         <children>
+            <Pane fx:id="panBlockPuzzleBackgound" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
                <children>
                   <GridPane prefHeight="500.0" prefWidth="500.0">
@@ -177,5 +194,6 @@
             </AnimatedButton>
          </children>
       </Group>
+      <Label fx:id="timer" layoutX="580.0" layoutY="21.0" />
    </children>
 </Pane>
