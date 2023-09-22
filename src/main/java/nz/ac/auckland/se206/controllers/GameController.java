@@ -4,14 +4,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -24,7 +19,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
@@ -80,7 +74,6 @@ public class GameController implements Controller {
 
   @FXML private RiddleController riddleController;
 
-
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
@@ -108,11 +101,11 @@ public class GameController implements Controller {
     }
   }
 
-
   @FXML
   private void initialize() {
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+    // Set the narration boxes
     NarrationBox narrationBox1 =
         new NarrationBox(
             paneNarrationScientist,
@@ -134,6 +127,7 @@ public class GameController implements Controller {
             paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain, "Spacey's captain");
     App.captain = new Assistant(narrationBox3);
 
+    // Set the visibility of the corresponding group
     grpGptScientist.setVisible(false);
     grpGptMechanic.setVisible(false);
     grpGptCaptain.setVisible(false);
@@ -181,9 +175,7 @@ public class GameController implements Controller {
     String formattedSeconds = String.format("%02d", seconds);
 
     timer.setText(formattedMinutes + ":" + formattedSeconds);
-
   }
-
 
   @FXML
   private void onPress(MouseEvent event) {
@@ -207,6 +199,7 @@ public class GameController implements Controller {
 
   @FXML
   private void btnPanelHidePressed() {
+    // Hide the side panel
     if (panelContainer.getLayoutX() == 0) {
       panelContainer.setLayoutX(-180);
       btnPanelHide.setRotate(180);
@@ -252,10 +245,12 @@ public class GameController implements Controller {
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
 
+    // If the button is a puzzle button
     if (getButtonToPuzzleMap().containsKey(clickedButton)) {
       // Load the specific puzzle
       PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
       puzzleLoader.setPuzzle(puzzleName);
+      // Show the puzzle
       restorePuzzleWindow();
       if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
         GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
@@ -294,6 +289,7 @@ public class GameController implements Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
+    // Respond to the user's message
     if (event.getSource() == textResponseScientist) {
       App.scientist.respondToUser();
       hintsScientist.setState("nohint");
@@ -315,11 +311,12 @@ public class GameController implements Controller {
 
   @FXML
   private void riddleClicked() throws IOException {
+    // Set the visibility of the corresponding group
     grpRiddle.setVisible(true);
     if (GameState.cluesFound == true) {
-        riddleController.disableButton();
+      riddleController.disableButton();
     } else {
-        riddleController.enableButton();
+      riddleController.enableButton();
     }
   }
 }

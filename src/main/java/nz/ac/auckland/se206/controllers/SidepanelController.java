@@ -78,6 +78,7 @@ public class SidepanelController implements Controller {
 
   @FXML
   private void suspectsBtnPressed() throws IOException {
+    // button pressed
     clueContent.setVisible(false);
     suspectsContent.setVisible(true);
     suspectInformationRectangle.setVisible(false);
@@ -101,6 +102,7 @@ public class SidepanelController implements Controller {
     }
 
     if (event.getSource() instanceof ImageView) {
+      // Get image
       ImageView imageView = (ImageView) event.getSource();
       Image image = imageView.getImage();
       if (image == suspect) {
@@ -124,6 +126,7 @@ public class SidepanelController implements Controller {
     Rectangle informationRectangle = null;
     Label informationLabel = null;
 
+    // Get image
     if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
       informationRectangle = clueInformationRectangle;
       informationLabel = lblClueInformation;
@@ -134,6 +137,7 @@ public class SidepanelController implements Controller {
       informationLabel = lblSuspectInformation;
     }
 
+    // Hide information
     if (informationRectangle != null && informationLabel != null) {
       informationRectangle.setVisible(false);
       informationLabel.setText("");
@@ -174,6 +178,7 @@ public class SidepanelController implements Controller {
   }
 
   private void displayClue(Image clue) {
+    // Display clue
     if (clue == suspect) {
       clue1.setImage(clue);
     } else if (clue == room) {

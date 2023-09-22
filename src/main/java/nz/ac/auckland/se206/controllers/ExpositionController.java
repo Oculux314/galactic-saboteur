@@ -50,6 +50,7 @@ public class ExpositionController implements Controller {
   }
 
   private void updateImage() {
+    // Load image
     String imagePath = imagePaths[currentImageIndex];
     Image image = new Image(getClass().getResourceAsStream(imagePath));
     imageView.setImage(image);
