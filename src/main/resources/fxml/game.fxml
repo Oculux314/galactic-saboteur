@@ -172,8 +172,10 @@
             <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
          </children>
       </Group>
+      <Button layoutX="726.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartClicked" prefWidth="60.0" text="Restart" />
       <Group fx:id="grpPuzzleCommons" visible="false">
          <children>
+            <Pane fx:id="panBlockPuzzleBackgound" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
                <children>
                   <GridPane prefHeight="500.0" prefWidth="500.0">
