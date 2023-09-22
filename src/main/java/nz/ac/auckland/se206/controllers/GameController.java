@@ -15,7 +15,8 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
@@ -87,7 +89,6 @@ public class GameController implements Controller {
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
   private boolean mechanicWelcomeShown = false;
-
   private Timeline countdownTimer;
 
   private class TimerData {
@@ -112,7 +113,6 @@ public class GameController implements Controller {
   private void initialize() {
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
-
     NarrationBox narrationBox1 =
         new NarrationBox(
             paneNarrationScientist,
@@ -184,6 +184,7 @@ public class GameController implements Controller {
 
   }
 
+
   @FXML
   private void onPress(MouseEvent event) {
     zoomAndPanHandler.onPress(event);
@@ -224,7 +225,7 @@ public class GameController implements Controller {
       minimisePuzzleWindow();
       // If puzzle was solved, get the clue
       if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-        fullSidePanelController.getClue();
+        fullSidePanelController.getRandomClue();
         solvedPuzzles.add(lastClickedPuzzle);
       }
     } else if (event.getSource() == btnGptExitScientist) {

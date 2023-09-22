@@ -44,12 +44,6 @@ public class Puzzle {
     this.puzzleName = puzzleName;
   }
 
-  private static final Label solvedLabel =
-      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
-  private boolean isPuzzleSolved;
-  private Parent root;
-
-
   public void clearPuzzle(Parent puzzlePane) {
     if (puzzlePane instanceof Pane) {
       ((Pane) puzzlePane).getChildren().clear();
