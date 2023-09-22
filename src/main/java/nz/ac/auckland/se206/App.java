@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.gpt.Assistant;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -29,6 +30,9 @@ public class App extends Application {
   public static Map<Screen.Name, Screen> screens = new HashMap<>();
 
   private static TextToSpeech tts = new TextToSpeech();
+  public static Assistant scientist;
+  public static Assistant mechanic;
+  public static Assistant captain;
 
   /**
    * The entry point of the application.

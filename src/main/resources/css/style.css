@@ -2,7 +2,8 @@
   -white: white;
   -cream: #EBE7D9;
   -icon-grey: #BFBFBF;
-  -grey: #334855;
+  -other-grey: #334855;
+  -pop-up-grey: GREY;
   -background-grey: #131d23;
   -black: black;
   -green: #58DD94;
@@ -20,6 +21,10 @@
 .highscore {
   -fx-font-size: 15px;
   -fx-text-fill: -icon-grey;
+}
+
+.popup {
+  -fx-fill: -pop-up-grey;
 }
 
 #lblTitle {
