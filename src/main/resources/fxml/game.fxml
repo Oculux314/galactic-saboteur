@@ -194,6 +194,15 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Label fx:id="timer" layoutX="650.0" layoutY="19.0" />
+      <Group fx:id="grpTimer" layoutX="-10.0">
+         <children>
+            <ImageView fitHeight="130.0" fitWidth="90.0" layoutX="612.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/btnSmallBackground.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="timer" alignment="CENTER" layoutX="601.0" layoutY="22.0" prefHeight="26.0" prefWidth="111.0" textOverrun="CLIP" />
+         </children>
+      </Group>
    </children>
 </Pane>
