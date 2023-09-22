@@ -21,9 +21,9 @@ public class PuzzleLoader {
   private HashMap<PuzzleName, Puzzle> puzzleMap;
   private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
 
-  private List<PuzzleName> reactorPuzzles;
-  private List<PuzzleName> laboratoryPuzzles;
-  private List<PuzzleName> navigationPuzzles;
+  public static List<PuzzleName> reactorPuzzles;
+  public static List<PuzzleName> laboratoryPuzzles;
+  public static List<PuzzleName> navigationPuzzles;
 
   public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpMapButtons) {
     this.panPuzzle = panPuzzle;
@@ -97,6 +97,7 @@ public class PuzzleLoader {
     Parent puzzle = loader.load();
     Puzzle puzzleController = loader.getController();
     puzzleController.setRoot(puzzle);
+    puzzleController.setPuzzleName(name);
 
     puzzleMap.put(name, puzzleController);
     buttonToPuzzleMap.put(getButtonFromName(name), name);
