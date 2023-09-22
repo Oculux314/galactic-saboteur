@@ -29,9 +29,9 @@ public class SidepanelController implements Controller {
   @FXML private Label lblClueInformation;
   @FXML private Rectangle suspectInformationRectangle;
   @FXML private Label lblSuspectInformation;
-  @FXML private ImageView clue1;
-  @FXML private ImageView clue2;
-  @FXML private ImageView clue3;
+  @FXML public ImageView clue1;
+  @FXML public ImageView clue2;
+  @FXML public ImageView clue3;
   @FXML private ImageView suspect1;
   @FXML private ImageView suspect2;
   @FXML private ImageView suspect3;
@@ -143,21 +143,18 @@ public class SidepanelController implements Controller {
   private void selectClues() {
     int size = 3;
 
-    // Suspect
     random = (int) (Math.random() * size);
     suspect = new Image(getClass().getResourceAsStream(suspects[random]));
     suspectName = getClueName(suspects[random]);
     GameState.correctSuspect = suspectName;
     clues.add(suspect);
 
-    // Room
     random = (int) (Math.random() * size);
     room = new Image(getClass().getResourceAsStream(rooms[random]));
     roomName = getClueName(rooms[random]);
     GameState.correctRoom = roomName;
     clues.add(room);
 
-    // Time
     random = (int) (Math.random() * size);
     time = new Image(getClass().getResourceAsStream(times[random]));
     timeName = getClueName(times[random]);
@@ -165,15 +162,9 @@ public class SidepanelController implements Controller {
     clues.add(time);
   }
 
-  public void getRandomClue() {
+  public void getClue() {
     int random = (int) (Math.random()) * clues.size();
-    Image clue = (Image) (clues.toArray()[random]);
-
-    displayClue(clue);
-    clues.remove(clue);
-  }
-
-  private void displayClue(Image clue) {
+    Image clue = (Image) clues.toArray()[random];
     if (clue == suspect) {
       clue1.setImage(clue);
     } else if (clue == room) {
@@ -193,17 +184,12 @@ public class SidepanelController implements Controller {
   }
 
   private void setClueNameMap() {
-    // Suspects
     clueNameMap.put("/images/suspects/suspect1.jpg", "Scientist");
     clueNameMap.put("/images/suspects/suspect2.jpg", "Captain");
     clueNameMap.put("/images/suspects/suspect3.png", "Mechanic");
-
-    // Rooms
     clueNameMap.put("/images/rooms/room1.jpg", "Navigation");
     clueNameMap.put("/images/rooms/room2.jpg", "Laboratory");
     clueNameMap.put("/images/rooms/room3.jpg", "Reactor Room");
-
-    // Times
     clueNameMap.put("/images/times/time1.jpg", "Morning");
     clueNameMap.put("/images/times/time2.jpg", "Afternoon");
     clueNameMap.put("/images/times/time3.jpg", "Night");

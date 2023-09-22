@@ -106,7 +106,7 @@ public class PuzzleLoader {
   }
 
   private void addToRoom(PuzzleName name) {
-    String room = name.toString().split("_")[0].toLowerCase(); // parse room from puzzle name
+    String room = name.toString().split("_")[0].toLowerCase();
 
     switch (room) {
       case "reactor":
