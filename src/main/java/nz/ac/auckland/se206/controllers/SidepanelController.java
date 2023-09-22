@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.GameState; 
+import nz.ac.auckland.se206.GameState;
 
 public class SidepanelController implements Controller {
 
@@ -42,14 +42,10 @@ public class SidepanelController implements Controller {
     "/images/suspects/suspect3.png"
   };
   private String[] rooms = {
-    "/images/rooms/room1.jpg", 
-    "/images/rooms/room2.jpg", 
-    "/images/rooms/room3.jpg"
+    "/images/rooms/room1.jpg", "/images/rooms/room2.jpg", "/images/rooms/room3.jpg"
   };
   private String[] times = {
-    "/images/times/time1.jpg", 
-    "/images/times/time2.jpg", 
-    "/images/times/time3.jpg"
+    "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
   };
   private String defaultInfo = "Clue not found";
 
@@ -70,10 +66,6 @@ public class SidepanelController implements Controller {
     clueInformationRectangle.setVisible(false);
     setClueNameMap();
     selectClues();
-    System.out.println("side panel initialized");
-    System.out.println(suspectName);
-    System.out.println(roomName);
-    System.out.println(timeName);
   }
 
   @FXML

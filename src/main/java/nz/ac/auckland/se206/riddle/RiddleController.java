@@ -2,9 +2,9 @@ package nz.ac.auckland.se206.riddle;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.GameState;
-import javafx.scene.control.Button;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -38,7 +38,7 @@ public class RiddleController extends StateButton {
     btnWhen.addState("Night", "times/time3.jpg");
 
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(200);
+        new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(150);
 
     generateRiddle();
   }
@@ -54,12 +54,10 @@ public class RiddleController extends StateButton {
     }
   }
 
-
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
     Choice result = chatCompletionResult.getChoices().iterator().next();
-    chatCompletionRequest.addMessage(result.getChatMessage());
     chatCompletionRequest.addMessage(result.getChatMessage());
     return result.getChatMessage();
   }
