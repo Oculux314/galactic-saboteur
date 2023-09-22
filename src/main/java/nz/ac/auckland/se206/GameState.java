@@ -24,5 +24,6 @@ public class GameState {
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
+    timeLimit = 2;
   }
 }
