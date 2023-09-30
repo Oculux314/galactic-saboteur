@@ -12,6 +12,8 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -67,12 +69,16 @@ public class GameController implements Controller {
   @FXML private AnimatedButton btnGptExitMechanic;
   @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
-
   @FXML private Group grpRiddle;
   @FXML private AnimatedButton btnRiddleExit;
   @FXML private AnimatedButton btnReactor;
-
   @FXML private RiddleController riddleController;
+
+  @FXML private Pane panEnd;
+  @FXML private ImageView imageEnd;
+  @FXML private Label lblEnd;
+
+  @FXML private Label labelHintsLeft;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -142,6 +148,8 @@ public class GameController implements Controller {
     hintsCaptain.addState("hint", "yeshint.png");
 
     grpRiddle.setVisible(false);
+
+    labelHintsLeft.setText("Hints left: ");
   }
 
   public void startTimer() {
@@ -303,6 +311,7 @@ public class GameController implements Controller {
       hintsMechanic.setState("nohint");
       hintsMechanic.setDisable(GameState.isHintLimitReached());
     }
+    labelHintsLeft.setText("Hints left: " + GameState.getHintLimitRemaining());
   }
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
@@ -317,6 +326,17 @@ public class GameController implements Controller {
       riddleController.disableButton();
     } else {
       riddleController.enableButton();
+    }
+  }
+
+  public void showEndScreen(boolean isWon) {
+    panEnd.setVisible(true);
+
+    if (!isWon) {
+      lblEnd.setText(App.speak("Gameover. You lost."));
+      imageEnd.setImage(new Image("gameover.png"));
+    } else {
+      App.speak("You win!");
     }
   }
 }

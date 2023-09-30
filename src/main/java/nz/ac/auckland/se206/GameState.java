@@ -54,4 +54,12 @@ public class GameState {
   public static boolean isHintLimitReached() {
     return numberOfHintsAsked >= getHintLimit();
   }
+
+  public static int getHintLimitRemaining() {
+    int num = getHintLimit() - numberOfHintsAsked;
+    if (num < 0) {
+      num = 0;
+    }
+    return num;
+  }
 }
