@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panReactorButtonpad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorButtonPuzzle">
+<Pane fx:id="panReactorButtonpad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorButtonPuzzleController">
    <children>
       <Label layoutX="199.0" layoutY="47.0" style="-fx-font-size: 12;" text="Encrypted Number:" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="47.0" layoutX="150.0" layoutY="68.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="0.0" width="200.0" />

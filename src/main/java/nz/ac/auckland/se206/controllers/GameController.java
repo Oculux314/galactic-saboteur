@@ -91,19 +91,19 @@ public class GameController implements Controller {
   private Timeline countdownTimer;
 
   private class TimerData {
-    private int initialSeconds;
+    private int seconds;
 
     // Constructor of TimerDate class
     public TimerData(int initialSeconds) {
-      this.initialSeconds = initialSeconds;
+      this.seconds = initialSeconds;
     }
 
-    public int getInitialSeconds() {
-      return initialSeconds;
+    public int getSeconds() {
+      return seconds;
     }
 
-    public void decrement() {
-      initialSeconds--;
+    public void decrementSeconds() {
+      seconds--;
     }
   }
 
@@ -164,11 +164,11 @@ public class GameController implements Controller {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  timerData.decrement();
-                  if (timerData.getInitialSeconds() <= 0) {
+                  timerData.decrementSeconds();
+                  if (timerData.getSeconds() <= 0) {
                     countdownTimer.stop();
                   }
-                  updateTimerDisplay(timerData.getInitialSeconds());
+                  updateTimerDisplay(timerData.getSeconds());
                 }));
 
     countdownTimer.setCycleCount(Timeline.INDEFINITE);

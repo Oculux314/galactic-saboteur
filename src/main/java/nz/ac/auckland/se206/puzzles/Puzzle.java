@@ -8,8 +8,8 @@ import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.GameState;
 
 public class Puzzle {
-  
-  public boolean isPuzzleSolved;
+
+  private boolean isPuzzleSolved;
   private Label solvedLabel =
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private Parent root;

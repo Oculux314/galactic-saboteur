@@ -4,12 +4,12 @@ import java.util.Map;
 import java.util.Random;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
-public class ReactorButtonPuzzle extends Puzzle {
+public class ReactorButtonPuzzleController extends Puzzle {
 
   @FXML private Label lblNumberPrompt;
   @FXML private Label lblAnswer;
@@ -34,18 +34,18 @@ public class ReactorButtonPuzzle extends Puzzle {
   @FXML
   private void initialize() {
     // Map each button to its corresponding number
-    buttonToNumberMap = Map.of(
-        btn1, "1",
-        btn2, "2",
-        btn3, "3",
-        btn4, "4",
-        btn5, "5",
-        btn6, "6",
-        btn7, "7",
-        btn8, "8",
-        btn9, "9",
-        btn0, "0"
-    );
+    buttonToNumberMap =
+        Map.of(
+            btn1, "1",
+            btn2, "2",
+            btn3, "3",
+            btn4, "4",
+            btn5, "5",
+            btn6, "6",
+            btn7, "7",
+            btn8, "8",
+            btn9, "9",
+            btn0, "0");
 
     randomNumber = generateRandomNumber();
     String randomSymbol = convertNumberToSymbol(randomNumber);
@@ -65,30 +65,30 @@ public class ReactorButtonPuzzle extends Puzzle {
     StringBuilder result = new StringBuilder();
 
     for (char digit : number.toCharArray()) {
-        int index = digit - '0';
-        if (index >= 0 && index < symbols.length()) {
-            result.append(symbols.charAt(index));
-        } else {
-            result.append(digit);
-        }
+      int index = digit - '0';
+      if (index >= 0 && index < symbols.length()) {
+        result.append(symbols.charAt(index));
+      } else {
+        result.append(digit);
+      }
     }
 
     return result.toString();
-}
+  }
 
   @FXML
   private void onNumberClicked(MouseEvent event) {
-      AnimatedButton clickedButton = (AnimatedButton) event.getSource();
-      String number = buttonToNumberMap.get(clickedButton);
+    AnimatedButton clickedButton = (AnimatedButton) event.getSource();
+    String number = buttonToNumberMap.get(clickedButton);
 
-      // Append the number to the label
-      if (lblAnswer.getText() != null) {
+    // Append the number to the label
+    if (lblAnswer.getText() != null) {
       String currentText = lblAnswer.getText();
       String newText = currentText + number;
       lblAnswer.setText(newText);
-      } else {
-        lblAnswer.setText(number);
-      }
+    } else {
+      lblAnswer.setText(number);
+    }
   }
 
   @FXML
@@ -119,5 +119,4 @@ public class ReactorButtonPuzzle extends Puzzle {
   private void onClearClicked() {
     lblAnswer.setText("");
   }
-  
 }

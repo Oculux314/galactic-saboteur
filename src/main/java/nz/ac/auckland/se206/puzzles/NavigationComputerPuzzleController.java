@@ -14,7 +14,7 @@ import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
 import nz.ac.auckland.se206.components.RotateButton.Orientation;
 
-public class NavigationComputerPuzzle extends Puzzle {
+public class NavigationComputerPuzzleController extends Puzzle {
 
   private enum State {
     UNCLICKED,

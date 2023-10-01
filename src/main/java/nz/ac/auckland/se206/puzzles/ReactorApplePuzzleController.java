@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
-public class ReactorApplePuzzle extends Puzzle {
+public class ReactorApplePuzzleController extends Puzzle {
 
   @FXML private Button btnSolve;
   @FXML private Pane panReactorApple;

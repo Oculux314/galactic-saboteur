@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Ellipse;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
-public class TestTubesPuzzle extends Puzzle {
+public class TestTubesPuzzleController extends Puzzle {
 
   private static String colour;
   private boolean yellowSelected;
