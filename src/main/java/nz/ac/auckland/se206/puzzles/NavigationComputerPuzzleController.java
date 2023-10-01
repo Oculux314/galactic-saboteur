@@ -76,7 +76,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
     chooseSolution();
 
     for (int i = 0; i < (NUM_ROWS * NUM_COLS); i++) {
-      makeTile(i);
+      makeTile(i); // Automatically gets row and col
     }
 
     updateActiveTiles();
@@ -93,6 +93,8 @@ public class NavigationComputerPuzzleController extends Puzzle {
   }
 
   private void chooseSolution() {
+    // Forces a path to exist from start to end
+    // Only allow direction right and up
     Coordinate here = start;
     Orientation prevDirection = Orientation.RIGHT;
 
@@ -142,10 +144,12 @@ public class NavigationComputerPuzzleController extends Puzzle {
   }
 
   public void updateActiveTiles() {
+    // Start path from the start tile
     clearActiveTiles();
     ComputerTile tile = tiles[start.getRow()][start.getCol()];
     Orientation prevDirection = Orientation.LEFT;
 
+    // Follow the path until it terminates
     while (tile != null) {
       if (!tile.getConnections().get(prevDirection)) {
         return;
@@ -199,14 +203,14 @@ public class NavigationComputerPuzzleController extends Puzzle {
         new Thread(
             () -> {
               while (state != State.COMPLETE && GameState.isRunning) {
-                lblWarning.setVisible(!lblWarning.isVisible());
+                lblWarning.setVisible(!lblWarning.isVisible()); // Flash warning until solved
 
                 if (state == State.UNCLICKED) {
-                  tilStart.setVisible(!tilStart.isVisible());
+                  tilStart.setVisible(!tilStart.isVisible()); // Flash start tile until tiles clicked
                 }
 
                 try {
-                  Thread.sleep(500);
+                  Thread.sleep(500); // 500ms flash period
                 } catch (InterruptedException e) {
                   e.printStackTrace();
                 }
@@ -262,6 +266,6 @@ public class NavigationComputerPuzzleController extends Puzzle {
                   });
             });
 
-    completeDelay.start();
+    completeDelay.start(); // Delay before setting solved
   }
 }

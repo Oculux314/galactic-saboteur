@@ -174,7 +174,7 @@ public class App extends Application {
 
     Thread ttsThread = new Thread(() -> tts.speak(text));
     ttsThread.start();
-    return text;
+    return text; // Return original text so this function can wrap existing strings
   }
 
   @Override
