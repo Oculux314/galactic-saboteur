@@ -9,12 +9,6 @@ import nz.ac.auckland.se206.GameState;
 
 public class Puzzle {
 
-  private boolean isPuzzleSolved;
-  private Label solvedLabel =
-      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
-  private Parent root;
-  private PuzzleName puzzleName;
-
   public enum PuzzleName {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
@@ -39,6 +33,12 @@ public class Puzzle {
       return ("#btn" + this.toCamelCase());
     }
   }
+  
+  private boolean isPuzzleSolved;
+  private Label solvedLabel =
+      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
+  private Parent root;
+  private PuzzleName puzzleName;
 
   public void setPuzzleName(PuzzleName puzzleName) {
     this.puzzleName = puzzleName;

@@ -15,15 +15,15 @@ import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {
 
+  public static List<PuzzleName> reactorPuzzles;
+  public static List<PuzzleName> laboratoryPuzzles;
+  public static List<PuzzleName> navigationPuzzles;
+
   private Pane panPuzzle;
   private Group grpMapButtons;
 
   private HashMap<PuzzleName, Puzzle> puzzleMap;
   private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
-
-  public static List<PuzzleName> reactorPuzzles;
-  public static List<PuzzleName> laboratoryPuzzles;
-  public static List<PuzzleName> navigationPuzzles;
 
   public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpMapButtons) {
     this.panPuzzle = panPuzzle;

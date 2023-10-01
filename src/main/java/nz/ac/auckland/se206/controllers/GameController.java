@@ -34,6 +34,23 @@ import nz.ac.auckland.se206.riddle.RiddleController;
 /** Controller class for the game screens. */
 public class GameController implements Controller {
 
+  private class TimerData {
+    private int seconds;
+
+    // Constructor of TimerDate class
+    public TimerData(int initialSeconds) {
+      this.seconds = initialSeconds;
+    }
+
+    public int getSeconds() {
+      return seconds;
+    }
+
+    public void decrementSeconds() {
+      seconds--;
+    }
+  }
+
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
   @FXML private Group grpMapButtons;
@@ -89,23 +106,6 @@ public class GameController implements Controller {
   private boolean scientistWelcomeShown = false;
   private boolean mechanicWelcomeShown = false;
   private Timeline countdownTimer;
-
-  private class TimerData {
-    private int seconds;
-
-    // Constructor of TimerDate class
-    public TimerData(int initialSeconds) {
-      this.seconds = initialSeconds;
-    }
-
-    public int getSeconds() {
-      return seconds;
-    }
-
-    public void decrementSeconds() {
-      seconds--;
-    }
-  }
 
   @FXML
   private void initialize() {
