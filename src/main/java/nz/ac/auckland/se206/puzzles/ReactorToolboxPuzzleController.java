@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+/** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
 
   @FXML private ImageView imvHammer;

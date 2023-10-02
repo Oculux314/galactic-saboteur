@@ -44,13 +44,21 @@ public class Puzzle {
     this.puzzleName = puzzleName;
   }
 
+  /**
+   * Called when a puzzle is solved. Clears puzzle.
+   *
+   * @param puzzlePane. The pane containing the puzzle.
+   */
   public void clearPuzzle(Parent puzzlePane) {
+    // clear the puzzle content and display the solved label
     if (puzzlePane instanceof Pane) {
       ((Pane) puzzlePane).getChildren().clear();
       ((Pane) puzzlePane).getChildren().add(solvedLabel);
       solvedLabel.setLayoutX(0);
       solvedLabel.setLayoutY(230);
       solvedLabel.setPrefWidth(500);
+
+      // center the label
       solvedLabel.setAlignment(Pos.CENTER);
       solvedLabel.setTextAlignment(TextAlignment.CENTER);
     }

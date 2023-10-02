@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
+/** Controller class for the reactor apple puzzle. */
 public class ReactorApplePuzzleController extends Puzzle {
 
   @FXML private Button btnSolve;

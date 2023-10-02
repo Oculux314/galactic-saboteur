@@ -11,7 +11,7 @@ import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
-
+/** Class which handles zooming and panning of game screen. */
 public class ZoomAndPanHandler {
 
   private final Group grpPanZoom;
@@ -32,6 +32,12 @@ public class ZoomAndPanHandler {
   private double scaleFactor = 1.0;
   private double margin = 300.0;
 
+  /**
+   * Constructor for ZoomAndPanHandler.
+   *
+   * @param grpPanZoom The group to be zoomed and panned.
+   * @param panSpaceship The pane containing the spaceship.
+   */
   public ZoomAndPanHandler(Group grpPanZoom, Pane panSpaceship) {
     this.grpPanZoom = grpPanZoom;
     this.scale = new Scale();
@@ -42,11 +48,24 @@ public class ZoomAndPanHandler {
     grpPanZoom.getTransforms().add(scale);
   }
 
+  /**
+   * Called when the mouse is pressed. 
+   *
+   * @param event The mouse event.
+   * @return void
+   */
   public void onPress(MouseEvent event) {
+    // Record the current mouse X and Y position
     pressedX = event.getSceneX();
     pressedY = event.getSceneY();
   }
 
+  /**
+   * Called when the mouse is dragged. Pans the screen according to cursor position
+   *
+   * @param event The mouse event.
+   * @return void
+   */
   public void onDrag(MouseEvent event) {
     deltaX = event.getSceneX() - pressedX;
     deltaY = event.getSceneY() - pressedY;
@@ -71,6 +90,12 @@ public class ZoomAndPanHandler {
     pressedY = event.getSceneY();
   }
 
+  /**
+   * Called when the mouse is scrolled. Zooms the screen according to cursor position.
+   * 
+   * @param event The scroll event.
+   * @return void
+   */
   public void onScroll(ScrollEvent event) {
     scaleFactor = (event.getDeltaY() < 0) ? 1 / zoomFactor : zoomFactor;
     double currentScaleFactor = scale.getX();
@@ -112,6 +137,14 @@ public class ZoomAndPanHandler {
     event.consume();
   }
 
+  /**
+   * Keeps translation within set boundaries. 
+   *
+   * @param value The value to be clamped.
+   * @param min The minimum value.
+   * @param max The maximum value.
+   * @return the clamped value
+   */
   private double clamp(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
   }

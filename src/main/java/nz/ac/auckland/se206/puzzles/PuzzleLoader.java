@@ -94,12 +94,14 @@ public class PuzzleLoader {
   }
 
   private Parent loadPuzzle(PuzzleName name) throws IOException {
+    // get and load puzzle fxml
     FXMLLoader loader = new FXMLLoader(getClass().getResource(name.toFxmlUrl()));
     Parent puzzle = loader.load();
     Puzzle puzzleController = loader.getController();
     puzzleController.setRoot(puzzle);
     puzzleController.setPuzzleName(name);
 
+    // save puzzle fxml
     puzzleMap.put(name, puzzleController);
     buttonToPuzzleMap.put(getButtonFromName(name), name);
     addToRoom(name);

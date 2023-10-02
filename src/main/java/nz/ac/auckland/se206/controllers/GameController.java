@@ -248,6 +248,11 @@ public class GameController implements Controller {
     grpPuzzleCommons.setVisible(true);
   }
 
+  /**
+   * Called when a puzzle button is clicked. Loads puzzle.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onPuzzleButtonClicked(MouseEvent event) throws IOException {
     // Get the specific puzzle button that was clicked

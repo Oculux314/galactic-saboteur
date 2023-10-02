@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.puzzles;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 import javafx.application.Platform;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
+/** Controller class for the reactor button puzzle. */
 public class ReactorButtonPuzzleController extends Puzzle {
 
   @FXML private Label lblNumberPrompt;
@@ -47,12 +49,20 @@ public class ReactorButtonPuzzleController extends Puzzle {
             btn9, "9",
             btn0, "0");
 
+    // Generate and display random sequence
     randomNumber = generateRandomNumber();
     String randomSymbol = convertNumberToSymbol(randomNumber);
     lblNumberPrompt.setText(randomSymbol);
   }
 
+  /**
+   * Called when the puzzle is initialized. Generates a random number.
+   *
+   * @param
+   * @return A random 5 digit number.  
+   */
   private String generateRandomNumber() {
+    // Generate random 5 digit number
     Random random = new Random();
     int min = 10000;
     int max = 99999;
@@ -64,6 +74,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
     String symbols = ")!@#$%^&*(";
     StringBuilder result = new StringBuilder();
 
+    // Convert each digit to its corresponding symbol
     for (char digit : number.toCharArray()) {
       int index = digit - '0';
       if (index >= 0 && index < symbols.length()) {
@@ -76,6 +87,11 @@ public class ReactorButtonPuzzleController extends Puzzle {
     return result.toString();
   }
 
+  /**
+   * Called when a number button is clicked. Appends the number to the label.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onNumberClicked(MouseEvent event) {
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
@@ -91,9 +107,15 @@ public class ReactorButtonPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Called when the submit button is clicked. Checks if the answer is correct.
+   *
+   * @param event The mouse event.
+   */
   @FXML
-  private void onSubmitClicked() {
+  private void onSubmitClicked(MouseEvent event) {
 
+    // Create a thread to clear the verdict label after 1.5 seconds
     Thread labelThread =
         new Thread(
             () -> {
@@ -105,7 +127,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
               }
             });
 
-    // Check if the answer is correct
+    // Verdict
     if (lblAnswer.getText().equals(randomNumber.toString())) {
       setSolved();
       clearPuzzle(panReactorButtonpad);
@@ -115,8 +137,13 @@ public class ReactorButtonPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Called when the clear button is clicked. Clears the text.
+   *
+   * @param event The mouse event.
+   */
   @FXML
-  private void onClearClicked() {
+  private void onClearClicked(MouseEvent event) {
     lblAnswer.setText("");
   }
 }
