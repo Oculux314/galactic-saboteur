@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import javafx.scene.input.MouseEvent;
 
 /** Controller class for the title screen. */
 public class ExpositionController implements Controller {
