@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="panHangmanPuzzle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorHangmanPuzzleController">
+   <children>
+      <Line endX="381.5" endY="166.5" startX="112.99998474121094" startY="166.49998474121094" />
+      <Label layoutX="208.0" layoutY="79.0" style="-fx-font-size: 12;" text="Guess the word:" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="88.0" layoutX="147.0" layoutY="249.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <VBox layoutX="113.0" layoutY="92.0" prefHeight="108.0" prefWidth="323.0">
+         <children>
+            <Group fx:id="grpWord">
+               <children>
+                  <Label fx:id="letterE" layoutX="347.0" layoutY="87.0" style="-fx-font-size: 60;" text="E">
+                     <font>
+                        <Font size="60.0" />
+                     </font></Label>
+                  <Label fx:id="letterC" layoutX="288.0" layoutY="87.0" style="-fx-font-size: 60;" text="C">
+                     <font>
+                        <Font size="60.0" />
+                     </font></Label>
+                  <Label fx:id="letterP" layoutX="179.0" layoutY="87.0" style="-fx-font-size: 60;" text="P">
+                     <font>
+                        <Font size="60.0" />
+                     </font></Label>
+                  <Label fx:id="letterS" layoutX="116.0" layoutY="87.0" style="-fx-font-size: 60;" text="S">
+                     <font>
+                        <Font size="60.0" />
+                     </font></Label>
+                  <Label fx:id="letterA" layoutX="231.0" layoutY="87.0" style="-fx-font-size: 60;" text="A">
+                     <font>
+                        <Font size="60.0" />
+                     </font></Label>
+               </children>
+            </Group>
+         </children>
+      </VBox>
+      <VBox layoutX="147.0" layoutY="265.0" prefHeight="62.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="lblGuessedLetters1" prefHeight="35.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
+            <Label fx:id="lblGuessedLetters2" prefHeight="33.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
+         </children>
+      </VBox>
+      <TextField fx:id="txtGuessLetter" layoutX="47.0" layoutY="281.0" onAction="#onGuess" prefHeight="25.0" prefWidth="30.0" />
+      <Label layoutX="25.0" layoutY="257.0" style="-fx-font-size: 12;" text="Guess a letter:" />
+      <Label layoutX="203.0" layoutY="233.0" style="-fx-font-size: 12;" text="Letters Guessed:" />
+      <Label layoutX="33.0" layoutY="367.0" text="&#10;" />
+   </children>
+</Pane>

@@ -154,6 +154,11 @@
             
             <Group fx:id="grpMapButtons">
                <children>
+                  <AnimatedButton fx:id="btnReactorHangman" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="150.0" onMouseClicked="#onPuzzleButtonClicked">
+                     <image>
+                        <Image url="@../images/whiteboard.png" />
+                     </image>
+                  </AnimatedButton>
                <AnimatedButton fx:id="btnReactorToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/toolbox.png" />
