@@ -34,7 +34,6 @@ public class GameState {
     laboratoryPuzzle = null;
     navigationPuzzle = null;
     timeLimit = 2;
-
     numberOfHintsAsked = 0;
   }
 
