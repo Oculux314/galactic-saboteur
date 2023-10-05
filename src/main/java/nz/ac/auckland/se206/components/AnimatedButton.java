@@ -34,7 +34,18 @@ public class AnimatedButton extends ImageView {
 
   private void loadImages() {
     normalImage = getImage();
-    hoverImage = Utils.getImageWithSuffix(normalImage, "_hover");
+    hoverImage = getHoverImage(normalImage);
+  }
+
+  protected Image getHoverImage(Image normal) {
+    String hoverUrl = Utils.appendBeforeExtension(normal.getUrl(), "_hover");
+    Image hover = new Image(hoverUrl);
+
+    if (hover.isError()) {
+      return normal; // Default to normal image if hover image not found
+    }
+
+    return hover;
   }
 
   /**
