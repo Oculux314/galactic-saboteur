@@ -169,11 +169,6 @@
                         <Image url="@../images/buttonpad.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="btnReactorApple" fitWidth="40.0" layoutX="150.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/apple.png" />
-                     </image>
-                  </AnimatedButton>
                   <AnimatedButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
                         <Image url="@../images/testtubes.png" />

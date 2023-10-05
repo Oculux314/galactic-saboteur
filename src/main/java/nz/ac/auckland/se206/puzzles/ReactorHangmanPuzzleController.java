@@ -8,14 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javax.swing.JLabel;
 
 public class ReactorHangmanPuzzleController extends Puzzle {
 
-  @FXML private Label letterS;
-  @FXML private Label letterP;
-  @FXML private Label letterA;
-  @FXML private Label letterC;
-  @FXML private Label letterE;
+  @FXML private Label letter1;
+  @FXML private Label letter2;
+  @FXML private Label letter3;
+  @FXML private Label letter4;
+  @FXML private Label letter5;
   @FXML private Label lblGuessedLetters1;
   @FXML private Label lblGuessedLetters2;
   @FXML private TextField txtGuessLetter;
@@ -25,17 +26,14 @@ public class ReactorHangmanPuzzleController extends Puzzle {
 
   private String letter;
   private int lettersguessed = 0;
+  private String[] words = {"SPACE", "ORBIT", "STARS", "SOLAR", "COMET", "EARTH"};
+  private String word;
   private List<Label> letters = new ArrayList<Label>();
 
   @FXML
   private void initialize() {
-    letterS.setText(null);
-    letterP.setText(null);
-    letterA.setText(null);
-    letterC.setText(null);
-    letterE.setText(null);
-
     addLetters();
+    selectWord();
   }
 
   @FXML
@@ -49,40 +47,32 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   }
 
   private void addLetter(String letter) {
-
     // Check if input is valid
-    if (checkValidInput(letter)) {
-
-      // Add letter to the correct label (top row or bottom row)
-      if (lettersguessed <= 16) {
-        if (lblGuessedLetters1.getText().equals("")) {
-          lblGuessedLetters1.setText(letter + ",");
-        } else {
-          lblGuessedLetters1.setText(lblGuessedLetters1.getText() + " " + letter.toUpperCase());
-        }
-      } else if (lettersguessed <= 26) {
-        if (lblGuessedLetters2.getText().equals("")) {
-          lblGuessedLetters2.setText(letter + ",");
-        } else {
-          lblGuessedLetters2.setText(lblGuessedLetters2.getText() + " " + letter.toUpperCase());
-        }
-      }
-    } else {
+    if (!checkValidInput(letter)) {
       return;
+    }
+
+    // Determine which label to use based on the condition
+    Label label;
+    if (lettersguessed <= 16) {
+      label = lblGuessedLetters1;
+    } else {
+      label = lblGuessedLetters2;
+    }
+
+    // Update the label
+    if (label.getText().equals("")) {
+      label.setText(letter + ",");
+    } else {
+      label.setText(label.getText() + " " + letter.toUpperCase());
     }
   }
 
   private void checkLetter(String letter) {
-    if (letter.equals("S")) {
-      letterS.setText(letter);
-    } else if (letter.equals("P")) {
-      letterP.setText(letter);
-    } else if (letter.equals("A")) {
-      letterA.setText(letter);
-    } else if (letter.equals("C")) {
-      letterC.setText(letter);
-    } else if (letter.equals("E")) {
-      letterE.setText(letter);
+    for (int i = 0; i < word.length(); i++) {
+      if (letter.equals(word.substring(i, i + 1))) {
+        setLetter(letter);
+      }
     }
   }
 
@@ -98,10 +88,15 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   }
 
   private void checkIfSolved() throws InterruptedException {
-    if (!isEmpty(letters)) {
-      setSolved();
-      clearPuzzle(panHangmanPuzzle);
+    for (Label label : letters) {
+      System.out.println(label.getText());
+      if (label.getText().equals("*")) {
+        return;
+      }
     }
+
+    setSolved();
+    clearPuzzle(panHangmanPuzzle);
   }
 
   private boolean isEmpty(List<Label> letters) {
@@ -121,10 +116,24 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   }
 
   private void addLetters() {
-    letters.add(letterS);
-    letters.add(letterP);
-    letters.add(letterA);
-    letters.add(letterC);
-    letters.add(letterE);
+    letters.add(letter1);
+    letters.add(letter2);
+    letters.add(letter3);
+    letters.add(letter4);
+    letters.add(letter5);
+  }
+
+  private void selectWord() {
+    int random = (int) (Math.random() * words.length);
+    word = words[2];
+    System.out.println(word);
+  }
+
+  private void setLetter(String letter) {
+    for (int i = 0; i < word.length(); i++) {
+      if (letter.equals(word.substring(i, i + 1))) {
+        letters.get(i).setText(letter);
+      }
+    }
   }
 }
