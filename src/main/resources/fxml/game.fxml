@@ -19,7 +19,7 @@
 
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
    <children>
-      <Group fx:id="grpPanZoom" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll">
+   <Group fx:id="grpPanZoom" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
@@ -188,10 +188,9 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
       <Group fx:id="panelContainer">
          <children>
-            <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
+            <fx:include fx:id="fullSidePanel" layoutY="500.0" source="sidepanel.fxml" />
          </children>
       </Group>
       <Group fx:id="grpPuzzleCommons" visible="false">
@@ -319,14 +318,9 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Group fx:id="grpTimer" layoutX="-10.0" layoutY="-10.0">
+      <Group fx:id="grpTimer" layoutX="635.0">
          <children>
-            <ImageView fitHeight="130.0" fitWidth="90.0" layoutX="612.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/btnSmallBackground.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="timer" alignment="CENTER" layoutX="601.0" layoutY="22.0" prefHeight="26.0" prefWidth="111.0" textOverrun="CLIP" />
+            <Label fx:id="timer" alignment="CENTER" layoutX="42.0" layoutY="522.0" prefHeight="66.0" prefWidth="100.0" textOverrun="CLIP" />
          </children>
       </Group>
       <Pane fx:id="panEnd" prefHeight="600.0" prefWidth="800.0" visible="false">

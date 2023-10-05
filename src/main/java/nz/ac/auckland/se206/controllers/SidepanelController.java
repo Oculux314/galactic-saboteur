@@ -18,23 +18,23 @@ import nz.ac.auckland.se206.GameState;
 
 public class SidepanelController implements Controller {
 
-  @FXML private Polyline shapeClues;
-  @FXML private Polyline shapeSuspects;
-  @FXML private VBox suspectsContent;
-  @FXML private VBox clueContent;
-  @FXML private Polyline colShapeSuspects;
-  @FXML private Polyline colShapeClues;
-  @FXML private Rectangle colPanel;
-  @FXML private Rectangle clueInformationRectangle;
-  @FXML private Label lblClueInformation;
-  @FXML private Rectangle suspectInformationRectangle;
-  @FXML private Label lblSuspectInformation;
-  @FXML private ImageView clue1;
-  @FXML private ImageView clue2;
-  @FXML private ImageView clue3;
-  @FXML private ImageView suspect1;
-  @FXML private ImageView suspect2;
-  @FXML private ImageView suspect3;
+  // @FXML private Polyline shapeClues;
+  // @FXML private Polyline shapeSuspects;
+  // @FXML private VBox suspectsContent;
+  // @FXML private VBox clueContent;
+  // @FXML private Polyline colShapeSuspects;
+  // @FXML private Polyline colShapeClues;
+  // @FXML private Rectangle colPanel;
+  // @FXML private Rectangle clueInformationRectangle;
+  // @FXML private Label lblClueInformation;
+  // @FXML private Rectangle suspectInformationRectangle;
+  // @FXML private Label lblSuspectInformation;
+  // @FXML private ImageView clue1;
+  // @FXML private ImageView clue2;
+  // @FXML private ImageView clue3;
+  // @FXML private ImageView suspect1;
+  // @FXML private ImageView suspect2;
+  // @FXML private ImageView suspect3;
 
   private String[] suspects = {
     "/images/suspects/suspect1.jpg",
@@ -47,7 +47,7 @@ public class SidepanelController implements Controller {
   private String[] times = {
     "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
   };
-  private String defaultInfo = "Clue not found";
+  //private String defaultInfo = "Clue not found";
 
   private int random;
   private Image suspect;
@@ -62,83 +62,66 @@ public class SidepanelController implements Controller {
 
   @FXML
   private void initialize() {
-    suspectsContent.setVisible(false);
-    clueInformationRectangle.setVisible(false);
+    // suspectsContent.setVisible(false);
+    // clueInformationRectangle.setVisible(false);
     setClueNameMap();
     selectClues();
   }
 
-  @FXML
-  private void clueBtnPressed() throws IOException {
-    suspectsContent.setVisible(false);
-    clueContent.setVisible(true);
-    Color blue = Color.web("334855");
-    colPanel.setFill(blue);
-  }
+  // @FXML
+  // private void itemInformationShow(MouseEvent event) {
+  //   Rectangle informationRectangle = null;
+  //   Label informationLabel = null;
 
-  @FXML
-  private void suspectsBtnPressed() throws IOException {
-    clueContent.setVisible(false);
-    suspectsContent.setVisible(true);
-    suspectInformationRectangle.setVisible(false);
-    Color green = Color.web("42805e");
-    colPanel.setFill(green);
-  }
+  //   if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
+  //     informationRectangle = clueInformationRectangle;
+  //     informationLabel = lblClueInformation;
+  //   } else if (event.getSource() == suspect1
+  //       || event.getSource() == suspect2
+  //       || event.getSource() == suspect3) {
+  //     informationRectangle = suspectInformationRectangle;
+  //     informationLabel = lblSuspectInformation;
+  //   }
 
-  @FXML
-  private void itemInformationShow(MouseEvent event) {
-    Rectangle informationRectangle = null;
-    Label informationLabel = null;
+  //   if (event.getSource() instanceof ImageView) {
+  //     ImageView imageView = (ImageView) event.getSource();
+  //     Image image = imageView.getImage();
+  //     if (image == suspect) {
+  //       informationLabel.setText("Culprit: " + suspectName);
+  //     } else if (image == room) {
+  //       informationLabel.setText("Location: " + roomName);
+  //     } else if (image == time) {
+  //       informationLabel.setText("Time: " + timeName);
+  //     } else {
+  //       informationLabel.setText(defaultInfo);
+  //     }
+  //   }
 
-    if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
-      informationRectangle = clueInformationRectangle;
-      informationLabel = lblClueInformation;
-    } else if (event.getSource() == suspect1
-        || event.getSource() == suspect2
-        || event.getSource() == suspect3) {
-      informationRectangle = suspectInformationRectangle;
-      informationLabel = lblSuspectInformation;
-    }
+  //   if (informationRectangle != null && informationLabel != null) {
+  //     informationRectangle.setVisible(true);
+  //   }
+  // }
 
-    if (event.getSource() instanceof ImageView) {
-      ImageView imageView = (ImageView) event.getSource();
-      Image image = imageView.getImage();
-      if (image == suspect) {
-        informationLabel.setText("Culprit: " + suspectName);
-      } else if (image == room) {
-        informationLabel.setText("Location: " + roomName);
-      } else if (image == time) {
-        informationLabel.setText("Time: " + timeName);
-      } else {
-        informationLabel.setText(defaultInfo);
-      }
-    }
+  // @FXML
+  // private void itemInformationHide(MouseEvent event) {
+  //   Rectangle informationRectangle = null;
+  //   Label informationLabel = null;
 
-    if (informationRectangle != null && informationLabel != null) {
-      informationRectangle.setVisible(true);
-    }
-  }
+  //   if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
+  //     informationRectangle = clueInformationRectangle;
+  //     informationLabel = lblClueInformation;
+  //   } else if (event.getSource() == suspect1
+  //       || event.getSource() == suspect2
+  //       || event.getSource() == suspect3) {
+  //     informationRectangle = suspectInformationRectangle;
+  //     informationLabel = lblSuspectInformation;
+  //   }
 
-  @FXML
-  private void itemInformationHide(MouseEvent event) {
-    Rectangle informationRectangle = null;
-    Label informationLabel = null;
-
-    if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
-      informationRectangle = clueInformationRectangle;
-      informationLabel = lblClueInformation;
-    } else if (event.getSource() == suspect1
-        || event.getSource() == suspect2
-        || event.getSource() == suspect3) {
-      informationRectangle = suspectInformationRectangle;
-      informationLabel = lblSuspectInformation;
-    }
-
-    if (informationRectangle != null && informationLabel != null) {
-      informationRectangle.setVisible(false);
-      informationLabel.setText("");
-    }
-  }
+  //   if (informationRectangle != null && informationLabel != null) {
+  //     informationRectangle.setVisible(false);
+  //     informationLabel.setText("");
+  //   }
+  // }
 
   private void selectClues() {
     int size = 3;
@@ -175,11 +158,11 @@ public class SidepanelController implements Controller {
 
   private void displayClue(Image clue) {
     if (clue == suspect) {
-      clue1.setImage(clue);
+      // clue1.setImage(clue);
     } else if (clue == room) {
-      clue2.setImage(clue);
+    // ?clue2.setImage(clue);
     } else if (clue == time) {
-      clue3.setImage(clue);
+      // clue3.setImage(clue);
     }
     clues.remove(clue);
 
