@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,31 +9,20 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 
 public class SidepanelController implements Controller {
 
-  // @FXML private Polyline shapeClues;
-  // @FXML private Polyline shapeSuspects;
-  // @FXML private VBox suspectsContent;
-  // @FXML private VBox clueContent;
-  // @FXML private Polyline colShapeSuspects;
-  // @FXML private Polyline colShapeClues;
-  // @FXML private Rectangle colPanel;
-  // @FXML private Rectangle clueInformationRectangle;
-  // @FXML private Label lblClueInformation;
-  // @FXML private Rectangle suspectInformationRectangle;
-  // @FXML private Label lblSuspectInformation;
-  // @FXML private ImageView clue1;
-  // @FXML private ImageView clue2;
-  // @FXML private ImageView clue3;
-  // @FXML private ImageView suspect1;
-  // @FXML private ImageView suspect2;
-  // @FXML private ImageView suspect3;
+  @FXML private Rectangle timeClueInformationRectangle;
+  @FXML private Rectangle whereClueInformationRectangle;
+  @FXML private Rectangle whoClueInformationRectangle;
+  @FXML private ImageView timeClue;
+  @FXML private ImageView whereClue;
+  @FXML private ImageView whoClue;
+  @FXML private Label timeClueInformationLabel;
+  @FXML private Label whereClueInformationLabel;
+  @FXML private Label whoClueInformationLabel;
 
   private String[] suspects = {
     "/images/suspects/suspect1.jpg",
@@ -47,7 +35,7 @@ public class SidepanelController implements Controller {
   private String[] times = {
     "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
   };
-  //private String defaultInfo = "Clue not found";
+  private String defaultInfo = "Find the clue!";
 
   private int random;
   private Image suspect;
@@ -62,45 +50,66 @@ public class SidepanelController implements Controller {
 
   @FXML
   private void initialize() {
-    // suspectsContent.setVisible(false);
-    // clueInformationRectangle.setVisible(false);
     setClueNameMap();
     selectClues();
   }
 
-  // @FXML
-  // private void itemInformationShow(MouseEvent event) {
-  //   Rectangle informationRectangle = null;
-  //   Label informationLabel = null;
+  @FXML
+  private void informationShow(MouseEvent event) {
+    Rectangle informationRectangle = null;
+    Label informationLabel = null;
 
-  //   if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
-  //     informationRectangle = clueInformationRectangle;
-  //     informationLabel = lblClueInformation;
-  //   } else if (event.getSource() == suspect1
-  //       || event.getSource() == suspect2
-  //       || event.getSource() == suspect3) {
-  //     informationRectangle = suspectInformationRectangle;
-  //     informationLabel = lblSuspectInformation;
-  //   }
+    if (event.getSource() == timeClue){
+      informationRectangle = timeClueInformationRectangle;
+      informationLabel = timeClueInformationLabel;
+    } else if (event.getSource() == whereClue){
+      System.out.println("chosen");
+      informationRectangle = whereClueInformationRectangle;
+      informationLabel = whereClueInformationLabel;
+    } else if (event.getSource() == whoClue){
+      informationRectangle = whoClueInformationRectangle;
+      informationLabel = whoClueInformationLabel;
+    }
+    System.out.println(informationLabel.getId());
+    System.out.println(informationRectangle.getId());
+    System.out.println(event.getSource());
 
-  //   if (event.getSource() instanceof ImageView) {
-  //     ImageView imageView = (ImageView) event.getSource();
-  //     Image image = imageView.getImage();
-  //     if (image == suspect) {
-  //       informationLabel.setText("Culprit: " + suspectName);
-  //     } else if (image == room) {
-  //       informationLabel.setText("Location: " + roomName);
-  //     } else if (image == time) {
-  //       informationLabel.setText("Time: " + timeName);
-  //     } else {
-  //       informationLabel.setText(defaultInfo);
-  //     }
-  //   }
 
-  //   if (informationRectangle != null && informationLabel != null) {
-  //     informationRectangle.setVisible(true);
-  //   }
-  // }
+    if (event.getSource() instanceof ImageView) {
+      ImageView imageView = (ImageView) event.getSource();
+      Image image = imageView.getImage();
+      if (image == suspect) {
+        informationLabel.setText("Culprit: " + suspectName);
+      } else if (image == room) {
+        informationLabel.setText("Location: " + roomName);
+      } else if (image == time) {
+        informationLabel.setText("Time: " + timeName);
+      } else {
+        informationLabel.setText(defaultInfo);
+      }
+    }
+      informationRectangle.setVisible(true);
+  }
+
+  @FXML
+  private void informationHide(MouseEvent event){
+    Rectangle informationRectangle = null;
+    Label informationLabel = null;
+
+    if (event.getSource() == timeClue){
+      informationRectangle = timeClueInformationRectangle;
+      informationLabel = timeClueInformationLabel;
+    } else if (event.getSource() == whereClue){
+      informationRectangle = whereClueInformationRectangle;
+      informationLabel = whereClueInformationLabel;
+    } else if (event.getSource() == whoClue){
+      informationRectangle = whoClueInformationRectangle;
+      informationLabel = whoClueInformationLabel;
+    }
+
+      informationRectangle.setVisible(false);
+      informationLabel.setText("");
+  }
 
   // @FXML
   // private void itemInformationHide(MouseEvent event) {

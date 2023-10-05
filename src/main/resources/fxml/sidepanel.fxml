@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -15,23 +16,29 @@
                   <Image url="@../images/sidepanel/sidepanelbackground.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="135.0" layoutX="25.0" layoutY="20.0" pickOnBounds="true">
+            <ImageView fx:id="timeClue" fitHeight="75.0" fitWidth="135.0" layoutX="25.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
                <image>
                   <Image url="@../images/sidepanel/timeicon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="135.0" layoutX="185.0" layoutY="20.0" pickOnBounds="true">
+            <ImageView fx:id="whereClue" fitHeight="75.0" fitWidth="135.0" layoutX="185.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
                <image>
                   <Image url="@../images/sidepanel/whereicon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="75.0" fitWidth="135.0" layoutX="345.0" layoutY="20.0" pickOnBounds="true">
+            <ImageView fx:id="whoClue" fitHeight="75.0" fitWidth="135.0" layoutX="345.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
                <image>
                   <Image url="@../images/sidepanel/whoicon.png" />
                </image>
             </ImageView>
             <Rectangle arcHeight="5.0" fill="#212325" height="75.0" layoutX="505.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="135.0" />
             <Rectangle arcHeight="5.0" fill="#212325" height="75.0" layoutX="665.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" />
+            <Rectangle fx:id="timeClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="25.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
+            <Rectangle fx:id="whereClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="185.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
+            <Rectangle fx:id="whoClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="345.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
+            <Label fx:id="timeClueInformationLabel" alignment="CENTER" layoutX="25.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
+            <Label fx:id="whereClueInformationLabel" alignment="CENTER" layoutX="185.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
+            <Label fx:id="whoClueInformationLabel" alignment="CENTER" layoutX="345.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
          </children>
       </Pane>
    </children>
