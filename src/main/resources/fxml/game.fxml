@@ -334,14 +334,9 @@
             <Button layoutX="373.0" layoutY="510.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
          </children>
       </Pane>
-      <Group fx:id="grpTimer1" layoutX="-400.0" layoutY="-10.0">
+      <Group fx:id="grpHints" layoutX="-400.0" layoutY="-10.0">
          <children>
-            <ImageView fitHeight="41.0" fitWidth="340.0" layoutX="612.0" layoutY="15.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/btnSmallBackground.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="labelHintsLeft" alignment="TOP_CENTER" layoutX="694.0" layoutY="23.0" prefHeight="26.0" prefWidth="176.0" textOverrun="CLIP" />
+            <Label fx:id="labelHintsLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="909.0" layoutY="534.0" prefHeight="68.0" prefWidth="128.0" stylesheets="@../css/style.css" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
          </children>
       </Group>
    </children>

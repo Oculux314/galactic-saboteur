@@ -54,3 +54,7 @@
   -fx-height: 100%;
   -fx-transform: scale(1,.9);
 }
+
+#labelHintsLeft {
+  -fx-font-size: 16px;
+}

@@ -53,9 +53,6 @@ public class GameController implements Controller {
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
   @FXML private Group grpMapButtons;
-
-  //@FXML private Polyline btnPanelHide;
-  //@FXML private Group panelContainer;
   @FXML private Label timer;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
@@ -148,7 +145,7 @@ public class GameController implements Controller {
 
     grpRiddle.setVisible(false);
 
-    labelHintsLeft.setText("Hints left: ");
+    updateHintsLeft();
   }
 
   public void startTimer() {
@@ -203,19 +200,6 @@ public class GameController implements Controller {
   private void onRestartClicked() throws IOException {
     App.restart();
   }
-
-  // @FXML
-  // private void btnPanelHidePressed() {
-  //   if (panelContainer.getLayoutX() == 0) {
-  //     panelContainer.setLayoutX(-180);
-  //     btnPanelHide.setRotate(180);
-  //     btnPanelHide.setLayoutX(100);
-  //   } else {
-  //     panelContainer.setLayoutX(0);
-  //     btnPanelHide.setRotate(0);
-  //     btnPanelHide.setLayoutX(267);
-  //   }
-  // }
 
   @FXML
   private void onExitClicked(MouseEvent event) {
@@ -314,7 +298,17 @@ public class GameController implements Controller {
       hintsMechanic.setState("nohint");
       hintsMechanic.setDisable(GameState.isHintLimitReached());
     }
-    labelHintsLeft.setText("Hints left: " + GameState.getHintLimitRemaining());
+    updateHintsLeft();
+  }
+
+  private void updateHintsLeft() {
+    if (GameState.difficulty == "easy") {
+      labelHintsLeft.setText("You Have Unlimited Hints");
+    } else if (GameState.difficulty == "medium") {
+      labelHintsLeft.setText("You have " + GameState.getHintLimitRemaining() + " Hints Left");
+    } else {
+      labelHintsLeft.setText("No Hints Are Allowed");
+    }
   }
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
