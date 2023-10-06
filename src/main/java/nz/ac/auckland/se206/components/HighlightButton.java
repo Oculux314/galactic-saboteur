@@ -7,6 +7,9 @@ public class HighlightButton extends StateButton {
 
   public HighlightButton() {
     super();
+  }
+
+  public void initialise() {
     setupStates();
   }
 
@@ -15,11 +18,11 @@ public class HighlightButton extends StateButton {
     Image highlightImage = Utils.getImageWithSuffix(normalImage, "_highlighted");
 
     addState("normal", normalImage);
-    addState("highlighted", highlightImage);
+    addState("highlight", highlightImage);
   }
 
   public void highlight() {
-    setState("highlighted");
+    setState("highlight");
   }
 
   public void unhighlight() {

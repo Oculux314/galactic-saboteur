@@ -10,6 +10,10 @@ public class Utils {
   }
 
   public static Image getImageWithSuffix(Image base, String suffix) {
+    if (base == null) {
+      return new Image("/images/placeholder.png");
+    }
+
     String url = appendBeforeExtension(base.getUrl(), suffix);
     Image image = new Image(url);
 

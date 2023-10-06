@@ -3,12 +3,14 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -23,6 +25,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
@@ -101,6 +104,7 @@ public class GameController implements Controller {
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
   private Set<Puzzle> solvedPuzzles = new HashSet<>();
+  private Map<String, HighlightButton> mapButtons = new HashMap<>();
 
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
@@ -150,6 +154,24 @@ public class GameController implements Controller {
     grpRiddle.setVisible(false);
 
     labelHintsLeft.setText("Hints left: ");
+
+    intialiseMapButtons();
+  }
+
+  private void intialiseMapButtons() {
+    for (Node node : grpMapButtons.getChildren()) {
+      HighlightButton mapButton;
+
+      try {
+        mapButton = (HighlightButton) node;
+      } catch (ClassCastException e) {
+        continue;
+      }
+
+      addMapButton(mapButton);
+    }
+
+    mapButtons.get("btnNavigationComputer").highlight();
   }
 
   public void startTimer() {
@@ -343,5 +365,10 @@ public class GameController implements Controller {
     } else {
       App.speak("You win!");
     }
+  }
+
+  public void addMapButton(HighlightButton mapButton) {
+    mapButtons.put(mapButton.getId(), mapButton);
+    mapButton.initialise();
   }
 }
