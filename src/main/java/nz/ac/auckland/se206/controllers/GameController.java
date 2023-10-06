@@ -185,7 +185,7 @@ public class GameController implements Controller {
       addMapButton(mapButton);
     }
 
-    //mapButtons.get("btnNavigationComputer").highlight();
+    // mapButtons.get("btnNavigationComputer").highlight();
   }
 
   public void startTimer() {

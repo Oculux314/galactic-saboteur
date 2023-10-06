@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.components;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.Utils;
 
 /**
@@ -72,7 +73,8 @@ public class StateButton extends AnimatedButton {
   protected void init() {
     currentState = states.get(0);
     setState(0);
-    setOnMouseClicked((event) -> onClick());
+    addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> onClick());
+    // setOnMouseClicked((event) -> onClick());
   }
 
   private void setState(int index) {
