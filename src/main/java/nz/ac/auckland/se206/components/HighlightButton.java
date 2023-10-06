@@ -15,7 +15,7 @@ public class HighlightButton extends StateButton {
 
   private void setupStates() {
     Image normalImage = getImage();
-    Image highlightImage = Utils.getImageWithSuffix(normalImage, "_highlighted");
+    Image highlightImage = Utils.getImageWithSuffix(normalImage, "_highlight");
 
     addState("normal", normalImage);
     addState("highlight", highlightImage);

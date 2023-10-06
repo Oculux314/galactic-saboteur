@@ -170,6 +170,8 @@ public class GameController implements Controller {
 
       intialiseMapButtonsInGroup(mapButtonGroup);
     }
+
+    mapButtons.get("btnNavigationComputer").highlight();
   }
 
   private void intialiseMapButtonsInGroup(Group mapButtonGroup) {
@@ -184,8 +186,6 @@ public class GameController implements Controller {
 
       addMapButton(mapButton);
     }
-
-    // mapButtons.get("btnNavigationComputer").highlight();
   }
 
   public void startTimer() {
@@ -382,7 +382,7 @@ public class GameController implements Controller {
   }
 
   public void addMapButton(HighlightButton mapButton) {
-    mapButtons.put(mapButton.getId(), mapButton);
     mapButton.initialise();
+    mapButtons.put(mapButton.getId(), mapButton);
   }
 }

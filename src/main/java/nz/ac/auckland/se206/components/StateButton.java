@@ -74,7 +74,6 @@ public class StateButton extends AnimatedButton {
     currentState = states.get(0);
     setState(0);
     addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> onClick());
-    // setOnMouseClicked((event) -> onClick());
   }
 
   private void setState(int index) {
