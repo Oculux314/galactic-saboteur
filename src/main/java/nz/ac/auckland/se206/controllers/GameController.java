@@ -56,7 +56,7 @@ public class GameController implements Controller {
 
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
-  @FXML private Group grpMapButtons;
+  @FXML private Group grpPuzzleButtons;
 
   @FXML private Polyline btnPanelHide;
   @FXML private Group panelContainer;
@@ -113,7 +113,7 @@ public class GameController implements Controller {
 
   @FXML
   private void initialize() {
-    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpPuzzleButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
     // Set the narration boxes
     NarrationBox narrationBox1 =
@@ -159,7 +159,21 @@ public class GameController implements Controller {
   }
 
   private void intialiseMapButtons() {
-    for (Node node : grpMapButtons.getChildren()) {
+    for (Node node : grpPanZoom.getChildren()) {
+      Group mapButtonGroup;
+
+      try {
+        mapButtonGroup = (Group) node;
+      } catch (ClassCastException e) {
+        continue;
+      }
+
+      intialiseMapButtonsInGroup(mapButtonGroup);
+    }
+  }
+
+  private void intialiseMapButtonsInGroup(Group mapButtonGroup) {
+    for (Node node : mapButtonGroup.getChildren()) {
       HighlightButton mapButton;
 
       try {
@@ -171,7 +185,7 @@ public class GameController implements Controller {
       addMapButton(mapButton);
     }
 
-    mapButtons.get("btnNavigationComputer").highlight();
+    //mapButtons.get("btnNavigationComputer").highlight();
   }
 
   public void startTimer() {
