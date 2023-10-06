@@ -35,7 +35,6 @@ public class SidepanelController implements Controller {
   private String[] times = {
     "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
   };
-  private String defaultInfo = "Find the clue!";
 
   private int random;
   private Image suspect;

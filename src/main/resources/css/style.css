@@ -48,3 +48,9 @@
 #whoClueInformationLabel {
   -fx-font-size: 14px;
 }
+
+#timer {
+  -fx-font-size: 35px;
+  -fx-height: 100%;
+  -fx-transform: scale(1,.9);
+}
