@@ -59,22 +59,22 @@ public class SidepanelController implements Controller {
     Rectangle informationRectangle = null;
     Label informationLabel = null;
 
-    if (event.getSource() == timeClue){
+    // Set the correct information rectangle and label
+    if (event.getSource() == timeClue) {
       informationRectangle = timeClueInformationRectangle;
       informationLabel = timeClueInformationLabel;
-    } else if (event.getSource() == whereClue){
-      System.out.println("chosen");
+      informationLabel.setText("Time: Unknown");
+    } else if (event.getSource() == whereClue) {
       informationRectangle = whereClueInformationRectangle;
       informationLabel = whereClueInformationLabel;
-    } else if (event.getSource() == whoClue){
+      informationLabel.setText("Location: Unknown");
+    } else if (event.getSource() == whoClue) {
       informationRectangle = whoClueInformationRectangle;
       informationLabel = whoClueInformationLabel;
+      informationLabel.setText("Culprit: Unknown");
     }
-    System.out.println(informationLabel.getId());
-    System.out.println(informationRectangle.getId());
-    System.out.println(event.getSource());
 
-
+    // If clue has been found, display the information otherwise encourage the user to find the clue
     if (event.getSource() instanceof ImageView) {
       // Get image
       ImageView imageView = (ImageView) event.getSource();
@@ -85,53 +85,32 @@ public class SidepanelController implements Controller {
         informationLabel.setText("Location: " + roomName);
       } else if (image == time) {
         informationLabel.setText("Time: " + timeName);
-      } else {
-        informationLabel.setText(defaultInfo);
       }
     }
-      informationRectangle.setVisible(true);
+    informationRectangle.setVisible(true);
   }
 
   @FXML
-  private void informationHide(MouseEvent event){
+  private void informationHide(MouseEvent event) {
     Rectangle informationRectangle = null;
     Label informationLabel = null;
 
-    if (event.getSource() == timeClue){
+    // Set the correct information rectangle and label
+    if (event.getSource() == timeClue) {
       informationRectangle = timeClueInformationRectangle;
       informationLabel = timeClueInformationLabel;
-    } else if (event.getSource() == whereClue){
+    } else if (event.getSource() == whereClue) {
       informationRectangle = whereClueInformationRectangle;
       informationLabel = whereClueInformationLabel;
-    } else if (event.getSource() == whoClue){
+    } else if (event.getSource() == whoClue) {
       informationRectangle = whoClueInformationRectangle;
       informationLabel = whoClueInformationLabel;
     }
 
-      informationRectangle.setVisible(false);
-      informationLabel.setText("");
+    // Hide the information
+    informationRectangle.setVisible(false);
+    informationLabel.setText("");
   }
-
-  // @FXML
-  // private void itemInformationHide(MouseEvent event) {
-  //   Rectangle informationRectangle = null;
-  //   Label informationLabel = null;
-
-  //   if (event.getSource() == clue1 || event.getSource() == clue2 || event.getSource() == clue3) {
-  //     informationRectangle = clueInformationRectangle;
-  //     informationLabel = lblClueInformation;
-  //   } else if (event.getSource() == suspect1
-  //       || event.getSource() == suspect2
-  //       || event.getSource() == suspect3) {
-  //     informationRectangle = suspectInformationRectangle;
-  //     informationLabel = lblSuspectInformation;
-  //   }
-
-  //   if (informationRectangle != null && informationLabel != null) {
-  //     informationRectangle.setVisible(false);
-  //     informationLabel.setText("");
-  //   }
-  // }
 
   private void selectClues() {
     int size = 3;
@@ -159,6 +138,7 @@ public class SidepanelController implements Controller {
   }
 
   public void getRandomClue() {
+    // ensure that the clues picked are random
     int random = (int) (Math.random()) * clues.size();
     Image clue = (Image) (clues.toArray()[random]);
 
@@ -167,13 +147,13 @@ public class SidepanelController implements Controller {
   }
 
   private void displayClue(Image clue) {
-    // Display clue
+    // Change the image in the side panel to represent the clue
     if (clue == suspect) {
-      // clue1.setImage(clue);
+      whoClue.setImage(clue);
     } else if (clue == room) {
-    // ?clue2.setImage(clue);
+      whereClue.setImage(clue);
     } else if (clue == time) {
-      // clue3.setImage(clue);
+      timeClue.setImage(clue);
     }
     clues.remove(clue);
 

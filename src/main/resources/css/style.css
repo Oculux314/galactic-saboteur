@@ -36,3 +36,15 @@
   -fx-font-size: 30px;
   -fx-text-fill: -icon-grey;
 }
+
+#timeClueInformationLabel {
+  -fx-font-size: 14px;
+}
+
+#whereClueInformationLabel {
+  -fx-font-size: 14px;
+}
+
+#whoClueInformationLabel {
+  -fx-font-size: 14px;
+}
