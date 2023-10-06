@@ -8,12 +8,6 @@ import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.GameState;
 
 public class Puzzle {
-  
-  public boolean isPuzzleSolved;
-  private Label solvedLabel =
-      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
-  private Parent root;
-  private PuzzleName puzzleName;
 
   public enum PuzzleName {
     REACTOR_TOOLBOX,
@@ -39,18 +33,32 @@ public class Puzzle {
       return ("#btn" + this.toCamelCase());
     }
   }
+  
+  private boolean isPuzzleSolved;
+  private Label solvedLabel =
+      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
+  private Parent root;
+  private PuzzleName puzzleName;
 
   public void setPuzzleName(PuzzleName puzzleName) {
     this.puzzleName = puzzleName;
   }
 
+  /**
+   * Called when a puzzle is solved. Clears puzzle.
+   *
+   * @param puzzlePane. The pane containing the puzzle.
+   */
   public void clearPuzzle(Parent puzzlePane) {
+    // clear the puzzle content and display the solved label
     if (puzzlePane instanceof Pane) {
       ((Pane) puzzlePane).getChildren().clear();
       ((Pane) puzzlePane).getChildren().add(solvedLabel);
       solvedLabel.setLayoutX(0);
       solvedLabel.setLayoutY(230);
       solvedLabel.setPrefWidth(500);
+
+      // center the label
       solvedLabel.setAlignment(Pos.CENTER);
       solvedLabel.setTextAlignment(TextAlignment.CENTER);
     }

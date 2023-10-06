@@ -75,10 +75,10 @@ public class ComputerTile extends RotateButton {
 
     switch (type) {
       case STRAIGHT:
-        setConnections(false, true, false, true);
+        setConnections(false, true, false, true); // Initally horizontal
         break;
       case BEND:
-        setConnections(true, false, false, true);
+        setConnections(true, false, false, true); // Initally second quadrant
         break;
     }
   }

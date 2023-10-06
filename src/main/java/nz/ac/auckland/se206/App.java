@@ -18,8 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.gpt.Assistant;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -143,7 +143,7 @@ public class App extends Application {
                 if (screenName == Screen.Name.MAIN) { // Main screen is persistent
                   continue;
                 }
-                
+
                 try {
                   makeScreen(screenName);
                 } catch (IOException e) {
@@ -174,7 +174,7 @@ public class App extends Application {
 
     Thread ttsThread = new Thread(() -> tts.speak(text));
     ttsThread.start();
-    return text;
+    return text; // Return original text so this function can wrap existing strings
   }
 
   @Override

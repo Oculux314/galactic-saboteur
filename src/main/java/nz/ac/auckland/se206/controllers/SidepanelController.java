@@ -76,6 +76,7 @@ public class SidepanelController implements Controller {
 
 
     if (event.getSource() instanceof ImageView) {
+      // Get image
       ImageView imageView = (ImageView) event.getSource();
       Image image = imageView.getImage();
       if (image == suspect) {
@@ -166,6 +167,7 @@ public class SidepanelController implements Controller {
   }
 
   private void displayClue(Image clue) {
+    // Display clue
     if (clue == suspect) {
       // clue1.setImage(clue);
     } else if (clue == room) {
