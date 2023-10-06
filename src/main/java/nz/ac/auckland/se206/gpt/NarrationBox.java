@@ -45,7 +45,7 @@ public class NarrationBox {
     this.waitingMessage = waitingMessage;
   }
 
-  public String getWaitingMessage(){
+  public String getWaitingMessage() {
     return waitingMessage;
   }
 

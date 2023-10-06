@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import javafx.scene.input.MouseEvent;
 
 /** Controller class for the title screen. */
 public class ExpositionController implements Controller {
@@ -33,13 +34,14 @@ public class ExpositionController implements Controller {
   }
 
   private void showNextImage() {
+    // Check if slideshow is finished
     if (currentImageIndex >= imagePaths.length) {
       showReplayPane();
       return;
     }
 
+    // Show next image
     updateImage();
-
     delayManager = new Thread(() -> delayAndShowImage());
     delayManager.start();
   }
@@ -50,6 +52,7 @@ public class ExpositionController implements Controller {
   }
 
   private void updateImage() {
+    // Load image
     String imagePath = imagePaths[currentImageIndex];
     Image image = new Image(getClass().getResourceAsStream(imagePath));
     imageView.setImage(image);
@@ -66,14 +69,24 @@ public class ExpositionController implements Controller {
     showNextImage();
   }
 
+  /**
+   * Called when the replay button is clicked. Replays exposition.
+   *
+   * @param event The mouse event.
+   */
   @FXML
-  private void onReplayClicked() throws IOException {
+  private void onReplayClicked(MouseEvent event) throws IOException {
     replayPane.setVisible(false);
     startSlideshow();
   }
 
+  /**
+   * Called when the continue button is clicked. Moves onto game.
+   *
+   * @param event The mouse event.
+   */
   @FXML
-  private void onContinueClicked() throws IOException {
+  private void onContinueClicked(MouseEvent event) throws IOException {
     // Start timer
     App.setScreen(Screen.Name.GAME);
     GameController gameController =

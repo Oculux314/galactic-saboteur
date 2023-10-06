@@ -39,6 +39,7 @@ public class GameState {
   }
 
   public static int getHintLimit() {
+    // Set hint limit based on difficulty
     int hintLimit;
     if (difficulty == "easy") {
       hintLimit = 1000;

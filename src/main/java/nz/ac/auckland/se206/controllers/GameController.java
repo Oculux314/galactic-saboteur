@@ -34,6 +34,23 @@ import nz.ac.auckland.se206.riddle.RiddleController;
 /** Controller class for the game screens. */
 public class GameController implements Controller {
 
+  private class TimerData {
+    private int seconds;
+
+    // Constructor of TimerDate class
+    public TimerData(int initialSeconds) {
+      this.seconds = initialSeconds;
+    }
+
+    public int getSeconds() {
+      return seconds;
+    }
+
+    public void decrementSeconds() {
+      seconds--;
+    }
+  }
+
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
   @FXML private Group grpMapButtons;
@@ -90,27 +107,11 @@ public class GameController implements Controller {
   private boolean mechanicWelcomeShown = false;
   private Timeline countdownTimer;
 
-  private class TimerData {
-    private int initialSeconds;
-
-    // Constructor of TimerDate class
-    public TimerData(int initialSeconds) {
-      this.initialSeconds = initialSeconds;
-    }
-
-    public int getInitialSeconds() {
-      return initialSeconds;
-    }
-
-    public void decrement() {
-      initialSeconds--;
-    }
-  }
-
   @FXML
   private void initialize() {
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+    // Set the narration boxes
     NarrationBox narrationBox1 =
         new NarrationBox(
             paneNarrationScientist,
@@ -132,6 +133,7 @@ public class GameController implements Controller {
             paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain, "Spacey's captain");
     App.captain = new Assistant(narrationBox3);
 
+    // Set the visibility of the corresponding group
     grpGptScientist.setVisible(false);
     grpGptMechanic.setVisible(false);
     grpGptCaptain.setVisible(false);
@@ -162,11 +164,11 @@ public class GameController implements Controller {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  timerData.decrement();
-                  if (timerData.getInitialSeconds() <= 0) {
+                  timerData.decrementSeconds();
+                  if (timerData.getSeconds() <= 0) {
                     countdownTimer.stop();
                   }
-                  updateTimerDisplay(timerData.getInitialSeconds());
+                  updateTimerDisplay(timerData.getSeconds());
                 }));
 
     countdownTimer.setCycleCount(Timeline.INDEFINITE);
@@ -205,6 +207,7 @@ public class GameController implements Controller {
 
   @FXML
   private void btnPanelHidePressed() {
+    // Hide the side panel
     if (panelContainer.getLayoutX() == 0) {
       panelContainer.setLayoutX(-180);
       btnPanelHide.setRotate(180);
@@ -245,15 +248,22 @@ public class GameController implements Controller {
     grpPuzzleCommons.setVisible(true);
   }
 
+  /**
+   * Called when a puzzle button is clicked. Loads puzzle.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onPuzzleButtonClicked(MouseEvent event) throws IOException {
     // Get the specific puzzle button that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
 
+    // If the button is a puzzle button
     if (getButtonToPuzzleMap().containsKey(clickedButton)) {
       // Load the specific puzzle
       PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
       puzzleLoader.setPuzzle(puzzleName);
+      // Show the puzzle
       restorePuzzleWindow();
       if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
         GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
@@ -292,6 +302,7 @@ public class GameController implements Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
+    // Respond to the user's message
     if (event.getSource() == textResponseScientist) {
       App.scientist.respondToUser();
       hintsScientist.setState("nohint");
@@ -314,6 +325,7 @@ public class GameController implements Controller {
 
   @FXML
   private void riddleClicked() throws IOException {
+    // Set the visibility of the corresponding group
     grpRiddle.setVisible(true);
     if (GameState.cluesFound == true) {
       riddleController.disableButton();

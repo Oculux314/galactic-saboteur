@@ -8,12 +8,11 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class Assistant {
 
   public class ApiCallTask extends Task<Void> {
-    ChatCompletionRequest request;
+    private ChatCompletionRequest request;
 
     public ApiCallTask(ChatCompletionRequest request) {
       this.request = request;
@@ -59,7 +58,7 @@ public class Assistant {
   private boolean onlySystemMessage = false;
   private String responseText = "";
   private boolean isWaitingForResponse = false;
-  public String job;
+  private String job;
 
   public Assistant(NarrationBox narrationBox) {
     this.narrationBox = narrationBox;
@@ -142,10 +141,6 @@ public class Assistant {
         || userMessage.toLowerCase().contains("help")
         || userMessage.toLowerCase().contains("clue")) {
       GameState.numberOfHintsAsked++;
-      System.out.println(GameState.numberOfHintsAsked);
-      System.out.println(PuzzleName.REACTOR_APPLE);
-      System.out.println();
-      System.out.println();
     }
     narrationBox.clearUserResponse();
     if (userMessage.equals("")) {
@@ -165,73 +160,4 @@ public class Assistant {
           renderNarrationBox();
         });
   }
-
-  // public void getOptions(String topic, Runnable callback) {
-  //   setSystemMessage(GptPromptEngineering.getOptionsPrompt(topic));
-  //   executeApiCallWithCallback(
-  //       () -> {
-  //         String optionsString = chatMessages.get(chatMessages.size() - 1).getContent();
-  //         String[] optionsTemp = optionsString.replace(" ", "").split(",");
-
-  //         for (int i = 0; i < optionsTemp.length; i++) {
-  //           GameState.options[i] = optionsTemp[i];
-  //         }
-
-  //         callback.run();
-  //       });
-  // }
-
-  // public void getRiddle(String answer, Label labelRiddle) {
-  //   setSystemMessage(GptPromptEngineering.getRiddlePrompt(answer));
-  //   executeApiCallWithCallback(
-  //       () -> {
-  //         labelRiddle.setText(responseText);
-  //       });
-  // }
-
-  // public void introduceRiddle() {
-  //   narrationBox.setText(GameState.riddleIntroduction);
-  // }
-
-  // public void introduceDoor(Runnable callback) {
-  //   setSystemMessage(GptPromptEngineering.getIntroduceDoorPrompt());
-  //   executeApiCallWithCallback(
-  //       () -> {
-  //         renderNarrationBox();
-  //         callback.run();
-  //       });
-  // }
-
-  // public void getUserWinMessage() {
-  //   setSystemMessage(GptPromptEngineering.getWinPrompt());
-  //   executeApiCallWithCallback(
-  //       () -> {
-  //         renderNarrationBox();
-  //         App.setTitle("EscAIpe Room: Escaped!");
-  //         textToSpeech.speak("You escaped!");
-  //         textToSpeech.terminate();
-  //       });
-  // }
-
-  // public void getUserLoseMessage() {
-  //   setSystemMessage(GptPromptEngineering.getLosePrompt());
-  //   executeApiCallWithCallback(
-  //       () -> {
-  //         renderNarrationBox();
-  //         App.setTitle("EscAIpe Room: Try Again");
-  //         textToSpeech.speak("Try again!");
-  //         textToSpeech.terminate();
-  //       });
-  // }
-
-  // public void getUserTimeoutMessage() {
-  //   setSystemMessage(GptPromptEngineering.getTimeoutPrompt());
-  //   executeApiCallWithCallback(
-  //       () -> {
-  //         renderNarrationBox();
-  //         App.setTitle("EscAIpe Room: Timeout");
-  //         textToSpeech.speak("Out of time!");
-  //         textToSpeech.terminate();
-  //       });
-  // }
 }

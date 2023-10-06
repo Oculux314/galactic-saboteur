@@ -15,15 +15,15 @@ import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {
 
+  public static List<PuzzleName> reactorPuzzles;
+  public static List<PuzzleName> laboratoryPuzzles;
+  public static List<PuzzleName> navigationPuzzles;
+
   private Pane panPuzzle;
   private Group grpMapButtons;
 
   private HashMap<PuzzleName, Puzzle> puzzleMap;
   private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
-
-  public static List<PuzzleName> reactorPuzzles;
-  public static List<PuzzleName> laboratoryPuzzles;
-  public static List<PuzzleName> navigationPuzzles;
 
   public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpMapButtons) {
     this.panPuzzle = panPuzzle;
@@ -94,12 +94,14 @@ public class PuzzleLoader {
   }
 
   private Parent loadPuzzle(PuzzleName name) throws IOException {
+    // get and load puzzle fxml
     FXMLLoader loader = new FXMLLoader(getClass().getResource(name.toFxmlUrl()));
     Parent puzzle = loader.load();
     Puzzle puzzleController = loader.getController();
     puzzleController.setRoot(puzzle);
     puzzleController.setPuzzleName(name);
 
+    // save puzzle fxml
     puzzleMap.put(name, puzzleController);
     buttonToPuzzleMap.put(getButtonFromName(name), name);
     addToRoom(name);
