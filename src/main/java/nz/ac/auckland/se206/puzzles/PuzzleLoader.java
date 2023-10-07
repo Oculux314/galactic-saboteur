@@ -20,14 +20,14 @@ public class PuzzleLoader {
   public static List<PuzzleName> navigationPuzzles;
 
   private Pane panPuzzle;
-  private Group grpMapButtons;
+  private Group grpPuzzleButtons;
 
   private HashMap<PuzzleName, Puzzle> puzzleMap;
   private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
 
-  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpMapButtons) {
+  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpPuzzleButtons) {
     this.panPuzzle = panPuzzle;
-    this.grpMapButtons = grpMapButtons;
+    this.grpPuzzleButtons = grpPuzzleButtons;
 
     puzzleMap = new HashMap<>();
     buttonToPuzzleMap = new HashMap<>();
@@ -70,7 +70,7 @@ public class PuzzleLoader {
   }
 
   private void displayChosenPuzzleButtons() {
-    grpMapButtons.getChildren().forEach(button -> button.setVisible(false));
+    grpPuzzleButtons.getChildren().forEach(button -> button.setVisible(false));
 
     getButtonFromName(GameState.reactorPuzzle).setVisible(true);
     getButtonFromName(GameState.laboratoryPuzzle).setVisible(true);
@@ -148,6 +148,6 @@ public class PuzzleLoader {
   }
 
   private AnimatedButton getButtonFromName(PuzzleName name) {
-    return (AnimatedButton) grpMapButtons.lookup(name.toFxmlButtonId());
+    return (AnimatedButton) grpPuzzleButtons.lookup(name.toFxmlButtonId());
   }
 }
