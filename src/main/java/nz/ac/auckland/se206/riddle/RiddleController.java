@@ -8,6 +8,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.StateButton;
+import nz.ac.auckland.se206.controllers.EndController;
 import nz.ac.auckland.se206.controllers.GameController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -48,17 +49,20 @@ public class RiddleController extends StateButton {
 
   @FXML
   private void answerClicked() {
-    GameController gameController =
-        ((GameController) App.getScreen(Screen.Name.GAME).getController());
+    EndController endController =
+        ((EndController) App.getScreen(Screen.Name.END).getController());
 
-    if (btnWho.getState().equals(GameState.correctSuspect)
-        && btnWhere.getState().equals(GameState.correctRoom)
-        && btnWhen.getState().equals(GameState.correctTime)) {
-
-      gameController.showEndScreen(true);
+    if (isCorrectRiddleCombination()) {
+      endController.showEndOnWin();
     } else {
-      gameController.showEndScreen(false);
+      endController.showEndOnLose();
     }
+  }
+
+  private boolean isCorrectRiddleCombination() {
+    return btnWho.getState().equals(GameState.correctSuspect)
+        && btnWhere.getState().equals(GameState.correctRoom)
+        && btnWhen.getState().equals(GameState.correctTime);
   }
 
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
