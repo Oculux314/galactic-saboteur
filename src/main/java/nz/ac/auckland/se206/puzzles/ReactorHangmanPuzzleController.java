@@ -8,8 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javax.swing.JLabel;
 
+/** Controller class for the reactor hangman puzzle. */
 public class ReactorHangmanPuzzleController extends Puzzle {
 
   @FXML private Label letter1;
@@ -32,25 +32,36 @@ public class ReactorHangmanPuzzleController extends Puzzle {
 
   @FXML
   private void initialize() {
-    addLetters();
+    addLabels();
     selectWord();
   }
 
+  /**
+   * Called when the guess button is clicked. Adds valid input into lblGuessedLetters1 or
+   * lblGuessedLetters2.
+   *
+   * @param
+   * @return
+   */
   @FXML
   private void onGuess() throws InterruptedException {
-    lettersguessed++;
     letter = txtGuessLetter.getText();
     addLetter(letter);
-    checkLetter(letter.toUpperCase());
-    txtGuessLetter.clear();
-    checkIfSolved();
   }
 
-  private void addLetter(String letter) {
-    // Check if input is valid
+  /**
+   * Adds a letter to the guessed letters text area
+   *
+   * @param letter the letter to add
+   * @return
+   */
+  private void addLetter(String letter) throws InterruptedException {
     if (!checkValidInput(letter)) {
+      txtGuessLetter.clear();
       return;
     }
+
+    lettersguessed++;
 
     // Determine which label to use based on the condition
     Label label;
@@ -66,16 +77,32 @@ public class ReactorHangmanPuzzleController extends Puzzle {
     } else {
       label.setText(label.getText() + " " + letter.toUpperCase());
     }
+
+    checkLetter(letter.toUpperCase());
   }
 
-  private void checkLetter(String letter) {
+  /**
+   * Checks if the letter is in the word and updates the word accordingly
+   *
+   * @param letter the letter to check
+   * @return
+   */
+  private void checkLetter(String letter) throws InterruptedException {
     for (int i = 0; i < word.length(); i++) {
       if (letter.equals(word.substring(i, i + 1))) {
         setLetter(letter);
       }
     }
+
+    checkIfSolved();
   }
 
+  /**
+   * Checks if the input is valid
+   *
+   * @param letter the letter to check
+   * @return true if the input is valid, false otherwise
+   */
   private boolean checkValidInput(String letter) {
     if (letter.length() > 1
         || !letter.matches("[a-zA-Z]+")
@@ -87,35 +114,32 @@ public class ReactorHangmanPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Checks if the word has been solved
+   *
+   * @param
+   * @return
+   */
   private void checkIfSolved() throws InterruptedException {
+    txtGuessLetter.clear();
     for (Label label : letters) {
-      System.out.println(label.getText());
       if (label.getText().equals("*")) {
         return;
       }
     }
 
+    // Puzzle is solved
     setSolved();
     clearPuzzle(panHangmanPuzzle);
   }
 
-  private boolean isEmpty(List<Label> letters) {
-
-    int count = 0;
-    for (Label letter : letters) {
-      if (letter.getText() != null) {
-        count++;
-      }
-    }
-
-    if (count == 5) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  private void addLetters() {
+  /**
+   * Adds the labels to the letters list
+   *
+   * @param
+   * @return
+   */
+  private void addLabels() {
     letters.add(letter1);
     letters.add(letter2);
     letters.add(letter3);
@@ -123,12 +147,23 @@ public class ReactorHangmanPuzzleController extends Puzzle {
     letters.add(letter5);
   }
 
+  /**
+   * Selects a random word from the words array
+   *
+   * @param
+   * @return
+   */
   private void selectWord() {
     int random = (int) (Math.random() * words.length);
-    word = words[2];
-    System.out.println(word);
+    word = words[random];
   }
 
+  /**
+   * Sets the letter in the word to the letter guessed
+   *
+   * @param letter the letter to set
+   * @return
+   */
   private void setLetter(String letter) {
     for (int i = 0; i < word.length(); i++) {
       if (letter.equals(word.substring(i, i + 1))) {

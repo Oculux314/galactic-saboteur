@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.controllers.MainController;
 import javafx.scene.control.Label;
 
+/** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
 
   @FXML private ImageView imvAxe;
@@ -28,12 +29,19 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private double pressedX, pressedY;
   private Node selectedNode;
 
+   /**
+   * Called when the mouse is pressed
+   *
+   * @param event the mouse event
+   * @return
+   */
   @FXML
   private void onMousePressed(MouseEvent event) {
     if (event.isPrimaryButtonDown()) {
       Node source = (Node) event.getSource();
 
       if (source.equals(imvBottle) || source.equals(imvAxe) || source.equals(imvTorch)) {
+        // Select the node
         selectedNode = source;
         pressedX = event.getSceneX();
         pressedY = event.getSceneY();
@@ -41,6 +49,12 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Called when the mouse is dragged
+   *
+   * @param event the mouse event
+   * @return
+   */
   @FXML
   private void onMouseDragged(MouseEvent event) {
     double offsetX = -selectedNode.getLayoutX();
@@ -70,11 +84,22 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     pressedY = event.getSceneY();
   }
 
+  /**
+   * Called when the mouse is released
+   *
+   * @param event the mouse event
+   * @return
+   */
   @FXML
   private void onMouseReleased(MouseEvent event) {
     selectedNode = null;
   }
 
+  /**
+   * Called when the submit button is clicked. Checks if the answer is correct.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onSubmitClicked() {
     // Check if all tools are in the correct place
@@ -104,6 +129,13 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Checks if a tool is in the corresponding rectangle
+   *
+   * @param tool the tool to check
+   * @param rectangle the rectangle to check
+   * @return true if the tool is in the rectangle, false otherwise
+   */
   private boolean isToolInRectangle(ImageView tool, Rectangle rectangle) {
 
     // Calculate the position of the tool
@@ -123,14 +155,32 @@ public class ReactorToolboxPuzzleController extends Puzzle {
         && toolY + tool.getFitHeight() <= rectY + rectHeight;
   }
 
+  /**
+   * get screen zoom
+   *
+   * @param event The mouse event.
+   */
   private double getScreenZoom() {
     return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenZoom();
   }
 
+  /**
+   * Clamps a value between a minimum and maximum value
+   *
+   * @param value the value to clamp
+   * @param min the minimum value
+   * @param max the maximum value
+   * @return the clamped value
+   */
   private double clamp(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
   }
 
+  /**
+   * Called when the puzzle is solved
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onSolved() {
     setSolved();
