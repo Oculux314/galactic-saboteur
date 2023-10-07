@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.animation.KeyFrame;
@@ -62,9 +61,8 @@ public class App extends Application {
    * does not exist. Assumes there is only one screen currently active.
    *
    * @param screenName The name of the screen to set.
-   * @throws IOException If the screen does not exist and the FXML file for the screen is not found.
    */
-  public static void setScreen(final Screen.Name screenName) throws IOException {
+  public static void setScreen(final Screen.Name screenName) {
     GameState.currentScreen = screenName;
 
     if (!screens.containsKey(screenName)) {
@@ -104,9 +102,8 @@ public class App extends Application {
    * Creates a screen with the given name, and stores it in the screens map.
    *
    * @param screenName The name of the screen to create.
-   * @throws IOException If the FXML file for the screen is not found.
    */
-  private static void makeScreen(final Screen.Name screenName) throws IOException {
+  private static void makeScreen(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
     screens.put(screenName, new Screen(loader));
@@ -130,12 +127,12 @@ public class App extends Application {
     return stage.getScene();
   }
 
-  public static void restart() throws IOException {
+  public static void restart() {
     GameState.reset();
     resetScreens();
   }
 
-  private static void resetScreens() throws IOException {
+  private static void resetScreens() {
     Thread screenLoader =
         new Thread(
             () -> {
@@ -144,11 +141,7 @@ public class App extends Application {
                   continue;
                 }
 
-                try {
-                  makeScreen(screenName);
-                } catch (IOException e) {
-                  e.printStackTrace();
-                }
+                makeScreen(screenName);
               }
             });
 
@@ -196,11 +189,9 @@ public class App extends Application {
    * </ul>
    *
    * @param newStage The primary stage of the application.
-   * @throws IOException If either "main.fxml" or "title.fxml" is not found in
-   *     "src/main/resources/fxml/".
    */
   @Override
-  public void start(final Stage newStage) throws IOException {
+  public void start(final Stage newStage) {
     App.stage = newStage;
 
     // Set up screen graph
