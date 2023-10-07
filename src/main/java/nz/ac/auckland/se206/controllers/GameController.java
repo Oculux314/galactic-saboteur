@@ -56,7 +56,10 @@ public class GameController implements Controller {
 
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
+
+  @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
+  @FXML private Group grpOtherButtons;
 
   @FXML private Polyline btnPanelHide;
   @FXML private Group panelContainer;
@@ -156,6 +159,28 @@ public class GameController implements Controller {
     labelHintsLeft.setText("Hints left: ");
 
     intialiseMapButtons();
+    highlightReactor();
+  }
+
+  private void unhiglightAllMapButtons() {
+    for (HighlightButton button : mapButtons.values()) {
+      button.unhighlight();
+    }
+  }
+
+  private void highlightReactor() {
+    unhiglightAllMapButtons();
+    mapButtons.get("btnReactor").highlight();
+  }
+
+  private void highlightAllMapButtonsOfType(Group group) {
+    unhiglightAllMapButtons();
+
+    for (HighlightButton button : mapButtons.values()) {
+      if (button.parentProperty().getValue() == group) {
+        button.highlight();
+      }
+    }
   }
 
   private void intialiseMapButtons() {
@@ -170,8 +195,6 @@ public class GameController implements Controller {
 
       intialiseMapButtonsInGroup(mapButtonGroup);
     }
-
-    mapButtons.get("btnNavigationComputer").highlight();
   }
 
   private void intialiseMapButtonsInGroup(Group mapButtonGroup) {
