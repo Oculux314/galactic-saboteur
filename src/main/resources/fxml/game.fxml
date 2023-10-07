@@ -329,17 +329,6 @@
             <Label fx:id="timer" alignment="CENTER" layoutX="601.0" layoutY="22.0" prefHeight="26.0" prefWidth="111.0" textOverrun="CLIP" />
          </children>
       </Group>
-      <Pane fx:id="panEnd" prefHeight="600.0" prefWidth="800.0" visible="false">
-         <children>
-            <ImageView fx:id="imageEnd" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/expo1.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="lblEnd" alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="72.0" text="You Saved The Ship And Escaped!" textAlignment="CENTER" />
-            <Button layoutX="373.0" layoutY="510.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
-         </children>
-      </Pane>
       <Group fx:id="grpTimer1" layoutX="-400.0" layoutY="-10.0">
          <children>
             <ImageView fitHeight="41.0" fitWidth="340.0" layoutX="612.0" layoutY="15.0" pickOnBounds="true">
@@ -350,5 +339,7 @@
             <Label fx:id="labelHintsLeft" alignment="TOP_CENTER" layoutX="694.0" layoutY="23.0" prefHeight="26.0" prefWidth="176.0" textOverrun="CLIP" />
          </children>
       </Group>
+      <Button fx:id="btnRestart" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
+      <Button fx:id="btnEnd" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#onEndClicked" prefWidth="60.0" text="End" />
    </children>
 </Pane>

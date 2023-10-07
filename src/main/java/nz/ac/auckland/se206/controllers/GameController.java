@@ -12,7 +12,6 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -328,24 +327,18 @@ public class GameController implements Controller {
     } else {
       riddleController.enableButton();
     }
-
-    EndController endController = (EndController) App.getScreen(Screen.Name.END).getController();
-    endController.showEndOnLose();
-  }
-
-  public void showEndScreen(boolean isWon) {
-    panEnd.setVisible(true);
-
-    if (!isWon) {
-      lblEnd.setText(App.speak("Gameover. You lost."));
-      imageEnd.setImage(new Image("gameover.png"));
-    } else {
-      App.speak("You win!");
-    }
   }
 
   @FXML
   private void onRestartClicked() throws IOException {
+    // TODO: TEMPORARY DEV TOOL
     App.restart();
+  }
+
+  @FXML
+  private void onEndClicked() throws IOException {
+    // TODO: TEMPORARY DEV TOOL
+    EndController endController = (EndController) App.getScreen(Screen.Name.END).getController();
+    endController.showEndOnLose();
   }
 }

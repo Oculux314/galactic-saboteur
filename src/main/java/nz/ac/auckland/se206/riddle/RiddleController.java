@@ -9,7 +9,6 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.controllers.EndController;
-import nz.ac.auckland.se206.controllers.GameController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -49,8 +48,7 @@ public class RiddleController extends StateButton {
 
   @FXML
   private void answerClicked() {
-    EndController endController =
-        ((EndController) App.getScreen(Screen.Name.END).getController());
+    EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
 
     if (isCorrectRiddleCombination()) {
       endController.showEndOnWin();
