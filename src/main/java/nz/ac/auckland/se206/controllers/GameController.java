@@ -166,13 +166,20 @@ public class GameController implements Controller {
                 event -> {
                   timerData.decrementSeconds();
                   if (timerData.getSeconds() <= 0) {
-                    countdownTimer.stop();
+                    stopTimer();
                   }
                   updateTimerDisplay(timerData.getSeconds());
                 }));
 
     countdownTimer.setCycleCount(Timeline.INDEFINITE);
     countdownTimer.play();
+  }
+
+  private void stopTimer() {
+    countdownTimer.stop();
+
+    EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
+    endController.showEndOnTimeout();
   }
 
   public void updateTimerDisplay(int initialSeconds) {

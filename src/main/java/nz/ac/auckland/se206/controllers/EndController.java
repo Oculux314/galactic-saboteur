@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
 
@@ -36,7 +37,7 @@ public class EndController implements Controller {
 
   public void showEndOnTimeout() {
     showEndScreen();
-    throw new UnsupportedOperationException("Not implemented yet");
+    setEndElements("gameover.png", "Gameover.", "Gameover.\nReactor meltdown complete.", "RED");
   }
 
   @FXML
