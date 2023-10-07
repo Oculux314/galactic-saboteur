@@ -24,6 +24,7 @@ import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GameState.HighlightState;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
@@ -159,7 +160,37 @@ public class GameController implements Controller {
     labelHintsLeft.setText("Hints left: ");
 
     intialiseMapButtons();
-    highlightReactor();
+    progressHighlightStateTo(HighlightState.REACTOR_INITAL);
+  }
+
+  private void progressHighlightStateTo(HighlightState newState) {
+    HighlightState nextState = HighlightState.values()[GameState.highlightState.ordinal() + 1];
+
+    if (newState == nextState) {
+      forceHighlightStateTo(newState);
+    }
+  }
+
+  private void forceHighlightStateTo(HighlightState newState) {
+    GameState.highlightState = newState;
+
+    // Highlight map buttons based on new state
+    switch (newState) {
+      case PAN_ARROWS:
+        break;
+      case REACTOR_INITAL:
+        highlightReactor();
+        break;
+      case SUSPECTS:
+        highlightAllMapButtonsOfType(grpSuspectButtons);
+        break;
+      case PUZZLES:
+        unhiglightAllMapButtons();
+        break;
+      case REACTOR_FINAL:
+        highlightReactor();
+        break;
+    }
   }
 
   private void unhiglightAllMapButtons() {
@@ -280,22 +311,32 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked(MouseEvent event) {
-
     if (event.getSource() == btnExit) {
+
       minimisePuzzleWindow();
-      // If puzzle was solved, get the clue
       if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
+        // If puzzle was solved, get the clue
         fullSidePanelController.getRandomClue();
         solvedPuzzles.add(lastClickedPuzzle);
+
+        // If all puzzles are solved, highlight the reactor
+        if (solvedPuzzles.size() == 3) {
+          progressHighlightStateTo(HighlightState.REACTOR_FINAL);
+        }
       }
+
     } else if (event.getSource() == btnGptExitScientist) {
       grpGptScientist.setVisible(false);
+      progressHighlightStateTo(HighlightState.PUZZLES);
     } else if (event.getSource() == btnGptExitMechanic) {
       grpGptMechanic.setVisible(false);
+      progressHighlightStateTo(HighlightState.PUZZLES);
     } else if (event.getSource() == btnGptExitCaptain) {
       grpGptCaptain.setVisible(false);
+      progressHighlightStateTo(HighlightState.PUZZLES);
     } else {
       grpRiddle.setVisible(false);
+      progressHighlightStateTo(HighlightState.SUSPECTS);
     }
   }
 

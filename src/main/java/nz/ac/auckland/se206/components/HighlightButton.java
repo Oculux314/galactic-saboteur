@@ -28,4 +28,9 @@ public class HighlightButton extends StateButton {
   public void unhighlight() {
     setState("normal");
   }
+
+  @Override
+  protected void onClick() {
+    // Do nothing
+  }
 }
