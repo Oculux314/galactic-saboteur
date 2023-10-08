@@ -45,17 +45,17 @@ public class PuzzleLoader {
     try {
       setPuzzle(PuzzleName.REACTOR_TOOLBOX);
       setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
-      setPuzzle(PuzzleName.REACTOR_APPLE);
       setPuzzle(PuzzleName.LABORATORY_TESTTUBES);
       setPuzzle(PuzzleName.NAVIGATION_COMPUTER);
+      setPuzzle(PuzzleName.REACTOR_HANGMAN);
     } catch (IllegalStateException | IOException e) {
       e.printStackTrace();
     }
   }
 
   private void choosePuzzles() {
-    // force reactor puzzle to be button pad
-    GameState.reactorPuzzle = PuzzleName.REACTOR_BUTTONPAD;
+    // select a random puzzle
+    GameState.reactorPuzzle = getRandomPuzzle(reactorPuzzles);
     GameState.laboratoryPuzzle = getRandomPuzzle(laboratoryPuzzles);
     GameState.navigationPuzzle = getRandomPuzzle(navigationPuzzles);
   }
