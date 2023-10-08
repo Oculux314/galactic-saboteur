@@ -305,7 +305,7 @@ public class GameController implements Controller {
     if (GameState.difficulty == "easy") {
       labelHintsLeft.setText("You Have Unlimited Hints");
     } else if (GameState.difficulty == "medium") {
-      labelHintsLeft.setText("You have " + GameState.getHintLimitRemaining() + " Hints Left");
+      labelHintsLeft.setText("You Have " + GameState.getHintLimitRemaining() + " Hints Left");
     } else {
       labelHintsLeft.setText("No Hints Are Allowed");
     }

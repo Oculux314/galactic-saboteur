@@ -39,17 +39,17 @@
             <Label fx:id="timeClueInformationLabel" alignment="CENTER" layoutX="25.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
             <Label fx:id="whereClueInformationLabel" alignment="CENTER" layoutX="185.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
             <Label fx:id="whoClueInformationLabel" alignment="CENTER" layoutX="345.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
-            <ImageView fitHeight="23.0" fitWidth="93.0" layoutX="50.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="50.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/sidepanel/lbltime.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="118.0" layoutX="193.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="24.0" fitWidth="118.0" layoutX="193.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/sidepanel/lblwhere.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="93.0" layoutX="372.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="372.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/sidepanel/lblwho.png" />
                </image>
