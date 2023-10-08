@@ -77,7 +77,7 @@
             </Group>
             <Group fx:id="grpOtherButtons">
                <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="115.0" fitWidth="101.0" layoutX="350.0" layoutY="230.0" onMouseClicked="#riddleClicked" preserveRatio="true">
+                  <HighlightButton fx:id="btnReactor" fitHeight="118.0" fitWidth="93.0" layoutX="353.0" layoutY="242.0" onMouseClicked="#riddleClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/reactor-machine.png" />
                      </image>
@@ -115,95 +115,6 @@
                   <Image url="@../images/exit.png" />
                </image>
             </AnimatedButton>
-         </children>
-      </Group>
-
-       <Group fx:id="grpGpt">
-         <children>
-            <Group fx:id="grpGptCaptain">
-               <children>
-                  <Pane fx:id="paneNarrationCaptain" prefHeight="590.0" prefWidth="794.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
-                        <TextField fx:id="textResponseCaptain" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
-                        <TextArea fx:id="labelNarrationCaptain" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="213.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/captain.png" />
-                           </image>
-                        </ImageView>
-                        <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
-                        <Polyline fill="#80ff0000" layoutX="290.0" layoutY="187.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
-                        <StateButton fx:id="hintsCaptain" fitHeight="43.0" fitWidth="145.0" layoutX="393.0" layoutY="296.0">
-                           <image>
-                              <Image url="@../images/btnhint.png" />
-                           </image>
-                        </StateButton>
-                        <AnimatedButton fx:id="btnGptExitCaptain" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/exit.png" />
-                           </image>
-                        </AnimatedButton>
-                     </children>
-                  </Pane>
-               </children>
-            </Group>
-            <Group fx:id="grpGptMechanic">
-               <children>
-                  <Pane fx:id="paneNarrationMechanic" prefHeight="590.0" prefWidth="794.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
-                        <TextField fx:id="textResponseMechanic" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
-                        <TextArea fx:id="labelNarrationMechanic" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="213.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/mechanic.png" />
-                           </image>
-                        </ImageView>
-                        <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
-                        <Polyline fill="#80ff0000" layoutX="290.0" layoutY="187.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
-                        <StateButton fx:id="hintsMechanic" fitHeight="43.0" fitWidth="145.0" layoutX="393.0" layoutY="296.0">
-                           <image>
-                              <Image url="@../images/btnhint.png" />
-                           </image>
-                        </StateButton>
-                        <AnimatedButton fx:id="btnGptExitMechanic" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/exit.png" />
-                           </image>
-                        </AnimatedButton>
-                     </children>
-                  </Pane>
-               </children>
-            </Group>
-            <Group fx:id="grpGptScientist">
-               <children>
-                <Pane fx:id="paneNarrationScientist" prefHeight="590.0" prefWidth="794.0">
-                     <children>
-                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
-                        <TextField fx:id="textResponseScientist" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
-                        <TextArea fx:id="labelNarrationScientist" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="213.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/labgpt.png" />
-                           </image>
-                        </ImageView>
-                        <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
-                        <Polyline fill="#80ff0000" layoutX="290.0" layoutY="187.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
-                        <StateButton fx:id="hintsScientist" fitHeight="43.0" fitWidth="145.0" layoutX="393.0" layoutY="296.0">
-                           <image>
-                              <Image url="@../images/btnhint.png" />
-                           </image>
-                        </StateButton>
-                        <AnimatedButton fx:id="btnGptExitScientist" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/exit.png" />
-                           </image>
-                        </AnimatedButton>
-                     </children>
-                  </Pane>
-               </children>
-            </Group>
          </children>
       </Group>
       <Group fx:id="grpRiddle">
@@ -246,6 +157,95 @@
                </image>
             </ImageView>
             <Label fx:id="labelHintsLeft" alignment="TOP_CENTER" layoutX="694.0" layoutY="23.0" prefHeight="26.0" prefWidth="176.0" textOverrun="CLIP" />
+         </children>
+      </Group>
+
+       <Group fx:id="grpGpt">
+         <children>
+            <Group fx:id="grpGptCaptain">
+               <children>
+                  <Pane fx:id="paneNarrationCaptain" prefHeight="590.0" prefWidth="794.0">
+                     <children>
+                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
+                        <TextField fx:id="textResponseCaptain" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
+                        <TextArea fx:id="labelNarrationCaptain" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
+                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="240.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/captain.png" />
+                           </image>
+                        </ImageView>
+                        <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
+                        <Polyline fill="#80ff0000" layoutX="290.0" layoutY="187.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
+                        <StateButton fx:id="hintsCaptain" fitHeight="43.0" fitWidth="145.0" layoutX="393.0" layoutY="296.0">
+                           <image>
+                              <Image url="@../images/btnhint.png" />
+                           </image>
+                        </StateButton>
+                        <AnimatedButton fx:id="btnGptExitCaptain" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/exit.png" />
+                           </image>
+                        </AnimatedButton>
+                     </children>
+                  </Pane>
+               </children>
+            </Group>
+            <Group fx:id="grpGptMechanic">
+               <children>
+                  <Pane fx:id="paneNarrationMechanic" prefHeight="590.0" prefWidth="794.0">
+                     <children>
+                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
+                        <TextField fx:id="textResponseMechanic" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
+                        <TextArea fx:id="labelNarrationMechanic" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
+                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="240.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/mechanic.png" />
+                           </image>
+                        </ImageView>
+                        <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
+                        <Polyline fill="#80ff0000" layoutX="290.0" layoutY="187.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
+                        <StateButton fx:id="hintsMechanic" fitHeight="43.0" fitWidth="145.0" layoutX="393.0" layoutY="296.0">
+                           <image>
+                              <Image url="@../images/btnhint.png" />
+                           </image>
+                        </StateButton>
+                        <AnimatedButton fx:id="btnGptExitMechanic" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/exit.png" />
+                           </image>
+                        </AnimatedButton>
+                     </children>
+                  </Pane>
+               </children>
+            </Group>
+            <Group fx:id="grpGptScientist">
+               <children>
+                <Pane fx:id="paneNarrationScientist" prefHeight="590.0" prefWidth="794.0">
+                     <children>
+                        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
+                        <TextField fx:id="textResponseScientist" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
+                        <TextArea fx:id="labelNarrationScientist" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
+                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="240.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/scientist.png" />
+                           </image>
+                        </ImageView>
+                        <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
+                        <Polyline fill="#80ff0000" layoutX="290.0" layoutY="187.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
+                        <StateButton fx:id="hintsScientist" fitHeight="43.0" fitWidth="145.0" layoutX="393.0" layoutY="296.0">
+                           <image>
+                              <Image url="@../images/btnhint.png" />
+                           </image>
+                        </StateButton>
+                        <AnimatedButton fx:id="btnGptExitScientist" fitHeight="29.0" fitWidth="32.0" layoutX="225.0" layoutY="113.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/exit.png" />
+                           </image>
+                        </AnimatedButton>
+                     </children>
+                  </Pane>
+               </children>
+            </Group>
          </children>
       </Group>
    </children>
