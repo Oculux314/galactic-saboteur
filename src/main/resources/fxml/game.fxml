@@ -24,29 +24,24 @@
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/new%20assets/space-station.png" />
+                  <Image url="@../images/space-station.png" />
                </image>
             </ImageView>
             <Group fx:id="grpSuspectButtons">
                <children>
                   <HighlightButton fx:id="gptScientist" fitHeight="90.0" fitWidth="85.0" layoutX="160.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
-               <image>
-                  <Image url="@../images/new%20assets/scientist.png" />
-               </image>
-            </AnimatedButton>
-            <AnimatedButton fx:id="gptCaptain" fitHeight="90.0" fitWidth="115.0" layoutX="590.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
-                        <Image url="@../images/new%20assets/captain.png" />
+                        <Image url="@../images/scientist.png" />
+                     </image>
+                  </HighlightButton>
+                  <HighlightButton fx:id="gptCaptain" fitHeight="90.0" fitWidth="115.0" layoutX="590.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/captain.png" />
                      </image>
                   </HighlightButton>
                   <HighlightButton fx:id="gptMechanic" fitHeight="90.0" fitWidth="101.0" layoutX="440.0" layoutY="290.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
-                        <Image url="@../images/new%20assets/mechanic.png" />
-                     </image>
-                  </HighlightButton>
-                  <HighlightButton fx:id="btnReactor" fitHeight="115.0" fitWidth="101.0" layoutX="350.0" layoutY="230.0" onMouseClicked="#riddleClicked" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/new%20assets/reactor-machine.png" />
+                        <Image url="@../images/mechanic.png" />
                      </image>
                   </HighlightButton>
                </children>
@@ -55,25 +50,25 @@
                <children>
                   <HighlightButton fx:id="btnReactorHangman" fitHeight="44.0" fitWidth="62.0" layoutX="303.0" layoutY="250.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/new%20assets/whiteboard.png" />
+                        <Image url="@../images/whiteboard.png" />
                      </image>
                   </HighlightButton>
                <HighlightButton fx:id="btnReactorToolbox" fitHeight="18.0" fitWidth="39.0" layoutX="287.0" layoutY="321.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/new%20assets/toolbox.png" />
+                        <Image url="@../images/toolbox.png" />
                      </image>
                   </HighlightButton>
                   <HighlightButton fx:id="btnReactorButtonpad" fitHeight="29.0" fitWidth="23.0" layoutX="475.0" layoutY="264.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/new%20assets/buttonpad.png" />
+                        <Image url="@../images/buttonpad.png" />
                      </image>
                   </HighlightButton>
                   <HighlightButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="120.0" layoutY="293.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/new%20assets/test-tubes.png" />
+                        <Image url="@../images/test-tubes.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="btnNavigationComputer" fitHeight="88.0" fitWidth="31.0" layoutX="591.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked">
+                  <HighlightButton fx:id="btnNavigationComputer" fitHeight="45.0" fitWidth="68.0" layoutX="630.0" layoutY="245.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
                         <Image url="@../images/computer.png" />
                      </image>
@@ -82,9 +77,9 @@
             </Group>
             <Group fx:id="grpOtherButtons">
                <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="148.0" fitWidth="93.0" layoutX="77.0" layoutY="234.0" onMouseClicked="#riddleClicked">
+                  <HighlightButton fx:id="btnReactor" fitHeight="115.0" fitWidth="101.0" layoutX="350.0" layoutY="230.0" onMouseClicked="#riddleClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/reactorcrop.png" />
+                        <Image url="@../images/reactor-machine.png" />
                      </image>
                   </HighlightButton>
                </children>
