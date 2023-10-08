@@ -15,13 +15,15 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.components.AnimatedButton;
+ 
 
 public class RiddleController extends StateButton {
 
   @FXML private StateButton btnWho = new StateButton();
   @FXML private StateButton btnWhere = new StateButton();
   @FXML private StateButton btnWhen = new StateButton();
-  @FXML private Button btnAnswer;
+  @FXML private AnimatedButton btnAnswer;
   @FXML private TextArea gptTextArea = new TextArea();
 
   private ChatCompletionRequest chatCompletionRequest;
@@ -41,7 +43,7 @@ public class RiddleController extends StateButton {
     btnWhen.addState("Night", "times/time3.jpg");
 
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(150);
+        new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(75);
 
     generateRiddle();
   }
