@@ -15,6 +15,7 @@
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
+<?import nz.ac.auckland.se206.components.HighlightButton?>
 <?import nz.ac.auckland.se206.components.StateButton?>
 
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameController">
@@ -26,133 +27,26 @@
                   <Image url="@../images/ship.png" />
                </image>
             </ImageView>
-            <GridPane gridLinesVisible="true" prefHeight="600.0" prefWidth="800.0" visible="false">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <AnimatedButton fx:id="gptScientist" fitHeight="56.0" fitWidth="39.0" layoutX="400.0" layoutY="237.0" onMouseClicked="#gptStart">
-               <image>
-                  <Image url="@../images/labgpt.png" />
-               </image>
-            </AnimatedButton>
-            <AnimatedButton fx:id="gptCaptain" fitHeight="56.0" fitWidth="39.0" layoutX="554.0" layoutY="329.0" onMouseClicked="#gptStart">
-               <image>
-                  <Image url="@../images/captain.png" />
-               </image>
-            </AnimatedButton>
-            <AnimatedButton fx:id="gptMechanic" fitHeight="56.0" fitWidth="42.0" layoutX="209.0" layoutY="359.0" onMouseClicked="#gptStart">
-               <image>
-                  <Image url="@../images/mechanic.png" />
-               </image>
-            </AnimatedButton>
-            
-            <Group fx:id="grpMapButtons">
+            <Group fx:id="grpSuspectButtons">
+               <children>
+                  <HighlightButton fx:id="gptScientist" fitHeight="56.0" fitWidth="39.0" layoutX="400.0" layoutY="237.0" onMouseClicked="#gptStart">
+                     <image>
+                        <Image url="@../images/labgpt.png" />
+                     </image>
+                  </HighlightButton>
+                  <HighlightButton fx:id="gptCaptain" fitHeight="56.0" fitWidth="39.0" layoutX="554.0" layoutY="329.0" onMouseClicked="#gptStart">
+                     <image>
+                        <Image url="@../images/captain.png" />
+                     </image>
+                  </HighlightButton>
+                  <HighlightButton fx:id="gptMechanic" fitHeight="56.0" fitWidth="42.0" layoutX="209.0" layoutY="359.0" onMouseClicked="#gptStart">
+                     <image>
+                        <Image url="@../images/mechanic.png" />
+                     </image>
+                  </HighlightButton>
+               </children>
+            </Group>
+            <Group fx:id="grpPuzzleButtons">
                <children>
                   <AnimatedButton fx:id="btnReactorHangman" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="150.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
@@ -163,29 +57,38 @@
                      <image>
                         <Image url="@../images/toolbox.png" />
                      </image>
-                  </AnimatedButton>
-                  <AnimatedButton fx:id="btnReactorButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                  </HighlightButton>
+                  <HighlightButton fx:id="btnReactorButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/buttonpad.png" />
                      </image>
-                  </AnimatedButton>
-                  <AnimatedButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
+                  </HighlightButton>
+                  <HighlightButton fx:id="btnReactorApple" fitWidth="40.0" layoutX="150.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/apple.png" />
+                     </image>
+                  </HighlightButton>
+                  <HighlightButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
                         <Image url="@../images/testtubes.png" />
                      </image>
-                  </AnimatedButton>
-                  <AnimatedButton fx:id="btnNavigationComputer" fitHeight="50.0" fitWidth="20.0" layoutX="625.0" layoutY="250.0" onMouseClicked="#onPuzzleButtonClicked">
+                  </HighlightButton>
+                  <HighlightButton fx:id="btnNavigationComputer" fitHeight="88.0" fitWidth="31.0" layoutX="591.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
-                        <Image url="@../images/placeholder.png" />
+                        <Image url="@../images/computer.png" />
                      </image>
-                  </AnimatedButton>
+                  </HighlightButton>
                </children>
             </Group>
-            <AnimatedButton fx:id="btnReactor" fitHeight="148.0" fitWidth="93.0" layoutX="77.0" layoutY="234.0" onMouseClicked="#riddleClicked">
-               <image>
-                  <Image url="@../images/reactorcrop.png" />
-               </image>
-            </AnimatedButton>
+            <Group fx:id="grpOtherButtons">
+               <children>
+                  <HighlightButton fx:id="btnReactor" fitHeight="148.0" fitWidth="93.0" layoutX="77.0" layoutY="234.0" onMouseClicked="#riddleClicked">
+                     <image>
+                        <Image url="@../images/reactorcrop.png" />
+                     </image>
+                  </HighlightButton>
+               </children>
+            </Group>
          </children>
       </Group>
       <Polyline fx:id="btnPanelHide" fill="#58dd94" layoutX="267.0" layoutY="107.0" onMouseClicked="#btnPanelHidePressed" points="-36.13677978515625, -39.99999237060547, -59.29461669921875, -25.50141143798828, -36.13676452636719, -11.342330932617188, -36.13677978515625, -39.99999237060547" stroke="#ebe7d9" strokeType="INSIDE" strokeWidth="1.5" />
@@ -194,7 +97,7 @@
             <fx:include fx:id="fullSidePanel" layoutY="65.0" source="sidepanel.fxml" />
          </children>
       </Group>
-      <Group fx:id="grpPuzzleCommons" visible="false">
+      <Group fx:id="grpPuzzleCommons">
          <children>
             <Pane fx:id="panBlockPuzzleBackgound" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">

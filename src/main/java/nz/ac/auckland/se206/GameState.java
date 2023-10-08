@@ -4,6 +4,13 @@ import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 /** Represents the state of the game. */
 public class GameState {
+  public enum HighlightState {
+    PAN_ARROWS,
+    REACTOR_INITAL,
+    SUSPECTS,
+    PUZZLES,
+    REACTOR_FINAL
+  }
 
   public static boolean isRunning = true;
   public static boolean cluesFound = false;
@@ -27,6 +34,7 @@ public class GameState {
   public static PuzzleName reactorPuzzle;
   public static PuzzleName laboratoryPuzzle;
   public static PuzzleName navigationPuzzle;
+  public static HighlightState highlightState;
 
   public static void reset() {
     currentScreen = null;
@@ -34,6 +42,8 @@ public class GameState {
     laboratoryPuzzle = null;
     navigationPuzzle = null;
     timeLimit = 2;
+    highlightState = HighlightState.PAN_ARROWS;
+
     numberOfHintsAsked = 0;
   }
 

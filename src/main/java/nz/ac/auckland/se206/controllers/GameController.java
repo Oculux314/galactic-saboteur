@@ -3,12 +3,14 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -22,7 +24,9 @@ import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GameState.HighlightState;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
@@ -53,7 +57,10 @@ public class GameController implements Controller {
 
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
-  @FXML private Group grpMapButtons;
+
+  @FXML private Group grpSuspectButtons;
+  @FXML private Group grpPuzzleButtons;
+  @FXML private Group grpOtherButtons;
 
   @FXML private Polyline btnPanelHide;
   @FXML private Group panelContainer;
@@ -101,6 +108,7 @@ public class GameController implements Controller {
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
   private Set<Puzzle> solvedPuzzles = new HashSet<>();
+  private Map<String, HighlightButton> mapButtons = new HashMap<>();
 
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
@@ -109,7 +117,7 @@ public class GameController implements Controller {
 
   @FXML
   private void initialize() {
-    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpMapButtons);
+    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpPuzzleButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
     // Set the narration boxes
     NarrationBox narrationBox1 =
@@ -150,6 +158,88 @@ public class GameController implements Controller {
     grpRiddle.setVisible(false);
 
     labelHintsLeft.setText("Hints left: ");
+
+    intialiseMapButtons();
+    progressHighlightStateTo(HighlightState.REACTOR_INITAL);
+  }
+
+  private void progressHighlightStateTo(HighlightState newState) {
+    HighlightState nextState = HighlightState.values()[GameState.highlightState.ordinal() + 1];
+
+    if (newState == nextState) {
+      forceHighlightStateTo(newState);
+    }
+  }
+
+  private void forceHighlightStateTo(HighlightState newState) {
+    GameState.highlightState = newState;
+
+    // Highlight map buttons based on new state
+    switch (newState) {
+      case PAN_ARROWS:
+        break;
+      case REACTOR_INITAL:
+        highlightReactor();
+        break;
+      case SUSPECTS:
+        highlightAllMapButtonsOfType(grpSuspectButtons);
+        break;
+      case PUZZLES:
+        unhiglightAllMapButtons();
+        break;
+      case REACTOR_FINAL:
+        highlightReactor();
+        break;
+    }
+  }
+
+  private void unhiglightAllMapButtons() {
+    for (HighlightButton button : mapButtons.values()) {
+      button.unhighlight();
+    }
+  }
+
+  private void highlightReactor() {
+    unhiglightAllMapButtons();
+    mapButtons.get("btnReactor").highlight();
+  }
+
+  private void highlightAllMapButtonsOfType(Group group) {
+    unhiglightAllMapButtons();
+
+    for (HighlightButton button : mapButtons.values()) {
+      if (button.parentProperty().getValue() == group) {
+        button.highlight();
+      }
+    }
+  }
+
+  private void intialiseMapButtons() {
+    for (Node node : grpPanZoom.getChildren()) {
+      Group mapButtonGroup;
+
+      try {
+        mapButtonGroup = (Group) node;
+      } catch (ClassCastException e) {
+        continue;
+      }
+
+      intialiseMapButtonsInGroup(mapButtonGroup);
+    }
+  }
+
+  private void intialiseMapButtonsInGroup(Group mapButtonGroup) {
+    for (Node node : mapButtonGroup.getChildren()) {
+      HighlightButton mapButton;
+
+      try {
+        mapButton = (HighlightButton) node;
+      } catch (ClassCastException e) {
+        continue;
+      }
+
+      addMapButton(mapButton);
+    }
   }
 
   public void startTimer() {
@@ -221,22 +311,32 @@ public class GameController implements Controller {
 
   @FXML
   private void onExitClicked(MouseEvent event) {
-
     if (event.getSource() == btnExit) {
+
       minimisePuzzleWindow();
-      // If puzzle was solved, get the clue
       if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
+        // If puzzle was solved, get the clue
         fullSidePanelController.getRandomClue();
         solvedPuzzles.add(lastClickedPuzzle);
+
+        // If all puzzles are solved, highlight the reactor
+        if (solvedPuzzles.size() == 3) {
+          progressHighlightStateTo(HighlightState.REACTOR_FINAL);
+        }
       }
+
     } else if (event.getSource() == btnGptExitScientist) {
       grpGptScientist.setVisible(false);
+      progressHighlightStateTo(HighlightState.PUZZLES);
     } else if (event.getSource() == btnGptExitMechanic) {
       grpGptMechanic.setVisible(false);
+      progressHighlightStateTo(HighlightState.PUZZLES);
     } else if (event.getSource() == btnGptExitCaptain) {
       grpGptCaptain.setVisible(false);
+      progressHighlightStateTo(HighlightState.PUZZLES);
     } else {
       grpRiddle.setVisible(false);
+      progressHighlightStateTo(HighlightState.SUSPECTS);
     }
   }
 
@@ -343,5 +443,10 @@ public class GameController implements Controller {
     } else {
       App.speak("You win!");
     }
+  }
+
+  public void addMapButton(HighlightButton mapButton) {
+    mapButton.initialise();
+    mapButtons.put(mapButton.getId(), mapButton);
   }
 }
