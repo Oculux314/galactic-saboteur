@@ -29,17 +29,17 @@
             </ImageView>
             <Group fx:id="grpSuspectButtons">
                <children>
-                  <HighlightButton fx:id="gptScientist" fitHeight="90.0" fitWidth="85.0" layoutX="160.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
+                  <HighlightButton fx:id="gptScientist" fitHeight="105.0" fitWidth="85.0" layoutX="167.0" layoutY="255.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
                         <Image url="@../images/scientist.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="gptCaptain" fitHeight="90.0" fitWidth="115.0" layoutX="590.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
+                  <HighlightButton fx:id="gptCaptain" fitHeight="110.0" fitWidth="115.0" layoutX="595.0" layoutY="250.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
                         <Image url="@../images/captain.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="gptMechanic" fitHeight="90.0" fitWidth="101.0" layoutX="440.0" layoutY="290.0" onMouseClicked="#gptStart" preserveRatio="true">
+                  <HighlightButton fx:id="gptMechanic" fitHeight="110.0" fitWidth="101.0" layoutX="436.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
                         <Image url="@../images/mechanic.png" />
                      </image>
@@ -77,7 +77,7 @@
             </Group>
             <Group fx:id="grpOtherButtons">
                <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="118.0" fitWidth="93.0" layoutX="353.0" layoutY="242.0" onMouseClicked="#riddleClicked" preserveRatio="true">
+                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#riddleClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/reactor-machine.png" />
                      </image>
@@ -169,7 +169,7 @@
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseCaptain" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
                         <TextArea fx:id="labelNarrationCaptain" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="240.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="220.0" fitWidth="67.0" layoutX="240.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/captain.png" />
                            </image>
@@ -197,7 +197,7 @@
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseMechanic" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
                         <TextArea fx:id="labelNarrationMechanic" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="240.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="220.0" fitWidth="165.0" layoutX="240.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/mechanic.png" />
                            </image>
@@ -225,7 +225,7 @@
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseScientist" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
                         <TextArea fx:id="labelNarrationScientist" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="240.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="220.0" fitWidth="165.0" layoutX="240.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/scientist.png" />
                            </image>
