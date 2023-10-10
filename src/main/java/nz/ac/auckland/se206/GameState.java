@@ -4,6 +4,13 @@ import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 /** Represents the state of the game. */
 public class GameState {
+  public enum HighlightState {
+    PAN_ARROWS,
+    REACTOR_INITAL,
+    SUSPECTS,
+    PUZZLES,
+    REACTOR_FINAL
+  }
 
   public static boolean isRunning = true;
   public static String difficulty = "easy";
@@ -13,6 +20,7 @@ public class GameState {
   public static Screen.Name currentScreen;
   public static int numberOfHintsAsked;
   public static boolean cluesFound;
+  public static HighlightState highlightState;
 
   public static String correctSuspect;
   public static String correctRoom;
@@ -32,6 +40,7 @@ public class GameState {
     currentScreen = null;
     numberOfHintsAsked = 0;
     cluesFound = false;
+    highlightState = HighlightState.PAN_ARROWS;
 
     correctSuspect = null;
     correctRoom = null;

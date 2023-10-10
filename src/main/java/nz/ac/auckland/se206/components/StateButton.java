@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.components;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.Utils;
 
 /**
  * This is an AnimatedButton that has multiple states. Each state has its own name, image (and
@@ -22,7 +24,7 @@ public class StateButton extends AnimatedButton {
     State(String name, Image image, Runnable onArrive, Runnable onLeave) {
       this.name = name;
       this.normalImage = image;
-      hoverImage = getHoverImage(image);
+      hoverImage = Utils.getImageWithSuffix(image, "_hover");
       this.onArrive = onArrive;
       this.onLeave = onLeave;
       index = states.size();
@@ -71,7 +73,7 @@ public class StateButton extends AnimatedButton {
   protected void init() {
     currentState = states.get(0);
     setState(0);
-    setOnMouseClicked((event) -> onClick());
+    addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> onClick());
   }
 
   private void setState(int index) {

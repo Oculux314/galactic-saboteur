@@ -100,7 +100,7 @@ public class GptPromptEngineering {
 
   public static String getReactorPuzzleInformation() {
     String puzzle = "";
-    if (GameState.reactorPuzzle == PuzzleName.REACTOR_APPLE) {
+    if (GameState.reactorPuzzle == PuzzleName.REACTOR_HANGMAN) {
       puzzle =
           "The reactor puzzle can be found by clicking the apple in the top half of the reactor"
               + " room. Users should solve it trying to guess the correct word. The word is related"

@@ -12,7 +12,7 @@ public class Puzzle {
   public enum PuzzleName {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
-    REACTOR_APPLE,
+    REACTOR_HANGMAN,
     LABORATORY_TESTTUBES,
     NAVIGATION_COMPUTER;
 
