@@ -21,6 +21,15 @@
                         <Image url="@../../images/puzzle/testtubebackground.jpeg" />
                      </image>
                   </ImageView>
+                  <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="122.0" layoutY="275.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="greenChosen" fill="#ffffff00" layoutX="192.0" layoutY="226.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="162.0" layoutY="249.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="redChosen" fill="#ffffff00" layoutX="79.0" layoutY="285.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="blueGlitterChosen" fill="#ffffff00" layoutX="361.0" layoutY="260.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="whiteChosen" fill="#ffffff00" layoutX="219.0" layoutY="211.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="pinkGlitterChosen" fill="#ffffff00" layoutX="373.0" layoutY="301.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="yellowGlitterChosen" fill="#ffffff00" layoutX="306.0" layoutY="228.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="blackGlitterChosen" fill="#ffffff00" layoutX="431.0" layoutY="285.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
                   <AnimatedButton fx:id="blueOption" fitHeight="96.0" fitWidth="46.0" layoutX="149.0" layoutY="205.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
                      <image>
                         <Image url="@../../images/puzzle/bluetesttube.png" />
@@ -31,7 +40,7 @@
                         <Image url="@../../images/puzzle/yellow.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="69.0" layoutX="228.0" layoutY="279.0" onMouseClicked="#btnMixClicked">
+                  <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="69.0" layoutX="364.0" layoutY="378.0" onMouseClicked="#btnMixClicked">
                      <image>
                         <Image url="@../../images/btnmix.png" />
                      </image>
@@ -67,25 +76,16 @@
                         <Image url="@../../images/puzzle/blueglitter.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="blackGlitter" fitHeight="47.0" fitWidth="151.0" layoutX="403.0" layoutY="261.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                  <AnimatedButton fx:id="blackGlitter" fitHeight="42.0" fitWidth="51.0" layoutX="405.0" layoutY="262.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
                      <image>
                         <Image url="@../../images/puzzle/blackglitter.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="pinkGlitter" fitHeight="47.0" fitWidth="151.0" layoutX="344.0" layoutY="276.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                  <AnimatedButton fx:id="pinkGlitter" fitHeight="48.0" fitWidth="53.0" layoutX="345.0" layoutY="278.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
                      <image>
                         <Image url="@../../images/puzzle/pinkglitter.png" />
                      </image>
                   </AnimatedButton>
-                  <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="122.0" layoutY="275.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="162.0" layoutY="249.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="redChosen" fill="#ffffff00" layoutX="79.0" layoutY="285.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="greenChosen" fill="#ffffff00" layoutX="192.0" layoutY="226.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="whiteChosen" fill="#ffffff00" layoutX="219.0" layoutY="211.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="yellowGlitterChosen" fill="#ffffff00" layoutX="306.0" layoutY="228.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="blueGlitterChosen" fill="#ffffff00" layoutX="361.0" layoutY="260.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="blackGlitterChosen" fill="#ffffff00" layoutX="432.0" layoutY="283.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="pinkGlitterChosen" fill="#ffffff00" layoutX="373.0" layoutY="302.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
                </children>
             </Group>
          </children>

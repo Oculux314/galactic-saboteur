@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.puzzles;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -15,6 +17,8 @@ public class TestTubesPuzzleController extends Puzzle {
   private boolean yellowSelected;
   private boolean blueSelected;
   private boolean redSelected;
+  private Map<AnimatedButton, Ellipse> buttonToEllipseMap;
+  private Map<AnimatedButton, Boolean> selectedMap;
 
   @FXML private Label instructions;
   @FXML private Ellipse yellowChosen;
@@ -24,9 +28,8 @@ public class TestTubesPuzzleController extends Puzzle {
   @FXML private Ellipse whiteChosen;
   @FXML private Ellipse yellowGlitterChosen;
   @FXML private Ellipse blueGlitterChosen;
-  @FXML private Ellipse redGlitterChosen;
-  @FXML private Ellipse greenGlitterChosen;
-  @FXML private Ellipse whiteGlitterChosen;
+  @FXML private Ellipse blackGlitterChosen;
+  @FXML private Ellipse pinkGlitterChosen;
   @FXML private AnimatedButton yellowOption;
   @FXML private AnimatedButton blueOption;
   @FXML private AnimatedButton redOption;
@@ -50,9 +53,52 @@ public class TestTubesPuzzleController extends Puzzle {
     }
     instructions.setText("Mix two solutions to create a " + colour + " solution");
 
-    yellowChosen.setVisible(false);
-    blueChosen.setVisible(false);
-    redChosen.setVisible(false);
+    initializeButtonToEllipseMap();
+    hideAllChosenCircles();
+    initializeSelectedMaps();
+  }
+
+  public void hideAllChosenCircles() {
+
+    Ellipse[] ellipses = {
+      yellowChosen,
+      blueChosen,
+      redChosen,
+      greenChosen,
+      whiteChosen,
+      yellowGlitterChosen,
+      blueGlitterChosen,
+      blackGlitterChosen,
+      pinkGlitterChosen
+    };
+
+    // Iterate through and hide all Ellipse elements
+    for (Ellipse ellipse : ellipses) {
+      if (ellipse != null) {
+        ellipse.setVisible(false);
+      }
+    }
+  }
+
+  private void initializeButtonToEllipseMap() {
+    buttonToEllipseMap = new HashMap<>();
+    buttonToEllipseMap.put(yellowOption, yellowChosen);
+    buttonToEllipseMap.put(blueOption, blueChosen);
+    buttonToEllipseMap.put(redOption, redChosen);
+    buttonToEllipseMap.put(greenOption, greenChosen);
+    buttonToEllipseMap.put(whiteOption, whiteChosen);
+    buttonToEllipseMap.put(yellowGlitter, yellowGlitterChosen);
+    buttonToEllipseMap.put(blueGlitter, blueGlitterChosen);
+    buttonToEllipseMap.put(pinkGlitter, pinkGlitterChosen);
+    buttonToEllipseMap.put(blackGlitter, blackGlitterChosen);
+  }
+
+  private void initializeSelectedMaps() {
+    selectedMap = new HashMap<>();
+
+    for (AnimatedButton button : buttonToEllipseMap.keySet()) {
+      selectedMap.put(button, false);
+    }
   }
 
   public String selectRandomColor() {
@@ -69,36 +115,20 @@ public class TestTubesPuzzleController extends Puzzle {
 
   @FXML
   private void onTestTubeClicked(MouseEvent event) {
+    AnimatedButton clickedButton = (AnimatedButton) event.getSource();
+    Ellipse correspondingEllipse = buttonToEllipseMap.get(clickedButton);
 
-    Ellipse ellipse = null;
-    boolean colourSelected;
-
-    // Determine which ellipse was clicked
-    if (event.getSource() == blueOption) {
-      ellipse = blueChosen;
-    } else if (event.getSource() == yellowOption) {
-      ellipse = yellowChosen;
-    } else if (event.getSource() == redOption) {
-      ellipse = redChosen;
+    if (correspondingEllipse != null) {
+      System.out.println("is visible" + correspondingEllipse.isVisible());
+      if (correspondingEllipse.isVisible()) {
+        correspondingEllipse.setVisible(false);
+        selectedMap.put(clickedButton, false); // Button is now deselected
+      } else {
+        correspondingEllipse.setVisible(true);
+        selectedMap.put(clickedButton, true); // Button is now selected
+      }
     }
-
-    // Toggle the visibility of the ellipses
-    if (ellipse.isVisible()) {
-      ellipse.setVisible(false);
-      colourSelected = false;
-    } else {
-      ellipse.setVisible(true);
-      colourSelected = true;
-    }
-
-    // Update the corresponding color-specific variable
-    if (event.getSource() == blueOption) {
-      blueSelected = colourSelected;
-    } else if (event.getSource() == yellowOption) {
-      yellowSelected = colourSelected;
-    } else if (event.getSource() == redOption) {
-      redSelected = colourSelected;
-    }
+    System.out.println(selectedMap);
   }
 
   @FXML
