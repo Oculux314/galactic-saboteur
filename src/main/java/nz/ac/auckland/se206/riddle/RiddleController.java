@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.controllers.EndController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -75,8 +76,8 @@ public class RiddleController extends StateButton {
     String riddle = GptPromptEngineering.getRiddle();
     ChatMessage msg = new ChatMessage("user", riddle);
 
-    Thread runThread =
-        new Thread(
+    TaggedThread runThread =
+        new TaggedThread(
             () -> {
               try {
                 ChatMessage response = runGpt(msg);

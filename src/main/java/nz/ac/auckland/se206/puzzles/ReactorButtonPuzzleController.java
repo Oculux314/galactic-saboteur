@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
 /** Controller class for the reactor button puzzle. */
@@ -115,8 +116,8 @@ public class ReactorButtonPuzzleController extends Puzzle {
   private void onSubmitClicked(MouseEvent event) {
 
     // Create a thread to clear the verdict label after 1.5 seconds
-    Thread labelThread =
-        new Thread(
+    TaggedThread labelThread =
+        new TaggedThread(
             () -> {
               try {
                 Thread.sleep(1500);

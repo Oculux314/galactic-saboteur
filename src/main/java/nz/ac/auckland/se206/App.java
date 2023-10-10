@@ -1,7 +1,9 @@
 package nz.ac.auckland.se206;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -28,6 +30,7 @@ public class App extends Application {
   /** A map of all screens in the application (name -> screen) */
   public static Map<Screen.Name, Screen> screens = new HashMap<>();
 
+  private static Set<TaggedThread> threads = new HashSet<>();
   private static TextToSpeech tts = new TextToSpeech();
   public static Assistant scientist;
   public static Assistant mechanic;
@@ -128,13 +131,22 @@ public class App extends Application {
   }
 
   public static void restart() {
+    killAllThreads();
     GameState.reset();
     resetScreens();
   }
 
+  private static void killAllThreads() {
+    for (TaggedThread thread : threads) {
+      thread.interrupt(); // Does nothing if thread is already dead
+    }
+
+    threads.clear();
+  }
+
   private static void resetScreens() {
-    Thread screenLoader =
-        new Thread(
+    TaggedThread screenLoader =
+        new TaggedThread(
             () -> {
               for (Screen.Name screenName : Screen.Name.values()) {
                 if (screenName == Screen.Name.MAIN) { // Main screen is persistent
@@ -165,9 +177,13 @@ public class App extends Application {
       return text;
     }
 
-    Thread ttsThread = new Thread(() -> tts.speak(text));
+    TaggedThread ttsThread = new TaggedThread(() -> tts.speak(text));
     ttsThread.start();
     return text; // Return original text so this function can wrap existing strings
+  }
+
+  public static void addThread(TaggedThread thread) {
+    threads.add(thread);
   }
 
   @Override

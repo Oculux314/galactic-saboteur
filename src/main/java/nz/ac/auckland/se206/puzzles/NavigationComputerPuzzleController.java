@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
 import nz.ac.auckland.se206.components.RotateButton.Orientation;
@@ -199,20 +200,21 @@ public class NavigationComputerPuzzleController extends Puzzle {
   }
 
   private void startFlashing() {
-    Thread flashManager =
-        new Thread(
+    TaggedThread flashManager =
+        new TaggedThread(
             () -> {
               while (state != State.COMPLETE && GameState.isRunning) {
                 lblWarning.setVisible(!lblWarning.isVisible()); // Flash warning until solved
 
                 if (state == State.UNCLICKED) {
-                  tilStart.setVisible(!tilStart.isVisible()); // Flash start tile until tiles clicked
+                  tilStart.setVisible(
+                      !tilStart.isVisible()); // Flash start tile until tiles clicked
                 }
 
                 try {
                   Thread.sleep(500); // 500ms flash period
                 } catch (InterruptedException e) {
-                  e.printStackTrace();
+                  // Do nothing
                 }
               }
             });
@@ -250,8 +252,8 @@ public class NavigationComputerPuzzleController extends Puzzle {
     lblWarning.setVisible(true);
     lblWarning.setStyle("-fx-text-fill: #58DD94;");
 
-    Thread completeDelay =
-        new Thread(
+    TaggedThread completeDelay =
+        new TaggedThread(
             () -> {
               try {
                 Thread.sleep(1500);

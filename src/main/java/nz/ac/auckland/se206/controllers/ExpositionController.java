@@ -4,11 +4,12 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
-import javafx.scene.input.MouseEvent;
 
 /** Controller class for the title screen. */
 public class ExpositionController implements Controller {
@@ -27,7 +28,7 @@ public class ExpositionController implements Controller {
   private String[] imagePaths = {
     "/images/expo1.png", "/images/expo2.jpg", "/images/expo3.jpg", "/images/expo4.jpg"
   };
-  private Thread delayManager;
+  private TaggedThread delayManager;
 
   public void startSlideshow() {
     showNextImage();
@@ -42,7 +43,7 @@ public class ExpositionController implements Controller {
 
     // Show next image
     updateImage();
-    delayManager = new Thread(() -> delayAndShowImage());
+    delayManager = new TaggedThread(() -> delayAndShowImage());
     delayManager.start();
   }
 
