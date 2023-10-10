@@ -14,7 +14,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 /** Controller class for the title screen. */
 public class ExpositionController implements Controller {
 
-  private static final int DELAY_MILLIS = 1000;
+  private static final int DELAY_MILLIS = 2000;
 
   /** Pane that takes up the entire screen. */
   @FXML private Pane panFullScreen;
