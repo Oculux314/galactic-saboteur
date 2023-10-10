@@ -107,13 +107,16 @@ public class App extends Application {
    * @param screenName The name of the screen to create.
    */
   private static void makeScreen(final Screen.Name screenName) {
-    Utils.startTimeTest();
+    Utils.startTimeTest(); // TODO: Remove
 
+    TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
+    screenLoader.start();
+  }
+
+  private static void makeScreenWithoutThread(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
     screens.put(screenName, new Screen(loader));
-
-    Utils.logTimeTest("Loaded " + screenName + " screen", 1000);
   }
 
   /**
@@ -215,7 +218,7 @@ public class App extends Application {
     App.stage = newStage;
 
     // Set up screen graph
-    makeScreen(Screen.Name.MAIN);
+    makeScreenWithoutThread(Screen.Name.MAIN);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
 
     // Link stage/scene/screen graph
