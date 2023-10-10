@@ -86,7 +86,7 @@ public class RiddleController extends StateButton {
                 e.printStackTrace();
               }
             });
-    runThread.setDaemon(true);
+    
     runThread.start();
   }
 

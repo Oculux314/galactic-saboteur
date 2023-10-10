@@ -263,6 +263,7 @@ public class GameController implements Controller {
 
   private void stopTimer() {
     countdownTimer.stop();
+    Thread.currentThread().interrupt();
 
     EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
     endController.showEndOnTimeout();
