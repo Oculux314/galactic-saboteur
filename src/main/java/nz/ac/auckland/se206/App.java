@@ -107,7 +107,7 @@ public class App extends Application {
    * @param screenName The name of the screen to create.
    */
   private static void makeScreen(final Screen.Name screenName) {
-    Utils.startTimeTest(); // TODO: Remove
+    //Utils.logTimeTest(
 
     TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
     screenLoader.start();

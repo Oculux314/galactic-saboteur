@@ -24,7 +24,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.HighlightState;
 import nz.ac.auckland.se206.Screen;
-import nz.ac.auckland.se206.Utils;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
@@ -112,14 +111,8 @@ public class GameController implements Controller {
   private boolean mechanicWelcomeShown = false;
   private Timeline countdownTimer;
 
-  public GameController() {
-    Utils.logTimeTest("Constructor", 1000); // TODO: Remove
-  }
-
   @FXML
   private void initialize() {
-    Utils.logTimeTest("Start of initialize()", 1000); // TODO: Remove
-
     puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpPuzzleButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
     // Set the narration boxes
@@ -164,8 +157,6 @@ public class GameController implements Controller {
 
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
-
-    Utils.logTimeTest("End of initialize()", 1000); // TODO: Remove
   }
 
   private void progressHighlightStateTo(HighlightState newState) {
