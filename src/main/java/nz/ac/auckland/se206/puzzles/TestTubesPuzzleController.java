@@ -15,9 +15,6 @@ public class TestTubesPuzzleController extends Puzzle {
 
   private static String colour;
   private static String glitterColour;
-  private boolean yellowSelected;
-  private boolean blueSelected;
-  private boolean redSelected;
   private Map<AnimatedButton, Ellipse> buttonToEllipseMap;
   private Map<AnimatedButton, Boolean> selectedMap;
 
@@ -106,6 +103,7 @@ public class TestTubesPuzzleController extends Puzzle {
     for (AnimatedButton button : buttonToEllipseMap.keySet()) {
       selectedMap.put(button, false);
     }
+    System.out.println(selectedMap);
   }
 
   public String selectRandomColor() {
@@ -151,30 +149,74 @@ public class TestTubesPuzzleController extends Puzzle {
 
   @FXML
   private void btnMixClicked(MouseEvent event) {
-    if (yellowSelected && blueSelected) { // Yellow + blue = green
-      if (colour.equals("green")) {
-        completePuzzle();
-        instructions.setText("Correct! You have created a green solution");
-      } else {
-        instructions.setText("Incorrect!");
-      }
-    } else if (yellowSelected && redSelected) { // Yellow + red = orange
-      if (colour.equals("orange")) {
-        completePuzzle();
-        instructions.setText("Correct! You have created an orange solution");
-      } else {
-        instructions.setText("Incorrect!");
-      }
-    } else if (blueSelected && redSelected) { // Blue + red = purple
-      if (colour.equals("purple")) {
-        completePuzzle();
-        instructions.setText("Correct! You have created a purple solution");
-      } else {
-        instructions.setText("Incorrect!");
-      }
+    boolean isSolutionCorrect = checkSolution();
+
+    if (isSolutionCorrect) {
+      completePuzzle();
+      instructions.setText(
+          "Correct! You have created a "
+              + colour
+              + " solution with "
+              + glitterColour
+              + " glitter in it!");
     } else {
-      instructions.setText("You need to select 2 solutions");
+      instructions.setText(
+          "Incorrect! Try again and select what's needed to create a "
+              + colour
+              + " solution with "
+              + glitterColour
+              + " glitter in it!");
     }
+  }
+
+  private boolean checkSolution() {
+    boolean isColourCorrect = false;
+    boolean isGlitterColourCorrect = false;
+    int totalSelected = 0;
+
+    // check if the total number of selected test tubes and glitter is correct
+    totalSelected = countSelected(selectedMap);
+    boolean isTotalSelectedCorrect = (totalSelected == 3);
+    if (!isTotalSelectedCorrect) {
+      return false;
+    }
+
+    // check if the colour is correct
+    if (colour.equalsIgnoreCase("Orange")) {
+      isColourCorrect = selectedMap.get(yellowOption) && selectedMap.get(redOption);
+    } else if (colour.equalsIgnoreCase("Turquoise")) {
+      isColourCorrect = selectedMap.get(greenOption) && selectedMap.get(blueOption);
+    } else if (colour.equalsIgnoreCase("Violet")) {
+      isColourCorrect = selectedMap.get(redOption) && selectedMap.get(blueOption);
+    } else if (colour.equalsIgnoreCase("Brown")) {
+      isColourCorrect = selectedMap.get(redOption) && selectedMap.get(greenOption);
+    } else if (colour.equalsIgnoreCase("Light Blue")) {
+      isColourCorrect = selectedMap.get(blueOption) && selectedMap.get(whiteOption);
+    } else if (colour.equalsIgnoreCase("Pink")) {
+      isColourCorrect = selectedMap.get(redOption) && selectedMap.get(whiteOption);
+    }
+
+    // check if the glitter colour is correct
+    if (glitterColour.equalsIgnoreCase("Yellow")) {
+      isGlitterColourCorrect = selectedMap.get(yellowGlitter);
+    } else if (glitterColour.equalsIgnoreCase("Blue")) {
+      isGlitterColourCorrect = selectedMap.get(blueGlitter);
+    } else if (glitterColour.equalsIgnoreCase("Black")) {
+      isGlitterColourCorrect = selectedMap.get(blackGlitter);
+    } else if (glitterColour.equalsIgnoreCase("Pink")) {
+      isGlitterColourCorrect = selectedMap.get(pinkGlitter);
+    }
+    return isColourCorrect && isGlitterColourCorrect;
+  }
+
+  private int countSelected(Map<AnimatedButton, Boolean> selectedMap) {
+    int count = 0;
+    for (Boolean isSelected : selectedMap.values()) {
+      if (isSelected) {
+        count++;
+      }
+    }
+    return count;
   }
 
   private void completePuzzle() {
