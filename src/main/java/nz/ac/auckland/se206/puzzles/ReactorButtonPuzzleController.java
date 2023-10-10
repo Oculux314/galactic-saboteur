@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.puzzles;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 import javafx.application.Platform;
@@ -59,7 +58,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
    * Called when the puzzle is initialized. Generates a random number.
    *
    * @param
-   * @return A random 5 digit number.  
+   * @return A random 5 digit number.
    */
   private String generateRandomNumber() {
     // Generate random 5 digit number
