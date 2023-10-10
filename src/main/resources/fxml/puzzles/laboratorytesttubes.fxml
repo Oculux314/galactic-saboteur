@@ -42,7 +42,7 @@
                   </AnimatedButton>
                   <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="65.0" layoutX="363.0" layoutY="372.0" onMouseClicked="#btnMixClicked">
                      <image>
-                        <Image url="@../../images/btnmix.png" />
+                        <Image url="@../../images/btnSubmit.png" />
                      </image>
                   </AnimatedButton>
                   <AnimatedButton fx:id="redOption" fitHeight="72.0" fitWidth="37.0" layoutX="64.0" layoutY="257.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
@@ -89,6 +89,5 @@
             </Group>
          </children>
       </Pane>
-      <ImageView />
    </children>
 </StackPane>

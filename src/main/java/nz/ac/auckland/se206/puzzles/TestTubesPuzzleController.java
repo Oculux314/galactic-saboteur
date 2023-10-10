@@ -15,6 +15,7 @@ public class TestTubesPuzzleController extends Puzzle {
 
   private static String colour;
   private static String glitterColour;
+  private int incorrectCount = 0;
   private Map<AnimatedButton, Ellipse> buttonToEllipseMap;
   private Map<AnimatedButton, Boolean> selectedMap;
 
@@ -49,7 +50,7 @@ public class TestTubesPuzzleController extends Puzzle {
       colour = selectRandomColor();
       glitterColour = selectRandomGlitterColor();
     }
-    System.out.println(colour + glitterColour);
+
     instructions.setText(
         "Select what's needed to create a "
             + colour
@@ -103,7 +104,6 @@ public class TestTubesPuzzleController extends Puzzle {
     for (AnimatedButton button : buttonToEllipseMap.keySet()) {
       selectedMap.put(button, false);
     }
-    System.out.println(selectedMap);
   }
 
   public String selectRandomColor() {
@@ -132,19 +132,20 @@ public class TestTubesPuzzleController extends Puzzle {
 
   @FXML
   private void onTestTubeClicked(MouseEvent event) {
+    // Get the testtube or glitter that was clicked
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     Ellipse correspondingEllipse = buttonToEllipseMap.get(clickedButton);
 
+    // Toggle the visibility of the corresponding ellipse and update selected map
     if (correspondingEllipse != null) {
       if (correspondingEllipse.isVisible()) {
         correspondingEllipse.setVisible(false);
-        selectedMap.put(clickedButton, false); // Button is now deselected
+        selectedMap.put(clickedButton, false);
       } else {
         correspondingEllipse.setVisible(true);
-        selectedMap.put(clickedButton, true); // Button is now selected
+        selectedMap.put(clickedButton, true);
       }
     }
-    System.out.println(selectedMap);
   }
 
   @FXML
@@ -160,12 +161,24 @@ public class TestTubesPuzzleController extends Puzzle {
               + glitterColour
               + " glitter in it!");
     } else {
-      instructions.setText(
-          "Incorrect! Try again and select what's needed to create a "
-              + colour
-              + " solution with "
-              + glitterColour
-              + " glitter in it!");
+      incorrectCount++;
+
+      // Display different messages depending on the amount of incorrect attempts
+      if (incorrectCount % 2 == 1) {
+        instructions.setText(
+            "Oh no, that's wrong! Select what's needed to create a "
+                + colour
+                + " solution with "
+                + glitterColour
+                + " glitter in it!");
+      } else {
+        instructions.setText(
+            "Incorrect! Try again and select what's needed to create a "
+                + colour
+                + " solution with "
+                + glitterColour
+                + " glitter in it!");
+      }
     }
   }
 
