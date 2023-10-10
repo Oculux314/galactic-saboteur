@@ -15,12 +15,12 @@
          <children>
             <Group fx:id="gameComponents">
                <children>
-                  <Label fx:id="instructions" alignment="CENTER" layoutX="163.0" layoutY="380.0" prefHeight="34.0" prefWidth="195.0" wrapText="true" />
                   <ImageView fitHeight="365.0" fitWidth="510.0" layoutX="-1.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/puzzle/testtubebackground.jpeg" />
                      </image>
                   </ImageView>
+                  <Label fx:id="instructions" alignment="CENTER" layoutX="163.0" layoutY="377.0" prefHeight="34.0" prefWidth="195.0" stylesheets="@../../css/style.css" textAlignment="CENTER" wrapText="true" />
                   <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="122.0" layoutY="275.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
                   <Ellipse fx:id="greenChosen" fill="#ffffff00" layoutX="192.0" layoutY="226.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
                   <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="162.0" layoutY="249.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
@@ -40,7 +40,7 @@
                         <Image url="@../../images/puzzle/yellow.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="69.0" layoutX="364.0" layoutY="378.0" onMouseClicked="#btnMixClicked">
+                  <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="65.0" layoutX="363.0" layoutY="372.0" onMouseClicked="#btnMixClicked">
                      <image>
                         <Image url="@../../images/btnmix.png" />
                      </image>
@@ -50,7 +50,6 @@
                         <Image url="@../../images/puzzle/red.png" />
                      </image>
                   </AnimatedButton>
-                  <Label fx:id="confirmationMessage" alignment="CENTER" layoutX="159.0" layoutY="380.0" prefHeight="34.0" prefWidth="205.0" wrapText="true" />
                   <AnimatedButton fx:id="greenOption" fitHeight="90.0" fitWidth="27.0" layoutX="178.0" layoutY="183.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
                      <image>
                         <Image url="@../../images/puzzle/greentesttube.png" />

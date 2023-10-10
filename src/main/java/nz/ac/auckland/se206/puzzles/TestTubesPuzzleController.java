@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 public class TestTubesPuzzleController extends Puzzle {
 
   private static String colour;
+  private static String glitterColour;
   private boolean yellowSelected;
   private boolean blueSelected;
   private boolean redSelected;
@@ -40,7 +41,6 @@ public class TestTubesPuzzleController extends Puzzle {
   @FXML private AnimatedButton pinkGlitter;
   @FXML private AnimatedButton blackGlitter;
   @FXML private AnimatedButton btnMix;
-  @FXML private Label confirmationMessage;
   @FXML private Group gameComponents;
   @FXML private Pane puzzlePane;
 
@@ -50,8 +50,15 @@ public class TestTubesPuzzleController extends Puzzle {
     // generate and store the color only if it hasn't been set before
     if (colour == null) {
       colour = selectRandomColor();
+      glitterColour = selectRandomGlitterColor();
     }
-    instructions.setText("Mix two solutions to create a " + colour + " solution");
+    System.out.println(colour + glitterColour);
+    instructions.setText(
+        "Select what's needed to create a "
+            + colour
+            + " solution with "
+            + glitterColour
+            + " glitter in it!");
 
     initializeButtonToEllipseMap();
     hideAllChosenCircles();
@@ -103,7 +110,7 @@ public class TestTubesPuzzleController extends Puzzle {
 
   public String selectRandomColor() {
     // Create an array of colors
-    String[] colours = {"purple", "orange", "green"};
+    String[] colours = {"purple", "orange", "turquoise", "violet", "brown", "light blue", "pink"};
     Random random = new Random();
 
     // Generate a random index to select a color
@@ -113,13 +120,24 @@ public class TestTubesPuzzleController extends Puzzle {
     return randomColor;
   }
 
+  public String selectRandomGlitterColor() {
+    // Create an array of glitter colors
+    String[] glitterColours = {"yellow", "blue", "black", "pink"};
+    Random random = new Random();
+
+    // Generate a random index to select a color
+    int randomIndex = random.nextInt(glitterColours.length);
+
+    String randomColor = glitterColours[randomIndex];
+    return randomColor;
+  }
+
   @FXML
   private void onTestTubeClicked(MouseEvent event) {
     AnimatedButton clickedButton = (AnimatedButton) event.getSource();
     Ellipse correspondingEllipse = buttonToEllipseMap.get(clickedButton);
 
     if (correspondingEllipse != null) {
-      System.out.println("is visible" + correspondingEllipse.isVisible());
       if (correspondingEllipse.isVisible()) {
         correspondingEllipse.setVisible(false);
         selectedMap.put(clickedButton, false); // Button is now deselected
@@ -136,26 +154,26 @@ public class TestTubesPuzzleController extends Puzzle {
     if (yellowSelected && blueSelected) { // Yellow + blue = green
       if (colour.equals("green")) {
         completePuzzle();
-        confirmationMessage.setText("Correct! You have created a green solution");
+        instructions.setText("Correct! You have created a green solution");
       } else {
-        confirmationMessage.setText("Incorrect!");
+        instructions.setText("Incorrect!");
       }
     } else if (yellowSelected && redSelected) { // Yellow + red = orange
       if (colour.equals("orange")) {
         completePuzzle();
-        confirmationMessage.setText("Correct! You have created an orange solution");
+        instructions.setText("Correct! You have created an orange solution");
       } else {
-        confirmationMessage.setText("Incorrect!");
+        instructions.setText("Incorrect!");
       }
     } else if (blueSelected && redSelected) { // Blue + red = purple
       if (colour.equals("purple")) {
         completePuzzle();
-        confirmationMessage.setText("Correct! You have created a purple solution");
+        instructions.setText("Correct! You have created a purple solution");
       } else {
-        confirmationMessage.setText("Incorrect!");
+        instructions.setText("Incorrect!");
       }
     } else {
-      confirmationMessage.setText("You need to select 2 solutions");
+      instructions.setText("You need to select 2 solutions");
     }
   }
 
