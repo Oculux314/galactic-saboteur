@@ -20,7 +20,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -61,9 +60,6 @@ public class GameController implements Controller {
   @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
-
-  @FXML private Polyline btnPanelHide;
-  @FXML private Group panelContainer;
   @FXML private Label timer;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
@@ -157,7 +153,7 @@ public class GameController implements Controller {
 
     grpRiddle.setVisible(false);
 
-    labelHintsLeft.setText("Hints left: ");
+    updateHintsLeft();
 
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
@@ -296,20 +292,6 @@ public class GameController implements Controller {
   }
 
   @FXML
-  private void btnPanelHidePressed() {
-    // Hide the side panel
-    if (panelContainer.getLayoutX() == 0) {
-      panelContainer.setLayoutX(-180);
-      btnPanelHide.setRotate(180);
-      btnPanelHide.setLayoutX(100);
-    } else {
-      panelContainer.setLayoutX(0);
-      btnPanelHide.setRotate(0);
-      btnPanelHide.setLayoutX(267);
-    }
-  }
-
-  @FXML
   private void onExitClicked(MouseEvent event) {
     if (event.getSource() == btnExit) {
 
@@ -416,7 +398,17 @@ public class GameController implements Controller {
       hintsMechanic.setState("nohint");
       hintsMechanic.setDisable(GameState.isHintLimitReached());
     }
-    labelHintsLeft.setText("Hints left: " + GameState.getHintLimitRemaining());
+    updateHintsLeft();
+  }
+
+  private void updateHintsLeft() {
+    if (GameState.difficulty == "easy") {
+      labelHintsLeft.setText("You Have Unlimited Hints");
+    } else if (GameState.difficulty == "medium") {
+      labelHintsLeft.setText("You Have " + GameState.getHintLimitRemaining() + " Hints Left");
+    } else {
+      labelHintsLeft.setText("No Hints Are Allowed");
+    }
   }
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {

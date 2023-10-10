@@ -36,3 +36,25 @@
   -fx-font-size: 30px;
   -fx-text-fill: -icon-grey;
 }
+
+#timeClueInformationLabel {
+  -fx-font-size: 14px;
+}
+
+#whereClueInformationLabel {
+  -fx-font-size: 14px;
+}
+
+#whoClueInformationLabel {
+  -fx-font-size: 14px;
+}
+
+#timer {
+  -fx-font-size: 35px;
+  -fx-height: 100%;
+  -fx-transform: scale(1,.9);
+}
+
+#labelHintsLeft {
+  -fx-font-size: 16px;
+}
