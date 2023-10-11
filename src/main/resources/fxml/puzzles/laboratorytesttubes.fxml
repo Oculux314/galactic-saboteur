@@ -3,6 +3,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Ellipse?>
@@ -12,35 +13,80 @@
    <children>
       <Pane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <Label fx:id="instructions" layoutX="79.0" layoutY="51.0" />
             <Group fx:id="gameComponents">
                <children>
-                  <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="167.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="redChosen" fill="#ffffff00" layoutX="250.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="333.0" layoutY="200.0" radiusX="35.0" radiusY="74.0" stroke="#58dd94" strokeType="INSIDE" strokeWidth="2.0" />
-                  <AnimatedButton fx:id="blueOption" fitHeight="96.0" fitWidth="46.0" layoutX="144.0" layoutY="155.0" onMouseClicked="#onTestTubeClicked">
+                  <ImageView fitHeight="365.0" fitWidth="510.0" layoutX="-1.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/blueoption.png" />
+                        <Image url="@../../images/puzzle/testtubebackground.jpeg" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="instructions" alignment="CENTER" layoutX="163.0" layoutY="377.0" prefHeight="34.0" prefWidth="195.0" stylesheets="@../../css/style.css" textAlignment="CENTER" wrapText="true" />
+                  <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="122.0" layoutY="275.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="greenChosen" fill="#ffffff00" layoutX="192.0" layoutY="226.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="162.0" layoutY="249.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="redChosen" fill="#ffffff00" layoutX="79.0" layoutY="285.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="blueGlitterChosen" fill="#ffffff00" layoutX="361.0" layoutY="260.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="whiteChosen" fill="#ffffff00" layoutX="219.0" layoutY="211.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="pinkGlitterChosen" fill="#ffffff00" layoutX="373.0" layoutY="301.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="yellowGlitterChosen" fill="#ffffff00" layoutX="306.0" layoutY="228.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Ellipse fx:id="blackGlitterChosen" fill="#ffffff00" layoutX="431.0" layoutY="285.0" radiusX="27.0" radiusY="25.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+                  <AnimatedButton fx:id="blueOption" fitHeight="96.0" fitWidth="46.0" layoutX="149.0" layoutY="205.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/bluetesttube.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="yellowOption" fitHeight="96.0" fitWidth="46.0" layoutX="310.0" layoutY="154.0" onMouseClicked="#onTestTubeClicked">
+                  <AnimatedButton fx:id="yellowOption" fitHeight="96.0" fitWidth="46.0" layoutX="109.0" layoutY="229.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/yellowoption.png" />
+                        <Image url="@../../images/puzzle/yellow.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="btnMix" fitHeight="73.0" fitWidth="176.0" layoutX="160.0" layoutY="300.0" onMouseClicked="#btnMixClicked">
+                  <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="65.0" layoutX="363.0" layoutY="372.0" onMouseClicked="#btnMixClicked">
                      <image>
-                        <Image url="@../../images/btnmix.png" />
+                        <Image url="@../../images/btnSubmit.png" />
                      </image>
                   </AnimatedButton>
-                  <AnimatedButton fx:id="redOption" fitHeight="96.0" fitWidth="46.0" layoutX="227.0" layoutY="154.0" onMouseClicked="#onTestTubeClicked">
+                  <AnimatedButton fx:id="redOption" fitHeight="72.0" fitWidth="37.0" layoutX="64.0" layoutY="257.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../../images/redoption.png" />
+                        <Image url="@../../images/puzzle/red.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="greenOption" fitHeight="90.0" fitWidth="27.0" layoutX="178.0" layoutY="183.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/greentesttube.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="whiteOption" fitHeight="76.0" fitWidth="29.0" layoutX="204.0" layoutY="173.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/whitetesttube.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="greenOption" fitHeight="90.0" fitWidth="27.0" layoutX="177.0" layoutY="183.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/greentesttube.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="yellowGlitter" fitHeight="47.0" fitWidth="151.0" layoutX="277.0" layoutY="204.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/yellowglitter.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="blueGlitter" fitHeight="50.0" fitWidth="59.0" layoutX="335.0" layoutY="235.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/blueglitter.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="blackGlitter" fitHeight="42.0" fitWidth="51.0" layoutX="405.0" layoutY="262.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/blackglitter.png" />
+                     </image>
+                  </AnimatedButton>
+                  <AnimatedButton fx:id="pinkGlitter" fitHeight="48.0" fitWidth="53.0" layoutX="345.0" layoutY="278.0" onMouseClicked="#onTestTubeClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/puzzle/pinkglitter.png" />
                      </image>
                   </AnimatedButton>
                </children>
             </Group>
-            <Label fx:id="confirmationMessage" layoutX="63.0" layoutY="420.0" />
          </children>
       </Pane>
    </children>
