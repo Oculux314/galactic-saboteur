@@ -24,9 +24,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML private ImageView imvTool3;
   @FXML private AnimatedButton btnExit;
   @FXML private Pane panReactorToolbox;
-  @FXML private Rectangle rec2; // Axe
-  @FXML private Rectangle rec3; // Bottle
-  @FXML private Rectangle rec1; //Torch
+  @FXML private Rectangle rec2;
+  @FXML private Rectangle rec3;
+  @FXML private Rectangle rec1;
   @FXML private Label lblVerdict;
 
   private double pressedX, pressedY;
@@ -80,12 +80,11 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private void onMouseDragged(MouseEvent event) {
 
     checkRectanglesClear();
+
     double offsetX = -selectedNode.getLayoutX();
     double offsetY = -selectedNode.getLayoutY();
-
     double deltaX = event.getSceneX() - pressedX;
     double deltaY = event.getSceneY() - pressedY;
-
     double newX = selectedNode.getTranslateX() + deltaX / getScreenZoom();
     double newY = selectedNode.getTranslateY() + deltaY / getScreenZoom();
 
@@ -204,22 +203,27 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     clearPuzzle(panReactorToolbox);
   }
 
+  /**
+   * Snaps a tool to a rectangle if it meets conditions
+   *
+   * @param source the node to snap
+   * @return
+   */
   private void snapToPosition(Node source) {
     for (Rectangle rect: rects) {
       checkCloseToRectangle(source, rect);
     }
   }
 
+  /**
+   * Checks if a tool is close to a rectangle
+   *
+   * @param source the node to check
+   * @param rect the rectangle to check
+   * @return
+   */
   private void checkCloseToRectangle(Node source, Rectangle rect) {
-    for (ImageView tool: tools) {
-      double toolX = tool.getTranslateX() + tool.getLayoutX();
-      double toolY = tool.getTranslateY() + tool.getLayoutY();
-
-      // If a tool is in the rectangle already don't snap the position
-      if (toolX == rect.getLayoutX() + marginX && toolY == rect.getLayoutY() + marginY) {
-        return;
-      }
-    }
+    checkRectangleAvailable(rect);
 
     double sourceX = source.getTranslateX() + source.getLayoutX();
     double sourceY = source.getTranslateY() + source.getLayoutY();
@@ -244,11 +248,25 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Sets position of a tool node
+   *
+   * @param source the node to set the position of
+   * @param x the x position to set
+   * @param y the y position to set
+   * @return
+   */
   private void setPosition(Node source, double x, double y) {
     source.setTranslateX(x - source.getLayoutX());
     source.setTranslateY(y - source.getLayoutY());
   }
 
+  /**
+   * Checks if a tool has moved away from a rectangle
+   *
+   * @param
+   * @return
+   */
   private void checkRectanglesClear() {
     for (ImageView tool: tools) {
       for (Rectangle rect: rects) {
@@ -273,6 +291,12 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Adds tools and rectangles to lists
+   *
+   * @param
+   * @return
+   */
   private void addToolsAndRectangles() {
     tools.add(imvTool2);
     tools.add(imvTool3);
@@ -281,5 +305,23 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     rects.add(rec2);
     rects.add(rec3);
     rects.add(rec1);
+  }
+
+  /**
+   * Checks if a rectangle is available to snap to
+   *
+   * @param rect the rectangle to check
+   * @return
+   */
+  private void checkRectangleAvailable(Rectangle rect) {
+    for (ImageView tool: tools) {
+      double toolX = tool.getTranslateX() + tool.getLayoutX();
+      double toolY = tool.getTranslateY() + tool.getLayoutY();
+
+      // If a tool is in the rectangle already don't snap the position
+      if (toolX == rect.getLayoutX() + marginX && toolY == rect.getLayoutY() + marginY) {
+        return;
+      }
+    }
   }
 }
