@@ -26,7 +26,7 @@ public class EndController implements Controller {
 
   public void showEndOnWin() {
     showEndScreen();
-    setEndElements("expo1.png", "You win!", "You Saved The Ship And Escaped!", "WHITE");
+    setEndElements("expo1.jpg", "You win!", "You Saved The Ship And Escaped!", "WHITE");
   }
 
   public void showEndOnLose() {
