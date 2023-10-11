@@ -153,10 +153,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
             && isToolInRectangle(imvBottle, recBottle)
             && isToolInRectangle(imvTorch, recTorch);
 
-    System.out.println("Axe: " + isToolInRectangle(imvAxe, recAxe));
-    System.out.println("Bottle: " + isToolInRectangle(imvBottle, recBottle));
-    System.out.println("Torch: " + isToolInRectangle(imvTorch, recTorch));
-
     if (allToolsInRectangles) {
       setSolved();
       clearPuzzle(panReactorToolbox);
