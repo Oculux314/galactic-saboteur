@@ -123,7 +123,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
                 Thread.sleep(1500);
                 Platform.runLater(() -> lblVerdict.setText(""));
               } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
               }
             });
 

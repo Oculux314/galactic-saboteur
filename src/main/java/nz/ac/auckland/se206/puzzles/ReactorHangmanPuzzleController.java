@@ -44,7 +44,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
    * @return
    */
   @FXML
-  private void onGuess() throws InterruptedException {
+  private void onGuess() {
     letter = txtGuessLetter.getText();
     addLetter(letter);
   }
@@ -55,7 +55,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
    * @param letter the letter to add
    * @return
    */
-  private void addLetter(String letter) throws InterruptedException {
+  private void addLetter(String letter) {
     if (!checkValidInput(letter)) {
       txtGuessLetter.clear();
       return;
@@ -87,7 +87,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
    * @param letter the letter to check
    * @return
    */
-  private void checkLetter(String letter) throws InterruptedException {
+  private void checkLetter(String letter) {
     for (int i = 0; i < word.length(); i++) {
       if (letter.equals(word.substring(i, i + 1))) {
         setLetter(letter);
@@ -120,7 +120,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
    * @param
    * @return
    */
-  private void checkIfSolved() throws InterruptedException {
+  private void checkIfSolved() {
     txtGuessLetter.clear();
     for (Label label : letters) {
       if (label.getText().equals("*")) {

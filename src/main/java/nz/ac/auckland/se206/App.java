@@ -21,6 +21,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.speech.TextToSpeech.TextToSpeechException;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -107,8 +108,6 @@ public class App extends Application {
    * @param screenName The name of the screen to create.
    */
   private static void makeScreen(final Screen.Name screenName) {
-    //Utils.logTimeTest(
-
     TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
     screenLoader.start();
   }
@@ -144,6 +143,8 @@ public class App extends Application {
   }
 
   private static void killAllThreads() {
+    GameState.isGameover = true;
+
     for (TaggedThread thread : threads) {
       thread.interrupt(); // Does nothing if thread is already dead
     }
@@ -184,7 +185,15 @@ public class App extends Application {
       return text;
     }
 
-    TaggedThread ttsThread = new TaggedThread(() -> tts.speak(text));
+    TaggedThread ttsThread =
+        new TaggedThread(
+            () -> {
+              try {
+                tts.speak(text);
+              } catch (TextToSpeechException e) {
+                return;
+              }
+            });
     ttsThread.start();
     return text; // Return original text so this function can wrap existing strings
   }

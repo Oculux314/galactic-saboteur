@@ -50,7 +50,7 @@ public class GameController implements Controller {
 
     public void decrementSeconds() {
       seconds--;
-      App.speak(Integer.toString(seconds));
+      System.out.println(seconds);
     }
   }
 
@@ -246,30 +246,30 @@ public class GameController implements Controller {
               int initialMinutes = GameState.timeLimit;
               TimerData timerData = new TimerData(initialMinutes * 60 + 1);
 
-              while (timerData.getSeconds() > 0 && !Thread.currentThread().isInterrupted()) {
+              while (timerData.getSeconds() > 0) {
+                if (GameState.isGameover) {
+                  return; // Returning as interupting this thread doesn't seem to work
+                }
+
                 timerData.decrementSeconds();
                 Platform.runLater(() -> updateTimerDisplay(timerData.getSeconds()));
 
                 try {
                   Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                  // Do nothing
+                  return; // Returning as interupting this thread doesn't seem to work
                 }
               }
 
               Platform.runLater(() -> showTimeout());
             });
 
-    //countdownTimer.start();
+    countdownTimer.start();
   }
 
   private void showTimeout() {
     EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
     endController.showEndOnTimeout();
-  }
-
-  public void stopTimer() {
-    countdownTimer.interrupt();
   }
 
   public void updateTimerDisplay(int initialSeconds) {
@@ -423,7 +423,6 @@ public class GameController implements Controller {
 
   @FXML
   private void riddleClicked() throws IOException {
-    System.out.println("Riddle clicked");
     // Set the visibility of the corresponding group
     grpRiddle.setVisible(true);
     if (GameState.cluesFound == true) {

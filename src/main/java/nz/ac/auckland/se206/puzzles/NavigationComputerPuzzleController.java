@@ -214,7 +214,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
                 try {
                   Thread.sleep(500); // 500ms flash period
                 } catch (InterruptedException e) {
-                  // Do nothing
+                  return;
                 }
               }
             });
@@ -258,7 +258,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
               try {
                 Thread.sleep(1500);
               } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
               }
 
               Platform.runLater(

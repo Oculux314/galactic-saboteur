@@ -17,6 +17,7 @@ public class GameState {
   public static int timeLimit = 2; // In minutes
   public static boolean ttsEnabled = false;
 
+  public static boolean isGameover;
   public static Screen.Name currentScreen;
   public static int numberOfHintsAsked;
   public static boolean cluesFound;
@@ -37,6 +38,7 @@ public class GameState {
   public static PuzzleName navigationPuzzle;
 
   public static void reset() {
+    isGameover = false;
     currentScreen = null;
     numberOfHintsAsked = 0;
     cluesFound = false;

@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
 
 public class EndController implements Controller {
@@ -15,10 +16,7 @@ public class EndController implements Controller {
 
   private void showEndScreen() {
     App.setScreen(Screen.Name.END);
-
-    // Stop timer
-    GameController gameController = (GameController) App.getScreen(Screen.Name.GAME).getController();
-    gameController.stopTimer();
+    GameState.isGameover = true;
   }
 
   private void setEndElements(String imageUrl, String speech, String labelText, String labelColor) {

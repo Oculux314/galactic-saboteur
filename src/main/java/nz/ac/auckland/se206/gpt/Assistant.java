@@ -25,7 +25,7 @@ public class Assistant {
         try {
           Thread.sleep(100);
         } catch (InterruptedException e) {
-          e.printStackTrace();
+          return null;
         }
       }
 
@@ -113,7 +113,7 @@ public class Assistant {
               try {
                 sendMessageThread.join();
               } catch (InterruptedException e) {
-                // Nothing
+                return;
               }
 
               Platform.runLater(
