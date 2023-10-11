@@ -17,17 +17,17 @@
             <Label layoutX="102.0" layoutY="14.0" style="-fx-font-size: 30;" text="SPACEY THE SHIP AI" />
             <Group>
                <children>
-                  <StateButton fx:id="btnWho" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="250.0">
+                  <StateButton fx:id="btnWho" fitHeight="75.0" fitWidth="135.0" layoutX="50.0" layoutY="260.0">
                      <image>
-                        <Image url="@../images/suspects/suspect1.jpg" />
+                        <Image url="@../images/suspects/suspect1.png" />
                      </image>
                   </StateButton>
-                  <StateButton fx:id="btnWhere" fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="250.0">
+                  <StateButton fx:id="btnWhere" fitHeight="75.0" fitWidth="135.0" layoutX="200.0" layoutY="260.0">
                      <image>
-                        <Image url="@../images/rooms/room1.jpg" />
+                        <Image url="@../images/rooms/room2.jpg" />
                      </image>
                   </StateButton>
-                  <StateButton fx:id="btnWhen" fitHeight="100.0" fitWidth="100.0" layoutX="350.0" layoutY="250.0">
+                  <StateButton fx:id="btnWhen" fitHeight="75.0" fitWidth="135.0" layoutX="350.0" layoutY="260.0">
                      <image>
                         <Image url="@../images/times/time1.jpg" />
                      </image>

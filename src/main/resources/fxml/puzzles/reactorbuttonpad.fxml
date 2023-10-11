@@ -22,7 +22,7 @@
       </Label>
       <ImageView fitHeight="389.0" fitWidth="413.0" layoutX="56.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/buttonpad.png" />
+            <Image url="@../../images/button-overlay.png" />
          </image>
       </ImageView>
       <Label layoutX="159.0" layoutY="121.0" text="Decrypt the sequence">

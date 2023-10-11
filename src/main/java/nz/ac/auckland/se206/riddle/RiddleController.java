@@ -29,13 +29,13 @@ public class RiddleController extends StateButton {
 
   @FXML
   private void initialize() throws ApiProxyException, IOException {
-    btnWho.addState("Scientist", "suspects/suspect1.jpg");
-    btnWho.addState("Captain", "suspects/suspect2.jpg");
+    btnWho.addState("Scientist", "suspects/suspect1.png");
+    btnWho.addState("Captain", "suspects/suspect2.png");
     btnWho.addState("Mechanic", "suspects/suspect3.png");
 
-    btnWhere.addState("Navigation", "rooms/room1.jpg");
+    btnWhere.addState("Navigation", "rooms/room1.png");
     btnWhere.addState("Laboratory", "rooms/room2.jpg");
-    btnWhere.addState("Reactor Room", "rooms/room3.jpg");
+    btnWhere.addState("Reactor Room", "rooms/room3.png");
 
     btnWhen.addState("Morning", "times/time1.jpg");
     btnWhen.addState("Afternoon", "times/time2.jpg");
