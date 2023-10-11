@@ -28,6 +28,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
   private double pressedX, pressedY;
   private Node selectedNode;
+  private boolean recAxeOccupied = false;
+  private boolean recBottleOccupied = false;
+  private boolean recTorchOccupied = false;
 
    /**
    * Called when the mouse is pressed
@@ -45,7 +48,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
         selectedNode = source;
         pressedX = event.getSceneX();
         pressedY = event.getSceneY();
-      }
+       }
     }
   }
 
@@ -93,7 +96,11 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML
   private void onMouseReleased(MouseEvent event) {
     selectedNode = null;
-  }
+
+    Node source = (Node) event.getSource();
+
+    snapToPosition(source);
+  } 
 
   /**
    * Called when the submit button is clicked. Checks if the answer is correct.
@@ -120,6 +127,10 @@ public class ReactorToolboxPuzzleController extends Puzzle {
             && isToolInRectangle(imvBottle, recBottle)
             && isToolInRectangle(imvTorch, recTorch);
 
+    System.out.println("Axe: " + isToolInRectangle(imvAxe, recAxe));
+    System.out.println("Bottle: " + isToolInRectangle(imvBottle, recBottle));
+    System.out.println("Torch: " + isToolInRectangle(imvTorch, recTorch));
+
     if (allToolsInRectangles) {
       setSolved();
       clearPuzzle(panReactorToolbox);
@@ -138,21 +149,13 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    */
   private boolean isToolInRectangle(ImageView tool, Rectangle rectangle) {
 
-    // Calculate the position of the tool
-
     double toolX = tool.getTranslateX() + tool.getLayoutX();
     double toolY = tool.getTranslateY() + tool.getLayoutY();
 
-    // Calculate the dimensions of the rectangle
-    double rectX = rectangle.getLayoutX();
-    double rectY = rectangle.getLayoutY();
-    double rectWidth = rectangle.getWidth();
-    double rectHeight = rectangle.getHeight();
-
-    return toolX >= rectX
-        && toolX + tool.getFitWidth() <= rectX + rectWidth
-        && toolY >= rectY
-        && toolY + tool.getFitHeight() <= rectY + rectHeight;
+    double rectangleX = rectangle.getLayoutX();
+    double rectangleY = rectangle.getLayoutY();
+    
+    return toolX == rectangleX + 10 && toolY == rectangleY + 5;
   }
 
   /**
@@ -185,5 +188,51 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private void onSolved() {
     setSolved();
     clearPuzzle(panReactorToolbox);
+  }
+
+  private void snapToPosition(Node source) {
+    checkCloseToRectangle(source, recAxe);
+    checkCloseToRectangle(source, recBottle);
+    checkCloseToRectangle(source, recTorch);
+  }
+
+  private void checkCloseToRectangle(Node source, Rectangle rect) {
+    if (rect == recAxe && recAxeOccupied ||
+        rect == recBottle && recBottleOccupied ||
+        rect == recTorch && recTorchOccupied) {
+        // The rectangle is already occupied, don't snap the tool
+        return;
+    }
+
+    double sourceX = source.getTranslateX() + source.getLayoutX();
+    double sourceY = source.getTranslateY() + source.getLayoutY();
+    double sourceWidth = ((ImageView) source).getFitWidth();
+    double sourceHeight = ((ImageView) source).getFitHeight();
+
+    double rectX = rect.getLayoutX();
+    double rectY = rect.getLayoutY();
+    double rectWidth = rect.getWidth();
+    double rectHeight = rect.getHeight();
+
+    double distanceX = Math.abs(sourceX - rectX);
+    double distanceY = Math.abs(sourceY - rectY);
+
+    if (distanceX < 20 && distanceY < 10) {
+        setPosition(source, rectX + 10, rectY + 5);
+
+        // Mark the rectangle as occupied
+        if (rect == recAxe) {
+            recAxeOccupied = true;
+        } else if (rect == recBottle) {
+            recBottleOccupied = true;
+        } else if (rect == recTorch) {
+            recTorchOccupied = true;
+        }
+    }
+  }
+
+  private void setPosition(Node source, double x, double y) {
+    source.setTranslateX(x - source.getLayoutX());
+    source.setTranslateY(y - source.getLayoutY());
   }
 }
