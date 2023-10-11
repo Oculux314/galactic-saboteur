@@ -108,7 +108,7 @@ public class TestTubesPuzzleController extends Puzzle {
 
   public String selectRandomColor() {
     // Create an array of colors
-    String[] colours = {"purple", "orange", "turquoise", "violet", "brown", "light blue", "pink"};
+    String[] colours = {"orange", "turquoise", "violet", "brown", "light blue", "pink"};
     Random random = new Random();
 
     // Generate a random index to select a color

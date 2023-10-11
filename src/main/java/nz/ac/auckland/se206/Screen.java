@@ -34,11 +34,11 @@ public class Screen {
    * @param loader The loader containing the FXML file and controller.
    * @throws IOException If the FXML file is not found.
    */
-  public Screen(FXMLLoader loader) throws IOException {
+  public Screen(FXMLLoader loader) {
     try {
       fxml = loader.load();
       controller = loader.getController();
-    } catch (IllegalStateException e) {
+    } catch (IllegalStateException | IOException e) {
       fxml = getDefaultParent();
       controller = null;
     }

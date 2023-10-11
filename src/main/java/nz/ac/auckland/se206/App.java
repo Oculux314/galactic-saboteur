@@ -1,8 +1,9 @@
 package nz.ac.auckland.se206;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -20,6 +21,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.MainController;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.speech.TextToSpeech.TextToSpeechException;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -29,6 +31,7 @@ public class App extends Application {
   /** A map of all screens in the application (name -> screen) */
   public static Map<Screen.Name, Screen> screens = new HashMap<>();
 
+  private static Set<TaggedThread> threads = new HashSet<>();
   private static TextToSpeech tts = new TextToSpeech();
   public static Assistant scientist;
   public static Assistant mechanic;
@@ -62,13 +65,12 @@ public class App extends Application {
    * does not exist. Assumes there is only one screen currently active.
    *
    * @param screenName The name of the screen to set.
-   * @throws IOException If the screen does not exist and the FXML file for the screen is not found.
    */
-  public static void setScreen(final Screen.Name screenName) throws IOException {
+  public static void setScreen(final Screen.Name screenName) {
     GameState.currentScreen = screenName;
 
-    if (!screens.containsKey(screenName)) {
-      makeScreen(screenName); // Automatically make screen if does not exist
+    while (!screens.containsKey(screenName)) {
+      // Wait for screen to be loaded
     }
 
     ObservableList<Node> activeScreens = getPanMain().getChildren();
@@ -104,9 +106,13 @@ public class App extends Application {
    * Creates a screen with the given name, and stores it in the screens map.
    *
    * @param screenName The name of the screen to create.
-   * @throws IOException If the FXML file for the screen is not found.
    */
-  private static void makeScreen(final Screen.Name screenName) throws IOException {
+  private static void makeScreen(final Screen.Name screenName) {
+    TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
+    screenLoader.start();
+  }
+
+  private static void makeScreenWithoutThread(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
     screens.put(screenName, new Screen(loader));
@@ -130,25 +136,32 @@ public class App extends Application {
     return stage.getScene();
   }
 
-  public static void restart() throws IOException {
+  public static void restart() {
+    killAllThreads();
     GameState.reset();
     resetScreens();
   }
 
-  private static void resetScreens() throws IOException {
-    Thread screenLoader =
-        new Thread(
+  private static void killAllThreads() {
+    GameState.isGameover = true;
+
+    for (TaggedThread thread : threads) {
+      thread.interrupt(); // Does nothing if thread is already dead
+    }
+
+    threads.clear();
+  }
+
+  private static void resetScreens() {
+    TaggedThread screenLoader =
+        new TaggedThread(
             () -> {
               for (Screen.Name screenName : Screen.Name.values()) {
                 if (screenName == Screen.Name.MAIN) { // Main screen is persistent
                   continue;
                 }
 
-                try {
-                  makeScreen(screenName);
-                } catch (IOException e) {
-                  e.printStackTrace();
-                }
+                makeScreen(screenName);
               }
             });
 
@@ -172,14 +185,27 @@ public class App extends Application {
       return text;
     }
 
-    Thread ttsThread = new Thread(() -> tts.speak(text));
+    TaggedThread ttsThread =
+        new TaggedThread(
+            () -> {
+              try {
+                tts.speak(text);
+              } catch (TextToSpeechException e) {
+                return;
+              }
+            });
     ttsThread.start();
     return text; // Return original text so this function can wrap existing strings
+  }
+
+  public static void addThread(TaggedThread thread) {
+    threads.add(thread);
   }
 
   @Override
   public void stop() {
     GameState.isRunning = false;
+    killAllThreads();
     tts.terminate();
   }
 
@@ -196,17 +222,14 @@ public class App extends Application {
    * </ul>
    *
    * @param newStage The primary stage of the application.
-   * @throws IOException If either "main.fxml" or "title.fxml" is not found in
-   *     "src/main/resources/fxml/".
    */
   @Override
-  public void start(final Stage newStage) throws IOException {
+  public void start(final Stage newStage) {
     App.stage = newStage;
 
     // Set up screen graph
-    makeScreen(Screen.Name.MAIN);
+    makeScreenWithoutThread(Screen.Name.MAIN);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
-    setScreen(Screen.Name.DEFAULT);
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);

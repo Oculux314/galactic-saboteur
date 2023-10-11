@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.controllers.MainController;
 import javafx.scene.control.Label;
@@ -49,7 +51,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     addToolsAndRectangles();
   }
 
-   /**
+  /**
    * Called when the mouse is pressed
    *
    * @param event the mouse event
@@ -127,8 +129,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML
   private void onSubmitClicked() {
     // Check if all tools are in the correct place
-     Thread labelThread =
-        new Thread(
+    TaggedThread labelThread =
+        new TaggedThread(
             () -> {
               try {
                 Thread.sleep(1500);
@@ -138,7 +140,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
               }
             });
 
-    
     boolean allToolsInRectangles =
         isToolInRectangle(imvTool2, rec2)
             && isToolInRectangle(imvTool3, rec3)

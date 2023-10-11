@@ -4,16 +4,17 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
-import javafx.scene.input.MouseEvent;
 
 /** Controller class for the title screen. */
 public class ExpositionController implements Controller {
 
-  private static final int DELAY_MILLIS = 1000;
+  private static final int DELAY_MILLIS = 2000;
 
   /** Pane that takes up the entire screen. */
   @FXML private Pane panFullScreen;
@@ -27,7 +28,7 @@ public class ExpositionController implements Controller {
   private String[] imagePaths = {
     "/images/expo1.jpg", "/images/expo2.png", "/images/expo3.png", "/images/expo4.png", "/images/expo5.png"
   };
-  private Thread delayManager;
+  private TaggedThread delayManager;
 
   public void startSlideshow() {
     showNextImage();
@@ -42,7 +43,7 @@ public class ExpositionController implements Controller {
 
     // Show next image
     updateImage();
-    delayManager = new Thread(() -> delayAndShowImage());
+    delayManager = new TaggedThread(() -> delayAndShowImage());
     delayManager.start();
   }
 

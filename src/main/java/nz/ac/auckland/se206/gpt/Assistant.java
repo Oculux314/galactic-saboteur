@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
@@ -24,7 +25,7 @@ public class Assistant {
         try {
           Thread.sleep(100);
         } catch (InterruptedException e) {
-          e.printStackTrace();
+          return null;
         }
       }
 
@@ -32,7 +33,7 @@ public class Assistant {
       isWaitingForResponse = true;
 
       // Modulate ... loading effect in response field
-      Thread loadEffectThread = new Thread(narrationBox.new LoadEffectTask());
+      TaggedThread loadEffectThread = new TaggedThread(narrationBox.new LoadEffectTask());
       loadEffectThread.start();
 
       // Expensive API call
@@ -85,7 +86,7 @@ public class Assistant {
     systemMessage = new ChatMessage("system", content);
   }
 
-  private Thread executeApiCall() {
+  private TaggedThread executeApiCall() {
     ChatCompletionRequest request =
         new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(100);
 
@@ -98,21 +99,21 @@ public class Assistant {
 
     Task<Void> apiCallTask = new ApiCallTask(request);
 
-    Thread apiCallThread = new Thread(apiCallTask);
+    TaggedThread apiCallThread = new TaggedThread(apiCallTask);
     apiCallThread.start();
     return apiCallThread;
   }
 
   private void executeApiCallWithCallback(Runnable callback) {
-    Thread apiCallThread =
-        new Thread(
+    TaggedThread apiCallThread =
+        new TaggedThread(
             () -> {
-              Thread sendMessageThread = executeApiCall();
+              TaggedThread sendMessageThread = executeApiCall();
 
               try {
                 sendMessageThread.join();
               } catch (InterruptedException e) {
-                // Nothing
+                return;
               }
 
               Platform.runLater(
