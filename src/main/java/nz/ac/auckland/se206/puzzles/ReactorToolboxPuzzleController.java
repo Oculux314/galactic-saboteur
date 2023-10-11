@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.puzzles;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,6 +14,7 @@ import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.controllers.MainController;
 import javafx.scene.control.Label;
+import java.util.List;
 
 /** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
@@ -28,9 +31,22 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
   private double pressedX, pressedY;
   private Node selectedNode;
+  private List<ImageView> tools = new ArrayList<>();
+  private List<Rectangle> rects = new ArrayList<>();
   private boolean recAxeOccupied = false;
   private boolean recBottleOccupied = false;
   private boolean recTorchOccupied = false;
+
+  @FXML
+  private void initialize() {
+    tools.add(imvAxe);
+    tools.add(imvBottle);
+    tools.add(imvTorch);
+
+    rects.add(recAxe);
+    rects.add(recBottle);
+    rects.add(recTorch);
+  }
 
    /**
    * Called when the mouse is pressed
@@ -60,6 +76,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    */
   @FXML
   private void onMouseDragged(MouseEvent event) {
+
+    checkRectanglesClear();
     double offsetX = -selectedNode.getLayoutX();
     double offsetY = -selectedNode.getLayoutY();
 
@@ -98,8 +116,16 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     selectedNode = null;
 
     Node source = (Node) event.getSource();
+    System.out.println("before Axe: " + recAxeOccupied);
+    System.out.println("before Bottle: " + recBottleOccupied);
+    System.out.println("before Torch: " + recTorchOccupied);
 
     snapToPosition(source);
+
+    System.out.println("after Axe: " + recAxeOccupied);
+    System.out.println("after Bottle: " + recBottleOccupied);
+    System.out.println("after Torch: " + recTorchOccupied);
+    
   } 
 
   /**
@@ -197,11 +223,13 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   private void checkCloseToRectangle(Node source, Rectangle rect) {
-    if (rect == recAxe && recAxeOccupied ||
-        rect == recBottle && recBottleOccupied ||
-        rect == recTorch && recTorchOccupied) {
-        // The rectangle is already occupied, don't snap the tool
+    for (ImageView tool: tools) {
+      double toolX = tool.getTranslateX() + tool.getLayoutX();
+      double toolY = tool.getTranslateY() + tool.getLayoutY();
+
+      if (toolX == rect.getLayoutX() + 10 && toolY == rect.getLayoutY() + 5) {
         return;
+      }
     }
 
     double sourceX = source.getTranslateX() + source.getLayoutX();
@@ -217,7 +245,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     double distanceX = Math.abs(sourceX - rectX);
     double distanceY = Math.abs(sourceY - rectY);
 
-    if (distanceX < 20 && distanceY < 10) {
+    if (distanceX < 30 && distanceY < 15) {
         setPosition(source, rectX + 10, rectY + 5);
 
         // Mark the rectangle as occupied
@@ -234,5 +262,28 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private void setPosition(Node source, double x, double y) {
     source.setTranslateX(x - source.getLayoutX());
     source.setTranslateY(y - source.getLayoutY());
+  }
+
+  private void checkRectanglesClear() {
+    for (ImageView tool: tools) {
+      for (Rectangle rect: rects) {
+        double toolX = tool.getTranslateX() + tool.getLayoutX();
+        double toolY = tool.getTranslateY() + tool.getLayoutY();
+
+        if (toolX != rect.getLayoutX() + 10 && toolY != rect.getLayoutY() + 5) {
+          switch (rect.getId()) {
+            case "recAxe":
+              recAxeOccupied = false;
+              break;
+            case "recBottle":
+              recBottleOccupied = false;
+              break;
+            case "recTorch":
+              recTorchOccupied = false;
+              break;
+          }
+        }
+      }
+    }
   }
 }

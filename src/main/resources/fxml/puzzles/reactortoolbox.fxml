@@ -10,17 +10,17 @@
 
 <Pane fx:id="panReactorToolbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorToolboxPuzzleController">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="519.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="410.0" fitWidth="511.0" layoutX="-5.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/toolbox-puzzle-background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="442.0" fitWidth="410.0" layoutX="35.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/toolbox-puzzle-overlay.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="185.0" layoutX="153.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/tool-4.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="126.0" layoutX="203.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="23.0" fitWidth="126.0" layoutX="190.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/tool-5.png" />
          </image>
@@ -32,25 +32,30 @@
       </AnimatedButton>
       <Group fx:id="grpRectangles">
          <children>
-            <Rectangle fx:id="recBottle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="45.0" layoutX="160.0" layoutY="345.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="165.0" />
-            <Rectangle fx:id="recTorch" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="160.0" layoutY="285.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="177.0" />
-            <Rectangle fx:id="recAxe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="165.0" layoutY="320.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="179.0" />
+            <Rectangle fx:id="recBottle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="160.0" layoutY="330.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="130.0" />
+            <Rectangle fx:id="recTorch" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="160.0" layoutY="276.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="153.0" />
+            <Rectangle fx:id="recAxe" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="165.0" layoutY="308.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+            <ImageView fitHeight="30.0" fitWidth="131.0" layoutX="170.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/tool-4.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
       <Label fx:id="lblVerdict" layoutX="380.0" layoutY="400.0" />
       <Group fx:id="grpTools">
          <children>
-            <ImageView fx:id="imvBottle" fitHeight="63.0" fitWidth="147.0" layoutX="170.0" layoutY="130.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imvBottle" fitHeight="30.0" fitWidth="128.0" layoutX="230.0" layoutY="210.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/tool-3.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imvAxe" fitHeight="29.0" fitWidth="169.0" layoutX="170.0" layoutY="80.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imvAxe" fitHeight="19.0" fitWidth="139.0" layoutX="130.0" layoutY="190.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/tool-2.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imvTorch" fitHeight="37.0" fitWidth="166.0" layoutX="170.0" layoutY="30.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imvTorch" fitHeight="21.0" fitWidth="147.0" layoutX="180.0" layoutY="160.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/tool-1.png" />
                </image>
