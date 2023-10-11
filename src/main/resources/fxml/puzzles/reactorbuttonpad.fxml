@@ -21,7 +21,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblVerdict" layoutX="371.0" layoutY="379.0" />
+      <Label fx:id="lblVerdict" layoutX="370.0" layoutY="340.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" />
       <Label fx:id="lblNumberPrompt" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="210.0" prefHeight="0.0" prefWidth="168.0" style="-fx-font-size: 20; -fx-text-fill: #000000;" text="NUMBER" textAlignment="CENTER">
          <font>
             <Font size="50.0" />

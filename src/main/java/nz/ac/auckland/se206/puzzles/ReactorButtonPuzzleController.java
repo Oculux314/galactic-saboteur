@@ -131,7 +131,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
       setSolved();
       clearPuzzle(panReactorButtonpad);
     } else {
-      lblVerdict.setText("Incorrect");
+      lblVerdict.setText("Incorrect :(");
       labelThread.start();
     }
   }

@@ -55,7 +55,7 @@ public class PuzzleLoader {
 
   private void choosePuzzles() {
     // select a random puzzle
-    GameState.reactorPuzzle = PuzzleName.REACTOR_BUTTONPAD;
+    GameState.reactorPuzzle = getRandomPuzzle(reactorPuzzles);
     GameState.laboratoryPuzzle = getRandomPuzzle(laboratoryPuzzles);
     GameState.navigationPuzzle = getRandomPuzzle(navigationPuzzles);
   }

@@ -19,33 +19,34 @@ import java.util.List;
 /** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
 
-  @FXML private ImageView imvAxe;
-  @FXML private ImageView imvBottle;
-  @FXML private ImageView imvTorch;
+  @FXML private ImageView imvTool1;
+  @FXML private ImageView imvTool2;
+  @FXML private ImageView imvTool3;
   @FXML private AnimatedButton btnExit;
   @FXML private Pane panReactorToolbox;
-  @FXML private Rectangle recAxe;
-  @FXML private Rectangle recBottle;
-  @FXML private Rectangle recTorch;
+  @FXML private Rectangle rec2; // Axe
+  @FXML private Rectangle rec3; // Bottle
+  @FXML private Rectangle rec1; //Torch
   @FXML private Label lblVerdict;
 
   private double pressedX, pressedY;
   private Node selectedNode;
   private List<ImageView> tools = new ArrayList<>();
   private List<Rectangle> rects = new ArrayList<>();
-  private boolean recAxeOccupied = false;
-  private boolean recBottleOccupied = false;
-  private boolean recTorchOccupied = false;
+  private boolean rec2Occupied = false;
+  private boolean rec3Occupied = false;
+  private boolean rec1Occupied = false;
+
+  private int marginX = 10;
+  private int marginY = 5;
+  private int boundminX = 130;
+  private int boundminY = 150;
+  private int boundmaxX = 360;
+  private int boundmaxY = 390;
 
   @FXML
   private void initialize() {
-    tools.add(imvAxe);
-    tools.add(imvBottle);
-    tools.add(imvTorch);
-
-    rects.add(recAxe);
-    rects.add(recBottle);
-    rects.add(recTorch);
+    addToolsAndRectangles();
   }
 
    /**
@@ -59,9 +60,10 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     if (event.isPrimaryButtonDown()) {
       Node source = (Node) event.getSource();
 
-      if (source.equals(imvBottle) || source.equals(imvAxe) || source.equals(imvTorch)) {
+      if (tools.contains(source)) {
         // Select the node
         selectedNode = source;
+        selectedNode.toFront();
         pressedX = event.getSceneX();
         pressedY = event.getSceneY();
        }
@@ -88,11 +90,11 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     double newY = selectedNode.getTranslateY() + deltaY / getScreenZoom();
 
     // Calculate the bounds within which the image can be dragged
-    double minX = offsetX;
-    double minY = offsetY;
-    double maxX = panReactorToolbox.getWidth() + offsetX - ((ImageView) selectedNode).getFitWidth();
-    double maxY =
-        panReactorToolbox.getHeight() + offsetY - ((ImageView) selectedNode).getFitHeight();
+    double minX = boundminX + offsetX;
+    double minY = boundminY + offsetY;
+    double maxX = boundmaxX + offsetX - ((ImageView) selectedNode).getFitWidth();
+    double maxY = boundmaxY + offsetY - ((ImageView) selectedNode).getFitHeight();
+        
 
     // Calculate the new position within the pane
     newX = clamp(newX, minX, maxX);
@@ -114,18 +116,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML
   private void onMouseReleased(MouseEvent event) {
     selectedNode = null;
-
     Node source = (Node) event.getSource();
-    System.out.println("before Axe: " + recAxeOccupied);
-    System.out.println("before Bottle: " + recBottleOccupied);
-    System.out.println("before Torch: " + recTorchOccupied);
-
-    snapToPosition(source);
-
-    System.out.println("after Axe: " + recAxeOccupied);
-    System.out.println("after Bottle: " + recBottleOccupied);
-    System.out.println("after Torch: " + recTorchOccupied);
-    
+    snapToPosition(source);  
   } 
 
   /**
@@ -149,15 +141,15 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
     
     boolean allToolsInRectangles =
-        isToolInRectangle(imvAxe, recAxe)
-            && isToolInRectangle(imvBottle, recBottle)
-            && isToolInRectangle(imvTorch, recTorch);
+        isToolInRectangle(imvTool2, rec2)
+            && isToolInRectangle(imvTool3, rec3)
+            && isToolInRectangle(imvTool1, rec1);
 
     if (allToolsInRectangles) {
       setSolved();
       clearPuzzle(panReactorToolbox);
     } else {
-      lblVerdict.setText("Incorrect");
+      lblVerdict.setText("Incorrect \n Try again");
       labelThread.start();
     }
   }
@@ -177,7 +169,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     double rectangleX = rectangle.getLayoutX();
     double rectangleY = rectangle.getLayoutY();
     
-    return toolX == rectangleX + 10 && toolY == rectangleY + 5;
+    return toolX == rectangleX + marginX && toolY == rectangleY + marginY;
   }
 
   /**
@@ -213,9 +205,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   private void snapToPosition(Node source) {
-    checkCloseToRectangle(source, recAxe);
-    checkCloseToRectangle(source, recBottle);
-    checkCloseToRectangle(source, recTorch);
+    for (Rectangle rect: rects) {
+      checkCloseToRectangle(source, rect);
+    }
   }
 
   private void checkCloseToRectangle(Node source, Rectangle rect) {
@@ -223,34 +215,31 @@ public class ReactorToolboxPuzzleController extends Puzzle {
       double toolX = tool.getTranslateX() + tool.getLayoutX();
       double toolY = tool.getTranslateY() + tool.getLayoutY();
 
-      if (toolX == rect.getLayoutX() + 10 && toolY == rect.getLayoutY() + 5) {
+      // If a tool is in the rectangle already don't snap the position
+      if (toolX == rect.getLayoutX() + marginX && toolY == rect.getLayoutY() + marginY) {
         return;
       }
     }
 
     double sourceX = source.getTranslateX() + source.getLayoutX();
     double sourceY = source.getTranslateY() + source.getLayoutY();
-    double sourceWidth = ((ImageView) source).getFitWidth();
-    double sourceHeight = ((ImageView) source).getFitHeight();
 
     double rectX = rect.getLayoutX();
     double rectY = rect.getLayoutY();
-    double rectWidth = rect.getWidth();
-    double rectHeight = rect.getHeight();
 
     double distanceX = Math.abs(sourceX - rectX);
     double distanceY = Math.abs(sourceY - rectY);
 
     if (distanceX < 30 && distanceY < 15) {
-        setPosition(source, rectX + 10, rectY + 5);
+        setPosition(source, rectX + marginX, rectY + marginY);
 
-        // Mark the rectangle as occupied
-        if (rect == recAxe) {
-            recAxeOccupied = true;
-        } else if (rect == recBottle) {
-            recBottleOccupied = true;
-        } else if (rect == recTorch) {
-            recTorchOccupied = true;
+        // Mark the rectangle as occupied if tool has snapped to it
+        if (rect == rec2) {
+            rec2Occupied = true;
+        } else if (rect == rec3) {
+            rec3Occupied = true;
+        } else if (rect == rec1) {
+            rec1Occupied = true;
         }
     }
   }
@@ -266,20 +255,31 @@ public class ReactorToolboxPuzzleController extends Puzzle {
         double toolX = tool.getTranslateX() + tool.getLayoutX();
         double toolY = tool.getTranslateY() + tool.getLayoutY();
 
-        if (toolX != rect.getLayoutX() + 10 && toolY != rect.getLayoutY() + 5) {
+        // Disable flag if tool has moved away from rectangle / allow tools to snap to other rectangles
+        if (toolX != rect.getLayoutX() + marginX && toolY != rect.getLayoutY() + marginY) {
           switch (rect.getId()) {
-            case "recAxe":
-              recAxeOccupied = false;
+            case "rec2":
+              rec2Occupied = false;
               break;
-            case "recBottle":
-              recBottleOccupied = false;
+            case "rec3":
+              rec3Occupied = false;
               break;
-            case "recTorch":
-              recTorchOccupied = false;
+            case "rec1":
+              rec1Occupied = false;
               break;
           }
         }
       }
     }
+  }
+
+  private void addToolsAndRectangles() {
+    tools.add(imvTool2);
+    tools.add(imvTool3);
+    tools.add(imvTool1);
+
+    rects.add(rec2);
+    rects.add(rec3);
+    rects.add(rec1);
   }
 }
