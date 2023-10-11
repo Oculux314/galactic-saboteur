@@ -15,7 +15,7 @@
       <Rectangle fx:id="recBackground" fill="#00000033" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
       <Group fx:id="grpPopup">
          <children>
-            <Rectangle fx:id="recPopupShape" arcHeight="30.0" arcWidth="30.0" height="480.0" layoutX="160.0" layoutY="60.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="480.0">
+            <Rectangle fx:id="recPopupShape" arcHeight="30.0" arcWidth="30.0" height="480.0" layoutX="160.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="480.0">
                <fill>
                   <LinearGradient endY="1.0">
                      <stops>
@@ -38,7 +38,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
-            <AnimatedButton fx:id="btnExit" fitHeight="80.0" fitWidth="80.0" layoutX="580.0" layoutY="40.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+            <AnimatedButton fx:id="btnExit" fitHeight="60.0" fitWidth="60.0" layoutX="600.0" layoutY="40.0" onMouseClicked="#onExitClicked" preserveRatio="true">
                <image>
                   <Image url="@../images/exit.png" />
                </image>
