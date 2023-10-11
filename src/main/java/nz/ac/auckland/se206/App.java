@@ -68,8 +68,8 @@ public class App extends Application {
   public static void setScreen(final Screen.Name screenName) {
     GameState.currentScreen = screenName;
 
-    if (!screens.containsKey(screenName)) {
-      makeScreen(screenName); // Automatically make screen if does not exist
+    while (!screens.containsKey(screenName)) {
+      // Wait for screen to be loaded
     }
 
     ObservableList<Node> activeScreens = getPanMain().getChildren();
@@ -107,6 +107,13 @@ public class App extends Application {
    * @param screenName The name of the screen to create.
    */
   private static void makeScreen(final Screen.Name screenName) {
+    //Utils.logTimeTest(
+
+    TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
+    screenLoader.start();
+  }
+
+  private static void makeScreenWithoutThread(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
     screens.put(screenName, new Screen(loader));
@@ -212,9 +219,8 @@ public class App extends Application {
     App.stage = newStage;
 
     // Set up screen graph
-    makeScreen(Screen.Name.MAIN);
+    makeScreenWithoutThread(Screen.Name.MAIN);
     Parent screen = getScreen(Screen.Name.MAIN).getFxml();
-    setScreen(Screen.Name.DEFAULT);
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);

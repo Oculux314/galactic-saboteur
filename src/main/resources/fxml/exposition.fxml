@@ -8,11 +8,7 @@
 
 <Pane fx:id="panFullScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onBackgroundClicked" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ExpositionController">
    <children>
-      <ImageView fx:id="imageView" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/shipinspace.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imageView" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" />
       <Pane fx:id="replayPane" prefHeight="600.0" prefWidth="800.0" visible="false">
          <children>
             <ImageView fitHeight="600.0" fitWidth="813.0" pickOnBounds="true" preserveRatio="true">
