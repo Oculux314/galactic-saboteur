@@ -417,6 +417,7 @@ public class GameController implements Controller {
 
   @FXML
   private void riddleClicked() throws IOException {
+    System.out.println("Riddle clicked");
     // Set the visibility of the corresponding group
     grpRiddle.setVisible(true);
     if (GameState.cluesFound == true) {

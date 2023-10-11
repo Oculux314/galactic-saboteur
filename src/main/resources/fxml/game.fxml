@@ -24,22 +24,22 @@
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/ship.png" />
+                  <Image url="@../images/space-station.png" />
                </image>
             </ImageView>
             <Group fx:id="grpSuspectButtons">
                <children>
-                  <HighlightButton fx:id="gptScientist" fitHeight="56.0" fitWidth="39.0" layoutX="400.0" layoutY="237.0" onMouseClicked="#gptStart">
+                  <HighlightButton fx:id="gptScientist" fitHeight="105.0" fitWidth="85.0" layoutX="167.0" layoutY="255.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
-                        <Image url="@../images/labgpt.png" />
+                        <Image url="@../images/scientist.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="gptCaptain" fitHeight="56.0" fitWidth="39.0" layoutX="554.0" layoutY="329.0" onMouseClicked="#gptStart">
+                  <HighlightButton fx:id="gptCaptain" fitHeight="110.0" fitWidth="115.0" layoutX="595.0" layoutY="250.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
                         <Image url="@../images/captain.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="gptMechanic" fitHeight="56.0" fitWidth="42.0" layoutX="209.0" layoutY="359.0" onMouseClicked="#gptStart">
+                  <HighlightButton fx:id="gptMechanic" fitHeight="110.0" fitWidth="101.0" layoutX="436.0" layoutY="270.0" onMouseClicked="#gptStart" preserveRatio="true">
                      <image>
                         <Image url="@../images/mechanic.png" />
                      </image>
@@ -48,32 +48,27 @@
             </Group>
             <Group fx:id="grpPuzzleButtons">
                <children>
-                  <HighlightButton fx:id="btnReactorHangman" fitHeight="30.0" fitWidth="28.0" layoutX="160.0" layoutY="150.0" onMouseClicked="#onPuzzleButtonClicked">
+                  <HighlightButton fx:id="btnReactorHangman" fitHeight="44.0" fitWidth="62.0" layoutX="303.0" layoutY="250.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/whiteboard.png" />
                      </image>
                   </HighlightButton>
-               <HighlightButton fx:id="btnReactorToolbox" fitHeight="53.0" fitWidth="58.0" layoutX="140.0" layoutY="440.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+               <HighlightButton fx:id="btnReactorToolbox" fitHeight="18.0" fitWidth="39.0" layoutX="287.0" layoutY="321.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/toolbox.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="btnReactorButtonpad" fitWidth="40.0" layoutX="206.0" layoutY="210.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                  <HighlightButton fx:id="btnReactorButtonpad" fitHeight="29.0" fitWidth="23.0" layoutX="475.0" layoutY="264.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
                         <Image url="@../images/buttonpad.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="btnReactorApple" fitWidth="40.0" layoutX="150.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
+                  <HighlightButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="120.0" layoutY="293.0" onMouseClicked="#onPuzzleButtonClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/apple.png" />
+                        <Image url="@../images/test-tubes.png" />
                      </image>
                   </HighlightButton>
-                  <HighlightButton fx:id="btnLaboratoryTesttubes" fitHeight="29.0" fitWidth="23.0" layoutX="347.0" layoutY="300.0" onMouseClicked="#onPuzzleButtonClicked">
-                     <image>
-                        <Image url="@../images/testtubes.png" />
-                     </image>
-                  </HighlightButton>
-                  <HighlightButton fx:id="btnNavigationComputer" fitHeight="88.0" fitWidth="31.0" layoutX="591.0" layoutY="200.0" onMouseClicked="#onPuzzleButtonClicked">
+                  <HighlightButton fx:id="btnNavigationComputer" fitHeight="45.0" fitWidth="68.0" layoutX="630.0" layoutY="245.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
                         <Image url="@../images/computer.png" />
                      </image>
@@ -82,9 +77,9 @@
             </Group>
             <Group fx:id="grpOtherButtons">
                <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="148.0" fitWidth="93.0" layoutX="77.0" layoutY="234.0" onMouseClicked="#riddleClicked">
+                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#riddleClicked" preserveRatio="true">
                      <image>
-                        <Image url="@../images/reactorcrop.png" />
+                        <Image url="@../images/reactor-machine.png" />
                      </image>
                   </HighlightButton>
                </children>
@@ -121,6 +116,17 @@
             </AnimatedButton>
          </children>
       </Group>
+      <Group fx:id="grpRiddle">
+         <children>
+            <Pane fx:id="panBlockRiddlBackground" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
+            <fx:include fx:id="riddle" layoutX="150.0" layoutY="50.0" source="riddle.fxml" />
+            <AnimatedButton fx:id="btnRiddleExit" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exit.png" />
+               </image>
+            </AnimatedButton>
+         </children>
+      </Group>
 
        <Group fx:id="grpGpt">
          <children>
@@ -131,7 +137,7 @@
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseCaptain" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
                         <TextArea fx:id="labelNarrationCaptain" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="213.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="220.0" fitWidth="67.0" layoutX="240.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/captain.png" />
                            </image>
@@ -159,7 +165,7 @@
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseMechanic" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
                         <TextArea fx:id="labelNarrationMechanic" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="213.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="220.0" fitWidth="165.0" layoutX="240.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/mechanic.png" />
                            </image>
@@ -187,9 +193,9 @@
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseScientist" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
                         <TextArea fx:id="labelNarrationScientist" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-                        <ImageView fitHeight="183.0" fitWidth="165.0" layoutX="213.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="220.0" fitWidth="165.0" layoutX="240.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/labgpt.png" />
+                              <Image url="@../images/scientist.png" />
                            </image>
                         </ImageView>
                         <Polygon fill="#f2f0f0" layoutX="318.0" layoutY="214.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
@@ -210,37 +216,26 @@
             </Group>
          </children>
       </Group>
-      <Group fx:id="grpRiddle">
-         <children>
-            <Pane fx:id="panBlockRiddlBackground" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
-            <fx:include fx:id="riddle" layoutX="150.0" layoutY="50.0" source="riddle.fxml" />
-            <AnimatedButton fx:id="btnRiddleExit" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
-               <image>
-                  <Image url="@../images/exit.png" />
-               </image>
-            </AnimatedButton>
-         </children>
-      </Group>
       <Group fx:id="grpTimer" layoutX="635.0">
          <children>
             <Label fx:id="timer" alignment="CENTER" layoutX="42.0" layoutY="522.0" prefHeight="66.0" prefWidth="100.0" textOverrun="CLIP" />
          </children>
       </Group>
+      <Group fx:id="grpHints" layoutX="-400.0" layoutY="-10.0">
+         <children>
+            <Label fx:id="labelHintsLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="909.0" layoutY="534.0" prefHeight="68.0" prefWidth="128.0" stylesheets="@../css/style.css" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+         </children>
+      </Group>
       <Pane fx:id="panEnd" prefHeight="600.0" prefWidth="800.0" visible="false">
          <children>
-            <ImageView fx:id="imageEnd" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageEnd" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/expo1.png" />
+                  <Image url="@../images/expo1.jpg" />
                </image>
             </ImageView>
             <Label fx:id="lblEnd" alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="72.0" text="You Saved The Ship And Escaped!" textAlignment="CENTER" />
             <Button layoutX="373.0" layoutY="510.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
          </children>
       </Pane>
-      <Group fx:id="grpHints" layoutX="-400.0" layoutY="-10.0">
-         <children>
-            <Label fx:id="labelHintsLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="909.0" layoutY="534.0" prefHeight="68.0" prefWidth="128.0" stylesheets="@../css/style.css" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
-         </children>
-      </Group>
    </children>
 </Pane>

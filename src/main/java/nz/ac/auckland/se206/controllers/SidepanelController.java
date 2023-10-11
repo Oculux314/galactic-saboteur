@@ -25,12 +25,12 @@ public class SidepanelController implements Controller {
   @FXML private Label whoClueInformationLabel;
 
   private String[] suspects = {
-    "/images/suspects/suspect1.jpg",
-    "/images/suspects/suspect2.jpg",
+    "/images/suspects/suspect1.png",
+    "/images/suspects/suspect2.png",
     "/images/suspects/suspect3.png"
   };
   private String[] rooms = {
-    "/images/rooms/room1.jpg", "/images/rooms/room2.jpg", "/images/rooms/room3.jpg"
+    "/images/rooms/room1.png", "/images/rooms/room2.jpg", "/images/rooms/room3.png"
   };
   private String[] times = {
     "/images/times/time1.jpg", "/images/times/time2.jpg", "/images/times/time3.jpg"
@@ -167,14 +167,14 @@ public class SidepanelController implements Controller {
 
   private void setClueNameMap() {
     // Suspects
-    clueNameMap.put("/images/suspects/suspect1.jpg", "Scientist");
-    clueNameMap.put("/images/suspects/suspect2.jpg", "Captain");
+    clueNameMap.put("/images/suspects/suspect1.png", "Scientist");
+    clueNameMap.put("/images/suspects/suspect2.png", "Captain");
     clueNameMap.put("/images/suspects/suspect3.png", "Mechanic");
 
     // Rooms
-    clueNameMap.put("/images/rooms/room1.jpg", "Navigation");
+    clueNameMap.put("/images/rooms/room1.png", "Navigation");
     clueNameMap.put("/images/rooms/room2.jpg", "Laboratory");
-    clueNameMap.put("/images/rooms/room3.jpg", "Reactor Room");
+    clueNameMap.put("/images/rooms/room3.png", "Reactor Room");
 
     // Times
     clueNameMap.put("/images/times/time1.jpg", "Morning");
