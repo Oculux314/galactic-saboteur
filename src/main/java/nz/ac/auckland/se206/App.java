@@ -189,6 +189,7 @@ public class App extends Application {
   @Override
   public void stop() {
     GameState.isRunning = false;
+    killAllThreads();
     tts.terminate();
   }
 

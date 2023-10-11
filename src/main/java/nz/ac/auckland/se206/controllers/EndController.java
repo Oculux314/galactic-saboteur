@@ -15,6 +15,10 @@ public class EndController implements Controller {
 
   private void showEndScreen() {
     App.setScreen(Screen.Name.END);
+
+    // Stop timer
+    GameController gameController = (GameController) App.getScreen(Screen.Name.GAME).getController();
+    gameController.stopTimer();
   }
 
   private void setEndElements(String imageUrl, String speech, String labelText, String labelColor) {
