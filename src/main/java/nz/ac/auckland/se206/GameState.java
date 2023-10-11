@@ -84,6 +84,7 @@ public class GameState {
 
   public static int getHintLimitRemaining() {
     int num = getHintLimit() - numberOfHintsAsked;
+    // If the number of hints remaining is negative, set it to 0 so it appears correctly on screen
     if (num < 0) {
       num = 0;
     }
