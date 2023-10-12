@@ -9,10 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -72,10 +70,6 @@ public class GameController implements ScreenParent {
   @FXML private AnimatedButton btnRiddleExit;
   @FXML private AnimatedButton btnReactor;
   @FXML private RiddleController riddleController;
-
-  @FXML private Pane panEnd;
-  @FXML private ImageView imageEnd;
-  @FXML private Label lblEnd;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;

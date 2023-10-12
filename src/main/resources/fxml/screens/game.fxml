@@ -2,7 +2,6 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -216,19 +215,12 @@
             </Group>
          </children>
       </Group>
-      <Pane fx:id="panEnd" prefHeight="600.0" prefWidth="800.0" visible="false">
+      <Group fx:id="grpDevTools">
          <children>
-            <ImageView fx:id="imageEnd" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../images/expo1.jpg" />
-               </image>
-            </ImageView>
-            <Label fx:id="lblEnd" alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="72.0" text="You Saved The Ship And Escaped!" textAlignment="CENTER" />
-            <Button layoutX="373.0" layoutY="510.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
+            <Button fx:id="btnRestart" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
+            <Button fx:id="btnEnd" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#onEndClicked" prefWidth="60.0" text="End" />
+            <Button fx:id="btnTest" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#onTestClicked" prefWidth="60.0" text="Test" />
          </children>
-      </Pane>
-      <Button fx:id="btnRestart" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
-      <Button fx:id="btnEnd" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#onEndClicked" prefWidth="60.0" text="End" />
-      <Button fx:id="btnTest" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#onTestClicked" prefWidth="60.0" text="Test" />
+      </Group>
    </children>
 </Pane>
