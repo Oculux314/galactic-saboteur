@@ -24,6 +24,8 @@ public class SidepanelController implements ScreenParent {
   @FXML private Label timeClueInformationLabel;
   @FXML private Label whereClueInformationLabel;
   @FXML private Label whoClueInformationLabel;
+  @FXML private Label lblTimer;
+  @FXML private Label lblHints;
 
   private String[] suspects = {
     "/images/suspects/suspect1.png",
@@ -181,5 +183,13 @@ public class SidepanelController implements ScreenParent {
     clueNameMap.put("/images/times/time1.jpg", "Morning");
     clueNameMap.put("/images/times/time2.jpg", "Afternoon");
     clueNameMap.put("/images/times/time3.jpg", "Night");
+  }
+
+  public void setTimerText(String time) {
+    lblTimer.setText(time);
+  }
+
+  public void setHintText(String hints) {
+    lblHints.setText(hints);
   }
 }
