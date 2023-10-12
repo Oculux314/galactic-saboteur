@@ -9,26 +9,30 @@ public class GptPromptEngineering {
   public static String getMainPrompt(String job) {
     String prompt = "";
     boolean isUserAllowedHints = !GameState.isHintLimitReached();
+
+    String suspectInformation = getSuspectInformation(job);
+    String puzzleInformation = getPuzzleInformation(job);
+
     if (isUserAllowedHints) {
       prompt =
-          getSuspectInformation(job)
-              + " Assist users in finding and solving the puzzle discreetly through"
-              + " hints. The user can only escape when they find out what time, which suspect and"
-              + " in what room the sabotage occured. "
-              + getPuzzleInformation(job)
-              + " Please respond in 10 words or fewer. Provide hints only if"
-              + " users mention 'hint'. If you give a hint start your response with 'A hint is:'.";
+          suspectInformation
+              + " Assist users in finding and solving the puzzle discreetly through hints. The user"
+              + " can only escape when they find out what time, which suspect, and in what room the"
+              + " sabotage occurred. "
+              + puzzleInformation
+              + " Please respond in 10 words or fewer. Provide hints only if users mention 'hint'."
+              + " If you give a hint, start your response with 'A hint is:'.";
     } else {
       prompt =
-          getSuspectInformation(job)
-              + "Support users in"
-              + " finding and solving the puzzle but don't give any information they don't know"
-              + " .The user can only escape when they find out what time, which suspect and in what"
-              + " room the sabotage occured. "
-              + getPuzzleInformation(job)
-              + " Respond in 10 words or fewer and must not include"
-              + " new hints of any form. Do not, for any reason give the user any new hints.";
+          suspectInformation
+              + "Support users in finding and solving the puzzle but don't give any information"
+              + " they don't know. The user can only escape when they find out what time, which"
+              + " suspect, and in what room the sabotage occurred. "
+              + puzzleInformation
+              + " Respond in 10 words or fewer and must not include new hints of any form. Do not,"
+              + " for any reason, give the user any new hints.";
     }
+
     return prompt;
   }
 
