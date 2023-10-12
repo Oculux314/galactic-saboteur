@@ -13,7 +13,7 @@
    <children>
       <AnchorPane layoutY="-2.0" prefHeight="265.0" prefWidth="500.0" stylesheets="@../css/style.css">
          <children>
-            <TextArea fx:id="gptTextArea" layoutX="60.0" layoutY="50.0" prefHeight="185.0" prefWidth="380.0" />
+            <TextArea fx:id="gptTextArea" editable="false" layoutX="60.0" layoutY="50.0" prefHeight="185.0" prefWidth="380.0" />
             <Label layoutX="102.0" layoutY="14.0" style="-fx-font-size: 30;" text="SPACEY THE SHIP AI" />
             <Group>
                <children>
