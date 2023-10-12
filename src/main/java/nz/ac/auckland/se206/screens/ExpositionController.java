@@ -93,7 +93,7 @@ public class ExpositionController implements ScreenParent {
   private void onContinueClicked(MouseEvent event) throws IOException {
     // These need to be called upon screen transition, not when the screen is initialised
     GameController gameController =
-        ((GameController) App.screens.get(Screen.Name.GAME).getController());
+        ((GameController) App.getScreen(Screen.Name.GAME).getController());
     gameController.initialiseTimer();
     gameController.updateHintsLeft();
 

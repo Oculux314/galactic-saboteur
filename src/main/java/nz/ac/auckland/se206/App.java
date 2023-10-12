@@ -32,7 +32,7 @@ public class App extends Application {
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
-  public static Map<Screen.Name, Screen> screens = new HashMap<>();
+  private static Map<Screen.Name, Screen> screens = new HashMap<>();
 
   private static Set<TaggedThread> threads = new HashSet<>();
   private static TextToSpeech tts = new TextToSpeech();
@@ -54,13 +54,17 @@ public class App extends Application {
   }
 
   /**
-   * Returns the screen with the given name, or null if it does not exist.
+   * Returns the screen with the given name.
    *
    * @param screenName The name of the screen to get.
-   * @return The screen with the given name, or null if it does not exist.
    */
   public static Screen getScreen(final Screen.Name screenName) {
-    return screens.get(screenName); // Null if does not exist
+    while (!screens.containsKey(screenName)) {
+      // Wait for screen to be loaded.
+      // This assumes the screen is being ascnychonously loaded in the meantime.
+    }
+
+    return screens.get(screenName);
   }
 
   /**
@@ -70,14 +74,9 @@ public class App extends Application {
    * @param screenName The name of the screen to set.
    */
   public static void setScreen(final Screen.Name screenName) {
-    GameState.currentScreen = screenName;
-
-    while (!screens.containsKey(screenName)) {
-      // Wait for screen to be loaded
-    }
-
     ObservableList<Node> activeScreens = getPanMain().getChildren();
     Parent newScreen = getScreen(screenName).getFxml();
+    GameState.currentScreen = screenName;
 
     if (activeScreens.size() == 0) {
       makeScreen(Screen.Name.DEFAULT);
