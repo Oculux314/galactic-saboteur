@@ -100,7 +100,7 @@ public class ExpositionController implements Screen {
     GameController gameController =
         ((GameController) App.getScreen(Screen.Name.GAME).getController());
     gameController.initialiseTimer();
-    gameController.updateHintsLeft();
+    gameController.updateHintText();
 
     App.setScreen(Screen.Name.GAME);
   }

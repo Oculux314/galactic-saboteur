@@ -19,9 +19,7 @@ public class PopupController implements RootPair.Controller {
 
   public enum Name {
     RIDDLE,
-    GPT_SCIENTIST,
-    GPT_ENGINEER,
-    GPT_CAPTAIN,
+    SUSPECT,
     PUZZLE_REACTOR,
     PUZZLE_LABORATORY,
     PUZZLE_NAVIGATION
@@ -44,12 +42,8 @@ public class PopupController implements RootPair.Controller {
   }
 
   private void loadAllPopups() {
-    // Riddle
     load(Name.RIDDLE, "/fxml/gamechildren/riddle.fxml");
-
-    // Suspects
-
-    // Puzzles
+    load(Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());
     load(Name.PUZZLE_LABORATORY, puzzleLoader.getLaboratoryPuzzle());
     load(Name.PUZZLE_NAVIGATION, puzzleLoader.getNavigationPuzzle());

@@ -130,7 +130,6 @@ public class Assistant {
   }
 
   private void renderNarrationBox() {
-    narrationBox.showPane();
     narrationBox.setText(responseText);
     narrationBox.enableUserResponse();
   }

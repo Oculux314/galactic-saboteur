@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 public class NarrationBox {
 
@@ -32,14 +31,11 @@ public class NarrationBox {
     }
   }
 
-  private Pane paneNarration;
   private TextArea labelNarration;
   private TextField textResponse;
   private String waitingMessage;
 
-  public NarrationBox(
-      Pane paneNarration, TextArea labelNarration, TextField textResponse, String waitingMessage) {
-    this.paneNarration = paneNarration;
+  public NarrationBox(TextArea labelNarration, TextField textResponse, String waitingMessage) {
     this.labelNarration = labelNarration;
     this.textResponse = textResponse;
     this.waitingMessage = waitingMessage;
@@ -47,14 +43,6 @@ public class NarrationBox {
 
   public String getWaitingMessage() {
     return waitingMessage;
-  }
-
-  public void hidePane() {
-    paneNarration.setVisible(false);
-  }
-
-  public void showPane() {
-    paneNarration.setVisible(true);
   }
 
   public String getText() {

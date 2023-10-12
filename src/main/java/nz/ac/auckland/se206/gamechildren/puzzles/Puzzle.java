@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
-import nz.ac.auckland.se206.misc.GameState.HighlightState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;

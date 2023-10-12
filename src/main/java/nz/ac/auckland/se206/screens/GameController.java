@@ -3,27 +3,22 @@ package nz.ac.auckland.se206.screens;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
-import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.Timer;
 import nz.ac.auckland.se206.gamechildren.ZoomAndPanHandler;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
-import nz.ac.auckland.se206.gpt.Assistant;
-import nz.ac.auckland.se206.gpt.NarrationBox;
+import nz.ac.auckland.se206.gamechildren.suspects.Suspect;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 
@@ -33,87 +28,27 @@ public class GameController implements Screen {
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
 
+  private Map<String, HighlightButton> mapButtons = new HashMap<>();
   @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
 
+  private ZoomAndPanHandler zoomAndPanHandler;
+  private PuzzleLoader puzzleLoader;
   @FXML private SidepanelController sidePanelController;
   @FXML private PopupController popupController;
-
-  @FXML private AnimatedButton gptScientist;
-  @FXML private AnimatedButton gptMechanic;
-  @FXML private AnimatedButton gptCaptain;
-  @FXML private Pane paneNarrationScientist;
-  @FXML private Pane paneNarrationMechanic;
-  @FXML private Pane paneNarrationCaptain;
-  @FXML private TextArea labelNarrationScientist;
-  @FXML private TextArea labelNarrationMechanic;
-  @FXML private TextArea labelNarrationCaptain;
-  @FXML private TextField textResponseScientist;
-  @FXML private TextField textResponseMechanic;
-  @FXML private TextField textResponseCaptain;
-  @FXML private Group grpGptScientist;
-  @FXML private Group grpGptMechanic;
-  @FXML private Group grpGptCaptain;
-  @FXML private StateButton hintsScientist;
-  @FXML private StateButton hintsMechanic;
-  @FXML private StateButton hintsCaptain;
-  @FXML private AnimatedButton btnGptExitCaptain;
-  @FXML private AnimatedButton btnGptExitMechanic;
-  @FXML private AnimatedButton btnGptExitScientist;
-  @FXML private Group grpGpt;
-
-  private PuzzleLoader puzzleLoader;
-  private ZoomAndPanHandler zoomAndPanHandler;
-  private Map<String, HighlightButton> mapButtons = new HashMap<>();
-
-  private boolean captainWelcomeShown = false;
-  private boolean scientistWelcomeShown = false;
-  private boolean mechanicWelcomeShown = false;
   private Timer countdownTimer;
+
+  @FXML private HighlightButton gptScientist;
+  @FXML private HighlightButton gptCaptain;
+  @FXML private HighlightButton gptMechanic;
+  private Suspect.Name clickedSuspect;
 
   @FXML
   private void initialize() {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
     puzzleLoader = new PuzzleLoader(grpPuzzleButtons);
     popupController.initialise(puzzleLoader);
-
-    // Set the narration boxes
-    NarrationBox narrationBox1 =
-        new NarrationBox(
-            paneNarrationScientist,
-            labelNarrationScientist,
-            textResponseScientist,
-            "Spacey's scientist");
-    App.scientist = new Assistant(narrationBox1);
-
-    NarrationBox narrationBox2 =
-        new NarrationBox(
-            paneNarrationMechanic,
-            labelNarrationMechanic,
-            textResponseMechanic,
-            "Spacey's mechanic");
-    App.mechanic = new Assistant(narrationBox2);
-
-    NarrationBox narrationBox3 =
-        new NarrationBox(
-            paneNarrationCaptain, labelNarrationCaptain, textResponseCaptain, "Spacey's captain");
-    App.captain = new Assistant(narrationBox3);
-
-    // Set the visibility of the corresponding group
-    grpGptScientist.setVisible(false);
-    grpGptMechanic.setVisible(false);
-    grpGptCaptain.setVisible(false);
-
-    hintsScientist.addState("nohint", "btnhint.png");
-    hintsScientist.addState("hint", "yeshint.png");
-
-    hintsMechanic.addState("nohint", "btnhint.png");
-    hintsMechanic.addState("hint", "yeshint.png");
-
-    hintsCaptain.addState("nohint", "btnhint.png");
-    hintsCaptain.addState("hint", "yeshint.png");
-
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
   }
@@ -227,24 +162,22 @@ public class GameController implements Screen {
     zoomAndPanHandler.onScroll(event);
   }
 
-  @FXML
-  private void onExitClicked(MouseEvent event) {
-    if (event.getSource() == btnGptExitScientist) {
-      grpGptScientist.setVisible(false);
-      progressHighlightStateTo(HighlightState.PUZZLES);
-    } else if (event.getSource() == btnGptExitMechanic) {
-      grpGptMechanic.setVisible(false);
-      progressHighlightStateTo(HighlightState.PUZZLES);
-    } else if (event.getSource() == btnGptExitCaptain) {
-      grpGptCaptain.setVisible(false);
-      progressHighlightStateTo(HighlightState.PUZZLES);
-    } else {
-      progressHighlightStateTo(HighlightState.SUSPECTS);
-    }
-  }
-
   public void giveRandomClue() {
     sidePanelController.getRandomClue();
+  }
+
+  public void updateHintText() {
+    sidePanelController.setHintText(getHintsLeftText());
+  }
+
+  private String getHintsLeftText() {
+    if (GameState.difficulty == "easy") {
+      return "You Have Unlimited Hints";
+    } else if (GameState.difficulty == "medium") {
+      return "You Have " + GameState.getHintLimitRemaining() + " Hints Left";
+    } else {
+      return "No Hints Are Allowed";
+    }
   }
 
   /**
@@ -277,81 +210,21 @@ public class GameController implements Screen {
   }
 
   @FXML
-  private void gptStart(MouseEvent event) {
-    // Show the welcome message if it hasn't been shown yet
-    if (event.getSource() == gptScientist && !scientistWelcomeShown) {
-      App.scientist.welcome();
-      scientistWelcomeShown = true;
-    } else if (event.getSource() == gptCaptain && !captainWelcomeShown) {
-      App.captain.welcome();
-      captainWelcomeShown = true;
-    } else if (event.getSource() == gptMechanic && !mechanicWelcomeShown) {
-      App.mechanic.welcome();
-      mechanicWelcomeShown = true;
-    }
-
+  private void onSuspectButtonClicked(MouseEvent event) {
     // Set the visibility of the corresponding group
     if (event.getSource() == gptScientist) {
-      grpGptScientist.setVisible(true);
+      clickedSuspect = Suspect.Name.SCIENTIST;
     } else if (event.getSource() == gptCaptain) {
-      grpGptCaptain.setVisible(true);
+      clickedSuspect = Suspect.Name.CAPTAIN;
     } else if (event.getSource() == gptMechanic) {
-      grpGptMechanic.setVisible(true);
+      clickedSuspect = Suspect.Name.MECHANIC;
     }
+
+    popupController.show(PopupController.Name.SUSPECT);
   }
 
-  @FXML
-  private void onUserMessage(ActionEvent event) {
-    System.out.println(event);
-
-    // Respond to the user's message
-    if (event.getSource() == textResponseScientist) {
-      App.scientist.respondToUser();
-      hintsScientist.setState("nohint");
-      hintsScientist.setDisable(GameState.isHintLimitReached());
-    } else if (event.getSource() == textResponseCaptain) {
-      App.captain.respondToUser();
-      hintsCaptain.setState("nohint");
-      hintsCaptain.setDisable(GameState.isHintLimitReached());
-    } else if (event.getSource() == textResponseMechanic) {
-      App.mechanic.respondToUser();
-      hintsMechanic.setState("nohint");
-      hintsMechanic.setDisable(GameState.isHintLimitReached());
-    }
-    updateHintsLeft();
-  }
-
-  @FXML
-  private void onHintButtonClick(MouseEvent event) {
-    StateButton sourceStateButton = (StateButton) event.getSource();
-    // ActionEvent events =
-
-    if (sourceStateButton == hintsScientist) {
-      if (sourceStateButton.getState() == "hint") {
-        textResponseScientist.setText("I want a hint.");
-        // onUserMessage(event);
-      } else {
-        textResponseScientist.setText("");
-      }
-    } else if (sourceStateButton == hintsCaptain) {
-      textResponseCaptain.setText("I want a hint.");
-    } else if (sourceStateButton == hintsMechanic) {
-      textResponseMechanic.setText("I want a hint");
-    }
-  }
-
-  public void updateHintsLeft() {
-    sidePanelController.setHintText(getHintsLeft());
-  }
-
-  private String getHintsLeft() {
-    if (GameState.difficulty == "easy") {
-      return "You Have Unlimited Hints";
-    } else if (GameState.difficulty == "medium") {
-      return "You Have " + GameState.getHintLimitRemaining() + " Hints Left";
-    } else {
-      return "No Hints Are Allowed";
-    }
+  public Suspect.Name getClickedSuspectName() {
+    return clickedSuspect;
   }
 
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
