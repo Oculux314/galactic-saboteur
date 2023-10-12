@@ -410,7 +410,7 @@ public class GameController implements Controller {
     updateHintsLeft();
   }
 
-  private void updateHintsLeft() {
+  public void updateHintsLeft() {
     if (GameState.difficulty == "easy") {
       labelHintsLeft.setText("You Have Unlimited Hints");
     } else if (GameState.difficulty == "medium") {

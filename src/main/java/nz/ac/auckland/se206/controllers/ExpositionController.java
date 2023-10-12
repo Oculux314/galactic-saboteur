@@ -26,7 +26,11 @@ public class ExpositionController implements Controller {
 
   private int currentImageIndex = 0;
   private String[] imagePaths = {
-    "/images/expo1.jpg", "/images/expo2.png", "/images/expo3.png", "/images/expo4.png", "/images/expo5.png"
+    "/images/expo1.jpg",
+    "/images/expo2.png",
+    "/images/expo3.png",
+    "/images/expo4.png",
+    "/images/expo5.png"
   };
   private TaggedThread delayManager;
 
@@ -93,6 +97,7 @@ public class ExpositionController implements Controller {
     GameController gameController =
         ((GameController) App.screens.get(Screen.Name.GAME).getController());
     gameController.startTimer();
+    gameController.updateHintsLeft();
   }
 
   @FXML
