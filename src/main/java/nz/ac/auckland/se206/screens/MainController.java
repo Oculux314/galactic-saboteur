@@ -30,6 +30,11 @@ public class MainController implements Screen {
   private double screenHeight = DEFAULT_HEIGHT;
   private double zoom = 1;
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   /** Adds listeners to the scene to keep the screen centered and scaled to the scene dimensions. */
   public void addSceneListeners() {
     Scene scene = App.getScene();

@@ -13,6 +13,11 @@ public class EndController implements Screen {
   @FXML private Label lblEnd;
   @FXML private ImageView imgEnd;
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   private void showEndScreen() {
     App.setScreen(Screen.Name.END);
     GameState.isGameover = true;

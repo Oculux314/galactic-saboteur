@@ -63,10 +63,6 @@ public class GameController implements Screen {
   @FXML private AnimatedButton btnGptExitMechanic;
   @FXML private AnimatedButton btnGptExitScientist;
   @FXML private Group grpGpt;
-  @FXML private Group grpRiddle;
-  @FXML private AnimatedButton btnRiddleExit;
-  @FXML private AnimatedButton btnReactor;
-  @FXML private RiddleController riddleController;
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
@@ -119,13 +115,20 @@ public class GameController implements Screen {
     hintsCaptain.addState("nohint", "btnhint.png");
     hintsCaptain.addState("hint", "yeshint.png");
 
-    grpRiddle.setVisible(false);
-
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
   }
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   public void progressHighlightStateTo(HighlightState newState) {
+    if (newState == null) {
+      return;
+    }
+
     HighlightState nextState = HighlightState.values()[GameState.highlightState.ordinal() + 1];
 
     if (newState == nextState) {
@@ -237,7 +240,6 @@ public class GameController implements Screen {
       grpGptCaptain.setVisible(false);
       progressHighlightStateTo(HighlightState.PUZZLES);
     } else {
-      grpRiddle.setVisible(false);
       progressHighlightStateTo(HighlightState.SUSPECTS);
     }
   }
@@ -359,12 +361,6 @@ public class GameController implements Screen {
 
   @FXML
   private void onRiddleClicked() throws IOException {
-    if (GameState.cluesFound == true) {
-      riddleController.disableButton(); // To prevent accidentally submitting
-    } else {
-      riddleController.enableButton();
-    }
-
     popupController.show(PopupController.Name.RIDDLE);
   }
 

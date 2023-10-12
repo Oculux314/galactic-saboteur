@@ -7,7 +7,9 @@ import javafx.scene.layout.Pane;
 
 /** Represents a root in the application, consisting of an FXML file / controller pair. */
 public class RootPair {
-  public interface Controller {}
+  public interface Controller {
+    void onLoad();
+  }
 
   /**
    * The FXML file for the screen. More precisely, a reference to the screen node of the FXML file.

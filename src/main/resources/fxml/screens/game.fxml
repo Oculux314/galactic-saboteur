@@ -83,17 +83,6 @@
          </children>
       </Group>
       <fx:include fx:id="sidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
-      <Group fx:id="grpRiddle">
-         <children>
-            <Pane fx:id="panBlockRiddlBackground" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
-            <fx:include fx:id="riddle" layoutX="150.0" layoutY="50.0" source="../gamechildren/riddle.fxml" />
-            <AnimatedButton fx:id="btnRiddleExit" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/exit.png" />
-               </image>
-            </AnimatedButton>
-         </children>
-      </Group>
 
       <Group fx:id="grpGpt">
          <children>

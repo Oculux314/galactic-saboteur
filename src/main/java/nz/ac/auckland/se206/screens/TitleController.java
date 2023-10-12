@@ -14,6 +14,11 @@ public class TitleController implements Screen {
   @FXML private Pane panFullScreen;
   @FXML private AnimatedButton btnPlay;
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   /**
    * Called when the play button is clicked. Moves control to the exposition screen.
    *

@@ -6,9 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.misc.GameState.HighlightState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.screens.GameController;
+import nz.ac.auckland.se206.screens.Screen;
 
 public class PopupController implements RootPair.Controller {
 
@@ -31,6 +36,11 @@ public class PopupController implements RootPair.Controller {
   public void initialise(PuzzleLoader puzzleLoader) {
     this.puzzleLoader = puzzleLoader;
     loadAllPopups();
+  }
+
+  @Override
+  public void onLoad() {
+    // Do nothing
   }
 
   private void loadAllPopups() {
@@ -68,6 +78,7 @@ public class PopupController implements RootPair.Controller {
 
   private void show() {
     panRoot.setVisible(true);
+    getCurrentPopup().getController().onLoad();
   }
 
   private void hide() {
@@ -77,6 +88,34 @@ public class PopupController implements RootPair.Controller {
   @FXML
   private void onExitClicked() {
     hide();
+    updateHighlightState();
+  }
+
+  private void updateHighlightState() {
+    GameController gameController =
+        ((GameController) App.getScreen(Screen.Name.GAME).getController());
+    gameController.progressHighlightStateTo(getNextHighlightState());
+  }
+
+  private HighlightState getNextHighlightState() {
+    if (currentPopup == null) {
+      return null;
+    }
+
+    switch (currentPopup) {
+      case RIDDLE:
+        return HighlightState.SUSPECTS;
+      case PUZZLE_REACTOR:
+      case PUZZLE_LABORATORY:
+      case PUZZLE_NAVIGATION:
+        // If all three puzzles solved
+        if (((Puzzle) getCurrentPopup().getController()).isAllSolved()) {
+          return HighlightState.REACTOR_FINAL;
+        }
+        return null;
+      default:
+        return null;
+    }
   }
 
   public RootPair getCurrentPopup() {

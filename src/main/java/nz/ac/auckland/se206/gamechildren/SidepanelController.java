@@ -56,6 +56,11 @@ public class SidepanelController implements RootPair.Controller {
     selectClues();
   }
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   @FXML
   private void informationShow(MouseEvent event) {
     Rectangle informationRectangle = null;

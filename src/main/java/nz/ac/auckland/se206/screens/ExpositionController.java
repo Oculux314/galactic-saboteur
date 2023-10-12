@@ -33,6 +33,11 @@ public class ExpositionController implements Screen {
   };
   private TaggedThread delayManager;
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   public void startSlideshow() {
     showNextImage();
   }

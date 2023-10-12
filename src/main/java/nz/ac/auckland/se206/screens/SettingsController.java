@@ -33,6 +33,11 @@ public class SettingsController implements Screen {
     btnTts.setState(ttsEnabled);
   }
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   private void createButtonStates() {
     // Difficulty
     btnDifficulty.addState("easy", "settings_buttons/easy.png", this::updateDifficulty, null);

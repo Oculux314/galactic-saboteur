@@ -52,6 +52,11 @@ public class Puzzle implements RootPair.Controller {
     this.puzzleName = puzzleName;
   }
 
+  @Override
+  public void onLoad() {
+    // Do nothing
+  }
+
   /**
    * Called when a puzzle is solved. Clears puzzle.
    *
@@ -76,6 +81,10 @@ public class Puzzle implements RootPair.Controller {
     return isPuzzleSolved;
   }
 
+  public boolean isAllSolved() {
+    return solvedPuzzles.size() == 3;
+  }
+
   public void setSolved() {
     isPuzzleSolved = true;
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
@@ -91,11 +100,6 @@ public class Puzzle implements RootPair.Controller {
 
     gameController.giveRandomClue();
     solvedPuzzles.add(this);
-
-    // If all puzzles are solved, highlight the reactor
-    if (solvedPuzzles.size() == 3) {
-      gameController.progressHighlightStateTo(HighlightState.REACTOR_FINAL);
-    }
   }
 
   public Parent getRoot() {

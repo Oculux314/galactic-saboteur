@@ -48,6 +48,15 @@ public class RiddleController implements RootPair.Controller {
     generateRiddle();
   }
 
+  @Override
+  public void onLoad() {
+    if (GameState.cluesFound) {
+      enableButton();
+    } else {
+      disableButton(); // To prevent accidentally submitting
+    }
+  }
+
   @FXML
   private void answerClicked() {
     EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
@@ -92,10 +101,10 @@ public class RiddleController implements RootPair.Controller {
   }
 
   public void disableButton() {
-    btnAnswer.setDisable(false);
+    btnAnswer.setDisable(true);
   }
 
   public void enableButton() {
-    btnAnswer.setDisable(true);
+    btnAnswer.setDisable(false);
   }
 }
