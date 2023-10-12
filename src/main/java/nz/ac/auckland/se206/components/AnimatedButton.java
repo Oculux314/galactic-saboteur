@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.Utils;
+import nz.ac.auckland.se206.misc.Utils;
 
 /**
  * This is an ImageView-based button that displays an image and has nice animations on hover and

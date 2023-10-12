@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.speech;
+package nz.ac.auckland.se206.misc;
 
 import javax.speech.AudioException;
 import javax.speech.Central;

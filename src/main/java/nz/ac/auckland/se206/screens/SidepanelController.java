@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.misc.GameState;
 
 public class SidepanelController implements ScreenParent {
 

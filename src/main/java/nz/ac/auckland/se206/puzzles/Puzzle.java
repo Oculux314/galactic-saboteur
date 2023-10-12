@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
-import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.misc.GameState;
 
 public class Puzzle {
 

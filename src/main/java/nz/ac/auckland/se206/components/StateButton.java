@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import nz.ac.auckland.se206.Utils;
+import nz.ac.auckland.se206.misc.Utils;
 
 /**
  * This is an AnimatedButton that has multiple states. Each state has its own name, image (and

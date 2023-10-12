@@ -1,7 +1,7 @@
 package nz.ac.auckland.se206.components;
 
 import javafx.scene.image.Image;
-import nz.ac.auckland.se206.Utils;
+import nz.ac.auckland.se206.misc.Utils;
 
 public class HighlightButton extends StateButton {
 

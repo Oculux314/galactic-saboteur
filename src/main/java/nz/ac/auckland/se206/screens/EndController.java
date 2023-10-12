@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.misc.GameState;
 
 public class EndController implements ScreenParent {
 

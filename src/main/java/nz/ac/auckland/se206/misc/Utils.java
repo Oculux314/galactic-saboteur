@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.misc;
 
 import javafx.scene.image.Image;
 

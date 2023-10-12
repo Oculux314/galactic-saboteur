@@ -1,4 +1,6 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.misc;
+
+import nz.ac.auckland.se206.App;
 
 public class TaggedThread extends Thread {
 

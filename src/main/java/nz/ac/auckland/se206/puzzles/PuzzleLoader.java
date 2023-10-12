@@ -9,8 +9,8 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {

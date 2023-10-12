@@ -19,9 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.Assistant;
+import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.misc.TextToSpeech;
+import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
 import nz.ac.auckland.se206.screens.MainController;
-import nz.ac.auckland.se206.speech.TextToSpeech;
-import nz.ac.auckland.se206.speech.TextToSpeech.TextToSpeechException;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {

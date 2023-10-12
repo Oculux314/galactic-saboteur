@@ -1,5 +1,7 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.misc;
 
+import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.Screen.Name;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 /** Represents the state of the game. */

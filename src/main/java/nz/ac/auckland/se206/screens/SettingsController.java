@@ -5,10 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
+import nz.ac.auckland.se206.misc.GameState;
 
 /** Controller class for the title screen. */
 public class SettingsController implements ScreenParent {

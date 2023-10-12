@@ -1,8 +1,10 @@
 package nz.ac.auckland.se206.speech;
 
-import nz.ac.auckland.se206.speech.TextToSpeech.TextToSpeechException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import nz.ac.auckland.se206.misc.TextToSpeech;
+import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
 
 class TextToSpeechTest {
   private TextToSpeech textToSpeech;

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.TaggedThread;
 
 public class Assistant {
 

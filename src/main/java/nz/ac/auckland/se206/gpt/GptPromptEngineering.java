@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206.gpt;
 
-import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 /** Utility class for generating GPT prompt engineering strings. */

@@ -9,11 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
 import nz.ac.auckland.se206.components.RotateButton.Orientation;
+import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.TaggedThread;
 
 public class NavigationComputerPuzzleController extends Puzzle {
 
