@@ -39,7 +39,7 @@
             </Rectangle>
             <AnimatedButton fx:id="btnExit" fitHeight="60.0" fitWidth="60.0" layoutX="600.0" layoutY="40.0" onMouseClicked="#onExitClicked" preserveRatio="true">
                <image>
-                  <Image url="@../images/exit.png" />
+                  <Image url="@../../images/exit.png" />
                </image>
             </AnimatedButton>
          </children>

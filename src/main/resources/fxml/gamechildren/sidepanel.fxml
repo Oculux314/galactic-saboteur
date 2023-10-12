@@ -13,22 +13,22 @@
          <children>
             <ImageView fitHeight="100.0" fitWidth="800.0" pickOnBounds="true">
                <image>
-                  <Image url="@../images/sidepanel/sidepanelbackground.png" />
+                  <Image url="@../../images/sidepanel/sidepanelbackground.png" />
                </image>
             </ImageView>
             <ImageView fx:id="timeClue" fitHeight="75.0" fitWidth="135.0" layoutX="25.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
                <image>
-                  <Image url="@../images/sidepanel/timeicon.png" />
+                  <Image url="@../../images/sidepanel/timeicon.png" />
                </image>
             </ImageView>
             <ImageView fx:id="whereClue" fitHeight="75.0" fitWidth="135.0" layoutX="185.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
                <image>
-                  <Image url="@../images/sidepanel/whereicon.png" />
+                  <Image url="@../../images/sidepanel/whereicon.png" />
                </image>
             </ImageView>
             <ImageView fx:id="whoClue" fitHeight="75.0" fitWidth="135.0" layoutX="345.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
                <image>
-                  <Image url="@../images/sidepanel/whoicon.png" />
+                  <Image url="@../../images/sidepanel/whoicon.png" />
                </image>
             </ImageView>
             <Rectangle arcHeight="5.0" fill="#212325" height="75.0" layoutX="505.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="135.0" />
@@ -36,22 +36,22 @@
             <Rectangle fx:id="timeClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="25.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
             <Rectangle fx:id="whereClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="185.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
             <Rectangle fx:id="whoClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="345.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
-            <Label fx:id="timeClueInformationLabel" alignment="CENTER" layoutX="25.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
-            <Label fx:id="whereClueInformationLabel" alignment="CENTER" layoutX="185.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
-            <Label fx:id="whoClueInformationLabel" alignment="CENTER" layoutX="345.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../css/style.css" />
+            <Label fx:id="timeClueInformationLabel" alignment="CENTER" layoutX="25.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
+            <Label fx:id="whereClueInformationLabel" alignment="CENTER" layoutX="185.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
+            <Label fx:id="whoClueInformationLabel" alignment="CENTER" layoutX="345.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
             <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="50.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/sidepanel/lbltime.png" />
+                  <Image url="@../../images/sidepanel/lbltime.png" />
                </image>
             </ImageView>
             <ImageView disable="true" fitHeight="24.0" fitWidth="118.0" layoutX="193.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/sidepanel/lblwhere.png" />
+                  <Image url="@../../images/sidepanel/lblwhere.png" />
                </image>
             </ImageView>
             <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="372.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/sidepanel/lblwho.png" />
+                  <Image url="@../../images/sidepanel/lblwho.png" />
                </image>
             </ImageView>
          </children>

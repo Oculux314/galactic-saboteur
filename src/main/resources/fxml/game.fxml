@@ -88,7 +88,7 @@
       </Group>
       <Group fx:id="panelContainer">
          <children>
-            <fx:include fx:id="fullSidePanel" layoutY="500.0" source="sidepanel.fxml" />
+            <fx:include fx:id="fullSidePanel" layoutY="500.0" source="gamechildren/sidepanel.fxml" />
          </children>
       </Group>
       <Group fx:id="grpPuzzleCommons">
@@ -119,7 +119,7 @@
       <Group fx:id="grpRiddle">
          <children>
             <Pane fx:id="panBlockRiddlBackground" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
-            <fx:include fx:id="riddle" layoutX="150.0" layoutY="50.0" source="riddle.fxml" />
+            <fx:include fx:id="riddle" layoutX="150.0" layoutY="50.0" source="gamechildren/riddle.fxml" />
             <AnimatedButton fx:id="btnRiddleExit" fitWidth="47.0" layoutX="155.0" layoutY="55.0" onMouseClicked="#onExitClicked" preserveRatio="true">
                <image>
                   <Image url="@../images/exit.png" />

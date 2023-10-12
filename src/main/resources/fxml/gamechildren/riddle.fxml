@@ -12,20 +12,20 @@
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 <?import nz.ac.auckland.se206.components.StateButton?>
 
-<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.RiddleController">
+<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.RiddleController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
       <ImageView fitHeight="490.0" fitWidth="490.0" layoutX="5.0" layoutY="5.0" opacity="0.71" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/reactor-backdrop.jpg" />
+            <Image url="@../../images/reactor-backdrop.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="-2.0" prefHeight="265.0" prefWidth="500.0" stylesheets="@../css/style.css">
+      <AnchorPane layoutY="-2.0" prefHeight="265.0" prefWidth="500.0" stylesheets="@../../css/style.css">
          <children>
             <Label layoutX="56.0" layoutY="63.0" text="Spacey" />
             <ImageView fitHeight="214.0" fitWidth="277.0" layoutX="-18.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/SPACEY.png" />
+                  <Image url="@../../images/SPACEY.png" />
                </image>
             </ImageView>
             <Polygon fill="WHITE" layoutY="-20.0" points="178.0, 74.0, 127.0, 139.0, 178.0, 122.0" stroke="BLACK" strokeType="INSIDE" />
@@ -38,7 +38,7 @@
       <Label fx:id="lblWho" layoutX="90.0" layoutY="405.0" style="-fx-font-size: 14;" text="Who?" />
       <AnimatedButton fx:id="btnAnswer" fitHeight="75.0" fitWidth="96.0" layoutX="202.0" layoutY="428.0" onMouseClicked="#answerClicked" preserveRatio="true">
          <image>
-            <Image url="@../images/Answer.png" />
+            <Image url="@../../images/Answer.png" />
          </image>
       </AnimatedButton>
       <Label layoutX="137.0" layoutY="290.0" text="Key Card Combination:" />
@@ -48,17 +48,17 @@
          <children>
             <StateButton fx:id="btnWho" fitHeight="75.0" fitWidth="135.0" layoutX="35.0" layoutY="325.0">
                <image>
-                  <Image url="@../images/suspects/suspect1.png" />
+                  <Image url="@../../images/suspects/suspect1.png" />
                </image>
             </StateButton>
             <StateButton fx:id="btnWhere" fitHeight="75.0" fitWidth="135.0" layoutX="185.0" layoutY="325.0">
                <image>
-                  <Image url="@../images/rooms/room2.jpg" />
+                  <Image url="@../../images/rooms/room2.jpg" />
                </image>
             </StateButton>
             <StateButton fx:id="btnWhen" fitHeight="75.0" fitWidth="135.0" layoutX="335.0" layoutY="325.0">
                <image>
-                  <Image url="@../images/times/time1.jpg" />
+                  <Image url="@../../images/times/time1.jpg" />
                </image>
             </StateButton>
          </children>
