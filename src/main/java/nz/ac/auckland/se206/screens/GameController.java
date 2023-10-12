@@ -411,6 +411,13 @@ public class GameController implements ScreenParent {
     endController.showEndOnLose();
   }
 
+  @FXML
+  private void onTestClicked() throws IOException {
+    // TODO: TEMPORARY DEV TOOL
+    // Bind this to whatever action you want to run
+    System.out.println("Test clicked");
+  }
+
   public void addMapButton(HighlightButton mapButton) {
     mapButton.initialise();
     mapButtons.put(mapButton.getId(), mapButton);

@@ -244,5 +244,6 @@
       </Group>
       <Button fx:id="btnRestart" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
       <Button fx:id="btnEnd" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#onEndClicked" prefWidth="60.0" text="End" />
+      <Button fx:id="btnTest" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#onTestClicked" prefWidth="60.0" text="Test" />
    </children>
 </Pane>
