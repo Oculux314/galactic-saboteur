@@ -1,12 +1,13 @@
-package nz.ac.auckland.se206.screens;
+package nz.ac.auckland.se206.misc;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.screens.ScreenParent;
 
 /** Represents a screen in the application, consisting of an FXML file / controller pair. */
-public class Screen {
+public class RootPair {
 
   /** Represents possible names for a screen. */
   public enum Name {
@@ -33,7 +34,7 @@ public class Screen {
    * @param loader The loader containing the FXML file and controller.
    * @throws IOException If the FXML file is not found.
    */
-  public Screen(FXMLLoader loader) {
+  public RootPair(FXMLLoader loader) {
     try {
       fxml = loader.load();
       controller = loader.getController();

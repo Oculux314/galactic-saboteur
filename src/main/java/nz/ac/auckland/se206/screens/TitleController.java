@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.RootPair;
 
 /** Controller class for the title screen. */
 public class TitleController implements ScreenParent {
@@ -22,8 +23,9 @@ public class TitleController implements ScreenParent {
    */
   @FXML
   private void onPlayClicked(MouseEvent event) throws IOException {
-    App.setScreen(Screen.Name.EXPOSITION);
-    ((ExpositionController) App.getScreen(Screen.Name.EXPOSITION).getController()).startSlideshow();
+    App.setScreen(RootPair.Name.EXPOSITION);
+    ((ExpositionController) App.getScreen(RootPair.Name.EXPOSITION).getController())
+        .startSlideshow();
   }
 
   /**
@@ -34,6 +36,6 @@ public class TitleController implements ScreenParent {
    */
   @FXML
   private void onSettingsClicked(MouseEvent event) throws IOException {
-    App.setScreen(Screen.Name.SETTINGS);
+    App.setScreen(RootPair.Name.SETTINGS);
   }
 }

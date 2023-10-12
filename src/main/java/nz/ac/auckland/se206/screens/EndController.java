@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 
 public class EndController implements ScreenParent {
 
@@ -14,7 +15,7 @@ public class EndController implements ScreenParent {
   @FXML private ImageView imgEnd;
 
   private void showEndScreen() {
-    App.setScreen(Screen.Name.END);
+    App.setScreen(RootPair.Name.END);
     GameState.isGameover = true;
   }
 

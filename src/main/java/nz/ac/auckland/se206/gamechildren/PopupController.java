@@ -2,12 +2,11 @@ package nz.ac.auckland.se206.gamechildren;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.screens.Screen;
+import nz.ac.auckland.se206.misc.RootPair;
 
 public class PopupController {
 
@@ -25,7 +24,7 @@ public class PopupController {
 
   @FXML private Pane panRoot;
   @FXML private Group grpContent;
-  private Map<Name, Screen> popups = new HashMap<>();
+  private Map<Name, RootPair> popups = new HashMap<>();
 
   @FXML
   private void onExitClicked() {
@@ -54,7 +53,7 @@ public class PopupController {
     grpContent.getChildren().add(root);
   }
 
-  private void load(Name name, Screen popup) {
+  private void load(Name name, RootPair popup) {
     popups.put(name, popup);
   }
 }

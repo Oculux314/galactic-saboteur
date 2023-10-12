@@ -20,12 +20,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.misc.TextToSpeech;
 import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
 import nz.ac.auckland.se206.misc.Utils;
 import nz.ac.auckland.se206.screens.MainController;
-import nz.ac.auckland.se206.screens.Screen;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -33,7 +33,7 @@ public class App extends Application {
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
-  private static Map<Screen.Name, Screen> screens = new HashMap<>();
+  private static Map<RootPair.Name, RootPair> screens = new HashMap<>();
 
   private static Set<TaggedThread> threads = new HashSet<>();
   private static TextToSpeech tts = new TextToSpeech();
@@ -51,7 +51,7 @@ public class App extends Application {
   }
 
   private static Pane getPanMain() {
-    return ((MainController) getScreen(Screen.Name.MAIN).getController()).getMainPane();
+    return ((MainController) getScreen(RootPair.Name.MAIN).getController()).getMainPane();
   }
 
   /**
@@ -59,7 +59,7 @@ public class App extends Application {
    *
    * @param screenName The name of the screen to get.
    */
-  public static Screen getScreen(final Screen.Name screenName) {
+  public static RootPair getScreen(final RootPair.Name screenName) {
     while (!screens.containsKey(screenName)) {
       // Wait for screen to be loaded.
       // This assumes the screen is being ascnychonously loaded in the meantime.
@@ -74,14 +74,14 @@ public class App extends Application {
    *
    * @param screenName The name of the screen to set.
    */
-  public static void setScreen(final Screen.Name screenName) {
+  public static void setScreen(final RootPair.Name screenName) {
     ObservableList<Node> activeScreens = getPanMain().getChildren();
     Parent newScreen = getScreen(screenName).getFxml();
     GameState.currentScreen = screenName;
 
     if (activeScreens.size() == 0) {
-      makeScreen(Screen.Name.DEFAULT);
-      activeScreens.add(getScreen(Screen.Name.DEFAULT).getFxml()); // Black
+      makeScreen(RootPair.Name.DEFAULT);
+      activeScreens.add(getScreen(RootPair.Name.DEFAULT).getFxml()); // Black
 
       setScreen(screenName);
       return;
@@ -110,16 +110,16 @@ public class App extends Application {
    *
    * @param screenName The name of the screen to create.
    */
-  private static void makeScreen(final Screen.Name screenName) {
+  private static void makeScreen(final RootPair.Name screenName) {
     TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
     screenLoader.start();
   }
 
-  private static void makeScreenWithoutThread(final Screen.Name screenName) {
+  private static void makeScreenWithoutThread(final RootPair.Name screenName) {
     Utils.startTimeTest(); // TODO: Remove time tests
     String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/screens/" + fxml + ".fxml"));
-    screens.put(screenName, new Screen(loader));
+    screens.put(screenName, new RootPair(loader));
     Utils.logTimeTest(
         "Loaded screen " + screenName.toString().toLowerCase(), 1000); // TODO: Remove time tests
   }
@@ -162,8 +162,8 @@ public class App extends Application {
     TaggedThread screenLoader =
         new TaggedThread(
             () -> {
-              for (Screen.Name screenName : Screen.Name.values()) {
-                if (screenName == Screen.Name.MAIN) { // Main screen is persistent
+              for (RootPair.Name screenName : RootPair.Name.values()) {
+                if (screenName == RootPair.Name.MAIN) { // Main screen is persistent
                   continue;
                 }
 
@@ -172,7 +172,7 @@ public class App extends Application {
             });
 
     screenLoader.start();
-    setScreen(Screen.Name.TITLE);
+    setScreen(RootPair.Name.TITLE);
   }
 
   /**
@@ -234,8 +234,8 @@ public class App extends Application {
     App.stage = newStage;
 
     // Set up screen graph
-    makeScreenWithoutThread(Screen.Name.MAIN);
-    Parent screen = getScreen(Screen.Name.MAIN).getFxml();
+    makeScreenWithoutThread(RootPair.Name.MAIN);
+    Parent screen = getScreen(RootPair.Name.MAIN).getFxml();
 
     // Link stage/scene/screen graph
     Scene scene = new Scene(screen, 800, 600);
@@ -245,7 +245,7 @@ public class App extends Application {
     scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
 
     // Listeners
-    ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
+    ((MainController) screens.get(RootPair.Name.MAIN).getController()).addSceneListeners();
 
     // Properties
     scene.setFill(Color.web("#131d23"));

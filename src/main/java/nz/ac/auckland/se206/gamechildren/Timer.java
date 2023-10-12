@@ -4,9 +4,9 @@ import javafx.application.Platform;
 import javafx.scene.control.Label;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
-import nz.ac.auckland.se206.screens.Screen;
 
 public class Timer {
   private int secondsLeft;
@@ -47,7 +47,8 @@ public class Timer {
   }
 
   private void showTimeout() {
-    EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
+    EndController endController =
+        ((EndController) App.getScreen(RootPair.Name.END).getController());
     endController.showEndOnTimeout();
   }
 

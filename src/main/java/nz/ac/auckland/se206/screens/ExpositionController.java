@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
 /** Controller class for the title screen. */
@@ -93,11 +94,11 @@ public class ExpositionController implements ScreenParent {
   private void onContinueClicked(MouseEvent event) throws IOException {
     // These need to be called upon screen transition, not when the screen is initialised
     GameController gameController =
-        ((GameController) App.getScreen(Screen.Name.GAME).getController());
+        ((GameController) App.getScreen(RootPair.Name.GAME).getController());
     gameController.initialiseTimer();
     gameController.updateHintsLeft();
 
-    App.setScreen(Screen.Name.GAME);
+    App.setScreen(RootPair.Name.GAME);
   }
 
   @FXML
