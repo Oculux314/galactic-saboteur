@@ -35,6 +35,7 @@ public class PopupController implements RootPair.Controller {
 
   private void loadAllPopups() {
     // Riddle
+    load(Name.RIDDLE, "/fxml/gamechildren/riddle.fxml");
 
     // Suspects
 

@@ -358,14 +358,14 @@ public class GameController implements Screen {
   }
 
   @FXML
-  private void riddleClicked() throws IOException {
-    // Set the visibility of the corresponding group
-    grpRiddle.setVisible(true);
+  private void onRiddleClicked() throws IOException {
     if (GameState.cluesFound == true) {
-      riddleController.disableButton();
+      riddleController.disableButton(); // To prevent accidentally submitting
     } else {
       riddleController.enableButton();
     }
+
+    popupController.show(PopupController.Name.RIDDLE);
   }
 
   @FXML

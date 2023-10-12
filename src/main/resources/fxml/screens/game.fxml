@@ -73,7 +73,7 @@
             </Group>
             <Group fx:id="grpOtherButtons">
                <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#riddleClicked" preserveRatio="true">
+                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#onRiddleClicked" preserveRatio="true">
                      <image>
                         <Image url="@../../images/reactor-machine.png" />
                      </image>
