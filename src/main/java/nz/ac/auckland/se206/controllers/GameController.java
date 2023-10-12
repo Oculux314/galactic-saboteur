@@ -353,6 +353,8 @@ public class GameController implements Controller {
       puzzleLoader.setPuzzle(puzzleName);
       // Show the puzzle
       restorePuzzleWindow();
+
+      // update the game state depending on what puzzle was opened
       if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
         GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
       } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzleName)) {
@@ -367,6 +369,7 @@ public class GameController implements Controller {
 
   @FXML
   private void gptStart(MouseEvent event) {
+    // Show the welcome message if it hasn't been shown yet
     if (event.getSource() == gptScientist && !scientistWelcomeShown) {
       App.scientist.welcome();
       scientistWelcomeShown = true;

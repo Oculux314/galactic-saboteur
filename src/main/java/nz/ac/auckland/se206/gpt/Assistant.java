@@ -36,7 +36,7 @@ public class Assistant {
       TaggedThread loadEffectThread = new TaggedThread(narrationBox.new LoadEffectTask());
       loadEffectThread.start();
 
-      // Expensive API call
+      // API call
       try {
         ChatCompletionResult result = request.execute();
         ChatMessage response = result.getChoice(0).getChatMessage();
@@ -101,6 +101,11 @@ public class Assistant {
 
     TaggedThread apiCallThread = new TaggedThread(apiCallTask);
     apiCallThread.start();
+
+    System.out.println(request);
+    System.out.println(chatMessages.toString());
+    System.out.println(systemMessage);
+
     return apiCallThread;
   }
 
@@ -136,7 +141,10 @@ public class Assistant {
 
   public void respondToUser() {
     narrationBox.disableUserResponse();
-    String userMessage = narrationBox.getUserResponse() + GameState.reactorRoomGameState;
+    String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
+    System.out.println(userMessage);
+
+    // increment number of hints asked - temp solutions
     if (userMessage.toLowerCase().contains("hint")
         || userMessage.toLowerCase().contains("advice")
         || userMessage.toLowerCase().contains("help")
@@ -152,6 +160,8 @@ public class Assistant {
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
     executeApiCallWithCallback(this::renderNarrationBox);
+
+    System.out.println();
   }
 
   public void welcome() {
@@ -160,5 +170,19 @@ public class Assistant {
         () -> {
           renderNarrationBox();
         });
+  }
+
+  public String getGameStateOfPuzzle(String job) {
+    String gameState = "";
+
+    // return game state depending on what suspect the user is talking to
+    if (job == "Spacey's mechanic") { // reactor puzzle
+      gameState = GameState.reactorRoomGameState;
+    } else if (job == "Spacey's scientist") { // lab puzzle
+      gameState = GameState.labRoomGameState;
+    } else if (job == "Spacey's captain") { // bridge puzzle
+      gameState = GameState.controlRoomGameState;
+    }
+    return gameState;
   }
 }

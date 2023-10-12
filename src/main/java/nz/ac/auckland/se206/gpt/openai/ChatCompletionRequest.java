@@ -57,6 +57,7 @@ public class ChatCompletionRequest {
    */
   public ChatCompletionRequest addMessage(ChatMessage message) {
     messages.add(message);
+    // System.out.println(messages.toString());
     return this;
   }
 
@@ -198,6 +199,8 @@ public class ChatCompletionRequest {
       if (!responseChat.success && responseChat.code != 0) {
         throw new ApiProxyException("Problem calling API: " + responseChat.message);
       }
+
+      System.out.println(responseChat.chatCompletion.toString());
 
       // Return the chat completion result
       return new ChatCompletionResult(responseChat.chatCompletion);
