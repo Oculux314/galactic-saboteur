@@ -39,7 +39,7 @@ public class GameController implements ScreenParent {
   @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
-  @FXML private SidepanelController fullSidePanelController;
+  @FXML private SidepanelController sidePanelController;
 
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
@@ -209,7 +209,7 @@ public class GameController implements ScreenParent {
 
   public void initialiseTimer() {
     int initialSeconds = GameState.timeLimit * 60 + 1;
-    countdownTimer = new Timer(initialSeconds, fullSidePanelController.getTimerLabel());
+    countdownTimer = new Timer(initialSeconds, sidePanelController.getTimerLabel());
     countdownTimer.start();
   }
 
@@ -235,7 +235,7 @@ public class GameController implements ScreenParent {
       minimisePuzzleWindow();
       if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
         // If puzzle was solved, get the clue
-        fullSidePanelController.getRandomClue();
+        sidePanelController.getRandomClue();
         solvedPuzzles.add(lastClickedPuzzle);
 
         // If all puzzles are solved, highlight the reactor
@@ -363,7 +363,7 @@ public class GameController implements ScreenParent {
   }
 
   public void updateHintsLeft() {
-    fullSidePanelController.setHintText(getHintsLeft());
+    sidePanelController.setHintText(getHintsLeft());
   }
 
   private String getHintsLeft() {

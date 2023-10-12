@@ -87,7 +87,7 @@
       </Group>
       <Group fx:id="panelContainer">
          <children>
-            <fx:include fx:id="fullSidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
+            <fx:include fx:id="sidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
          </children>
       </Group>
       <Group fx:id="grpPuzzleCommons">
