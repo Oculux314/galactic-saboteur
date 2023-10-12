@@ -11,6 +11,7 @@ import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
+
 /** Class which handles zooming and panning of game screen. */
 public class ZoomAndPanHandler {
 
@@ -49,7 +50,7 @@ public class ZoomAndPanHandler {
   }
 
   /**
-   * Called when the mouse is pressed. 
+   * Called when the mouse is pressed.
    *
    * @param event The mouse event.
    * @return void
@@ -92,7 +93,7 @@ public class ZoomAndPanHandler {
 
   /**
    * Called when the mouse is scrolled. Zooms the screen according to cursor position.
-   * 
+   *
    * @param event The scroll event.
    * @return void
    */
@@ -138,7 +139,7 @@ public class ZoomAndPanHandler {
   }
 
   /**
-   * Keeps translation within set boundaries. 
+   * Keeps translation within set boundaries.
    *
    * @param value The value to be clamped.
    * @param min The minimum value.

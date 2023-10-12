@@ -2,12 +2,12 @@ package nz.ac.auckland.se206.riddle;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.TaggedThread;
+import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.controllers.EndController;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -16,8 +16,6 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.components.AnimatedButton;
- 
 
 public class RiddleController extends StateButton {
 
@@ -88,7 +86,7 @@ public class RiddleController extends StateButton {
                 e.printStackTrace();
               }
             });
-    
+
     runThread.start();
   }
 

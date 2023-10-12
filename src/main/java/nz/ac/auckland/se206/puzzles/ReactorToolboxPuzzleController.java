@@ -1,7 +1,7 @@
 package nz.ac.auckland.se206.puzzles;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,8 +15,6 @@ import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.controllers.MainController;
-import javafx.scene.control.Label;
-import java.util.List;
 
 /** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
@@ -68,7 +66,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
         selectedNode.toFront();
         pressedX = event.getSceneX();
         pressedY = event.getSceneY();
-       }
+      }
     }
   }
 
@@ -95,7 +93,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     double minY = boundminY + offsetY;
     double maxX = boundmaxX + offsetX - ((ImageView) selectedNode).getFitWidth();
     double maxY = boundmaxY + offsetY - ((ImageView) selectedNode).getFitHeight();
-        
 
     // Calculate the new position within the pane
     newX = clamp(newX, minX, maxX);
@@ -118,8 +115,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private void onMouseReleased(MouseEvent event) {
     selectedNode = null;
     Node source = (Node) event.getSource();
-    snapToPosition(source);  
-  } 
+    snapToPosition(source);
+  }
 
   /**
    * Called when the submit button is clicked. Checks if the answer is correct.
@@ -168,7 +165,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
     double rectangleX = rectangle.getLayoutX();
     double rectangleY = rectangle.getLayoutY();
-    
+
     return toolX == rectangleX + marginX && toolY == rectangleY + marginY;
   }
 
@@ -211,7 +208,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @return
    */
   private void snapToPosition(Node source) {
-    for (Rectangle rect: rects) {
+    for (Rectangle rect : rects) {
       checkCloseToRectangle(source, rect);
     }
   }
@@ -224,7 +221,10 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @return
    */
   private void checkCloseToRectangle(Node source, Rectangle rect) {
-    if (!checkRectangleAvailable(rect)) {return;};
+    if (!checkRectangleAvailable(rect)) {
+      return;
+    }
+    ;
 
     double sourceX = source.getTranslateX() + source.getLayoutX();
     double sourceY = source.getTranslateY() + source.getLayoutY();
@@ -236,16 +236,16 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     double distanceY = Math.abs(sourceY - rectY);
 
     if (distanceX < 30 && distanceY < 15) {
-        setPosition(source, rectX + marginX, rectY + marginY);
+      setPosition(source, rectX + marginX, rectY + marginY);
 
-        // Mark the rectangle as occupied if tool has snapped to it
-        if (rect == rec2) {
-            rec2Occupied = true;
-        } else if (rect == rec3) {
-            rec3Occupied = true;
-        } else if (rect == rec1) {
-            rec1Occupied = true;
-        }
+      // Mark the rectangle as occupied if tool has snapped to it
+      if (rect == rec2) {
+        rec2Occupied = true;
+      } else if (rect == rec3) {
+        rec3Occupied = true;
+      } else if (rect == rec1) {
+        rec1Occupied = true;
+      }
     }
   }
 
@@ -269,12 +269,13 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @return
    */
   private void checkRectanglesClear() {
-    for (ImageView tool: tools) {
-      for (Rectangle rect: rects) {
+    for (ImageView tool : tools) {
+      for (Rectangle rect : rects) {
         double toolX = tool.getTranslateX() + tool.getLayoutX();
         double toolY = tool.getTranslateY() + tool.getLayoutY();
 
-        // Disable flag if tool has moved away from rectangle / allow tools to snap to other rectangles
+        // Disable flag if tool has moved away from rectangle / allow tools to snap to other
+        // rectangles
         if (toolX != rect.getLayoutX() + marginX && toolY != rect.getLayoutY() + marginY) {
           switch (rect.getId()) {
             case "rec2":
@@ -315,7 +316,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @return
    */
   private boolean checkRectangleAvailable(Rectangle rect) {
-    for (ImageView tool: tools) {
+    for (ImageView tool : tools) {
       double toolX = tool.getTranslateX() + tool.getLayoutX();
       double toolY = tool.getTranslateY() + tool.getLayoutY();
 
