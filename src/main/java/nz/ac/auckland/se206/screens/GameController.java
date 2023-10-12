@@ -80,8 +80,6 @@ public class GameController implements ScreenParent {
   @FXML private ImageView imageEnd;
   @FXML private Label lblEnd;
 
-  @FXML private Label labelHintsLeft;
-
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
@@ -134,7 +132,7 @@ public class GameController implements ScreenParent {
     hintsCaptain.addState("hint", "yeshint.png");
 
     grpRiddle.setVisible(false);
-    
+
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
   }
@@ -378,7 +376,6 @@ public class GameController implements ScreenParent {
   }
 
   private String getHintsLeft() {
-    // 
     if (GameState.difficulty == "easy") {
       return "You Have Unlimited Hints";
     } else if (GameState.difficulty == "medium") {
