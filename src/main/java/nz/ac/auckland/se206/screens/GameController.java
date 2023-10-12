@@ -42,8 +42,6 @@ public class GameController implements ScreenParent {
   @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
-  @FXML private Label timerDisplay;
-  @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
   @FXML private Pane panPuzzle;
@@ -218,7 +216,7 @@ public class GameController implements ScreenParent {
 
   public void initialiseTimer() {
     int initialSeconds = GameState.timeLimit * 60 + 1;
-    countdownTimer = new Timer(initialSeconds, timerDisplay);
+    countdownTimer = new Timer(initialSeconds, fullSidePanelController.getTimerLabel());
     countdownTimer.start();
   }
 

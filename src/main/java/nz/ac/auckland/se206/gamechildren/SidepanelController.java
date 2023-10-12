@@ -11,9 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.misc.GameState;
-import nz.ac.auckland.se206.screens.ScreenParent;
 
-public class SidepanelController implements ScreenParent {
+public class SidepanelController {
 
   @FXML private Rectangle timeClueInformationRectangle;
   @FXML private Rectangle whereClueInformationRectangle;
@@ -185,8 +184,8 @@ public class SidepanelController implements ScreenParent {
     clueNameMap.put("/images/times/time3.jpg", "Night");
   }
 
-  public void setTimerText(String time) {
-    lblTimer.setText(time);
+  public Label getTimerLabel() {
+    return lblTimer;
   }
 
   public void setHintText(String hints) {

@@ -216,16 +216,6 @@
             </Group>
          </children>
       </Group>
-      <Group fx:id="grpTimer" layoutX="635.0">
-         <children>
-            <Label fx:id="timerDisplay" alignment="CENTER" layoutX="42.0" layoutY="522.0" prefHeight="66.0" prefWidth="100.0" textOverrun="CLIP" />
-         </children>
-      </Group>
-      <Group fx:id="grpHints" layoutX="-400.0" layoutY="-10.0">
-         <children>
-            <Label fx:id="labelHintsLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="909.0" layoutY="534.0" prefHeight="68.0" prefWidth="128.0" stylesheets="@../../css/style.css" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
-         </children>
-      </Group>
       <Pane fx:id="panEnd" prefHeight="600.0" prefWidth="800.0" visible="false">
          <children>
             <ImageView fx:id="imageEnd" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
