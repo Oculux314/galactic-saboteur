@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.screens;
+package nz.ac.auckland.se206.gamechildren;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.screens.ScreenParent;
 
 public class SidepanelController implements ScreenParent {
 

@@ -1,10 +1,9 @@
-package nz.ac.auckland.se206.riddle;
+package nz.ac.auckland.se206.gamechildren;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -16,6 +15,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
+import nz.ac.auckland.se206.screens.Screen;
 
 public class RiddleController extends StateButton {
 

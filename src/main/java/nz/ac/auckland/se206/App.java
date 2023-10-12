@@ -24,6 +24,7 @@ import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.misc.TextToSpeech;
 import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
 import nz.ac.auckland.se206.screens.MainController;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {

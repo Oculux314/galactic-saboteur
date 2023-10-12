@@ -1,10 +1,9 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.screens;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.screens.ScreenParent;
 
 /** Represents a screen in the application, consisting of an FXML file / controller pair. */
 public class Screen {

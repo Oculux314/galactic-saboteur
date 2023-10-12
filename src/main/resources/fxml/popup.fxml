@@ -9,8 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-
-<Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.PopupController">
+<Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.PopupController">
    <children>
       <Rectangle fx:id="recBackground" fill="#00000033" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
       <Group fx:id="grpPopup">

@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.screens;
+package nz.ac.auckland.se206.gamechildren;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -10,7 +10,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.screens.MainController;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** Class which handles zooming and panning of game screen. */
 public class ZoomAndPanHandler {

@@ -11,10 +11,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.MainController;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
