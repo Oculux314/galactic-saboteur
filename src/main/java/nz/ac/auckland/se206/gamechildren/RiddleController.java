@@ -17,7 +17,7 @@ import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
 import nz.ac.auckland.se206.screens.Screen;
 
-public class RiddleController extends StateButton {
+public class RiddleController {
 
   @FXML private StateButton btnWho = new StateButton();
   @FXML private StateButton btnWhere = new StateButton();
