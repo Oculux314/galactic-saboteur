@@ -32,7 +32,7 @@ import nz.ac.auckland.se206.misc.GameState.HighlightState;
 import nz.ac.auckland.se206.misc.RootPair;
 
 /** Controller class for the game screens. */
-public class GameController implements ScreenParent {
+public class GameController implements Screen {
 
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;

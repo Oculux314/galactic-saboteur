@@ -9,7 +9,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.misc.RootPair;
 
 /** Controller class for the title screen. */
-public class TitleController implements ScreenParent {
+public class TitleController implements Screen {
 
   @FXML private Pane panBackground;
   @FXML private Pane panFullScreen;

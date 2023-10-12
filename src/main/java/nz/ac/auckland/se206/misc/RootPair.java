@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.screens.ScreenParent;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** Represents a screen in the application, consisting of an FXML file / controller pair. */
 public class RootPair {
@@ -26,7 +26,7 @@ public class RootPair {
   private Parent fxml;
 
   /** The controller for the screen. */
-  private ScreenParent controller;
+  private Screen controller;
 
   /**
    * Constructs a new screen with the FXML file and controller stored within the given loader.
@@ -63,7 +63,7 @@ public class RootPair {
    *
    * @return The controller for the screen.
    */
-  public ScreenParent getController() {
+  public Screen getController() {
     return controller;
   }
 }

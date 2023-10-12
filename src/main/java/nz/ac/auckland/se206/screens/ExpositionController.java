@@ -12,7 +12,7 @@ import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
 /** Controller class for the title screen. */
-public class ExpositionController implements ScreenParent {
+public class ExpositionController implements Screen {
 
   private static final int DELAY_MILLIS = 2000;
 

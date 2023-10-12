@@ -11,7 +11,7 @@ import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 
 /** Controller class for the title screen. */
-public class SettingsController implements ScreenParent {
+public class SettingsController implements Screen {
 
   @FXML private Pane panBackground;
   @FXML private AnimatedButton btnBack;

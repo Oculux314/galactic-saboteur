@@ -9,7 +9,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 
-public class EndController implements ScreenParent {
+public class EndController implements Screen {
 
   @FXML private Label lblEnd;
   @FXML private ImageView imgEnd;
