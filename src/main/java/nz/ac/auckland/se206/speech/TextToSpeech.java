@@ -9,7 +9,7 @@ import javax.speech.synthesis.SynthesizerModeDesc;
 /** Text-to-speech API using the JavaX speech library. */
 public class TextToSpeech {
   /** Custom unchecked exception for Text-to-speech issues. */
-  static class TextToSpeechException extends RuntimeException {
+  public static class TextToSpeechException extends RuntimeException {
     public TextToSpeechException(final String message) {
       super(message);
     }
@@ -96,7 +96,7 @@ public class TextToSpeech {
     try {
       Thread.sleep(100);
     } catch (final InterruptedException e) {
-      e.printStackTrace();
+      return;
     }
   }
 

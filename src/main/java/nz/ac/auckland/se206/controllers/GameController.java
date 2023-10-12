@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -14,16 +13,16 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.HighlightState;
+import nz.ac.auckland.se206.Screen;
+import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
@@ -51,6 +50,7 @@ public class GameController implements Controller {
 
     public void decrementSeconds() {
       seconds--;
+      System.out.println(seconds);
     }
   }
 
@@ -109,7 +109,7 @@ public class GameController implements Controller {
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
   private boolean mechanicWelcomeShown = false;
-  private Timeline countdownTimer;
+  private TaggedThread countdownTimer;
 
   @FXML
   private void initialize() {
@@ -239,26 +239,37 @@ public class GameController implements Controller {
   }
 
   public void startTimer() {
-    // Get the initial time limit in seconds
-    int initialMinutes = GameState.timeLimit;
-
-    TimerData timerData = new TimerData(initialMinutes * 60 + 1);
-
     // Create a timer that decrements every second
     countdownTimer =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1),
-                event -> {
-                  timerData.decrementSeconds();
-                  if (timerData.getSeconds() <= 0) {
-                    countdownTimer.stop();
-                  }
-                  updateTimerDisplay(timerData.getSeconds());
-                }));
+        new TaggedThread(
+            () -> {
+              int initialMinutes = GameState.timeLimit;
+              TimerData timerData = new TimerData(initialMinutes * 60 + 1);
 
-    countdownTimer.setCycleCount(Timeline.INDEFINITE);
-    countdownTimer.play();
+              while (timerData.getSeconds() > 0) {
+                if (GameState.isGameover) {
+                  return; // Returning as interupting this thread doesn't seem to work
+                }
+
+                timerData.decrementSeconds();
+                Platform.runLater(() -> updateTimerDisplay(timerData.getSeconds()));
+
+                try {
+                  Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                  return; // Returning as interupting this thread doesn't seem to work
+                }
+              }
+
+              Platform.runLater(() -> showTimeout());
+            });
+
+    countdownTimer.start();
+  }
+
+  private void showTimeout() {
+    EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
+    endController.showEndOnTimeout();
   }
 
   public void updateTimerDisplay(int initialSeconds) {
@@ -284,11 +295,6 @@ public class GameController implements Controller {
   @FXML
   private void onScroll(ScrollEvent event) {
     zoomAndPanHandler.onScroll(event);
-  }
-
-  @FXML
-  private void onRestartClicked() throws IOException {
-    App.restart();
   }
 
   @FXML
@@ -417,7 +423,6 @@ public class GameController implements Controller {
 
   @FXML
   private void riddleClicked() throws IOException {
-    System.out.println("Riddle clicked");
     // Set the visibility of the corresponding group
     grpRiddle.setVisible(true);
     if (GameState.cluesFound == true) {
@@ -427,15 +432,17 @@ public class GameController implements Controller {
     }
   }
 
-  public void showEndScreen(boolean isWon) {
-    panEnd.setVisible(true);
+  @FXML
+  private void onRestartClicked() throws IOException {
+    // TODO: TEMPORARY DEV TOOL
+    App.restart();
+  }
 
-    if (!isWon) {
-      lblEnd.setText(App.speak("Gameover. You lost."));
-      imageEnd.setImage(new Image("gameover.png"));
-    } else {
-      App.speak("You win!");
-    }
+  @FXML
+  private void onEndClicked() throws IOException {
+    // TODO: TEMPORARY DEV TOOL
+    EndController endController = (EndController) App.getScreen(Screen.Name.END).getController();
+    endController.showEndOnLose();
   }
 
   public void addMapButton(HighlightButton mapButton) {
