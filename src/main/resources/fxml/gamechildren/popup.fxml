@@ -37,6 +37,7 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
+            <Group fx:id="grpContent" layoutX="160.0" layoutY="60.0" />
             <AnimatedButton fx:id="btnExit" fitHeight="60.0" fitWidth="60.0" layoutX="600.0" layoutY="40.0" onMouseClicked="#onExitClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/exit.png" />
