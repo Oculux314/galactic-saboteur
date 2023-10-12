@@ -14,7 +14,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Screen;
 import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
-import nz.ac.auckland.se206.controllers.MainController;
+import nz.ac.auckland.se206.screens.MainController;
 
 /** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {

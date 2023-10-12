@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.controllers;
+package nz.ac.auckland.se206.screens;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

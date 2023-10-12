@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.controllers;
+package nz.ac.auckland.se206.screens;
 
 import java.util.HashMap;
 import java.util.HashSet;
