@@ -2,47 +2,51 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="panHangmanPuzzle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorHangmanPuzzleController">
    <children>
-      <Line endX="332.0" endY="166.5" layoutX="32.0" startX="131.0" startY="166.5" />
-      <Label layoutX="226.0" layoutY="80.0" style="-fx-font-size: 12;" text="Guess the word:" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="88.0" layoutX="168.0" layoutY="250.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <VBox layoutX="168.0" layoutY="263.0" prefHeight="62.0" prefWidth="200.0">
+      <ImageView fitHeight="390.0" fitWidth="500.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/hangman-puzzle-background.jpg" />
+         </image>
+      </ImageView>
+      <Line endX="332.0" endY="166.5" layoutX="32.0" layoutY="20.0" startX="131.0" startY="166.5" />
+      <VBox layoutX="253.0" layoutY="253.0" prefHeight="62.0" prefWidth="200.0">
          <children>
             <Label fx:id="lblGuessedLetters1" prefHeight="35.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
             <Label fx:id="lblGuessedLetters2" prefHeight="33.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
          </children>
       </VBox>
-      <TextField fx:id="txtGuessLetter" layoutX="47.0" layoutY="281.0" onAction="#onGuess" prefHeight="25.0" prefWidth="30.0" />
-      <Label layoutX="25.0" layoutY="257.0" style="-fx-font-size: 12;" text="Guess a letter:" />
-      <Label layoutX="225.0" layoutY="233.0" style="-fx-font-size: 12;" text="Letters Guessed:" />
-      <Label fx:id="letter1" layoutX="170.0" layoutY="95.0" style="-fx-font-size: 60;" text="*">
+      <TextField fx:id="txtGuessLetter" layoutX="135.0" layoutY="259.0" onAction="#onGuess" prefHeight="25.0" prefWidth="30.0" />
+      <Label fx:id="instructions" alignment="CENTER" layoutX="113.0" layoutY="230.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Guess a letter:" />
+      <Label fx:id="instructions" layoutX="264.0" layoutY="230.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Letters Guessed:" />
+      <Label fx:id="letter1" alignment="CENTER" layoutX="170.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label fx:id="letter4" alignment="CENTER" layoutX="280.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="letter4" layoutX="280.0" layoutY="95.0" style="-fx-font-size: 60;" text="*">
+      <Label fx:id="letter2" alignment="CENTER" layoutX="205.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="letter2" layoutX="205.0" layoutY="95.0" style="-fx-font-size: 60;" text="*">
+      <Label fx:id="letter3" alignment="CENTER" layoutX="240.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="letter3" layoutX="240.0" layoutY="95.0" style="-fx-font-size: 60;" text="*">
-         <font>
-            <Font size="60.0" />
-         </font>
-      </Label>
-      <Label fx:id="letter5" layoutX="320.0" layoutY="95.0" style="-fx-font-size: 60;" text="*">
+      <Label fx:id="letter5" alignment="CENTER" layoutX="320.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
