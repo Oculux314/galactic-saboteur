@@ -285,17 +285,17 @@ public class GameController implements Screen {
     if (getButtonToPuzzleMap().containsKey(clickedButton)) {
       // Load the specific puzzle
       PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
-      // puzzleLoader.setPuzzle(puzzleName); // TODO
-      // Show the puzzle
-      restorePuzzleWindow();
 
-      // update the game state depending on what puzzle was opened
+      // Update the game state and show popup
       if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
         GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
+        popupController.show(PopupController.Name.PUZZLE_REACTOR);
       } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzleName)) {
         GameState.labRoomGameState = GameState.puzzleOpenedMessage;
+        popupController.show(PopupController.Name.PUZZLE_LABORATORY);
       } else if (PuzzleLoader.navigationPuzzles.contains(puzzleName)) {
         GameState.controlRoomGameState = GameState.puzzleOpenedMessage;
+        popupController.show(PopupController.Name.PUZZLE_NAVIGATION);
       }
     }
 

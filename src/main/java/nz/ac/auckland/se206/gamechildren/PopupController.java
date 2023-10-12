@@ -39,7 +39,7 @@ public class PopupController implements RootPair.Controller {
     hide();
   }
 
-  private void show(Name name) {
+  public void show(Name name) {
     setRoot(name);
     show();
   }
