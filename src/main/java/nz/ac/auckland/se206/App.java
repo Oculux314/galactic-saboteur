@@ -17,7 +17,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
@@ -36,9 +35,6 @@ public class App extends Application {
 
   private static Set<TaggedThread> threads = new HashSet<>();
   private static TextToSpeech tts = new TextToSpeech();
-  public static Assistant scientist;
-  public static Assistant mechanic;
-  public static Assistant captain;
 
   /**
    * The entry point of the application.

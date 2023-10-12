@@ -34,6 +34,7 @@ public class PopupController implements RootPair.Controller {
   public void initialise(PuzzleLoader puzzleLoader) {
     this.puzzleLoader = puzzleLoader;
     loadAllPopups();
+    hide();
   }
 
   @Override
