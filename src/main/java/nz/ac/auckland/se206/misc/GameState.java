@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.misc;
 
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.screens.Screen;
-import nz.ac.auckland.se206.screens.Screen.Name;
 
 /** Represents the state of the game. */
 public class GameState {

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -24,35 +23,18 @@ import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.RiddleController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
+import nz.ac.auckland.se206.gamechildren.Timer;
 import nz.ac.auckland.se206.gamechildren.ZoomAndPanHandler;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
-import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
+import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.misc.GameState;
-import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 
 /** Controller class for the game screens. */
 public class GameController implements ScreenParent {
-
-  private class TimerData {
-    private int seconds;
-
-    // Constructor of TimerDate class
-    public TimerData(int initialSeconds) {
-      this.seconds = initialSeconds;
-    }
-
-    public int getSeconds() {
-      return seconds;
-    }
-
-    public void decrementSeconds() {
-      seconds--;
-    }
-  }
 
   @FXML private Pane panSpaceship;
   @FXML private Group grpPanZoom;
@@ -60,7 +42,7 @@ public class GameController implements ScreenParent {
   @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
-  @FXML private Label timer;
+  @FXML private Label timerDisplay;
   @FXML private StackPane fullSidePanel;
   @FXML private SidepanelController fullSidePanelController;
 
@@ -109,7 +91,7 @@ public class GameController implements ScreenParent {
   private boolean captainWelcomeShown = false;
   private boolean scientistWelcomeShown = false;
   private boolean mechanicWelcomeShown = false;
-  private TaggedThread countdownTimer;
+  private Timer countdownTimer;
 
   @FXML
   private void initialize() {
@@ -152,9 +134,7 @@ public class GameController implements ScreenParent {
     hintsCaptain.addState("hint", "yeshint.png");
 
     grpRiddle.setVisible(false);
-
-    updateHintsLeft();
-
+    
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
   }
@@ -238,48 +218,10 @@ public class GameController implements ScreenParent {
     }
   }
 
-  public void startTimer() {
-    // Create a timer that decrements every second
-    countdownTimer =
-        new TaggedThread(
-            () -> {
-              int initialMinutes = GameState.timeLimit;
-              TimerData timerData = new TimerData(initialMinutes * 60 + 1);
-
-              while (timerData.getSeconds() > 0) {
-                if (GameState.isGameover) {
-                  return; // Returning as interupting this thread doesn't seem to work
-                }
-
-                timerData.decrementSeconds();
-                Platform.runLater(() -> updateTimerDisplay(timerData.getSeconds()));
-
-                try {
-                  Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                  return; // Returning as interupting this thread doesn't seem to work
-                }
-              }
-
-              Platform.runLater(() -> showTimeout());
-            });
-
+  public void initialiseTimer() {
+    int initialSeconds = GameState.timeLimit * 60 + 1;
+    countdownTimer = new Timer(initialSeconds, timerDisplay);
     countdownTimer.start();
-  }
-
-  private void showTimeout() {
-    EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
-    endController.showEndOnTimeout();
-  }
-
-  public void updateTimerDisplay(int initialSeconds) {
-    int minutes = initialSeconds / 60;
-    int seconds = initialSeconds % 60;
-
-    String formattedMinutes = String.format("%02d", minutes);
-    String formattedSeconds = String.format("%02d", seconds);
-
-    timer.setText(formattedMinutes + ":" + formattedSeconds);
   }
 
   @FXML
