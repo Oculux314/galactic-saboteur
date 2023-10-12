@@ -35,9 +35,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private Node selectedNode;
   private List<ImageView> tools = new ArrayList<>();
   private List<Rectangle> rects = new ArrayList<>();
-  private boolean rec2Occupied = false;
-  private boolean rec3Occupied = false;
-  private boolean rec1Occupied = false;
+  private boolean rec2Occupied;
+  private boolean rec3Occupied;
+  private boolean rec1Occupied;
 
   private int marginX = 10;
   private int marginY = 5;
@@ -224,7 +224,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @return
    */
   private void checkCloseToRectangle(Node source, Rectangle rect) {
-    checkRectangleAvailable(rect);
+    if (!checkRectangleAvailable(rect)) {return;};
 
     double sourceX = source.getTranslateX() + source.getLayoutX();
     double sourceY = source.getTranslateY() + source.getLayoutY();
@@ -314,15 +314,16 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @param rect the rectangle to check
    * @return
    */
-  private void checkRectangleAvailable(Rectangle rect) {
+  private boolean checkRectangleAvailable(Rectangle rect) {
     for (ImageView tool: tools) {
       double toolX = tool.getTranslateX() + tool.getLayoutX();
       double toolY = tool.getTranslateY() + tool.getLayoutY();
 
       // If a tool is in the rectangle already don't snap the position
       if (toolX == rect.getLayoutX() + marginX && toolY == rect.getLayoutY() + marginY) {
-        return;
+        return false;
       }
     }
+    return true;
   }
 }
