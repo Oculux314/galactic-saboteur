@@ -37,6 +37,10 @@ public class Suspect {
     return image;
   }
 
+  public String getNarration() {
+    return narrationBox.getText();
+  }
+
   public Assistant getAssistant() {
     return assistant;
   }

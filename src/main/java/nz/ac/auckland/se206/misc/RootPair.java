@@ -40,7 +40,9 @@ public class RootPair {
       controller = null;
     }
 
-    Utils.logTimeTest("Loaded " + getFxml().toString() + " popup", 100); // TODO: remove time tests
+    Utils.logTimeTest(
+        "Loaded " + getFxml().toString() + " : " + getController(),
+        100); // TODO: remove time tests
   }
 
   private Parent getDefaultParent() {

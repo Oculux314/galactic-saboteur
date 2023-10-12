@@ -63,6 +63,10 @@ public class NarrationBox {
     return textResponse.getText();
   }
 
+  public void setUserResponse(String text) {
+    textResponse.setText(text);
+  }
+
   public void clearUserResponse() {
     textResponse.clear();
   }

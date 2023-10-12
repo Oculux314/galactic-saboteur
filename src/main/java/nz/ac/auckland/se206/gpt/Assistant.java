@@ -138,6 +138,11 @@ public class Assistant {
     return narrationBox;
   }
 
+  public void respondToUser(String text) {
+    narrationBox.setUserResponse(text);
+    respondToUser();
+  }
+
   public void respondToUser() {
     narrationBox.disableUserResponse();
     String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);

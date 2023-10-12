@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.suspects.Suspect.Name;
+import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.GameController;
@@ -64,6 +65,7 @@ public class SuspectController implements RootPair.Controller {
     }
 
     imgSuspect.setImage(suspect.getImage());
+    textNarration.setText(suspect.getNarration());
   }
 
   private Suspect getCurrentSuspect() {
@@ -79,7 +81,9 @@ public class SuspectController implements RootPair.Controller {
     System.out.println(event);
 
     // Respond to the user's message
-    getCurrentSuspect().getAssistant().respondToUser();
+    Assistant assistant = getCurrentSuspect().getAssistant();
+    assistant.respondToUser(textResponse.getText());
+
     btnHints.setState("nohint");
     btnHints.setDisable(GameState.isHintLimitReached());
 
