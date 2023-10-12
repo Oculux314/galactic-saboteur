@@ -50,7 +50,6 @@ public class GameController implements Controller {
 
     public void decrementSeconds() {
       seconds--;
-      System.out.println(seconds);
     }
   }
 
