@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panBackground" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.TitleController">
+<Pane fx:id="panBackground" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.TitleController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/splash.png" />
+            <Image url="@../../images/splash.png" />
          </image>
       </ImageView>
       <AnimatedButton fx:id="btnSettings" fitHeight="80.0" fitWidth="80.0" layoutX="280.0" layoutY="450.0" onMouseClicked="#onSettingsClicked">
          <image>
-            <Image url="@../images/settings.png" />
+            <Image url="@../../images/settings.png" />
          </image>
       </AnimatedButton>
       <AnimatedButton fx:id="btnPlay" fitHeight="80.0" fitWidth="80.0" layoutX="440.0" layoutY="450.0" onMouseClicked="#onPlayClicked">
          <image>
-            <Image url="@../images/play.png" />
+            <Image url="@../../images/play.png" />
          </image>
       </AnimatedButton>
       <Label fx:id="lblSubtitle" alignment="CENTER" layoutY="359.0" prefHeight="23.0" prefWidth="800.0" text="Escape by finding the saboteur" textAlignment="CENTER" />

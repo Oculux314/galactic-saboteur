@@ -117,7 +117,7 @@ public class App extends Application {
 
   private static void makeScreenWithoutThread(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/screens/" + fxml + ".fxml"));
     screens.put(screenName, new Screen(loader));
   }
 

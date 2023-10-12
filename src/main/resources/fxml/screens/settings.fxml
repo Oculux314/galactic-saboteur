@@ -7,7 +7,7 @@
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 <?import nz.ac.auckland.se206.components.StateButton?>
 
-<Pane fx:id="panBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.SettingsController">
+<Pane fx:id="panBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.SettingsController">
    <children>
       <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="50.0" prefHeight="80.0" prefWidth="800.0" text="Settings" textAlignment="CENTER">
          <font>
@@ -16,25 +16,25 @@
       </Label>
       <AnimatedButton fx:id="btnBack" fitHeight="80.0" fitWidth="80.0" layoutX="50.0" layoutY="50.0" onMouseClicked="#onBackClicked">
          <image>
-            <Image url="@../images/back.png" />
+            <Image url="@../../images/back.png" />
          </image>
       </AnimatedButton>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" text="Difficulty" textAlignment="CENTER" />
       <StateButton fx:id="btnDifficulty" fitHeight="50.0" fitWidth="150.0" layoutX="105.0" layoutY="305.0">
          <image>
-            <Image url="@../images/placeholder.png" />
+            <Image url="@../../images/placeholder.png" />
          </image>
       </StateButton>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="270.0" prefWidth="150.0" text="Time" textAlignment="CENTER" />
       <StateButton fx:id="btnTime" fitHeight="50.0" fitWidth="150.0" layoutX="325.0" layoutY="305.0">
          <image>
-            <Image url="@../images/placeholder.png" />
+            <Image url="@../../images/placeholder.png" />
          </image>
       </StateButton>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="545.0" layoutY="270.0" prefWidth="150.0" text="Text-to-Speech" textAlignment="CENTER" />
       <StateButton fx:id="btnTts" fitHeight="89.0" fitWidth="150.0" layoutX="545.0" layoutY="305.0">
          <image>
-            <Image url="@../images/placeholder.png" />
+            <Image url="@../../images/placeholder.png" />
          </image>
       </StateButton>
    </children>
