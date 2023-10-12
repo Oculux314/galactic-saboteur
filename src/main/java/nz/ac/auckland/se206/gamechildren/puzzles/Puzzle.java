@@ -1,12 +1,18 @@
 package nz.ac.auckland.se206.gamechildren.puzzles;
 
+import java.util.HashSet;
+import java.util.Set;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.GameState.HighlightState;
 import nz.ac.auckland.se206.misc.RootPair;
+import nz.ac.auckland.se206.screens.GameController;
+import nz.ac.auckland.se206.screens.Screen;
 
 public class Puzzle implements RootPair.Controller {
 
@@ -40,6 +46,7 @@ public class Puzzle implements RootPair.Controller {
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private Parent root;
   private PuzzleName puzzleName;
+  private Set<Puzzle> solvedPuzzles = new HashSet<>();
 
   public void setPuzzleName(PuzzleName puzzleName) {
     this.puzzleName = puzzleName;
@@ -77,6 +84,17 @@ public class Puzzle implements RootPair.Controller {
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
+    }
+
+    GameController gameController =
+        (GameController) App.getScreen(Screen.Name.GAME).getController();
+
+    gameController.giveRandomClue();
+    solvedPuzzles.add(this);
+
+    // If all puzzles are solved, highlight the reactor
+    if (solvedPuzzles.size() == 3) {
+      gameController.progressHighlightStateTo(HighlightState.REACTOR_FINAL);
     }
   }
 

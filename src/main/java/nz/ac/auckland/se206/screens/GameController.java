@@ -76,7 +76,6 @@ public class GameController implements Screen {
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
   private Puzzle lastClickedPuzzle;
-  private Set<Puzzle> solvedPuzzles = new HashSet<>();
   private Map<String, HighlightButton> mapButtons = new HashMap<>();
 
   private boolean captainWelcomeShown = false;
@@ -132,7 +131,7 @@ public class GameController implements Screen {
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
   }
 
-  private void progressHighlightStateTo(HighlightState newState) {
+  public void progressHighlightStateTo(HighlightState newState) {
     HighlightState nextState = HighlightState.values()[GameState.highlightState.ordinal() + 1];
 
     if (newState == nextState) {
@@ -235,19 +234,7 @@ public class GameController implements Screen {
   @FXML
   private void onExitClicked(MouseEvent event) {
     if (event.getSource() == btnExit) {
-
       minimisePuzzleWindow();
-      if (lastClickedPuzzle.isSolved() && !solvedPuzzles.contains(lastClickedPuzzle)) {
-        // If puzzle was solved, get the clue
-        sidePanelController.getRandomClue();
-        solvedPuzzles.add(lastClickedPuzzle);
-
-        // If all puzzles are solved, highlight the reactor
-        if (solvedPuzzles.size() == 3) {
-          progressHighlightStateTo(HighlightState.REACTOR_FINAL);
-        }
-      }
-
     } else if (event.getSource() == btnGptExitScientist) {
       grpGptScientist.setVisible(false);
       progressHighlightStateTo(HighlightState.PUZZLES);
@@ -269,6 +256,10 @@ public class GameController implements Screen {
 
   private void restorePuzzleWindow() {
     grpPuzzleCommons.setVisible(true);
+  }
+
+  public void giveRandomClue() {
+    sidePanelController.getRandomClue();
   }
 
   /**

@@ -86,7 +86,7 @@
          </children>
       </Group>
       <fx:include fx:id="sidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
-      <Group fx:id="grpPuzzleCommons">
+      <Group fx:id="grpPuzzleCommons" visible="false">
          <children>
             <Pane fx:id="panBlockPuzzleBackgound" opacity="0.4" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #000000;" />
             <Pane fx:id="panPuzzle" layoutX="150.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: BFBFBF;">
