@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.misc.TextToSpeech;
 import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
+import nz.ac.auckland.se206.misc.Utils;
 import nz.ac.auckland.se206.screens.MainController;
 import nz.ac.auckland.se206.screens.Screen;
 
@@ -115,9 +116,12 @@ public class App extends Application {
   }
 
   private static void makeScreenWithoutThread(final Screen.Name screenName) {
+    Utils.startTimeTest(); // TODO: Remove time tests
     String fxml = screenName.toString().toLowerCase();
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/screens/" + fxml + ".fxml"));
     screens.put(screenName, new Screen(loader));
+    Utils.logTimeTest(
+        "Loaded screen " + screenName.toString().toLowerCase(), 1000); // TODO: Remove time tests
   }
 
   /**
