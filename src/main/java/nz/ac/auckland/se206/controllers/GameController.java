@@ -393,6 +393,8 @@ public class GameController implements Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
+    System.out.println(event);
+
     // Respond to the user's message
     if (event.getSource() == textResponseScientist) {
       App.scientist.respondToUser();
@@ -408,6 +410,25 @@ public class GameController implements Controller {
       hintsMechanic.setDisable(GameState.isHintLimitReached());
     }
     updateHintsLeft();
+  }
+
+  @FXML
+  private void hintWanted(MouseEvent event) {
+    StateButton sourceStateButton = (StateButton) event.getSource();
+    // ActionEvent events =
+
+    if (sourceStateButton == hintsScientist) {
+      if (sourceStateButton.getState() == "hint") {
+        textResponseScientist.setText("I want a hint.");
+        // onUserMessage(event);
+      } else {
+        textResponseScientist.setText("");
+      }
+    } else if (sourceStateButton == hintsCaptain) {
+      textResponseCaptain.setText("I want a hint.");
+    } else if (sourceStateButton == hintsMechanic) {
+      textResponseMechanic.setText("I want a hint");
+    }
   }
 
   public void updateHintsLeft() {
