@@ -355,7 +355,7 @@ public class GameController implements ScreenParent {
   }
 
   @FXML
-  private void hintWanted(MouseEvent event) {
+  private void onHintButtonClick(MouseEvent event) {
     StateButton sourceStateButton = (StateButton) event.getSource();
     // ActionEvent events =
 
@@ -374,12 +374,17 @@ public class GameController implements ScreenParent {
   }
 
   public void updateHintsLeft() {
+    fullSidePanelController.setHintText(getHintsLeft());
+  }
+
+  private String getHintsLeft() {
+    // 
     if (GameState.difficulty == "easy") {
-      labelHintsLeft.setText("You Have Unlimited Hints");
+      return "You Have Unlimited Hints";
     } else if (GameState.difficulty == "medium") {
-      labelHintsLeft.setText("You Have " + GameState.getHintLimitRemaining() + " Hints Left");
+      return "You Have " + GameState.getHintLimitRemaining() + " Hints Left";
     } else {
-      labelHintsLeft.setText("No Hints Are Allowed");
+      return "No Hints Are Allowed";
     }
   }
 

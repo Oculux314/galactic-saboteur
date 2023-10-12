@@ -49,13 +49,12 @@
   -fx-font-size: 14px;
 }
 
-#timer {
+#lblTimer {
   -fx-font-size: 35px;
   -fx-height: 100%;
-  -fx-transform: scale(1,.9);
 }
 
-#labelHintsLeft {
+#lblHints {
   -fx-font-size: 16px;
 }
 
