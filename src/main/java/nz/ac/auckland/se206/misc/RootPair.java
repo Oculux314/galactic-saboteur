@@ -17,13 +17,17 @@ public class RootPair {
   /** The controller for the screen. */
   private Controller controller;
 
+  public RootPair(String fxmlUrl) {
+    this(new FXMLLoader(RootPair.class.getResource(fxmlUrl)));
+  }
+
   /**
    * Constructs a new screen with the FXML file and controller stored within the given loader.
    *
    * @param loader The loader containing the FXML file and controller.
    * @throws IOException If the FXML file is not found.
    */
-  public RootPair(FXMLLoader loader) {
+  private RootPair(FXMLLoader loader) {
     Utils.startTimeTest(); // TODO: remove time tests
 
     try {
@@ -35,10 +39,6 @@ public class RootPair {
     }
 
     Utils.logTimeTest("Loaded " + getFxml().toString() + " popup", 100); // TODO: remove time tests
-  }
-
-  public RootPair(String fxmlUrl) {
-    this(new FXMLLoader(RootPair.class.getResource(fxmlUrl)));
   }
 
   private Parent getDefaultParent() {

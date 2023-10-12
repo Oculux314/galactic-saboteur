@@ -9,7 +9,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -117,8 +116,7 @@ public class App extends Application {
 
   private static void makeScreenWithoutThread(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/screens/" + fxml + ".fxml"));
-    screens.put(screenName, new RootPair(loader));
+    screens.put(screenName, new RootPair("/fxml/screens/" + fxml + ".fxml"));
   }
 
   /**
