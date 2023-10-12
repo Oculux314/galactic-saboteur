@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 
-public class SidepanelController implements Controller {
+public class SidepanelController implements ScreenParent {
 
   @FXML private Rectangle timeClueInformationRectangle;
   @FXML private Rectangle whereClueInformationRectangle;

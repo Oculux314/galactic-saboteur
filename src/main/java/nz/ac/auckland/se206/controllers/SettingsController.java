@@ -11,7 +11,7 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
 
 /** Controller class for the title screen. */
-public class SettingsController implements Controller {
+public class SettingsController implements ScreenParent {
 
   @FXML private Pane panBackground;
   @FXML private AnimatedButton btnBack;

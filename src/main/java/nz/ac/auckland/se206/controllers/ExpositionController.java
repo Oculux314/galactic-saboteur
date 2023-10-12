@@ -12,7 +12,7 @@ import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.components.AnimatedButton;
 
 /** Controller class for the title screen. */
-public class ExpositionController implements Controller {
+public class ExpositionController implements ScreenParent {
 
   private static final int DELAY_MILLIS = 2000;
 

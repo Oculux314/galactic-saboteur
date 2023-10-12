@@ -34,7 +34,7 @@ import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.riddle.RiddleController;
 
 /** Controller class for the game screens. */
-public class GameController implements Controller {
+public class GameController implements ScreenParent {
 
   private class TimerData {
     private int seconds;

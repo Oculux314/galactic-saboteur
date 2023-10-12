@@ -9,7 +9,7 @@ import nz.ac.auckland.se206.App;
  * Controller class for the root screen that controls all other screens. The active screen is a
  * child of this screen.
  */
-public class MainController implements Controller {
+public class MainController implements ScreenParent {
 
   /** Should match width of screens in SceneBuilder. */
   private static final int DEFAULT_WIDTH = 800;
