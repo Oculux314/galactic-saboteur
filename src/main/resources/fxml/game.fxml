@@ -192,7 +192,7 @@
                      <children>
                         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="213.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
                         <TextField fx:id="textResponseScientist" layoutX="225.0" layoutY="390.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
-                        <TextArea fx:id="labelNarrationScientist" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
+                        <TextArea fx:id="labelNarrationScientist" editable="false" layoutX="331.0" layoutY="119.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
                         <ImageView fitHeight="220.0" fitWidth="165.0" layoutX="240.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/scientist.png" />
