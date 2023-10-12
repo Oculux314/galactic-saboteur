@@ -17,7 +17,6 @@ import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.PopupController;
-import nz.ac.auckland.se206.gamechildren.RiddleController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.Timer;
 import nz.ac.auckland.se206.gamechildren.ZoomAndPanHandler;
