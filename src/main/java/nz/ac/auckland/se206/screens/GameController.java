@@ -299,7 +299,11 @@ public class GameController implements Screen {
       }
     }
 
-    lastClickedPuzzle = puzzleLoader.getCurrentPuzzle();
+    try {
+      lastClickedPuzzle = (Puzzle) popupController.getCurrentPopup().getController();
+    } catch (ClassCastException e) {
+      e.printStackTrace();
+    }
   }
 
   @FXML

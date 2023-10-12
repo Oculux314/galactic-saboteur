@@ -6,11 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
-import nz.ac.auckland.se206.misc.Utils;
 
 public class PopupController implements RootPair.Controller {
 
@@ -28,15 +26,38 @@ public class PopupController implements RootPair.Controller {
   @FXML private Group grpContent;
   private Map<Name, RootPair> popups = new HashMap<>();
   private PuzzleLoader puzzleLoader;
+  private Name currentPopup;
 
   public void initialise(PuzzleLoader puzzleLoader) {
     this.puzzleLoader = puzzleLoader;
     loadAllPopups();
   }
 
-  @FXML
-  private void onExitClicked() {
-    hide();
+  private void loadAllPopups() {
+    // Riddle
+
+    // GPT
+
+    // Puzzles
+    load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());
+    load(Name.PUZZLE_LABORATORY, puzzleLoader.getLaboratoryPuzzle());
+    load(Name.PUZZLE_NAVIGATION, puzzleLoader.getNavigationPuzzle());
+  }
+
+  private void load(Name name, RootPair popup) {
+    popups.put(name, popup);
+  }
+
+  private void load(Name name, String popupUrl) {
+    TaggedThread popupLoader = new TaggedThread(() -> load(name, new RootPair(popupUrl)));
+    popupLoader.start();
+  }
+
+  private void setRoot(Name rootName) {
+    currentPopup = rootName;
+    Parent fxml = popups.get(rootName).getFxml();
+    grpContent.getChildren().clear();
+    grpContent.getChildren().add(fxml);
   }
 
   public void show(Name name) {
@@ -52,32 +73,12 @@ public class PopupController implements RootPair.Controller {
     panRoot.setVisible(false);
   }
 
-  private void setRoot(Name rootName) {
-    setRoot(popups.get(rootName).getFxml());
+  @FXML
+  private void onExitClicked() {
+    hide();
   }
 
-  private void setRoot(Parent root) {
-    grpContent.getChildren().clear();
-    grpContent.getChildren().add(root);
-  }
-
-  private void load(Name name, RootPair popup) {
-    popups.put(name, popup);
-  }
-
-  private void load(Name name, String popupUrl) {
-    TaggedThread popupLoader = new TaggedThread(() -> load(name, new RootPair(popupUrl)));
-    popupLoader.start();
-  }
-
-  private void loadAllPopups() {
-    // Riddle
-
-    // GPT
-
-    // Puzzles
-    load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());
-    load(Name.PUZZLE_LABORATORY, puzzleLoader.getLaboratoryPuzzle());
-    load(Name.PUZZLE_NAVIGATION, puzzleLoader.getNavigationPuzzle());
+  public RootPair getCurrentPopup() {
+    return popups.get(currentPopup);
   }
 }

@@ -100,23 +100,6 @@ public class PuzzleLoader {
     }
   }
 
-  public Puzzle getCurrentPuzzle() {
-    /*
-    // If there is no puzzle loaded, return null
-    if (panPuzzle.getChildren().isEmpty()) {
-      return null;
-    }
-
-    // Otherwise, return the puzzle controller for the loaded puzzle
-    Node puzzle = panPuzzle.getChildren().get(0);
-    for (Puzzle puzzleController : puzzleMap.values()) {
-      if (puzzleController.getRoot() == puzzle) {
-        return puzzleController;
-      }
-    }*/
-    return null; // TODO
-  }
-
   public HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return buttonToPuzzleMap;
   }
