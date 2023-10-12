@@ -7,8 +7,10 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.misc.RootPair;
+import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.misc.Utils;
 
-public class PopupController {
+public class PopupController implements RootPair.Controller {
 
   public enum Name {
     RIDDLE,
@@ -25,6 +27,10 @@ public class PopupController {
   @FXML private Pane panRoot;
   @FXML private Group grpContent;
   private Map<Name, RootPair> popups = new HashMap<>();
+
+  public PopupController() {
+    loadAllPopups();
+  }
 
   @FXML
   private void onExitClicked() {
@@ -55,5 +61,28 @@ public class PopupController {
 
   private void load(Name name, RootPair popup) {
     popups.put(name, popup);
+  }
+
+  private void load(Name name, String popupUrl) {
+    Utils.startTimeTest();
+    TaggedThread popupLoader = new TaggedThread(() -> load(name, new RootPair(popupUrl)));
+    popupLoader.start();
+    Utils.logTimeTest("Loaded " + name.toString() + " popup", 100);
+  }
+
+  private void loadAllPopups() {
+    load(Name.RIDDLE, "/fxml/gamechildren/riddle.fxml");
+
+    // GPT
+    // load(Name.GPT_SCIENTIST, "/fxml/gamechildren/gptScientist.fxml");
+    // load(Name.GPT_ENGINEER, "/fxml/gamechildren/gptEngineer.fxml");
+    // load(Name.GPT_CAPTAIN, "/fxml/gamechildren/gptCaptain.fxml");
+
+    // Puzzles
+    load(Name.PUZZLE_REACTOR_TOOLBOX, "/fxml/puzzles/reactortoolbox.fxml");
+    load(Name.PUZZLE_REACTOR_BUTTONPAD, "/fxml/puzzles/reactorbuttonpad.fxml");
+    load(Name.PUZZLE_REACTOR_HANGMAN, "/fxml/puzzles/reactorhangman.fxml");
+    load(Name.PUZZLE_LABORATORY_TESTTUBES, "/fxml/puzzles/testtubes.fxml");
+    load(Name.PUZZLE_NAVIGATION_COMPUTER, "/fxml/puzzles/navigationcomputer.fxml");
   }
 }

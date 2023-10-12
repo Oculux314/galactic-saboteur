@@ -11,8 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 
-public class SidepanelController {
+public class SidepanelController implements RootPair.Controller {
 
   @FXML private Rectangle timeClueInformationRectangle;
   @FXML private Rectangle whereClueInformationRectangle;

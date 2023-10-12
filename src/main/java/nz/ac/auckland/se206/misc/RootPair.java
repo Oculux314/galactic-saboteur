@@ -8,6 +8,7 @@ import nz.ac.auckland.se206.screens.Screen;
 
 /** Represents a root in the application, consisting of an FXML file / controller pair. */
 public class RootPair {
+  public interface Controller {}
 
   /**
    * The FXML file for the screen. More precisely, a reference to the screen node of the FXML file.
@@ -15,7 +16,7 @@ public class RootPair {
   private Parent fxml;
 
   /** The controller for the screen. */
-  private Screen controller;
+  private Controller controller;
 
   /**
    * Constructs a new screen with the FXML file and controller stored within the given loader.
@@ -31,6 +32,10 @@ public class RootPair {
       fxml = getDefaultParent();
       controller = null;
     }
+  }
+
+  public RootPair(String fxmlUrl) {
+    this(new FXMLLoader(RootPair.class.getResource(fxmlUrl)));
   }
 
   private Parent getDefaultParent() {
@@ -52,7 +57,7 @@ public class RootPair {
    *
    * @return The controller for the screen.
    */
-  public Screen getController() {
+  public Controller getController() {
     return controller;
   }
 }

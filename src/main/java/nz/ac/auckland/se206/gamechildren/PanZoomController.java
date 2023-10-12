@@ -1,5 +1,5 @@
 package nz.ac.auckland.se206.gamechildren;
 
-public class PanZoomController {
-  
-}
+import nz.ac.auckland.se206.misc.RootPair;
+
+public class PanZoomController implements RootPair.Controller {}

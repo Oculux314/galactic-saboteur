@@ -13,11 +13,12 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
 import nz.ac.auckland.se206.screens.Screen;
 
-public class RiddleController {
+public class RiddleController implements RootPair.Controller {
 
   @FXML private StateButton btnWho = new StateButton();
   @FXML private StateButton btnWhere = new StateButton();

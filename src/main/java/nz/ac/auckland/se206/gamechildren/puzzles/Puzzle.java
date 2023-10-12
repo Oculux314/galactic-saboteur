@@ -6,8 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 
-public class Puzzle {
+public class Puzzle implements RootPair.Controller {
 
   public enum PuzzleName {
     REACTOR_TOOLBOX,
@@ -33,7 +34,7 @@ public class Puzzle {
       return ("#btn" + this.toCamelCase());
     }
   }
-  
+
   private boolean isPuzzleSolved;
   private Label solvedLabel =
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
