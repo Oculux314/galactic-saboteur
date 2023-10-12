@@ -36,7 +36,7 @@ public class PopupController implements RootPair.Controller {
   private void loadAllPopups() {
     // Riddle
 
-    // GPT
+    // Suspects
 
     // Puzzles
     load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());

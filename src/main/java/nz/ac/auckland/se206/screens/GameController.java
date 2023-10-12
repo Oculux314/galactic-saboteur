@@ -2,9 +2,7 @@ package nz.ac.auckland.se206.screens;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -23,7 +21,6 @@ import nz.ac.auckland.se206.gamechildren.RiddleController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.Timer;
 import nz.ac.auckland.se206.gamechildren.ZoomAndPanHandler;
-import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.gpt.Assistant;
@@ -40,12 +37,10 @@ public class GameController implements Screen {
   @FXML private Group grpSuspectButtons;
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
+
   @FXML private SidepanelController sidePanelController;
   @FXML private PopupController popupController;
 
-  @FXML private Pane panPuzzle;
-  @FXML private AnimatedButton btnExit;
-  @FXML private Group grpPuzzleCommons;
   @FXML private AnimatedButton gptScientist;
   @FXML private AnimatedButton gptMechanic;
   @FXML private AnimatedButton gptCaptain;
@@ -75,7 +70,6 @@ public class GameController implements Screen {
 
   private PuzzleLoader puzzleLoader;
   private ZoomAndPanHandler zoomAndPanHandler;
-  private Puzzle lastClickedPuzzle;
   private Map<String, HighlightButton> mapButtons = new HashMap<>();
 
   private boolean captainWelcomeShown = false;
@@ -233,9 +227,7 @@ public class GameController implements Screen {
 
   @FXML
   private void onExitClicked(MouseEvent event) {
-    if (event.getSource() == btnExit) {
-      minimisePuzzleWindow();
-    } else if (event.getSource() == btnGptExitScientist) {
+    if (event.getSource() == btnGptExitScientist) {
       grpGptScientist.setVisible(false);
       progressHighlightStateTo(HighlightState.PUZZLES);
     } else if (event.getSource() == btnGptExitMechanic) {
@@ -248,14 +240,6 @@ public class GameController implements Screen {
       grpRiddle.setVisible(false);
       progressHighlightStateTo(HighlightState.SUSPECTS);
     }
-  }
-
-  private void minimisePuzzleWindow() {
-    grpPuzzleCommons.setVisible(false);
-  }
-
-  private void restorePuzzleWindow() {
-    grpPuzzleCommons.setVisible(true);
   }
 
   public void giveRandomClue() {
@@ -288,12 +272,6 @@ public class GameController implements Screen {
         GameState.controlRoomGameState = GameState.puzzleOpenedMessage;
         popupController.show(PopupController.Name.PUZZLE_NAVIGATION);
       }
-    }
-
-    try {
-      lastClickedPuzzle = (Puzzle) popupController.getCurrentPopup().getController();
-    } catch (ClassCastException e) {
-      e.printStackTrace();
     }
   }
 
