@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
 
 public class PuzzleLoader {
 
@@ -19,14 +16,12 @@ public class PuzzleLoader {
   public static List<PuzzleName> laboratoryPuzzles;
   public static List<PuzzleName> navigationPuzzles;
 
-  private Pane panPuzzle;
   private Group grpPuzzleButtons;
 
-  private HashMap<PuzzleName, Puzzle> puzzleMap;
+  private HashMap<PuzzleName, RootPair> puzzleMap;
   private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
 
-  public PuzzleLoader(Pane panPuzzle, Group grpPuzzleCommons, Group grpPuzzleButtons) {
-    this.panPuzzle = panPuzzle;
+  public PuzzleLoader(Group grpPuzzleButtons) {
     this.grpPuzzleButtons = grpPuzzleButtons;
 
     puzzleMap = new HashMap<>();
@@ -35,7 +30,6 @@ public class PuzzleLoader {
     laboratoryPuzzles = new ArrayList<>();
     navigationPuzzles = new ArrayList<>();
 
-    grpPuzzleCommons.setVisible(false);
     loadAllPuzzles();
     choosePuzzles();
     displayChosenPuzzleButtons();
@@ -43,11 +37,11 @@ public class PuzzleLoader {
 
   private void loadAllPuzzles() {
     try {
-      setPuzzle(PuzzleName.REACTOR_TOOLBOX);
-      setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
-      setPuzzle(PuzzleName.LABORATORY_TESTTUBES);
-      setPuzzle(PuzzleName.NAVIGATION_COMPUTER);
-      setPuzzle(PuzzleName.REACTOR_HANGMAN);
+      loadPuzzle(PuzzleName.REACTOR_TOOLBOX);
+      loadPuzzle(PuzzleName.REACTOR_BUTTONPAD);
+      loadPuzzle(PuzzleName.LABORATORY_TESTTUBES);
+      loadPuzzle(PuzzleName.NAVIGATION_COMPUTER);
+      loadPuzzle(PuzzleName.REACTOR_HANGMAN);
     } catch (IllegalStateException | IOException e) {
       e.printStackTrace();
     }
@@ -77,36 +71,15 @@ public class PuzzleLoader {
     getButtonFromName(GameState.navigationPuzzle).setVisible(true);
   }
 
-  public void setPuzzle(PuzzleName name) throws IOException {
-    Parent puzzleFxml = getFxml(name);
-    panPuzzle.getChildren().clear();
-    panPuzzle.getChildren().add(puzzleFxml);
-  }
-
-  private Parent getFxml(PuzzleName name) throws IOException {
-    if (puzzleMap.containsKey(name)) {
-      // If the puzzle is already loaded show it
-      return puzzleMap.get(name).getRoot();
-    } else {
-      // Otherwise, load the puzzle into panPuzzle
-      return loadPuzzle(name);
-    }
-  }
-
-  private Parent loadPuzzle(PuzzleName name) throws IOException {
+  private void loadPuzzle(PuzzleName name) throws IOException {
     // get and load puzzle fxml
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(name.toFxmlUrl()));
-    Parent puzzle = loader.load();
-    Puzzle puzzleController = loader.getController();
-    puzzleController.setRoot(puzzle);
-    puzzleController.setPuzzleName(name);
+    RootPair puzzle = new RootPair(name.toFxmlUrl());
+    ((Puzzle) puzzle.getController()).setPuzzleName(name);
 
     // save puzzle fxml
-    puzzleMap.put(name, puzzleController);
+    puzzleMap.put(name, puzzle);
     buttonToPuzzleMap.put(getButtonFromName(name), name);
     addToRoom(name);
-
-    return puzzle;
   }
 
   private void addToRoom(PuzzleName name) {
@@ -128,6 +101,7 @@ public class PuzzleLoader {
   }
 
   public Puzzle getCurrentPuzzle() {
+    /*
     // If there is no puzzle loaded, return null
     if (panPuzzle.getChildren().isEmpty()) {
       return null;
@@ -139,8 +113,8 @@ public class PuzzleLoader {
       if (puzzleController.getRoot() == puzzle) {
         return puzzleController;
       }
-    }
-    return null;
+    }*/
+    return null; // TODO
   }
 
   public HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
@@ -149,5 +123,17 @@ public class PuzzleLoader {
 
   private AnimatedButton getButtonFromName(PuzzleName name) {
     return (AnimatedButton) grpPuzzleButtons.lookup(name.toFxmlButtonId());
+  }
+
+  public RootPair getReactorPuzzle() {
+    return puzzleMap.get(GameState.reactorPuzzle);
+  }
+
+  public RootPair getLaboratoryPuzzle() {
+    return puzzleMap.get(GameState.laboratoryPuzzle);
+  }
+
+  public RootPair getNavigationPuzzle() {
+    return puzzleMap.get(GameState.navigationPuzzle);
   }
 }

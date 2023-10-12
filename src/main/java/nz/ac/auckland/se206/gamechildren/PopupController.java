@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
+import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.misc.Utils;
@@ -17,18 +19,18 @@ public class PopupController implements RootPair.Controller {
     GPT_SCIENTIST,
     GPT_ENGINEER,
     GPT_CAPTAIN,
-    PUZZLE_REACTOR_TOOLBOX,
-    PUZZLE_REACTOR_BUTTONPAD,
-    PUZZLE_REACTOR_HANGMAN,
-    PUZZLE_LABORATORY_TESTTUBES,
-    PUZZLE_NAVIGATION_COMPUTER
+    PUZZLE_REACTOR,
+    PUZZLE_LABORATORY,
+    PUZZLE_NAVIGATION
   }
 
   @FXML private Pane panRoot;
   @FXML private Group grpContent;
   private Map<Name, RootPair> popups = new HashMap<>();
+  private PuzzleLoader puzzleLoader;
 
-  public PopupController() {
+  public void initialise(PuzzleLoader puzzleLoader) {
+    this.puzzleLoader = puzzleLoader;
     loadAllPopups();
   }
 
@@ -64,25 +66,18 @@ public class PopupController implements RootPair.Controller {
   }
 
   private void load(Name name, String popupUrl) {
-    Utils.startTimeTest();
     TaggedThread popupLoader = new TaggedThread(() -> load(name, new RootPair(popupUrl)));
     popupLoader.start();
-    Utils.logTimeTest("Loaded " + name.toString() + " popup", 100);
   }
 
   private void loadAllPopups() {
-    load(Name.RIDDLE, "/fxml/gamechildren/riddle.fxml");
+    // Riddle
 
     // GPT
-    // load(Name.GPT_SCIENTIST, "/fxml/gamechildren/gptScientist.fxml");
-    // load(Name.GPT_ENGINEER, "/fxml/gamechildren/gptEngineer.fxml");
-    // load(Name.GPT_CAPTAIN, "/fxml/gamechildren/gptCaptain.fxml");
 
     // Puzzles
-    load(Name.PUZZLE_REACTOR_TOOLBOX, "/fxml/puzzles/reactortoolbox.fxml");
-    load(Name.PUZZLE_REACTOR_BUTTONPAD, "/fxml/puzzles/reactorbuttonpad.fxml");
-    load(Name.PUZZLE_REACTOR_HANGMAN, "/fxml/puzzles/reactorhangman.fxml");
-    load(Name.PUZZLE_LABORATORY_TESTTUBES, "/fxml/puzzles/testtubes.fxml");
-    load(Name.PUZZLE_NAVIGATION_COMPUTER, "/fxml/puzzles/navigationcomputer.fxml");
+    load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());
+    load(Name.PUZZLE_LABORATORY, puzzleLoader.getLaboratoryPuzzle());
+    load(Name.PUZZLE_NAVIGATION, puzzleLoader.getNavigationPuzzle());
   }
 }

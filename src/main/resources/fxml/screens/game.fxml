@@ -211,7 +211,7 @@
             </Group>
          </children>
       </Group>
-      <fx:include source="../gamechildren/popup.fxml" />
+      <fx:include fx:id="popup" source="../gamechildren/popup.fxml" />
       <Group fx:id="grpDevTools">
          <children>
             <Button fx:id="btnRestart" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />

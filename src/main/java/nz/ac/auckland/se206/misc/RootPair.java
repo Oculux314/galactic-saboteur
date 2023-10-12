@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import nz.ac.auckland.se206.screens.Screen;
 
 /** Represents a root in the application, consisting of an FXML file / controller pair. */
 public class RootPair {
@@ -25,6 +24,8 @@ public class RootPair {
    * @throws IOException If the FXML file is not found.
    */
   public RootPair(FXMLLoader loader) {
+    Utils.startTimeTest(); // TODO: remove time tests
+
     try {
       fxml = loader.load();
       controller = loader.getController();
@@ -32,6 +33,8 @@ public class RootPair {
       fxml = getDefaultParent();
       controller = null;
     }
+
+    Utils.logTimeTest("Loaded " + getFxml().toString() + " popup", 100); // TODO: remove time tests
   }
 
   public RootPair(String fxmlUrl) {

@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
 import nz.ac.auckland.se206.components.StateButton;
+import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.RiddleController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.Timer;
@@ -40,6 +41,7 @@ public class GameController implements Screen {
   @FXML private Group grpPuzzleButtons;
   @FXML private Group grpOtherButtons;
   @FXML private SidepanelController sidePanelController;
+  @FXML private PopupController popupController;
 
   @FXML private Pane panPuzzle;
   @FXML private AnimatedButton btnExit;
@@ -84,8 +86,10 @@ public class GameController implements Screen {
 
   @FXML
   private void initialize() {
-    puzzleLoader = new PuzzleLoader(panPuzzle, grpPuzzleCommons, grpPuzzleButtons);
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
+    puzzleLoader = new PuzzleLoader(grpPuzzleButtons);
+    popupController.initialise(puzzleLoader);
+
     // Set the narration boxes
     NarrationBox narrationBox1 =
         new NarrationBox(
@@ -281,7 +285,7 @@ public class GameController implements Screen {
     if (getButtonToPuzzleMap().containsKey(clickedButton)) {
       // Load the specific puzzle
       PuzzleName puzzleName = getButtonToPuzzleMap().get(clickedButton);
-      puzzleLoader.setPuzzle(puzzleName);
+      // puzzleLoader.setPuzzle(puzzleName); // TODO
       // Show the puzzle
       restorePuzzleWindow();
 
