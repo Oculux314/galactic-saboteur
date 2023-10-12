@@ -12,9 +12,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
-import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.MainController;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** Controller class for the reactor toolbox puzzle. */
 public class ReactorToolboxPuzzleController extends Puzzle {
@@ -175,7 +175,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @param event The mouse event.
    */
   private double getScreenZoom() {
-    return ((MainController) App.getScreen(RootPair.Name.MAIN).getController()).getScreenZoom();
+    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenZoom();
   }
 
   /**

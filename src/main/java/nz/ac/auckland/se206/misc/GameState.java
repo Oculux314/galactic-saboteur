@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.misc;
 
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -18,7 +19,7 @@ public class GameState {
   public static boolean ttsEnabled = false;
 
   public static boolean isGameover;
-  public static RootPair.Name currentScreen;
+  public static Screen.Name currentScreen;
   public static int numberOfHintsAsked;
   public static boolean cluesFound;
   public static HighlightState highlightState;

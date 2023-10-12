@@ -5,4 +5,15 @@ package nz.ac.auckland.se206.screens;
  * implement this. This should be merged with Screen but it'd take too much restructuring for very
  * little reward.
  */
-public interface Screen {}
+public interface Screen {
+  /** Represents possible names for a screen. */
+  public enum Name {
+    DEFAULT,
+    MAIN,
+    TITLE,
+    SETTINGS,
+    EXPOSITION,
+    GAME,
+    END,
+  }
+}

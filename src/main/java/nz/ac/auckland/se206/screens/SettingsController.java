@@ -8,7 +8,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.misc.GameState;
-import nz.ac.auckland.se206.misc.RootPair;
 
 /** Controller class for the title screen. */
 public class SettingsController implements Screen {
@@ -70,7 +69,7 @@ public class SettingsController implements Screen {
    */
   @FXML
   private void onBackClicked(MouseEvent event) throws IOException {
-    App.setScreen(RootPair.Name.TITLE);
+    App.setScreen(Screen.Name.TITLE);
   }
 
   public String getTimeState() {

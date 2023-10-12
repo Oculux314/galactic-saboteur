@@ -10,8 +10,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.MainController;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** Class which handles zooming and panning of game screen. */
 public class ZoomAndPanHandler {
@@ -157,6 +157,6 @@ public class ZoomAndPanHandler {
    * @return The screen zoom. 1.0 corresponds to the default screen size 600px x 800px.
    */
   private double getScreenZoom() {
-    return ((MainController) App.getScreen(RootPair.Name.MAIN).getController()).getScreenZoom();
+    return ((MainController) App.getScreen(Screen.Name.MAIN).getController()).getScreenZoom();
   }
 }

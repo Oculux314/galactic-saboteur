@@ -29,7 +29,6 @@ import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
-import nz.ac.auckland.se206.misc.RootPair;
 
 /** Controller class for the game screens. */
 public class GameController implements Screen {
@@ -401,7 +400,7 @@ public class GameController implements Screen {
   @FXML
   private void onEndClicked() throws IOException {
     // TODO: TEMPORARY DEV TOOL
-    EndController endController = (EndController) App.getScreen(RootPair.Name.END).getController();
+    EndController endController = (EndController) App.getScreen(Screen.Name.END).getController();
     endController.showEndOnLose();
   }
 

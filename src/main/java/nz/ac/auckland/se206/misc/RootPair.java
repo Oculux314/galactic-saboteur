@@ -6,19 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.screens.Screen;
 
-/** Represents a screen in the application, consisting of an FXML file / controller pair. */
+/** Represents a root in the application, consisting of an FXML file / controller pair. */
 public class RootPair {
-
-  /** Represents possible names for a screen. */
-  public enum Name {
-    DEFAULT,
-    MAIN,
-    TITLE,
-    SETTINGS,
-    EXPOSITION,
-    GAME,
-    END,
-  }
 
   /**
    * The FXML file for the screen. More precisely, a reference to the screen node of the FXML file.
