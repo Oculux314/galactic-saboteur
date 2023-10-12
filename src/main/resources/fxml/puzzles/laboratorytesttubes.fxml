@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Ellipse?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.TestTubesPuzzleController">
+<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.TestTubesPuzzleController">
    <children>
       <Pane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
          <children>

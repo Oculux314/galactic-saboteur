@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.puzzles;
+package nz.ac.auckland.se206.gamechildren.puzzles;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;

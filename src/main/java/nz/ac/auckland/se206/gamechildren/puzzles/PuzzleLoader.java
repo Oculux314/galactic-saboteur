@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206.puzzles;
+package nz.ac.auckland.se206.gamechildren.puzzles;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.misc.GameState;
-import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 
 public class PuzzleLoader {
 

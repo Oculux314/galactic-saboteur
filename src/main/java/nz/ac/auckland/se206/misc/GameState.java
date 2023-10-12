@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206.misc;
 
-import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.screens.Screen;
 import nz.ac.auckland.se206.screens.Screen.Name;
 

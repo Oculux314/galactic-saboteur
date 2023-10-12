@@ -25,14 +25,14 @@ import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.RiddleController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.ZoomAndPanHandler;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
+import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.gpt.NarrationBox;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
-import nz.ac.auckland.se206.puzzles.Puzzle;
-import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
-import nz.ac.auckland.se206.puzzles.PuzzleLoader;
 
 /** Controller class for the game screens. */
 public class GameController implements ScreenParent {
