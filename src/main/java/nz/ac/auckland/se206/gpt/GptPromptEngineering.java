@@ -6,81 +6,31 @@ import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
-  /**
-   * Generates a GPT prompt engineering string for a riddle with the given word.
-   *
-   * @param wordToGuess the word to be guessed in the riddle
-   * @return the generated prompt engineering string
-   */
-  public static String getRiddleWithGivenWord(String wordToGuess) {
-    return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
-        + " spaceship named Spacey. tell me a riddle with answer "
-        + wordToGuess
-        + ". You should answer with the word Correct when is correct, if the user asks for hints"
-        + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
-        + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
-        + " the answer";
-  }
-
   public static String getMainPrompt(String job) {
     String prompt = "";
-    if (job == "Spacey's mechanic" && GameState.numberOfHintsAsked < GameState.getHintLimit()) {
+    boolean isUserAllowedHints = !GameState.isHintLimitReached();
+
+    String suspectInformation = getSuspectInformation(job);
+    String puzzleInformation = getPuzzleInformation(job);
+
+    if (isUserAllowedHints) {
       prompt =
-          "Your role: Mechanic on the Spacey spaceship escape room adventure.Assist users in"
-              + " finding the reactor room puzzle discreetly through hints.The user can only escape"
-              + " when they find out what time, which suspect and in what room the sabotage"
-              + " occured. "
-              + getReactorPuzzleInformation()
-              + " Please respond in 10 words or fewer. Provide hints only if"
-              + " users mention 'hint'.";
-    } else if (job == "Spacey's mechanic"
-        && GameState.numberOfHintsAsked >= GameState.getHintLimit()) {
+          suspectInformation
+              + " Assist users in finding and solving the puzzle discreetly through hints. The user"
+              + " can only escape when they find out what time, which suspect, and in what room the"
+              + " sabotage occurred. "
+              + puzzleInformation
+              + " Please respond in 10 words or fewer. Provide hints only if users mention 'hint'."
+              + " If you give a hint, start your response with 'A hint is:'.";
+    } else {
       prompt =
-          "Your role: Mechanic on the Spacey spaceship escape room adventure. Support users in"
-              + " finding the reactor room puzzle but don't give any information they don't know"
-              + " .The user can only escape when they find out what time, which suspect and in what"
-              + " room the sabotage occured. "
-              + getReactorPuzzleInformation()
-              + " Respond in 10 words or fewer and must not include"
-              + " hints of any form. Do not, for any reason give the user any hints.";
-    } else if (job == "Spacey's scientist"
-        && GameState.numberOfHintsAsked < GameState.getHintLimit()) {
-      prompt =
-          "Your role: Scientist on the Spacey spaceship escape room adventure. Assist users in"
-              + " finding the lab puzzle subtly using hints. Users must deduce the time, suspect,"
-              + " and room of sabotage. "
-              + getLaboratoryPuzzleInformation()
-              + " Keep responses concise (10 words max). Provide hints only if"
-              + " users mention 'hint'.";
-    } else if (job == "Spacey's scientist"
-        && GameState.numberOfHintsAsked >= GameState.getHintLimit()) {
-      prompt =
-          "Your role: Scientist on the Spacey spaceship escape room adventure. Assist users in"
-              + " finding the lab puzzle by giving information they already know. Users must deduce"
-              + " the time, suspect, and room of sabotage in the game overall. "
-              + getLaboratoryPuzzleInformation()
-              + " Respond in 10 words or fewer and must not include hints of"
-              + " any form. Do not, for any reason give the user any hints.";
-    } else if (job == "Spacey's captain"
-        && GameState.numberOfHintsAsked < GameState.getHintLimit()) {
-      prompt =
-          "Your role: Captain on the Spacey spaceship escape room adventure. Assist users in"
-              + " finding the control room puzzle subtly using hints. The user can only escape when"
-              + " they find out what time, which suspect and in what room the"
-              + " sabotage of Spacey occured. "
-              + getControlRoomPuzzleInformation()
-              + " Respond in 10 words or fewer and must not include hints of"
-              + " any form. Do not, for any reason give the user any hints.";
-    } else if (job == "Spacey's captain"
-        && GameState.numberOfHintsAsked >= GameState.getHintLimit()) {
-      prompt =
-          "Your role: Captain on the Spacey spaceship escape room adventure. Assist users in"
-              + " finding the control room puzzle by using information the user would already know."
-              + " The user can only escape when they find out what time, which suspect and in what"
-              + " room in relation to the sabotage of Spacey. "
-              + getControlRoomPuzzleInformation()
-              + " Keep responses concise (10 words max). Provide hints only if users mention"
-              + " 'hint'.";
+          suspectInformation
+              + "Support users in finding and solving the puzzle but don't give any information"
+              + " they don't know. The user can only escape when they find out what time, which"
+              + " suspect, and in what room the sabotage occurred. "
+              + puzzleInformation
+              + " Respond in 10 words or fewer and must not include new hints of any form. Do not,"
+              + " for any reason, give the user any new hints.";
     }
 
     return prompt;
@@ -96,6 +46,33 @@ public class GptPromptEngineering {
 
   public static String getInternetErrorMessage() {
     return "I'm having trouble connecting to the internet";
+  }
+
+  public static String getSuspectInformation(String job) {
+    String suspectInformation = "";
+    if (job == "Spacey's mechanic") {
+      suspectInformation =
+          "Your role: Mechanic on the Brain-e Explorer spaceship escape room adventure.";
+    } else if (job == "Spacey's scientist") {
+      suspectInformation =
+          "Your role: Scientist on the Brain-e Explorer spaceship escape room adventure.";
+    } else if (job == "Spacey's captain") {
+      suspectInformation =
+          "Your role: Captain on the Brain-e Explorer spaceship escape room adventure.";
+    }
+    return suspectInformation;
+  }
+
+  public static String getPuzzleInformation(String job) {
+    String puzzleInformation = "";
+    if (job == "Spacey's mechanic") { // reactor puzzle
+      puzzleInformation = getReactorPuzzleInformation();
+    } else if (job == "Spacey's scientist") { // lab puzzle
+      puzzleInformation = getLaboratoryPuzzleInformation();
+    } else if (job == "Spacey's captain") { // navigation puzzle
+      puzzleInformation = getControlRoomPuzzleInformation();
+    }
+    return puzzleInformation;
   }
 
   public static String getReactorPuzzleInformation() {
@@ -150,8 +127,3 @@ public class GptPromptEngineering {
         + " riddle short and simple (you have a maximum token size of 60).";
   }
 }
-// setPuzzle(PuzzleName.REACTOR_TOOLBOX);
-//       setPuzzle(PuzzleName.REACTOR_BUTTONPAD);
-//       setPuzzle(PuzzleName.REACTOR_APPLE);
-//       setPuzzle(PuzzleName.LABORATORY_TESTTUBES);
-//       setPuzzle(PuzzleName.NAVIGATION_COMPUTER);

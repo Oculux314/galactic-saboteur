@@ -60,9 +60,10 @@ public class GameState {
     labRoomGameState = "User hasn't found where the puzzle is yet";
     controlRoomGameState = "User hasn't found where the puzzle is yet";
     puzzleSolvedMessage =
-        "User has solved the puzzle in this room already. They have got a clue which is located in"
-            + " the side panel, under clues.";
-    puzzleOpenedMessage = "User has opened the puzzle, but has not completed it yet.";
+        "User has solved the puzzle in this room already. They have got a clue which they can get"
+            + " more information about if the hover over the clues in the bottom bar";
+    puzzleOpenedMessage =
+        "User has opened the puzzle, but is having difficulty knowing how to complete the puzzle.";
   }
 
   public static int getHintLimit() {
@@ -84,6 +85,7 @@ public class GameState {
 
   public static int getHintLimitRemaining() {
     int num = getHintLimit() - numberOfHintsAsked;
+    // If the number of hints remaining is negative, set it to 0 so it appears correctly on screen
     if (num < 0) {
       num = 0;
     }

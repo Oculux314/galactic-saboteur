@@ -353,6 +353,8 @@ public class GameController implements Controller {
       puzzleLoader.setPuzzle(puzzleName);
       // Show the puzzle
       restorePuzzleWindow();
+
+      // update the game state depending on what puzzle was opened
       if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
         GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
       } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzleName)) {
@@ -367,6 +369,7 @@ public class GameController implements Controller {
 
   @FXML
   private void gptStart(MouseEvent event) {
+    // Show the welcome message if it hasn't been shown yet
     if (event.getSource() == gptScientist && !scientistWelcomeShown) {
       App.scientist.welcome();
       scientistWelcomeShown = true;
@@ -390,6 +393,8 @@ public class GameController implements Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
+    System.out.println(event);
+
     // Respond to the user's message
     if (event.getSource() == textResponseScientist) {
       App.scientist.respondToUser();
@@ -407,7 +412,26 @@ public class GameController implements Controller {
     updateHintsLeft();
   }
 
-  private void updateHintsLeft() {
+  @FXML
+  private void hintWanted(MouseEvent event) {
+    StateButton sourceStateButton = (StateButton) event.getSource();
+    // ActionEvent events =
+
+    if (sourceStateButton == hintsScientist) {
+      if (sourceStateButton.getState() == "hint") {
+        textResponseScientist.setText("I want a hint.");
+        // onUserMessage(event);
+      } else {
+        textResponseScientist.setText("");
+      }
+    } else if (sourceStateButton == hintsCaptain) {
+      textResponseCaptain.setText("I want a hint.");
+    } else if (sourceStateButton == hintsMechanic) {
+      textResponseMechanic.setText("I want a hint");
+    }
+  }
+
+  public void updateHintsLeft() {
     if (GameState.difficulty == "easy") {
       labelHintsLeft.setText("You Have Unlimited Hints");
     } else if (GameState.difficulty == "medium") {
