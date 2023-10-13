@@ -27,9 +27,9 @@
       </ImageView>
       <Group fx:id="grpRectangles" layoutY="-70.0">
          <children>
-            <Rectangle fx:id="rec3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="160.0" layoutY="330.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="130.0" />
-            <Rectangle fx:id="rec1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="160.0" layoutY="276.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="153.0" />
-            <Rectangle fx:id="rec2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="165.0" layoutY="308.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+            <Rectangle fx:id="rec3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="160.0" layoutY="320.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="130.0" />
+            <Rectangle fx:id="rec1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="160.0" layoutY="266.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="153.0" />
+            <Rectangle fx:id="rec2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="165.0" layoutY="298.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
             <ImageView fitHeight="30.0" fitWidth="131.0" layoutX="170.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/tool-4.png" />
