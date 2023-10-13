@@ -42,8 +42,10 @@ public class SuspectController implements RootPair.Controller {
   private void loadAllSuspects() {
     suspects.put(
         Name.SCIENTIST, new Suspect("Spacey's scientist", loadSuspectImage("scientist.png"), this));
-    suspects.put(Name.MECHANIC, new Suspect("Spacey's mechanic", loadSuspectImage("mechanic.png"), this));
-    suspects.put(Name.CAPTAIN, new Suspect("Spacey's captain", loadSuspectImage("captain.png"), this));
+    suspects.put(
+        Name.MECHANIC, new Suspect("Spacey's mechanic", loadSuspectImage("mechanic.png"), this));
+    suspects.put(
+        Name.CAPTAIN, new Suspect("Spacey's captain", loadSuspectImage("captain.png"), this));
   }
 
   private Image loadSuspectImage(String file) {
@@ -102,6 +104,7 @@ public class SuspectController implements RootPair.Controller {
   private void onHintButtonClick(MouseEvent event) {
     if (btnHints.getState() == "hint") {
       textResponse.setText("I want a hint.");
+      onUserMessage(new ActionEvent());
     } else {
       textResponse.setText("");
     }
