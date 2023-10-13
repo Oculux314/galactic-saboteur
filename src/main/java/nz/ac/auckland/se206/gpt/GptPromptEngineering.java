@@ -41,7 +41,7 @@ public class GptPromptEngineering {
   }
 
   public static String getWelcomePrompt(String job) {
-    return getMainPrompt(job) + "Introduce yourself and welcome the user.";
+    return getMainPrompt(job) + "Introduce yourself what your role is and welcome the user.";
   }
 
   public static String getInternetErrorMessage() {

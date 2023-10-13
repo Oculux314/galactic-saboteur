@@ -21,7 +21,7 @@ public class Suspect {
 
   public Suspect(String title, Image image) {
     this.narrationBox = generateNarrationBox();
-    assistant = new Assistant(narrationBox);
+    assistant = new Assistant(narrationBox, title);
     this.image = image;
     assistant.welcome();
   }

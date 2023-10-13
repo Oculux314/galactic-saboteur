@@ -28,7 +28,8 @@ public class SuspectController implements RootPair.Controller {
   private Map<Name, Suspect> suspects = new HashMap<>();
   private Name currentSuspect;
 
-  public SuspectController() {
+  @FXML
+  private void initialize() {
     loadAllSuspects();
     initialiseHintButton();
   }
@@ -78,10 +79,13 @@ public class SuspectController implements RootPair.Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
+    System.out.println();
+    System.out.println();
     System.out.println(event);
 
     // Respond to the user's message
     Assistant assistant = getCurrentSuspect().getAssistant();
+    System.out.println(assistant.getJob());
     assistant.respondToUser(textResponse.getText());
 
     btnHints.setState("nohint");

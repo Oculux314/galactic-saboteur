@@ -61,12 +61,16 @@ public class Assistant {
   private boolean isWaitingForResponse = false;
   private String job;
 
-  public Assistant(NarrationBox narrationBox) {
+  public Assistant(NarrationBox narrationBox, String title) {
     this.narrationBox = narrationBox;
-    this.job = narrationBox.getWaitingMessage();
+    this.job = title;
     chatMessages.add(
         new ChatMessage(
             "system", GptPromptEngineering.getMainPrompt(narrationBox.getWaitingMessage())));
+  }
+
+  public String getJob() {
+    return job;
   }
 
   public void addChatMessage(ChatMessage message) {
@@ -164,8 +168,6 @@ public class Assistant {
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
     executeApiCallWithCallback(this::renderNarrationBox);
-
-    System.out.println();
   }
 
   public void welcome() {
