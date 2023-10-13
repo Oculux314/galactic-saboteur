@@ -88,10 +88,13 @@ public class Puzzle implements RootPair.Controller {
     isPuzzleSolved = true;
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
       GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.unsolvedRooms.remove("reactor");
     } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.unsolvedRooms.remove("laboratory");
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.unsolvedRooms.remove("navigation");
     }
 
     GameController gameController =

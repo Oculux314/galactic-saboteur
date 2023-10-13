@@ -149,7 +149,8 @@ public class Assistant {
 
   public void respondToUser() {
     narrationBox.disableUserResponse();
-    String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
+    String userMessage = narrationBox.getUserResponse();
+    //String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
     System.out.println(userMessage);
 
     // increment number of hints asked - temp solutions

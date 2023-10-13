@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.misc;
 
+import java.util.ArrayList;
+import java.util.List;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.screens.Screen;
 
@@ -33,6 +35,7 @@ public class GameState {
   public static String controlRoomGameState;
   public static String puzzleSolvedMessage;
   public static String puzzleOpenedMessage;
+  public static List<String> unsolvedRooms = new ArrayList<>();
 
   public static PuzzleName reactorPuzzle;
   public static PuzzleName laboratoryPuzzle;
@@ -57,14 +60,17 @@ public class GameState {
   }
 
   private static void initialiseRoomStates() {
-    reactorRoomGameState = "User hasn't found where the puzzle is yet";
-    labRoomGameState = "User hasn't found where the puzzle is yet";
-    controlRoomGameState = "User hasn't found where the puzzle is yet";
+    reactorRoomGameState = "User hasn't found where the puzzle is yet.";
+    labRoomGameState = "User hasn't found where the puzzle is yet.";
+    controlRoomGameState = "User hasn't found where the puzzle is yet.";
     puzzleSolvedMessage =
         "User has solved the puzzle in this room already. They have got a clue which they can get"
-            + " more information about if the hover over the clues in the bottom bar";
+            + " more information about if the hover over the clues in the bottom bar.";
     puzzleOpenedMessage =
-        "User has opened the puzzle, but is having difficulty knowing how to complete the puzzle.";
+        "User has found the puzzle, but is having difficulty completing the puzzle.";
+    unsolvedRooms.add("reactor");
+    unsolvedRooms.add("labaoratory");
+    unsolvedRooms.add("navigation");
   }
 
   public static int getHintLimit() {

@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.gpt;
 
+import java.util.List;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.misc.GameState;
 
@@ -18,10 +19,12 @@ public class GptPromptEngineering {
           suspectInformation
               + " Assist users in finding and solving the puzzle discreetly through hints. The user"
               + " can only escape when they find out what time, which suspect, and in what room the"
-              + " sabotage occurred. "
+              + " sabotage occurred. There is one puzzle in each room that leads to a clue."
               + puzzleInformation
-              + " Please respond in 10 words or fewer. Provide hints only if users mention 'hint'."
-              + " If you give a hint, start your response with 'A hint is:'.";
+              + " Please respond in 12 words or fewer."
+              + getGameState(job)
+              + " If you give a hint, start your response with 'A hint is:' with"
+              + " nothing before it.";
     } else {
       prompt =
           suspectInformation
@@ -32,6 +35,7 @@ public class GptPromptEngineering {
               + " Respond in 10 words or fewer and must not include new hints of any form. Do not,"
               + " for any reason, give the user any new hints.";
     }
+    System.out.println(getGameState(job));
 
     return prompt;
   }
@@ -55,7 +59,8 @@ public class GptPromptEngineering {
           "Your role: Mechanic on the Brain-e Explorer spaceship escape room adventure.";
     } else if (job == "Spacey's scientist") {
       suspectInformation =
-          "Your role: Scientist on the Brain-e Explorer spaceship escape room adventure.";
+          "Your role: Scientist on the Brain-e Explorer spaceship escape room adventure You love"
+              + " atoms and chemsitry, sunny days and love exercising your brain.";
     } else if (job == "Spacey's captain") {
       suspectInformation =
           "Your role: Captain on the Brain-e Explorer spaceship escape room adventure.";
@@ -116,6 +121,35 @@ public class GptPromptEngineering {
               + " green when the user has solved it.";
     }
     return puzzle;
+  }
+
+  public static String getGameState(String job) {
+    // return game state depending on what suspect the user is talking to
+    String gameState = "";
+    if (job == "Spacey's mechanic") { // reactor puzzle
+      gameState = GameState.reactorRoomGameState;
+    } else if (job == "Spacey's scientist") { // lab puzzle
+      gameState = GameState.labRoomGameState;
+    } else if (job == "Spacey's captain") { // navigation puzzle
+      gameState = GameState.controlRoomGameState;
+    }
+
+    if (gameState == GameState.puzzleSolvedMessage) {
+      gameState = gameState + whatOtherRoomToLookIn();
+    }
+    return gameState;
+  }
+
+  private static String whatOtherRoomToLookIn() {
+    // retreieve what rooms are unsolved
+    List<String> unsolvedRooms = GameState.unsolvedRooms;
+
+    if (unsolvedRooms.isEmpty()) {
+      return "The user has solved all the puzzles, go to the unstable reactor to escape the ship."
+          + " Be quick.";
+    } else {
+      return "The user has solved the puzzle in this room, go to the " + unsolvedRooms.get(0) + ".";
+    }
   }
 
   public static String getRiddle() {
