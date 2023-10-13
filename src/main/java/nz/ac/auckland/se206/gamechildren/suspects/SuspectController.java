@@ -92,6 +92,7 @@ public class SuspectController implements RootPair.Controller {
     System.out.println(assistant.getJob());
     assistant.respondToUser(textResponse.getText());
 
+    // reset the accessibility of the hint button
     btnHints.setState("nohint");
     btnHints.setDisable(GameState.isHintLimitReached());
 
@@ -127,9 +128,11 @@ public class SuspectController implements RootPair.Controller {
 
   public void disableUserResponse() {
     textResponse.setDisable(true);
+    btnHints.setDisable(true);
   }
 
   public void enableUserResponse() {
     textResponse.setDisable(false);
+    btnHints.setDisable(false);
   }
 }
