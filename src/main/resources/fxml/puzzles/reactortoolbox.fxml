@@ -8,29 +8,24 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panReactorToolbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorToolboxPuzzleController">
+<Pane fx:id="panReactorToolbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorToolboxPuzzleController">
    <children>
-      <ImageView fitHeight="386.0" fitWidth="500.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="360.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/toolbox-puzzle-background.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="442.0" fitWidth="410.0" layoutX="35.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="442.0" fitWidth="410.0" layoutX="35.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/toolbox-puzzle-overlay.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="23.0" fitWidth="126.0" layoutX="190.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="23.0" fitWidth="126.0" layoutX="190.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/tool-5.png" />
          </image>
       </ImageView>
-      <AnimatedButton fx:id="btnSubmit" fitHeight="100.0" fitWidth="94.0" layoutX="392.0" layoutY="384.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
-         <image>
-            <Image url="@../../images/btnSubmit.png" />
-         </image>
-      </AnimatedButton>
-      <Group fx:id="grpRectangles">
+      <Group fx:id="grpRectangles" layoutY="-70.0">
          <children>
             <Rectangle fx:id="rec3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="160.0" layoutY="330.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="130.0" />
             <Rectangle fx:id="rec1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="160.0" layoutY="276.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="153.0" />
@@ -40,11 +35,16 @@
                   <Image url="@../../images/tool-4.png" />
                </image>
             </ImageView>
-            <Label layoutX="410.0" layoutY="180.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Verdict:" />
+            <Label layoutX="388.0" layoutY="180.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Verdict:" />
+            <Label fx:id="lblVerdict" layoutX="390.0" layoutY="197.0" prefHeight="17.0" prefWidth="58.0" style="-fx-text-fill: #000000; -fx-font-size: 12;" />
+            <AnimatedButton fx:id="btnSubmit" fitHeight="100.0" fitWidth="94.0" layoutX="361.0" layoutY="360.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/btnSubmit.png" />
+               </image>
+            </AnimatedButton>
          </children>
       </Group>
-      <Label fx:id="lblVerdict" layoutX="410.0" layoutY="200.0" style="-fx-text-fill: #000000; -fx-font-size: 12;" />
-      <Group fx:id="grpTools">
+      <Group fx:id="grpTools" layoutY="-60.0">
          <children>
             <ImageView fx:id="imvTool3" fitHeight="30.0" fitWidth="128.0" layoutX="230.0" layoutY="210.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseReleased" pickOnBounds="true" preserveRatio="true">
                <image>
