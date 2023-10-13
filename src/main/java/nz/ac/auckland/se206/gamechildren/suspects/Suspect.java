@@ -20,9 +20,10 @@ public class Suspect {
   private Image image;
 
   public Suspect(String title, Image image, SuspectController suspectController) {
+    this.title = title;
+    this.image = image;
     this.narrationBox = generateNarrationBox(suspectController);
     assistant = new Assistant(narrationBox, title);
-    this.image = image;
     assistant.welcome();
   }
 

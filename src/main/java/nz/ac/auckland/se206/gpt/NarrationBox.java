@@ -19,15 +19,15 @@ public class NarrationBox {
       while (textResponse.isDisabled()) {
         int numberOfDots = i;
         Platform.runLater(
-            () ->
-                textResponse.setText(
-                    waitingMessage + " is thinking" + ellipsisAnimation[numberOfDots]));
+            () -> {
+              setUserResponse(getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
+            });
 
         i = (i + 1) % ellipsisAnimation.length;
         Thread.sleep(200);
       }
 
-      Platform.runLater(() -> textResponse.setText(""));
+      Platform.runLater(() -> setUserResponse(""));
       return null;
     }
   }
@@ -90,10 +90,12 @@ public class NarrationBox {
   }
 
   public void disableUserResponse() {
+    textResponse.setDisable(true);
     suspectController.disableUserResponse();
   }
 
   public void enableUserResponse() {
+    textResponse.setDisable(false);
     suspectController.enableUserResponse();
   }
 }

@@ -253,7 +253,7 @@ public class GameController implements Screen {
   private void onTestClicked() throws IOException {
     // TODO: TEMPORARY DEV TOOL
     // Bind this to whatever action you want to run
-    System.out.println("Test clicked");
+    System.out.println("You are filled with determination!");
   }
 
   public void addMapButton(HighlightButton mapButton) {

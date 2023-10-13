@@ -30,8 +30,6 @@ public class RootPair {
    * @throws IOException If the FXML file is not found.
    */
   private RootPair(FXMLLoader loader) {
-    Utils.startTimeTest(); // TODO: remove time tests
-
     try {
       fxml = loader.load();
       controller = loader.getController();
@@ -39,10 +37,6 @@ public class RootPair {
       fxml = getDefaultParent();
       controller = null;
     }
-
-    Utils.logTimeTest(
-        "Loaded " + getFxml().toString() + " : " + getController(),
-        100); // TODO: remove time tests
   }
 
   private Parent getDefaultParent() {

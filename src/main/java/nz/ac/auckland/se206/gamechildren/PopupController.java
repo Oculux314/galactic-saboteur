@@ -51,7 +51,6 @@ public class PopupController implements RootPair.Controller {
   }
 
   private void load(Name name, RootPair popup) {
-    System.out.println("Loading " + name + " popup: " + popup.getFxml().toString());
     popups.put(name, popup);
   }
 
