@@ -41,9 +41,9 @@ public class SuspectController implements RootPair.Controller {
 
   private void loadAllSuspects() {
     suspects.put(
-        Name.SCIENTIST, new Suspect("Spacey's scientist", loadSuspectImage("scientist.png")));
-    suspects.put(Name.MECHANIC, new Suspect("Spacey's mechanic", loadSuspectImage("mechanic.png")));
-    suspects.put(Name.CAPTAIN, new Suspect("Spacey's captain", loadSuspectImage("captain.png")));
+        Name.SCIENTIST, new Suspect("Spacey's scientist", loadSuspectImage("scientist.png"), this));
+    suspects.put(Name.MECHANIC, new Suspect("Spacey's mechanic", loadSuspectImage("mechanic.png"), this));
+    suspects.put(Name.CAPTAIN, new Suspect("Spacey's captain", loadSuspectImage("captain.png"), this));
   }
 
   private Image loadSuspectImage(String file) {
@@ -105,5 +105,21 @@ public class SuspectController implements RootPair.Controller {
     } else {
       textResponse.setText("");
     }
+  }
+
+  public void updateNarration(String text) {
+    textNarration.setText(text);
+  }
+
+  public void updateResponse(String text) {
+    textResponse.setText(text);
+  }
+
+  public void disableUserResponse() {
+    textResponse.setDisable(true);
+  }
+
+  public void enableUserResponse() {
+    textResponse.setDisable(false);
   }
 }

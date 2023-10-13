@@ -19,18 +19,18 @@ public class Suspect {
   private String title;
   private Image image;
 
-  public Suspect(String title, Image image) {
-    this.narrationBox = generateNarrationBox();
+  public Suspect(String title, Image image, SuspectController suspectController) {
+    this.narrationBox = generateNarrationBox(suspectController);
     assistant = new Assistant(narrationBox, title);
     this.image = image;
     assistant.welcome();
   }
 
-  private NarrationBox generateNarrationBox() {
+  private NarrationBox generateNarrationBox(SuspectController suspectController) {
     TextArea textNarration = new TextArea();
     TextField textResponse = new TextField();
 
-    return new NarrationBox(textNarration, textResponse, title);
+    return new NarrationBox(textNarration, textResponse, title, suspectController);
   }
 
   public Image getImage() {

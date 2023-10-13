@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 
 public class NarrationBox {
 
@@ -34,11 +35,17 @@ public class NarrationBox {
   private TextArea labelNarration;
   private TextField textResponse;
   private String waitingMessage;
+  private SuspectController suspectController;
 
-  public NarrationBox(TextArea labelNarration, TextField textResponse, String waitingMessage) {
+  public NarrationBox(
+      TextArea labelNarration,
+      TextField textResponse,
+      String waitingMessage,
+      SuspectController suspectController) {
     this.labelNarration = labelNarration;
     this.textResponse = textResponse;
     this.waitingMessage = waitingMessage;
+    this.suspectController = suspectController;
   }
 
   public String getWaitingMessage() {
@@ -57,6 +64,7 @@ public class NarrationBox {
 
   public void setText(String text) {
     labelNarration.setText(text);
+    displayNarration();
   }
 
   public String getUserResponse() {
@@ -65,17 +73,27 @@ public class NarrationBox {
 
   public void setUserResponse(String text) {
     textResponse.setText(text);
+    displayResponse();
   }
 
   public void clearUserResponse() {
     textResponse.clear();
+    displayResponse();
+  }
+
+  private void displayNarration() {
+    suspectController.updateNarration(labelNarration.getText());
+  }
+
+  private void displayResponse() {
+    suspectController.updateResponse(textResponse.getText());
   }
 
   public void disableUserResponse() {
-    textResponse.setDisable(true);
+    suspectController.disableUserResponse();
   }
 
   public void enableUserResponse() {
-    textResponse.setDisable(false);
+    suspectController.enableUserResponse();
   }
 }
