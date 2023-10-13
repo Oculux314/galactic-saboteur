@@ -8,21 +8,28 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import nz.ac.auckland.se206.components.StateButton?>
 
-<Pane fx:id="panSuspect" prefHeight="380.0" prefWidth="500.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.suspects.SuspectController">
+<Pane fx:id="panSuspect" prefHeight="360.0" prefWidth="480.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.suspects.SuspectController">
    <children>
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="64.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" width="373.0" />
-      <TextField fx:id="textResponse" layoutX="76.0" layoutY="308.0" onAction="#onUserMessage" prefHeight="26.0" prefWidth="341.0" promptText="Respond:" />
-      <TextArea fx:id="textNarration" editable="false" layoutX="182.0" layoutY="37.0" prefHeight="137.0" prefWidth="244.0" wrapText="true" />
-      <ImageView fx:id="imgSuspect" fitHeight="220.0" fitWidth="67.0" layoutX="91.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="GREY" height="340.0" layoutX="55.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="popup" visible="false" width="373.0" />
+      <TextField fx:id="textResponse" layoutX="151.0" layoutY="293.0" onAction="#onUserMessage" prefHeight="37.0" prefWidth="300.0" promptText="Respond:">
+         <font>
+            <Font size="16.0" />
+         </font></TextField>
+      <TextArea fx:id="textNarration" editable="false" layoutX="150.0" layoutY="30.0" prefHeight="180.0" prefWidth="300.0" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font></TextArea>
+      <ImageView fx:id="imgSuspect" fitHeight="292.0" fitWidth="131.0" layoutX="30.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/suspects/captain.png" />
          </image>
       </ImageView>
-      <Polygon fill="#f2f0f0" layoutX="169.0" layoutY="132.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
-      <Polyline fill="#80ff0000" layoutX="141.0" layoutY="105.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
-      <StateButton fx:id="btnHints" fitHeight="43.0" fitWidth="145.0" layoutX="244.0" layoutY="214.0" onMouseClicked="#onHintButtonClick">
+      <Polygon fill="WHITE" layoutX="137.0" layoutY="121.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
+      <Polyline fill="#80ff0000" layoutX="109.0" layoutY="94.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
+      <StateButton fx:id="btnHints" fitHeight="37.0" fitWidth="118.0" layoutX="333.0" layoutY="256.0" onMouseClicked="#onHintButtonClick">
          <image>
             <Image url="@../../images/btnhint.png" />
          </image>
