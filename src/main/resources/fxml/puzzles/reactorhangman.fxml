@@ -9,44 +9,44 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="panHangmanPuzzle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorHangmanPuzzleController">
+<Pane fx:id="panHangmanPuzzle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorHangmanPuzzleController">
    <children>
-      <ImageView fitHeight="390.0" fitWidth="500.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="390.0" fitWidth="500.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/hangman-puzzle-background.jpg" />
          </image>
       </ImageView>
-      <Line endX="332.0" endY="166.5" layoutX="32.0" layoutY="20.0" startX="131.0" startY="166.5" />
-      <VBox layoutX="253.0" layoutY="253.0" prefHeight="62.0" prefWidth="200.0">
+      <Line endX="332.0" endY="166.5" layoutX="38.0" layoutY="2.0" startX="131.0" startY="166.5" />
+      <VBox layoutX="239.0" layoutY="188.0" prefHeight="65.0" prefWidth="155.0">
          <children>
-            <Label fx:id="lblGuessedLetters1" prefHeight="35.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
-            <Label fx:id="lblGuessedLetters2" prefHeight="33.0" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
+            <Label fx:id="lblGuessedLetters1" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
+            <Label fx:id="lblGuessedLetters2" prefWidth="200.0" style="-fx-text-fill: #000000; -fx-font-size: 10;" text="&#10;" />
          </children>
       </VBox>
-      <TextField fx:id="txtGuessLetter" layoutX="135.0" layoutY="259.0" onAction="#onGuess" prefHeight="25.0" prefWidth="30.0" />
-      <Label fx:id="instructions" alignment="CENTER" layoutX="113.0" layoutY="230.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Guess a letter:" />
-      <Label fx:id="instructions" layoutX="264.0" layoutY="230.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Letters Guessed:" />
-      <Label fx:id="letter1" alignment="CENTER" layoutX="170.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
+      <TextField fx:id="txtGuessLetter" layoutX="144.0" layoutY="216.0" onAction="#onGuess" prefHeight="25.0" prefWidth="30.0" />
+      <Label fx:id="instructions" alignment="CENTER" layoutX="122.0" layoutY="187.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Guess a letter:" />
+      <Label fx:id="instructions" layoutX="240.0" layoutY="187.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Letters Guessed:" />
+      <Label fx:id="letter1" alignment="CENTER" layoutX="176.0" layoutY="107.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
-      <Label fx:id="letter4" alignment="CENTER" layoutX="280.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
+      <Label fx:id="letter4" alignment="CENTER" layoutX="286.0" layoutY="107.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="letter2" alignment="CENTER" layoutX="205.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
+      <Label fx:id="letter2" alignment="CENTER" layoutX="211.0" layoutY="107.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="letter3" alignment="CENTER" layoutX="240.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
+      <Label fx:id="letter3" alignment="CENTER" layoutX="246.0" layoutY="107.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>
       </Label>
-      <Label fx:id="letter5" alignment="CENTER" layoutX="320.0" layoutY="125.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
+      <Label fx:id="letter5" alignment="CENTER" layoutX="326.0" layoutY="107.0" style="-fx-font-size: 50; -fx-text-fill: #000000;" text="*">
          <font>
             <Font size="60.0" />
          </font>

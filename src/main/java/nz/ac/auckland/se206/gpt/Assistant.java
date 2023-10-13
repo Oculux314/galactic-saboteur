@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.TaggedThread;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.TaggedThread;
 
 public class Assistant {
 
@@ -61,12 +61,16 @@ public class Assistant {
   private boolean isWaitingForResponse = false;
   private String job;
 
-  public Assistant(NarrationBox narrationBox) {
+  public Assistant(NarrationBox narrationBox, String title) {
     this.narrationBox = narrationBox;
-    this.job = narrationBox.getWaitingMessage();
+    this.job = title;
     chatMessages.add(
         new ChatMessage(
             "system", GptPromptEngineering.getMainPrompt(narrationBox.getWaitingMessage())));
+  }
+
+  public String getJob() {
+    return job;
   }
 
   public void addChatMessage(ChatMessage message) {
@@ -130,13 +134,17 @@ public class Assistant {
   }
 
   private void renderNarrationBox() {
-    narrationBox.showPane();
     narrationBox.setText(responseText);
     narrationBox.enableUserResponse();
   }
 
   public NarrationBox getNarrationBox() {
     return narrationBox;
+  }
+
+  public void respondToUser(String text) {
+    narrationBox.setUserResponse(text);
+    respondToUser();
   }
 
   public void respondToUser() {
@@ -160,8 +168,6 @@ public class Assistant {
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
     executeApiCallWithCallback(this::renderNarrationBox);
-
-    System.out.println();
   }
 
   public void welcome() {

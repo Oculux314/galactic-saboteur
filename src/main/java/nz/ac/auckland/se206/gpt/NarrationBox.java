@@ -4,7 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 
 public class NarrationBox {
 
@@ -19,42 +19,37 @@ public class NarrationBox {
       while (textResponse.isDisabled()) {
         int numberOfDots = i;
         Platform.runLater(
-            () ->
-                textResponse.setText(
-                    waitingMessage + " is thinking" + ellipsisAnimation[numberOfDots]));
+            () -> {
+              setUserResponse(getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
+            });
 
         i = (i + 1) % ellipsisAnimation.length;
         Thread.sleep(200);
       }
 
-      Platform.runLater(() -> textResponse.setText(""));
+      Platform.runLater(() -> setUserResponse(""));
       return null;
     }
   }
 
-  private Pane paneNarration;
   private TextArea labelNarration;
   private TextField textResponse;
   private String waitingMessage;
+  private SuspectController suspectController;
 
   public NarrationBox(
-      Pane paneNarration, TextArea labelNarration, TextField textResponse, String waitingMessage) {
-    this.paneNarration = paneNarration;
+      TextArea labelNarration,
+      TextField textResponse,
+      String waitingMessage,
+      SuspectController suspectController) {
     this.labelNarration = labelNarration;
     this.textResponse = textResponse;
     this.waitingMessage = waitingMessage;
+    this.suspectController = suspectController;
   }
 
   public String getWaitingMessage() {
     return waitingMessage;
-  }
-
-  public void hidePane() {
-    paneNarration.setVisible(false);
-  }
-
-  public void showPane() {
-    paneNarration.setVisible(true);
   }
 
   public String getText() {
@@ -69,21 +64,38 @@ public class NarrationBox {
 
   public void setText(String text) {
     labelNarration.setText(text);
+    displayNarration();
   }
 
   public String getUserResponse() {
     return textResponse.getText();
   }
 
+  public void setUserResponse(String text) {
+    textResponse.setText(text);
+    displayResponse();
+  }
+
   public void clearUserResponse() {
     textResponse.clear();
+    displayResponse();
+  }
+
+  private void displayNarration() {
+    suspectController.updateNarration(labelNarration.getText());
+  }
+
+  private void displayResponse() {
+    suspectController.updateResponse(textResponse.getText());
   }
 
   public void disableUserResponse() {
     textResponse.setDisable(true);
+    suspectController.disableUserResponse();
   }
 
   public void enableUserResponse() {
     textResponse.setDisable(false);
+    suspectController.enableUserResponse();
   }
 }

@@ -9,7 +9,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,10 +17,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.controllers.MainController;
-import nz.ac.auckland.se206.gpt.Assistant;
-import nz.ac.auckland.se206.speech.TextToSpeech;
-import nz.ac.auckland.se206.speech.TextToSpeech.TextToSpeechException;
+import nz.ac.auckland.se206.misc.GameState;
+import nz.ac.auckland.se206.misc.RootPair;
+import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.misc.TextToSpeech;
+import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
+import nz.ac.auckland.se206.screens.MainController;
+import nz.ac.auckland.se206.screens.Screen;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -29,13 +31,10 @@ public class App extends Application {
   private static Stage stage;
 
   /** A map of all screens in the application (name -> screen) */
-  public static Map<Screen.Name, Screen> screens = new HashMap<>();
+  private static Map<Screen.Name, RootPair> screens = new HashMap<>();
 
   private static Set<TaggedThread> threads = new HashSet<>();
   private static TextToSpeech tts = new TextToSpeech();
-  public static Assistant scientist;
-  public static Assistant mechanic;
-  public static Assistant captain;
 
   /**
    * The entry point of the application.
@@ -51,13 +50,17 @@ public class App extends Application {
   }
 
   /**
-   * Returns the screen with the given name, or null if it does not exist.
+   * Returns the screen with the given name.
    *
    * @param screenName The name of the screen to get.
-   * @return The screen with the given name, or null if it does not exist.
    */
-  public static Screen getScreen(final Screen.Name screenName) {
-    return screens.get(screenName); // Null if does not exist
+  public static RootPair getScreen(final Screen.Name screenName) {
+    while (!screens.containsKey(screenName)) {
+      // Wait for screen to be loaded.
+      // This assumes the screen is being ascnychonously loaded in the meantime.
+    }
+
+    return screens.get(screenName);
   }
 
   /**
@@ -67,14 +70,9 @@ public class App extends Application {
    * @param screenName The name of the screen to set.
    */
   public static void setScreen(final Screen.Name screenName) {
-    GameState.currentScreen = screenName;
-
-    while (!screens.containsKey(screenName)) {
-      // Wait for screen to be loaded
-    }
-
     ObservableList<Node> activeScreens = getPanMain().getChildren();
     Parent newScreen = getScreen(screenName).getFxml();
+    GameState.currentScreen = screenName;
 
     if (activeScreens.size() == 0) {
       makeScreen(Screen.Name.DEFAULT);
@@ -114,8 +112,7 @@ public class App extends Application {
 
   private static void makeScreenWithoutThread(final Screen.Name screenName) {
     String fxml = screenName.toString().toLowerCase();
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
-    screens.put(screenName, new Screen(loader));
+    screens.put(screenName, new RootPair("/fxml/screens/" + fxml + ".fxml"));
   }
 
   /**
@@ -235,10 +232,8 @@ public class App extends Application {
     Scene scene = new Scene(screen, 800, 600);
     stage.setScene(scene);
 
-    // Stylesheet
+    // Misc
     scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-
-    // Listeners
     ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
 
     // Properties

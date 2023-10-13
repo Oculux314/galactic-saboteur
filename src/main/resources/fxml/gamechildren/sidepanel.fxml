@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.SidepanelController">
+   <children>
+      <Pane prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 100, 100, 0);">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="800.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../images/sidepanel/sidepanelbackground.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="timeClue" fitHeight="75.0" fitWidth="135.0" layoutX="20.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
+               <image>
+                  <Image url="@../../images/sidepanel/timeicon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="whereClue" fitHeight="75.0" fitWidth="135.0" layoutX="180.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
+               <image>
+                  <Image url="@../../images/sidepanel/whereicon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="whoClue" fitHeight="75.0" fitWidth="135.0" layoutX="340.0" layoutY="20.0" onMouseEntered="#informationShow" onMouseExited="#informationHide" pickOnBounds="true">
+               <image>
+                  <Image url="@../../images/sidepanel/whoicon.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" fill="#212325" height="75.0" layoutX="500.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="135.0" />
+            <Rectangle arcHeight="5.0" fill="#212325" height="75.0" layoutX="660.0" layoutY="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" />
+            <Rectangle fx:id="timeClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="20.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
+            <Rectangle fx:id="whereClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="180.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
+            <Rectangle fx:id="whoClueInformationRectangle" arcHeight="5.0" fill="#1b1b1bf5" height="20.0" layoutX="340.0" layoutY="75.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="135.0" />
+            <Label fx:id="timeClueInformationLabel" alignment="CENTER" layoutX="20.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
+            <Label fx:id="whereClueInformationLabel" alignment="CENTER" layoutX="180.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
+            <Label fx:id="whoClueInformationLabel" alignment="CENTER" layoutX="340.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
+            <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/sidepanel/lbltime.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="24.0" fitWidth="118.0" layoutX="188.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/sidepanel/lblwhere.png" />
+               </image>
+            </ImageView>
+            <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="367.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/sidepanel/lblwho.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblTimer" alignment="CENTER" layoutX="670.0" layoutY="25.0" prefHeight="66.0" prefWidth="100.0" text="XX:XX" textOverrun="CLIP" />
+            <Label fx:id="lblHints" alignment="CENTER" contentDisplay="CENTER" layoutX="504.0" layoutY="24.0" prefHeight="68.0" prefWidth="128.0" stylesheets="@../../css/style.css" text="You Have X Hints Left" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+         </children>
+      </Pane>
+   </children>
+</StackPane>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
+
+<Pane fx:id="panRoot" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.PopupController">
+   <children>
+      <Rectangle fx:id="recBackground" fill="#00000033" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
+      <Group fx:id="grpPopup">
+         <children>
+            <Rectangle fx:id="recPopupShape" arcHeight="30.0" arcWidth="30.0" height="400.0" layoutX="140.0" layoutY="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="520.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3960784375667572" green="0.3960784375667572" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.3683704370600753">
+                           <color>
+                              <Color red="0.5254902243614197" green="0.5254902243614197" blue="0.5254902243614197" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5167785234899327">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.6651661483057781">
+                           <color>
+                              <Color red="0.5254902243614197" green="0.5254902243614197" blue="0.5254902243614197" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.3960784375667572" green="0.3960784375667572" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+            <Group fx:id="grpContent" layoutX="160.0" layoutY="110.0" />
+            <AnimatedButton fx:id="btnExit" fitHeight="60.0" fitWidth="60.0" layoutX="616.0" layoutY="74.0" onMouseClicked="#onExitClicked" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/exit.png" />
+               </image>
+            </AnimatedButton>
+         </children>
+      </Group>
+   </children>
+</Pane>

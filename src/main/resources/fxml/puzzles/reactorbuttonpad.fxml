@@ -8,27 +8,27 @@
 <?import javafx.scene.text.Font?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panReactorButtonpad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.ReactorButtonPuzzleController">
+<Pane fx:id="panReactorButtonpad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorButtonPuzzleController">
    <children>
       <Group />
-      <ImageView fitHeight="500.0" fitWidth="500.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/buttonpad-overlay.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblAnswer" alignment="CENTER" layoutX="189.0" layoutY="139.0" prefHeight="30.0" prefWidth="110.0" style="-fx-font-size: 15; -fx-text-fill: #000000;" textAlignment="CENTER">
+      <Label fx:id="lblAnswer" alignment="CENTER" layoutX="179.0" layoutY="74.0" prefHeight="30.0" prefWidth="110.0" style="-fx-font-size: 15; -fx-text-fill: #000000;" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblVerdict" layoutX="370.0" layoutY="340.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" />
-      <Label fx:id="lblNumberPrompt" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="210.0" prefHeight="0.0" prefWidth="168.0" style="-fx-font-size: 20; -fx-text-fill: #000000;" text="NUMBER" textAlignment="CENTER">
+      <Label fx:id="lblVerdict" layoutX="362.0" layoutY="273.0" prefHeight="17.0" prefWidth="82.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" />
+      <Label fx:id="lblNumberPrompt" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="152.0" prefHeight="0.0" prefWidth="168.0" style="-fx-font-size: 20; -fx-text-fill: #000000;" text="NUMBER" textAlignment="CENTER">
          <font>
             <Font size="50.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="245.0" style="-fx-text-fill: #000000; -fx-font-size: 12;" text="Decrypt the &#10;sequence" />
-      <Group>
+      <Label layoutX="29.0" layoutY="187.0" style="-fx-text-fill: #000000; -fx-font-size: 12;" text="Decrypt the &#10;sequence" />
+      <Group layoutX="-10.0" layoutY="-65.0">
          <children>
             <Group>
                <children>
@@ -96,19 +96,19 @@
                   </AnimatedButton>
                </children>
             </Group>
-            <AnimatedButton fx:id="btnClear" fitHeight="25.0" fitWidth="50.0" layoutX="175.0" layoutY="330.0" onMouseClicked="#onClearClicked" preserveRatio="true">
+            <AnimatedButton fx:id="btnClear" fitHeight="20.0" fitWidth="50.0" layoutX="184.0" layoutY="335.0" onMouseClicked="#onClearClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/btnClear.png" />
                </image>
             </AnimatedButton>
-            <AnimatedButton fx:id="btnSubmit" fitHeight="27.0" fitWidth="73.0" layoutX="240.0" layoutY="330.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
+            <AnimatedButton fx:id="btnSubmit" fitHeight="20.0" fitWidth="65.0" layoutX="245.0" layoutY="335.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/btnAnswer.png" />
                </image>
             </AnimatedButton>
          </children>
       </Group>
-      <Group>
+      <Group layoutX="-10.0" layoutY="-65.0">
          <children>
             <Label disable="true" layoutX="199.0" layoutY="195.0" style="-fx-font-size: 17;" text="1" />
             <Label disable="true" layoutX="239.0" layoutY="195.0" style="-fx-font-size: 17;" text="2" />
@@ -122,6 +122,6 @@
             <Label disable="true" layoutX="239.0" layoutY="300.0" style="-fx-font-size: 17;" text="0" />
          </children>
       </Group>
-      <Label layoutX="53.0" layoutY="197.0" prefHeight="11.0" prefWidth="111.0" style="-fx-font-size: 10; -fx-text-fill: #000000;" text="Encrypted Number:" />
+      <Label layoutX="48.0" layoutY="139.0" prefHeight="11.0" prefWidth="111.0" style="-fx-font-size: 10; -fx-text-fill: #000000;" text="Encrypted Number:" />
    </children>
 </Pane>

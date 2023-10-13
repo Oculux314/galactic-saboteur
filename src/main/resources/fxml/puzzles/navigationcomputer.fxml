@@ -7,25 +7,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="panBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.puzzles.NavigationComputerPuzzleController">
+<Pane fx:id="panBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.NavigationComputerPuzzleController">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="500.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/puzzle/terminal.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblWarning" alignment="CENTER" layoutY="44.0" prefHeight="17.0" prefWidth="500.0" style="-fx-text-fill: #dd5858;" text="WARNING: MEMORY CORE FRAGMENTED">
+      <Label fx:id="lblWarning" alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="298.0" prefHeight="25.0" prefWidth="338.0" stylesheets="@../../css/style.css" text="WARNING: MEMORY CORE FRAGMENTED" textAlignment="CENTER">
          <font>
-            <Font size="16.0" />
+            <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Group fx:id="grpTiles" layoutX="131.0" layoutY="130.0" onMouseClicked="#onTilesClicked" />
-      <ImageView fx:id="tilStart" fitHeight="60.0" fitWidth="60.0" layoutX="71.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <Group fx:id="grpTiles" layoutX="125.6" layoutY="67.8" onMouseClicked="#onTilesClicked" />
+      <ImageView fx:id="tilStart" fitHeight="57.6" fitWidth="57.6" layoutX="68.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/puzzle/connector_end_green.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tilEnd" fitHeight="60.0" fitWidth="60.0" layoutX="371.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="tilEnd" fitHeight="57.6" fitWidth="57.6" layoutX="356.0" layoutY="67.8" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../../images/puzzle/connector_end_red.png" />
          </image>

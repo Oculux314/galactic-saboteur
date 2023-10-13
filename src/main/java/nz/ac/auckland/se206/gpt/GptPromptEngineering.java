@@ -1,7 +1,7 @@
 package nz.ac.auckland.se206.gpt;
 
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.puzzles.Puzzle.PuzzleName;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
+import nz.ac.auckland.se206.misc.GameState;
 
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
@@ -41,11 +41,11 @@ public class GptPromptEngineering {
   }
 
   public static String getWelcomePrompt(String job) {
-    return getMainPrompt(job) + "Introduce yourself and welcome the user.";
+    return getMainPrompt(job) + "Introduce yourself what your role is and welcome the user.";
   }
 
   public static String getInternetErrorMessage() {
-    return "I'm having trouble connecting to the internet";
+    return "Sorry, I'm having trouble picking you up! Please check your internet connection.";
   }
 
   public static String getSuspectInformation(String job) {
@@ -120,10 +120,10 @@ public class GptPromptEngineering {
 
   public static String getRiddle() {
     return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
-        + " spaceship named Spacey. Tell me a five line riddle in the style of a space themed poem in a"
-        + " modern tone. This riddle should only tell the user to select the correct key card combination"
-        + ",tell the user to answer correctly to save the"
-        + " ship and tell the user to solve the puzzles to get the clues. Keep the"
-        + " riddle short and simple (you have a maximum token size of 60).";
+        + " spaceship named Spacey. Tell me a five line riddle in the style of a space"
+        + " themed poem in a modern tone. This riddle should only tell the user to select"
+        + " the correct key card combination,tell the user to answer correctly to save the"
+        + " ship and tell the user to solve the puzzles to get the clues. Keep the riddle"
+        + " short and simple (you have a maximum token size of 60).";
   }
 }

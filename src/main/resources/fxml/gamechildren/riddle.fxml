@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
+<?import nz.ac.auckland.se206.components.StateButton?>
+
+<Pane fx:id="panRiddle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" style="-fx-background-color: BFBFBF;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.RiddleController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="360.0" stroke="BLACK" strokeType="INSIDE" width="480.0" />
+      <ImageView fitHeight="350.0" fitWidth="470.0" layoutX="5.0" layoutY="5.0" opacity="0.71" pickOnBounds="true">
+         <image>
+            <Image url="@../../images/reactor-backdrop.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutY="-2.0" prefHeight="265.0" prefWidth="500.0" stylesheets="@../../css/style.css">
+         <children>
+            <ImageView fitHeight="146.0" fitWidth="180.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/SPACEY.png" />
+               </image>
+            </ImageView>
+            <Polygon fill="WHITE" layoutX="-23.0" layoutY="-37.0" points="178.0, 74.0, 127.0, 139.0, 178.0, 122.0" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" layoutX="154.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="274.0" />
+            <TextArea fx:id="gptTextArea" editable="false" layoutX="155.0" layoutY="25.0" prefHeight="110.0" prefWidth="272.0" />
+            <Label layoutX="162.0" layoutY="140.0" style="-fx-font-size: 12;" text="Note: You must find all of the clues to answer" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="150.0" layoutX="10.0" layoutY="200.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="460.0" />
+      <Label fx:id="lblWho" layoutX="90.0" layoutY="300.0" style="-fx-font-size: 14;" text="Who?" />
+      <AnimatedButton fx:id="btnAnswer" fitHeight="26.0" fitWidth="93.0" layoutX="206.0" layoutY="317.0" onMouseClicked="#answerClicked" preserveRatio="true">
+         <image>
+            <Image url="@../../images/Answer.png" />
+         </image>
+      </AnimatedButton>
+      <Label layoutX="179.0" layoutY="200.0" style="-fx-font-size: 14;" text="Key Card Combination:" />
+      <Label fx:id="lblWhere" layoutX="222.0" layoutY="300.0" style="-fx-font-size: 14;" text="Where?" />
+      <Label fx:id="lblWhen" layoutX="374.0" layoutY="300.0" style="-fx-font-size: 14;" text="When?" />
+      <Group layoutY="-105.0">
+         <children>
+            <StateButton fx:id="btnWho" fitHeight="75.0" fitWidth="135.0" layoutX="25.0" layoutY="325.0">
+               <image>
+                  <Image url="@../../images/suspects/suspect1.png" />
+               </image>
+            </StateButton>
+            <StateButton fx:id="btnWhere" fitHeight="75.0" fitWidth="135.0" layoutX="175.0" layoutY="325.0">
+               <image>
+                  <Image url="@../../images/rooms/room2.jpg" />
+               </image>
+            </StateButton>
+            <StateButton fx:id="btnWhen" fitHeight="75.0" fitWidth="135.0" layoutX="325.0" layoutY="325.0">
+               <image>
+                  <Image url="@../../images/times/time1.jpg" />
+               </image>
+            </StateButton>
+         </children>
+      </Group>
+   </children>
+</Pane>
