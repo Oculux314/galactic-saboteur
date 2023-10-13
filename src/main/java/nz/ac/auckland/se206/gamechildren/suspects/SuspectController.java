@@ -27,11 +27,13 @@ public class SuspectController implements RootPair.Controller {
 
   private Map<Name, Suspect> suspects = new HashMap<>();
   private Name currentSuspect;
+  private int numberOfHintsAskedToSuspect;
 
   @FXML
   private void initialize() {
     loadAllSuspects();
     initialiseHintButton();
+    numberOfHintsAskedToSuspect = 0;
   }
 
   @Override
@@ -103,8 +105,13 @@ public class SuspectController implements RootPair.Controller {
   @FXML
   private void onHintButtonClick(MouseEvent event) {
     if (btnHints.getState() == "hint") {
-      textResponse.setText("I want a hint.");
+      if (numberOfHintsAskedToSuspect % 2 == 0) {
+        textResponse.setText("I want a hint.");
+      } else {
+        textResponse.setText("Give me another hint.");
+      }
       onUserMessage(new ActionEvent());
+      numberOfHintsAskedToSuspect++;
     } else {
       textResponse.setText("");
     }
