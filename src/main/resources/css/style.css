@@ -9,12 +9,11 @@
   -green: #58DD94;
 
   -fx-background-color: -background-grey;
-
 }
 
 .label {
   -fx-font-size: 20px;
-  -fx-font-family: Consolas;
+  -fx-font-family: calibri;
   -fx-text-fill: -white;
 }
 
@@ -61,4 +60,10 @@
 #instructions {
   -fx-font-size: 10px;
   -fx-text-fill: black;
+}
+
+#lblWarning {
+  -fx-font-size: 15px;
+  -fx-text-fill: #dd5858;
+  -fx-background-color: #000000aa;
 }

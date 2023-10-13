@@ -51,6 +51,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
     }
   }
 
+  private static final double TILE_SIZE = 57.6;
   private static final int NUM_ROWS = 3;
   private static final int NUM_COLS = 4;
   private final Coordinate start = new Coordinate(2, 0);
@@ -138,10 +139,10 @@ public class NavigationComputerPuzzleController extends Puzzle {
     tile.setType(tileTypes[row][col]);
 
     // Dimensions & position
-    tile.setFitWidth(60);
-    tile.setFitHeight(60);
-    tile.setLayoutX(60 * col);
-    tile.setLayoutY(60 * row);
+    tile.setFitWidth(TILE_SIZE);
+    tile.setFitHeight(TILE_SIZE);
+    tile.setLayoutX(TILE_SIZE * col);
+    tile.setLayoutY(TILE_SIZE * row);
   }
 
   public void updateActiveTiles() {

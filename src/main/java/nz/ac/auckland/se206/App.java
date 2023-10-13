@@ -232,10 +232,8 @@ public class App extends Application {
     Scene scene = new Scene(screen, 800, 600);
     stage.setScene(scene);
 
-    // Stylesheet
+    // Misc
     scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-
-    // Listeners
     ((MainController) screens.get(Screen.Name.MAIN).getController()).addSceneListeners();
 
     // Properties
