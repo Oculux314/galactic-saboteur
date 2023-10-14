@@ -126,4 +126,17 @@ public class GptPromptEngineering {
         + " ship and tell the user to solve the puzzles to get the clues. Keep the riddle"
         + " short and simple (you have a maximum token size of 60).";
   }
+
+  public static String getMainNotificationPrompt() {
+    return "You are the game master of a space themed cluedo escape room, your job is"
+    + " to give the user notifications based off of where they are in the game"
+    + ". The user must solve all three puzzles to get the clues to correctly guess" 
+    + "the keycard combination";
+  }
+
+  public static String getNotification() {
+    return getMainNotificationPrompt() + "Tell the user where they are in the game and what they"
+        + " need to do next. Keep responses short and simple (maximum 10 words) two lines maximum";
+  }
+
 }
