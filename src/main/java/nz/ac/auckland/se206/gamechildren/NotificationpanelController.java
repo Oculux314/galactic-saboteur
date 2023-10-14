@@ -23,11 +23,15 @@ public class NotificationpanelController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
     riddleController = new RiddleController();
-    generateNotification();
+    generateNotification(false, null);
   }
 
-  public void generateNotification() {
-    String notification = GptPromptEngineering.getNotification();
+  public void generateNotification(Boolean timeWarning, Integer timeLeft) {
+    if (timeWarning) {
+      notification = GptPromptEngineering.getTimeWarning(timeLeft);
+    } else {
+      notification = GptPromptEngineering.getNotification();
+    }
     ChatMessage msg = new ChatMessage("user", notification);
 
     TaggedThread runThread =

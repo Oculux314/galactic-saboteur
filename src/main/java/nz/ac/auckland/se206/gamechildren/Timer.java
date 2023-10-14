@@ -7,6 +7,8 @@ import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
 import nz.ac.auckland.se206.screens.Screen;
+import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
+import nz.ac.auckland.se206.screens.GameController;
 
 public class Timer {
   private int secondsLeft;
@@ -43,6 +45,15 @@ public class Timer {
   }
 
   private void decrementSeconds() {
+    if (secondsLeft == 63) {
+      GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
+      NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
+      notificationpanelController.generateNotification(true, secondsLeft);
+    } else if (secondsLeft == 33) {
+      GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
+      NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
+      notificationpanelController.generateNotification(true, secondsLeft);
+    }
     secondsLeft--;
   }
 
