@@ -31,6 +31,7 @@ public class NotificationpanelController {
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
     riddleController = new RiddleController();
     generateNotification(false, null);
+    gptTextArea.setWrapText(true);
   }
 
   public void generateNotification(Boolean timeWarning, Integer timeLeft) {
@@ -56,21 +57,12 @@ public class NotificationpanelController {
   }
 
   private void buildText(String response) {
-    String[] words = response.split(" ");
-    StringBuilder output = new StringBuilder();
-
-    int wordCount = 0;
-
-    for (String word : words) {
-      output.append(word).append(" ");
-      wordCount++;
-      if (wordCount >= 10) {
-        output.append("\n     ");
-        wordCount = 0;
-      }
-    }
-    gptTextArea.setText("   " + output.toString());
-
+    String indentedResponse = "   " + response.replace("\n", "\n   ");
+    gptTextArea.setText(response);
+    transition();
+  }
+  
+  private void transition() {
     // Create the slide-in animation
      slideInTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
      slideInTransition.setFromX(-gptTextArea.getLayoutBounds().getWidth()); // Start off-screen
@@ -89,5 +81,4 @@ public class NotificationpanelController {
      slideInTransition.play();
      pauseTransition.play();
   }
-  
 }
