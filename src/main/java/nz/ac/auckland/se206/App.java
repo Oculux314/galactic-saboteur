@@ -30,7 +30,10 @@ public class App extends Application {
 
   private static Stage stage;
 
-  /** A map of all screens in the application (name -> screen) */
+  /**
+   * A map of all screens in the application (name -> screen). A value of null indicates a screen
+   * has begun loading but is not yet finished loading.
+   */
   private static Map<Screen.Name, RootPair> screens = new HashMap<>();
 
   private static Set<TaggedThread> threads = new HashSet<>();
@@ -55,9 +58,31 @@ public class App extends Application {
    * @param screenName The name of the screen to get.
    */
   public static RootPair getScreen(final Screen.Name screenName) {
-    while (!screens.containsKey(screenName)) {
-      // Wait for screen to be loaded.
-      // This assumes the screen is being ascnychonously loaded in the meantime.
+    // Should not run under normal execution
+    if (!screens.containsKey(screenName)) {
+      throw new IllegalArgumentException("Screen " + screenName + " does not exist.");
+    }
+
+    // May sometimes run under normal execution
+    while (screens.get(screenName) == null) { // Null indicates screen is loading in the background
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        throw new RuntimeException("Thread interrupted while waiting for screen to load.");
+      }
+    }
+
+    RootPair screen = screens.get(screenName);
+
+    // Should not run under normal execution
+    if (screen == null) {
+      throw new RuntimeException(screenName + ": Failed to load screen.");
+    }
+    if (screen.getFxml() == null) {
+      throw new RuntimeException(screenName + ": Failed to load fxml file.");
+    }
+    if (screen.getController() == null && screenName != Screen.Name.DEFAULT) {
+      throw new RuntimeException(screenName + ": Failed to load controller.");
     }
 
     return screens.get(screenName);
@@ -106,6 +131,7 @@ public class App extends Application {
    * @param screenName The name of the screen to create.
    */
   private static void makeScreen(final Screen.Name screenName) {
+    screens.put(screenName, null); // Set to null to indicate screen is being loaded
     TaggedThread screenLoader = new TaggedThread(() -> makeScreenWithoutThread(screenName));
     screenLoader.start();
   }
@@ -150,19 +176,14 @@ public class App extends Application {
   }
 
   private static void resetScreens() {
-    TaggedThread screenLoader =
-        new TaggedThread(
-            () -> {
-              for (Screen.Name screenName : Screen.Name.values()) {
-                if (screenName == Screen.Name.MAIN) { // Main screen is persistent
-                  continue;
-                }
+    for (Screen.Name screenName : Screen.Name.values()) {
+      if (screenName == Screen.Name.MAIN) { // Main screen is persistent
+        continue;
+      }
 
-                makeScreen(screenName);
-              }
-            });
+      makeScreen(screenName);
+    }
 
-    screenLoader.start();
     setScreen(Screen.Name.TITLE);
   }
 
@@ -242,7 +263,7 @@ public class App extends Application {
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);
 
-    stage.show();
     restart();
+    stage.show();
   }
 }
