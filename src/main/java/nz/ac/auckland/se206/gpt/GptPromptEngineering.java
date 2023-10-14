@@ -140,7 +140,7 @@ public class GptPromptEngineering {
   private static String getGameState() {
     System.out.println(GameState.cluesFound);
     if (GameState.cluesFound) {
-      return "The user has found all the clues, look at the reactor, it's glowing!";
+      return "The user has found all the clues, look at the highlighted objects";
     } else if (GameState.reactorPuzzleSolved || GameState.navigationPuzzleSolved || GameState.laboratoryPuzzleSolved) {
       return "The user has solved a puzzle, congratulate the user";
     } else {

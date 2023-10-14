@@ -83,7 +83,7 @@ public class Puzzle implements RootPair.Controller {
   }
 
   public boolean isAllSolved() {
-    return solvedPuzzles.size() == 3;
+    return GameState.solvedPuzzles == 3;
   }
 
   public void setSolved() {
@@ -99,13 +99,18 @@ public class Puzzle implements RootPair.Controller {
       GameState.navigationPuzzleSolved = true;
     }
 
+    GameState.solvedPuzzles++;
+    if (isAllSolved()) {
+      GameState.cluesFound = true;
+    }
+
     GameController gameController =
         (GameController) App.getScreen(Screen.Name.GAME).getController();
     NotificationpanelController notificationpanelcontroller = gameController.getNotificationpanelController();
     notificationpanelcontroller.generateNotification(false, null);
 
     gameController.giveRandomClue();
-    solvedPuzzles.add(this);
+    
   }
 
   public Parent getRoot() {

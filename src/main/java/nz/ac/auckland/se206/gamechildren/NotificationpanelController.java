@@ -34,7 +34,7 @@ public class NotificationpanelController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
     riddleController = new RiddleController();
-    gptTextArea.setWrapText(true);
+    
   }
 
   public void generateNotification(Boolean timeWarning, Integer timeLeft) {

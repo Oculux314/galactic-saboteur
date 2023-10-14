@@ -12,7 +12,7 @@
    <children>
       <Group fx:id="grpTextArea">
          <children>
-            <TextArea fx:id="gptTextArea" layoutX="-334.0" layoutY="10.0" prefHeight="60.0" prefWidth="412.0" style="-fx-control-inner-background: #808080;" />
+            <TextArea fx:id="gptTextArea" editable="false" layoutX="-334.0" layoutY="10.0" prefHeight="60.0" prefWidth="412.0" style="-fx-control-inner-background: #808080;" wrapText="true" />
          </children>
       </Group>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#131d23" height="65.0" layoutX="-137.0" layoutY="8.0" stroke="BLACK" strokeWidth="0.0" width="217.0" />
