@@ -3,25 +3,22 @@ package nz.ac.auckland.se206.gamechildren;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.TextArea;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
-import javafx.animation.TranslateTransition;
-import javafx.animation.PauseTransition;
-import javafx.util.Duration;
-import java.util.Queue;
-import java.util.LinkedList;
-
 
 public class NotificationpanelController {
 
   @FXML private TextArea gptTextArea;
+  @FXML private Group grpTextArea;
 
   private String notification;
   private String gamestate;
@@ -37,7 +34,6 @@ public class NotificationpanelController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
     riddleController = new RiddleController();
-    generateNotification(false, null);
     gptTextArea.setWrapText(true);
   }
 
@@ -48,7 +44,7 @@ public class NotificationpanelController {
     } else {
       newNotification = GptPromptEngineering.getNotification();
     }
-    
+
     notificationQueue.add(newNotification);
 
     if (!isTransitioning) {
@@ -61,14 +57,16 @@ public class NotificationpanelController {
       String nextNotification = notificationQueue.poll();
       ChatMessage msg = new ChatMessage("user", nextNotification);
 
-      TaggedThread runThread = new TaggedThread(() -> {
-        try {
-          ChatMessage response = riddleController.runGpt(msg, chatCompletionRequest);
-          buildText(response.getContent());
-        } catch (ApiProxyException e) {
-          e.printStackTrace();
-        }
-      });
+      TaggedThread runThread =
+          new TaggedThread(
+              () -> {
+                try {
+                  ChatMessage response = riddleController.runGpt(msg, chatCompletionRequest);
+                  buildText(response.getContent());
+                } catch (ApiProxyException e) {
+                  e.printStackTrace();
+                }
+              });
 
       isTransitioning = true;
       runThread.start();
@@ -76,29 +74,31 @@ public class NotificationpanelController {
   }
 
   private void buildText(String response) {
-    String indentedResponse = "   " + response.replace("\n", "\n   ");
     gptTextArea.setText(response);
     transition();
   }
-  
+
   private void transition() {
     // Create the slide-in animation
     slideInTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
-    slideInTransition.setFromX(-gptTextArea.getLayoutBounds().getWidth()); // Start off-screen
-    slideInTransition.setToX(0);
+    slideInTransition.setFromX(0); // Start off-screen
+    slideInTransition.setToX(gptTextArea.getLayoutBounds().getWidth());
 
     // Create a pause transition for 5 seconds
     pauseTransition = new PauseTransition(Duration.seconds(5));
-    pauseTransition.setOnFinished(event -> {
-      slideOutTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
-      slideOutTransition.setToX(-gptTextArea.getLayoutBounds().getWidth()); // Move off-screen to the left
-      slideOutTransition.setOnFinished(event2 -> {
-        gptTextArea.setTranslateX(-gptTextArea.getLayoutBounds().getWidth()); // Hide it off-screen
-        isTransitioning = false;
-        processNextNotification();
-      });
-      slideOutTransition.play();
-    });
+    pauseTransition.setOnFinished(
+        event -> {
+          slideOutTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
+          slideOutTransition.setFromX(gptTextArea.getLayoutBounds().getWidth());
+          slideOutTransition.setToX(0); // Move off-screen to the left
+          slideOutTransition.setOnFinished(
+              event2 -> {
+                gptTextArea.setTranslateX(0); // Hide it off-screen
+                isTransitioning = false;
+                processNextNotification();
+              });
+          slideOutTransition.play();
+        });
 
     // Start the slide-in animation
     slideInTransition.play();

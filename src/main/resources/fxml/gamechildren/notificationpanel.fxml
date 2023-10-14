@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,8 +10,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.NotificationpanelController">
    <children>
-      <TextArea fx:id="gptTextArea" layoutX="78.0" layoutY="10.0" prefHeight="60.0" prefWidth="412.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="60.0" layoutX="39.0" layoutY="10.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="450.0" />
+      <Group fx:id="grpTextArea">
+         <children>
+            <TextArea fx:id="gptTextArea" layoutX="-334.0" layoutY="10.0" prefHeight="60.0" prefWidth="412.0" style="-fx-control-inner-background: #808080;" />
+         </children>
+      </Group>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#131d23" height="65.0" layoutX="-137.0" layoutY="8.0" stroke="BLACK" strokeWidth="0.0" width="217.0" />
       <ImageView fitHeight="80.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/logo.png" />

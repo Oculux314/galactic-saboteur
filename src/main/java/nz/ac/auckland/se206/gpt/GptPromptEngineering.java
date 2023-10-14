@@ -150,7 +150,7 @@ public class GptPromptEngineering {
   }
 
   public static String getTimeWarning(Integer timeLeft) {
-    return "The user has " + timeLeft + " seconds left to escape, let them know";
+    return "The user has less than " + timeLeft + " seconds left to escape, let them know";
   }
 
 }

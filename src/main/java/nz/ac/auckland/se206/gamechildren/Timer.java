@@ -14,9 +14,11 @@ public class Timer {
   private int secondsLeft;
   private Thread timerThread;
   private Label timerDisplay;
+  private int initialSeconds;
 
   public Timer(int initialSeconds, Label timerDisplay) {
-    this.secondsLeft = initialSeconds;
+    this.initialSeconds = initialSeconds;
+    this.secondsLeft = this.initialSeconds;
     this.timerDisplay = timerDisplay;
     this.timerThread = new TaggedThread(() -> run());
   }
@@ -48,10 +50,12 @@ public class Timer {
     GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
       NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
 
-    if (secondsLeft == 63) {
-      notificationpanelController.generateNotification(true, secondsLeft - 3);
-    } else if (secondsLeft == 33) {
-      notificationpanelController.generateNotification(true, secondsLeft - 3);
+    if (secondsLeft == initialSeconds / 2) {
+      notificationpanelController.generateNotification(true, secondsLeft);
+    } else if (secondsLeft == initialSeconds / 4) {
+      notificationpanelController.generateNotification(true, secondsLeft);
+    } else if (secondsLeft == initialSeconds) {
+      notificationpanelController.generateNotification(false, null);
     }
     secondsLeft--;
   }
