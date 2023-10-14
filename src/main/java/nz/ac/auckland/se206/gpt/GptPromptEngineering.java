@@ -23,19 +23,22 @@ public class GptPromptEngineering {
               + puzzleInformation
               + " Please respond in 12 words or fewer."
               + getGameState(job)
-              + " If you give a hint, start your response with 'A hint is:' with"
-              + " nothing before it.";
+              + " If you give a hint or help with the solving the game, start your response with 'A"
+              + " hint is:' with nothing before it. Do this only if the user asks for help.";
     } else {
       prompt =
           suspectInformation
               + "Support users in finding and solving the puzzle but don't give any information"
-              + " they don't know. The user can only escape when they find out what time, which"
-              + " suspect, and in what room the sabotage occurred. "
-              + puzzleInformation
-              + " Respond in 10 words or fewer and must not include new hints of any form. Do not,"
-              + " for any reason, give the user any new hints.";
+              + " they don't know. The user can only escape the ship when they find out what time,"
+              + " which suspect, and in what room the sabotage occurred. There is one puzzle in"
+              + " each room that leads to a clue."
+              // + puzzleInformation
+              + " Respond in 11 words or fewer. You can have small-talk with the user. You must not"
+              + " include new hints of any form. Do not, for any reason, give the user any new"
+              + " hints or help with solving the game.";
     }
-    System.out.println(getGameState(job));
+
+    System.out.println("is user allowed hints" + isUserAllowedHints);
 
     return prompt;
   }

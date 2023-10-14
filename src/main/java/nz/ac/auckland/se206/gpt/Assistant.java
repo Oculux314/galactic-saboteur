@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.screens.GameController;
+import nz.ac.auckland.se206.screens.Screen;
 
 public class Assistant {
 
@@ -150,16 +153,9 @@ public class Assistant {
   public void respondToUser() {
     narrationBox.disableUserResponse();
     String userMessage = narrationBox.getUserResponse();
-    //String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
+    // String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
     System.out.println(userMessage);
 
-    // increment number of hints asked - temp solutions
-    if (userMessage.toLowerCase().contains("hint")
-        || userMessage.toLowerCase().contains("advice")
-        || userMessage.toLowerCase().contains("help")
-        || userMessage.toLowerCase().contains("clue")) {
-      GameState.numberOfHintsAsked++;
-    }
     narrationBox.clearUserResponse();
     if (userMessage.equals("")) {
       narrationBox.enableUserResponse();
@@ -168,7 +164,29 @@ public class Assistant {
 
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
-    executeApiCallWithCallback(this::renderNarrationBox);
+    executeApiCallWithCallback(
+        () -> {
+          renderNarrationBox();
+          System.out.println("rendered narration box");
+          increaseNumberOfHintsAskedIfHintGiven();
+          getGameController().updateHintText();
+        });
+  }
+
+  private void increaseNumberOfHintsAskedIfHintGiven() {
+    String stringToCheck =
+        narrationBox.getText().trim(); // Trim any leading or trailing white spaces
+    System.out.println("String to check: " + stringToCheck);
+
+    if (stringToCheck
+        .toLowerCase()
+        .startsWith("a hint is:")) { // Convert to lowercase before checking
+      GameState.numberOfHintsAsked++;
+    }
+  }
+
+  private GameController getGameController() {
+    return (GameController) App.getScreen(Screen.Name.GAME).getController();
   }
 
   public void welcome() {
