@@ -18,7 +18,6 @@ import nz.ac.auckland.se206.misc.TaggedThread;
 public class NotificationpanelController {
 
   @FXML private TextArea gptTextArea;
-  @FXML private Group grpTextArea;
 
   private String notification;
   private String gamestate;
@@ -29,12 +28,12 @@ public class NotificationpanelController {
   private TranslateTransition slideOutTransition;
   private Queue<String> notificationQueue = new LinkedList<>();
   private boolean isTransitioning = false;
+  private int notificationsgiven = 0;
 
   public void initialize() throws ApiProxyException, IOException {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
     riddleController = new RiddleController();
-    
   }
 
   public void generateNotification(Boolean timeWarning, Integer timeLeft) {
@@ -50,6 +49,20 @@ public class NotificationpanelController {
     if (!isTransitioning) {
       processNextNotification();
     }
+    notificationsgiven++;
+  }
+
+  public void generateNotification() {
+    generateNotification(false, null);
+  }
+
+  public void generateNotification(String notification) {
+    notificationQueue.add(notification);
+
+    if (!isTransitioning) {
+      processNextNotification();
+    }
+    notificationsgiven++;
   }
 
   private void processNextNotification() {
@@ -70,6 +83,7 @@ public class NotificationpanelController {
 
       isTransitioning = true;
       runThread.start();
+
     }
   }
 
@@ -103,5 +117,9 @@ public class NotificationpanelController {
     // Start the slide-in animation
     slideInTransition.play();
     pauseTransition.play();
+  }
+
+  public boolean isNotificationInProgress() {
+    return isTransitioning;
   }
 }

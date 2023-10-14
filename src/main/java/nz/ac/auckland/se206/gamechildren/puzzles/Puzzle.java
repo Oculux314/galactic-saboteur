@@ -107,7 +107,7 @@ public class Puzzle implements RootPair.Controller {
     GameController gameController =
         (GameController) App.getScreen(Screen.Name.GAME).getController();
     NotificationpanelController notificationpanelcontroller = gameController.getNotificationpanelController();
-    notificationpanelcontroller.generateNotification(false, null);
+    notificationpanelcontroller.generateNotification();
 
     gameController.giveRandomClue();
     

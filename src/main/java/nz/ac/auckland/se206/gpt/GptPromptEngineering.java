@@ -138,19 +138,18 @@ public class GptPromptEngineering {
   }
 
   private static String getGameState() {
-    System.out.println(GameState.cluesFound);
     if (GameState.cluesFound) {
-      return "The user has found all the clues, look at the highlighted objects";
+      return ". The user has found all the clues, pay attention to the highlighted objects";
     } else if (GameState.reactorPuzzleSolved || GameState.navigationPuzzleSolved || GameState.laboratoryPuzzleSolved) {
-      return "The user has solved a puzzle, congratulate the user";
+      return ". The user has solved a puzzle, congratulate the user";
     } else {
-      return "The user has just entered the game, welcome the user. They can pan and zoom around the screen";
+      return ". The user has just entered the game, welcome the user. They can pan and zoom around the screen";
 
     }
   }
 
   public static String getTimeWarning(Integer timeLeft) {
-    return "The user has less than " + timeLeft + " seconds left to escape, let them know";
+    return "The user has less than " + timeLeft + " seconds left to escape, let them know.";
   }
-
 }
+

@@ -28,6 +28,7 @@ public class GameState {
   public static boolean reactorPuzzleSolved;
   public static boolean laboratoryPuzzleSolved;
   public static boolean navigationPuzzleSolved;
+  public static boolean suspectsFound;
   
   public static String correctSuspect;
   public static String correctRoom;

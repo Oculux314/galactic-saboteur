@@ -47,18 +47,33 @@ public class Timer {
   }
 
   private void decrementSeconds() {
-    GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
-      NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
-
-    if (secondsLeft == initialSeconds / 2) {
-      notificationpanelController.generateNotification(true, secondsLeft);
-    } else if (secondsLeft == initialSeconds / 4) {
-      notificationpanelController.generateNotification(true, secondsLeft);
-    } else if (secondsLeft == initialSeconds) {
-      notificationpanelController.generateNotification(false, null);
-    }
     secondsLeft--;
-  }
+    GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
+    NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
+
+    // Create a thread to run the entire notification logic asynchronously
+    TaggedThread notificationThread = new TaggedThread(() -> {
+        if (secondsLeft == initialSeconds / 2) {
+            notificationpanelController.generateNotification(true, secondsLeft);
+        } else if (secondsLeft == initialSeconds / 4) {
+            notificationpanelController.generateNotification(true, secondsLeft);
+        } else if (secondsLeft == initialSeconds - 1) {
+            notificationpanelController.generateNotification();
+        } else if (secondsLeft == initialSeconds - initialSeconds / 4) {
+            System.out.println(GameState.suspectsFound);
+            System.out.println(notificationpanelController.isNotificationInProgress());
+            if (!GameState.suspectsFound && !notificationpanelController.isNotificationInProgress()) {
+                notificationpanelController.generateNotification("Ask the astronauts for help");
+            } else if (!notificationpanelController.isNotificationInProgress()) {
+                notificationpanelController.generateNotification("Let the user know each room has one puzzle to solve");
+            }
+        }
+    });
+
+    // Start the thread to run notifications asynchronously
+    notificationThread.start();
+}
+
 
   private void showTimeout() {
     EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
