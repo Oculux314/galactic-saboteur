@@ -9,6 +9,10 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import javafx.animation.TranslateTransition;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
+
 
 public class NotificationpanelController {
 
@@ -18,6 +22,9 @@ public class NotificationpanelController {
   private String gamestate;
   private RiddleController riddleController;
   private ChatCompletionRequest chatCompletionRequest;
+  private TranslateTransition slideInTransition;
+  private PauseTransition pauseTransition;
+  private TranslateTransition slideOutTransition;
 
   public void initialize() throws ApiProxyException, IOException {
     chatCompletionRequest =
@@ -63,7 +70,24 @@ public class NotificationpanelController {
       }
     }
     gptTextArea.setText("   " + output.toString());
-    System.out.println(GameState.cluesFound);
+
+    // Create the slide-in animation
+     slideInTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
+     slideInTransition.setFromX(-gptTextArea.getLayoutBounds().getWidth()); // Start off-screen
+     slideInTransition.setToX(0);
+
+     // Create a pause transition for 5 seconds
+     pauseTransition = new PauseTransition(Duration.seconds(5));
+     pauseTransition.setOnFinished(event -> {
+         slideOutTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
+         slideOutTransition.setToX(-gptTextArea.getLayoutBounds().getWidth()); // Move off-screen to the left
+         slideOutTransition.setOnFinished(event2 -> gptTextArea.setTranslateX(-gptTextArea.getLayoutBounds().getWidth())); // Hide it off-screen
+         slideOutTransition.play();
+     });
+
+     // Start the slide-in animation
+     slideInTransition.play();
+     pauseTransition.play();
   }
   
 }

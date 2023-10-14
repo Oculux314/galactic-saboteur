@@ -45,14 +45,13 @@ public class Timer {
   }
 
   private void decrementSeconds() {
+    GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
+      NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
+
     if (secondsLeft == 63) {
-      GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
-      NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
-      notificationpanelController.generateNotification(true, secondsLeft);
+      notificationpanelController.generateNotification(true, secondsLeft - 3);
     } else if (secondsLeft == 33) {
-      GameController gameController = ((GameController) App.getScreen(Screen.Name.GAME).getController());
-      NotificationpanelController notificationpanelController = gameController.getNotificationpanelController();
-      notificationpanelController.generateNotification(true, secondsLeft);
+      notificationpanelController.generateNotification(true, secondsLeft - 3);
     }
     secondsLeft--;
   }
