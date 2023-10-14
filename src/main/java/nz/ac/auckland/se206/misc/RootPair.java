@@ -20,22 +20,41 @@ public class RootPair {
   private Controller controller;
 
   public RootPair(String fxmlUrl) {
-    this(new FXMLLoader(RootPair.class.getResource(fxmlUrl)));
+    this(new FXMLLoader(RootPair.class.getResource(fxmlUrl)), fxmlUrl);
+  }
+
+  public RootPair() {
+    // Constructs default screen
+    fxml = getDefaultParent();
+    controller = null;
   }
 
   /**
    * Constructs a new screen with the FXML file and controller stored within the given loader.
    *
    * @param loader The loader containing the FXML file and controller.
+   * @param url The URL of the FXML file.
    * @throws IOException If the FXML file is not found.
    */
-  private RootPair(FXMLLoader loader) {
+  private RootPair(FXMLLoader loader, String url) {
     try {
       fxml = loader.load();
       controller = loader.getController();
     } catch (IllegalStateException | IOException e) {
-      fxml = getDefaultParent();
-      controller = null;
+      checkErrors(url);
+      throw new RuntimeException(e); // Fallback error
+    }
+
+    checkErrors(url);
+  }
+
+  private void checkErrors(String location) {
+    if (fxml == null) {
+      throw new RuntimeException(location + ": Failed to load fxml file.");
+    }
+
+    if (controller == null) {
+      throw new RuntimeException(location + ": Failed to load controller.");
     }
   }
 

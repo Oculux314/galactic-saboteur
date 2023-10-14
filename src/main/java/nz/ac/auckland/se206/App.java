@@ -63,26 +63,13 @@ public class App extends Application {
       throw new IllegalArgumentException("Screen " + screenName + " does not exist.");
     }
 
-    // May sometimes run under normal execution
+    // Can run under normal execution
     while (screens.get(screenName) == null) { // Null indicates screen is loading in the background
       try {
         Thread.sleep(10);
       } catch (InterruptedException e) {
         throw new RuntimeException("Thread interrupted while waiting for screen to load.");
       }
-    }
-
-    RootPair screen = screens.get(screenName);
-
-    // Should not run under normal execution
-    if (screen == null) {
-      throw new RuntimeException(screenName + ": Failed to load screen.");
-    }
-    if (screen.getFxml() == null) {
-      throw new RuntimeException(screenName + ": Failed to load fxml file.");
-    }
-    if (screen.getController() == null && screenName != Screen.Name.DEFAULT) {
-      throw new RuntimeException(screenName + ": Failed to load controller.");
     }
 
     return screens.get(screenName);
@@ -137,6 +124,12 @@ public class App extends Application {
   }
 
   private static void makeScreenWithoutThread(final Screen.Name screenName) {
+    if (screenName == Screen.Name.DEFAULT) {
+      screens.put(screenName, new RootPair());
+      return;
+    }
+
+    // Normal screens loaded via fxml
     String fxml = screenName.toString().toLowerCase();
     screens.put(screenName, new RootPair("/fxml/screens/" + fxml + ".fxml"));
   }
