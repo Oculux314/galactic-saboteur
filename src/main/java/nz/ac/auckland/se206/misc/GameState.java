@@ -21,9 +21,13 @@ public class GameState {
   public static boolean isGameover;
   public static Screen.Name currentScreen;
   public static int numberOfHintsAsked;
-  public static boolean cluesFound;
   public static HighlightState highlightState;
 
+  public static boolean cluesFound;
+  public static boolean reactorPuzzleSolved;
+  public static boolean laboratoryPuzzleSolved;
+  public static boolean navigationPuzzleSolved;
+  
   public static String correctSuspect;
   public static String correctRoom;
   public static String correctTime;
@@ -31,12 +35,16 @@ public class GameState {
   public static String reactorRoomGameState;
   public static String labRoomGameState;
   public static String controlRoomGameState;
+  public static String riddleGameState;
   public static String puzzleSolvedMessage;
   public static String puzzleOpenedMessage;
 
   public static PuzzleName reactorPuzzle;
   public static PuzzleName laboratoryPuzzle;
   public static PuzzleName navigationPuzzle;
+
+  public static String notificationGameState;
+  public static String notificationNextStep;
 
   public static void reset() {
     isGameover = false;
@@ -92,4 +100,6 @@ public class GameState {
     }
     return num;
   }
+
+  
 }

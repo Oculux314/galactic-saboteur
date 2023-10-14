@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
+import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.Timer;
@@ -37,6 +38,7 @@ public class GameController implements Screen {
   private PuzzleLoader puzzleLoader;
   @FXML private SidepanelController sidePanelController;
   @FXML private PopupController popupController;
+  @FXML private NotificationpanelController notificationPanelController;
   private Timer countdownTimer;
 
   @FXML private HighlightButton gptScientist;
@@ -259,5 +261,9 @@ public class GameController implements Screen {
   public void addMapButton(HighlightButton mapButton) {
     mapButton.initialise();
     mapButtons.put(mapButton.getId(), mapButton);
+  }
+
+  public NotificationpanelController getNotificationpanelController() {
+    return notificationPanelController;
   }
 }

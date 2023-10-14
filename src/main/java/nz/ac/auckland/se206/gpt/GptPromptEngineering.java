@@ -128,15 +128,25 @@ public class GptPromptEngineering {
   }
 
   public static String getMainNotificationPrompt() {
-    return "You are the game master of a space themed cluedo escape room, your job is"
-    + " to give the user notifications based off of where they are in the game"
-    + ". The user must solve all three puzzles to get the clues to correctly guess" 
-    + "the keycard combination";
+    return "Your role: Game master on the Brain-E explorer spaceship escape room adventure, your job is"
+    + " to give the user short notifications (maximum 15 words)" 
+    + "based off of where they are in the game, do not quote using speech marks";
   }
 
   public static String getNotification() {
-    return getMainNotificationPrompt() + "Tell the user where they are in the game and what they"
-        + " need to do next. Keep responses short and simple (maximum 10 words) two lines maximum";
+    return getMainNotificationPrompt() + getGameState();
+  }
+
+  private static String getGameState() {
+    System.out.println(GameState.cluesFound);
+    if (GameState.cluesFound) {
+      return "The user has found all the clues, look at the reactor, it's glowing!";
+    } else if (GameState.reactorPuzzleSolved || GameState.navigationPuzzleSolved || GameState.laboratoryPuzzleSolved) {
+      return "The user has solved a puzzle, congratulate the user";
+    } else {
+      return "The user has just entered the game, welcome the user. They can pan and zoom around the screen";
+
+    }
   }
 
 }

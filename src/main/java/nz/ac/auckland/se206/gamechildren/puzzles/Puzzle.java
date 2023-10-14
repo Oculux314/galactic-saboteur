@@ -12,6 +12,8 @@ import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;
+import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
+
 
 public class Puzzle implements RootPair.Controller {
 
@@ -88,14 +90,19 @@ public class Puzzle implements RootPair.Controller {
     isPuzzleSolved = true;
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
       GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.reactorPuzzleSolved = true;
     } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.laboratoryPuzzleSolved = true;
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.navigationPuzzleSolved = true;
     }
 
     GameController gameController =
         (GameController) App.getScreen(Screen.Name.GAME).getController();
+    NotificationpanelController notificationpanelcontroller = gameController.getNotificationpanelController();
+    notificationpanelcontroller.generateNotification();
 
     gameController.giveRandomClue();
     solvedPuzzles.add(this);
