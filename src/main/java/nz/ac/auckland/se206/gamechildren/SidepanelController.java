@@ -13,6 +13,9 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 
+/**
+ * Controller for the side panel displaying information related to clues, suspects, rooms, and time.
+ */
 public class SidepanelController implements RootPair.Controller {
 
   @FXML private Rectangle timeClueInformationRectangle;
@@ -144,6 +147,7 @@ public class SidepanelController implements RootPair.Controller {
     clues.add(time);
   }
 
+  /** Retrieves a random clue from the available list of clues and displays it on the side panel. */
   public void getRandomClue() {
     // ensure that the clues picked are random
     int random = (int) (Math.random()) * clues.size();
@@ -165,10 +169,17 @@ public class SidepanelController implements RootPair.Controller {
     clues.remove(clue);
   }
 
+  /**
+   * Retrieves the name of a clue based on the provided file path.
+   *
+   * @param filePath The file path of the clue.
+   * @return The name of the clue.
+   */
   private String getClueName(String filePath) {
     return clueNameMap.get(filePath);
   }
 
+  /** Initializes the clueNameMap with file paths as keys and corresponding clue names as values. */
   private void setClueNameMap() {
     // Suspects
     clueNameMap.put("/images/suspects/suspect1.png", "Scientist");

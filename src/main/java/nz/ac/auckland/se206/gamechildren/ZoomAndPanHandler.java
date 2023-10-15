@@ -54,7 +54,6 @@ public class ZoomAndPanHandler {
    * Called when the mouse is pressed.
    *
    * @param event The mouse event.
-   * @return void
    */
   public void onPress(MouseEvent event) {
     // Record the current mouse X and Y position
@@ -66,7 +65,6 @@ public class ZoomAndPanHandler {
    * Called when the mouse is dragged. Pans the screen according to cursor position
    *
    * @param event The mouse event.
-   * @return void
    */
   public void onDrag(MouseEvent event) {
     deltaX = event.getSceneX() - pressedX;
@@ -93,10 +91,10 @@ public class ZoomAndPanHandler {
   }
 
   /**
-   * Called when the mouse is scrolled. Zooms the screen according to cursor position.
+   * Handles the zoom functionality on mouse scroll. Scales the content based on the scroll event
+   * and ensures the translation stays within the image boundaries.
    *
-   * @param event The scroll event.
-   * @return void
+   * @param event The scroll event triggered by the user.
    */
   public void onScroll(ScrollEvent event) {
     scaleFactor = (event.getDeltaY() < 0) ? 1 / zoomFactor : zoomFactor;
