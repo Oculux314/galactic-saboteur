@@ -53,6 +53,7 @@ public class GameState {
     currentScreen = null;
     numberOfHintsAsked = 0;
     highlightState = HighlightState.PAN_ARROWS;
+    solvedPuzzles = 0;
 
     cluesFound = false;
     reactorPuzzleSolved = false;

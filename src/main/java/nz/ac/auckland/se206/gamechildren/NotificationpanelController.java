@@ -14,12 +14,16 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
+import javafx.application.Platform;
 
 public class NotificationpanelController {
 
-  @FXML private TextArea gptTextArea;
+  @FXML private Label gptTextLabel = new Label();
   @FXML private Rectangle recHide;
+  @FXML private Group grpTextArea;
 
   private String notification;
   private String gamestate;
@@ -124,8 +128,13 @@ public class NotificationpanelController {
    * @return
    */
   private void buildText(String response) {
-    gptTextArea.setText(response);
-    transition();
+    Platform.runLater(() -> {
+      // Set label text as response
+      System.out.println(response);
+      gptTextLabel.setText(response);
+      System.out.println("GPT TEXT LABEL: " + gptTextLabel.getText());
+      transition();
+  });
   }
 
   /**
@@ -137,20 +146,20 @@ public class NotificationpanelController {
   private void transition() {
      recHide.setVisible(true);
     // Create the slide-in animation
-    slideInTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
+    slideInTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
     slideInTransition.setFromX(0); // Start off-screen
-    slideInTransition.setToX(gptTextArea.getLayoutBounds().getWidth() + 100);
+    slideInTransition.setToX(grpTextArea.getLayoutBounds().getWidth() + 85);
 
     // Create a pause transition for 5 seconds
     pauseTransition = new PauseTransition(Duration.seconds(5));
     pauseTransition.setOnFinished(
         event -> {
-          slideOutTransition = new TranslateTransition(Duration.seconds(1), gptTextArea);
-          slideOutTransition.setFromX(gptTextArea.getLayoutBounds().getWidth() + 100);
+          slideOutTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
+          slideOutTransition.setFromX(grpTextArea.getLayoutBounds().getWidth() + 85);
           slideOutTransition.setToX(0); // Move off-screen to the left
           slideOutTransition.setOnFinished(
               event2 -> {
-                gptTextArea.setTranslateX(0); // Hide it off-screen
+                grpTextArea.setTranslateX(0); // Hide it off-screen
                 isTransitioning = false;
                 processNextNotification();
                 recHide.setVisible(false);

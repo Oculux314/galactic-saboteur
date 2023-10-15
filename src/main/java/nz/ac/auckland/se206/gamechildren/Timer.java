@@ -6,9 +6,8 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
-import nz.ac.auckland.se206.screens.Screen;
-import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.screens.GameController;
+import nz.ac.auckland.se206.screens.Screen;
 
 public class Timer {
   private int secondsLeft;
@@ -48,15 +47,20 @@ public class Timer {
 
   private void decrementSeconds() {
     secondsLeft--;
-    NotificationpanelController notificationpanelController = ((NotificationpanelController) ((GameController) App.getScreen(Screen.Name.GAME).getController()).getNotificationpanelController());
+    NotificationpanelController notificationpanelController =
+        ((NotificationpanelController)
+            ((GameController) App.getScreen(Screen.Name.GAME).getController())
+                .getNotificationpanelController());
 
     // Create a thread to run the time dependent notifications
-    TaggedThread notificationThread = new TaggedThread(() -> {
-        notificationpanelController.generateTimeDependentNotification(initialSeconds, secondsLeft);
-    });
+    TaggedThread notificationThread =
+        new TaggedThread(
+            () -> {
+              notificationpanelController.generateTimeDependentNotification(
+                  initialSeconds, secondsLeft);
+            });
     notificationThread.start();
-}
-
+  }
 
   private void showTimeout() {
     EndController endController = ((EndController) App.getScreen(Screen.Name.END).getController());
