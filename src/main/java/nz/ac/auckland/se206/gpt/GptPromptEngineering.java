@@ -34,8 +34,8 @@ public class GptPromptEngineering {
               + " which suspect, and in what room the sabotage occurred. There is one puzzle in"
               + " each room that leads to a clue."
               + " Respond in 11 words or fewer. You can have small-talk with the user. You must not"
-              + " include new hints of any form. Do not, for any reason, give the user any new"
-              + " hints or help with solving the game.";
+              + " give new hints of any form. Do not, for any reason, give the user any new"
+              + " hints or help the user solve the game.";
     }
     return prompt;
   }

@@ -37,7 +37,6 @@ public class GameController implements Screen {
   private ZoomAndPanHandler zoomAndPanHandler;
   private PuzzleLoader puzzleLoader;
   @FXML private SidepanelController sidePanelController;
-  @FXML private PopupController popupController;
   @FXML private SuspectController suspectController;
 
   private Timer countdownTimer;
@@ -231,22 +230,6 @@ public class GameController implements Screen {
     } else if (event.getSource() == gptMechanic) {
       clickedSuspect = Suspect.Name.MECHANIC;
     }
-
-    // if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
-    //   GameState.difficulty = "hard";
-    //   popupController.load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
-    // }
-
-    // if (event.getSource() == gptCaptain && !captainWelcomeShown) {
-    //   suspectController.getCurrentSuspect().getAssistant().welcome();
-    //   captainWelcomeShown = true;
-    // } else if (event.getSource() == gptScientist && !scientistWelcomeShown) {
-    //   suspectController.getCurrentSuspect().getAssistant().welcome();
-    //   scientistWelcomeShown = true;
-    // } else if (event.getSource() == gptMechanic && !mechanicWelcomeShown) {
-    //   suspectController.getCurrentSuspect().getAssistant().welcome();
-    //   mechanicWelcomeShown = true;
-    // }
 
     popupController.show(PopupController.Name.SUSPECT);
   }
