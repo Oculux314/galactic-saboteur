@@ -189,10 +189,9 @@ public class TestTubesPuzzleController extends Puzzle {
   private boolean checkSolution() {
     boolean isColourCorrect = false;
     boolean isGlitterColourCorrect = false;
-    int totalSelected = 0;
 
     // check if the total number of selected test tubes and glitter is correct
-    totalSelected = countSelected(selectedMap);
+    int totalSelected = countSelected(selectedMap);
     boolean isTotalSelectedCorrect = (totalSelected == 3);
     if (!isTotalSelectedCorrect) {
       return false;

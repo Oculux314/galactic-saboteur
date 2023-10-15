@@ -46,7 +46,6 @@ public class Puzzle implements RootPair.Controller {
       new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private Parent root;
   private PuzzleName puzzleName;
-  private Set<Puzzle> solvedPuzzles = new HashSet<>();
 
   public void setPuzzleName(PuzzleName puzzleName) {
     this.puzzleName = puzzleName;

@@ -34,9 +34,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private Node selectedNode;
   private List<ImageView> tools = new ArrayList<>();
   private List<Rectangle> rects = new ArrayList<>();
-  private boolean rec2Occupied;
-  private boolean rec3Occupied;
-  private boolean rec1Occupied;
 
   private int marginX = 10;
   private int marginY = 5;
@@ -79,8 +76,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    */
   @FXML
   private void onMouseDragged(MouseEvent event) {
-
-    checkRectanglesClear();
 
     double offsetX = -selectedNode.getLayoutX();
     double offsetY = -selectedNode.getLayoutY();
@@ -238,15 +233,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
     if (distanceX < 30 && distanceY < 15) {
       setPosition(source, rectX + marginX, rectY + marginY);
-
-      // Mark the rectangle as occupied if tool has snapped to it
-      if (rect == rec2) {
-        rec2Occupied = true;
-      } else if (rect == rec3) {
-        rec3Occupied = true;
-      } else if (rect == rec1) {
-        rec1Occupied = true;
-      }
     }
   }
 
@@ -261,37 +247,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private void setPosition(Node source, double x, double y) {
     source.setTranslateX(x - source.getLayoutX());
     source.setTranslateY(y - source.getLayoutY());
-  }
-
-  /**
-   * Checks if a tool has moved away from a rectangle
-   *
-   * @param
-   * @return
-   */
-  private void checkRectanglesClear() {
-    for (ImageView tool : tools) {
-      for (Rectangle rect : rects) {
-        double toolX = tool.getTranslateX() + tool.getLayoutX();
-        double toolY = tool.getTranslateY() + tool.getLayoutY();
-
-        // Disable flag if tool has moved away from rectangle / allow tools to snap to other
-        // rectangles
-        if (toolX != rect.getLayoutX() + marginX && toolY != rect.getLayoutY() + marginY) {
-          switch (rect.getId()) {
-            case "rec2":
-              rec2Occupied = false;
-              break;
-            case "rec3":
-              rec3Occupied = false;
-              break;
-            case "rec1":
-              rec1Occupied = false;
-              break;
-          }
-        }
-      }
-    }
   }
 
   /**
