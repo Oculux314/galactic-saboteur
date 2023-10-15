@@ -17,9 +17,9 @@
          </children>
       </Group>
       <Rectangle fx:id="recHide" arcHeight="5.0" arcWidth="5.0" fill="#131d23" height="65.0" layoutX="-157.0" layoutY="8.0" stroke="BLACK" strokeWidth="0.0" width="217.0" />
-      <ImageView fitHeight="80.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logo" fitHeight="80.0" fitWidth="89.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/logo.png" />
+            <Image url="@../../images/logo-AI.png" />
          </image>
       </ImageView>
    </children>

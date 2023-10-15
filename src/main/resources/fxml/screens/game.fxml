@@ -94,7 +94,7 @@
          <children>
             <ImageView fx:id="logo" fitHeight="80.0" fitWidth="80.0" layoutX="15.0" layoutY="15.0" onMouseEntered="#onLogoEntered" onMouseExited="#onLogoExited" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/logo.png" />
+                  <Image url="@../../images/logo-AI.png" />
                </image>
             </ImageView>
          </children>
