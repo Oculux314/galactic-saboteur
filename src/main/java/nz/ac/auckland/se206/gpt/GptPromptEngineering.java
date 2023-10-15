@@ -120,11 +120,9 @@ public class GptPromptEngineering {
 
   public static String getRiddle() {
     return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
-        + " spaceship named Spacey. Tell me a five line riddle in the style of a space"
-        + " themed poem in a modern tone. This riddle should only tell the user to select"
-        + " the correct key card combination, tell the user to answer correctly to save the"
-        + " ship and tell the user to solve the puzzles to get the clues. Keep the riddle"
-        + " short and simple (you have a maximum token size of 60).";
+        + " spaceship named Spacey. Tell me a four line riddle in the style of a space"
+        + " themed poem in a modern tone. The riddle needs to tell me to find the correct"
+        + " combination of clues to save the ship. Respond in less than 40 characters.";
   }
 
   public static String getMainNotificationPrompt() {
