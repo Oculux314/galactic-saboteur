@@ -30,6 +30,7 @@ public class MainController implements Screen {
   private double screenHeight = DEFAULT_HEIGHT;
   private double zoom = 1;
 
+  /** Specifies no actions to be performed during the loading process. */
   @Override
   public void onLoad() {
     // Do nothing

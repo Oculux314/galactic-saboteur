@@ -24,6 +24,7 @@ import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 
+/** GameController class that manages the main gameplay interactions and controls. */
 /** Controller class for the game screens. */
 public class GameController implements Screen {
 
@@ -49,6 +50,10 @@ public class GameController implements Screen {
   @FXML private HighlightButton gptMechanic;
   private Suspect.Name clickedSuspect;
 
+  /**
+   * Initializes the controller with the necessary components and sets up the zoom and pan handler,
+   * puzzle loader, and other UI elements.
+   */
   @FXML
   private void initialize() {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
@@ -58,11 +63,18 @@ public class GameController implements Screen {
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
   }
 
+  /** Represents the method called when the controller is loaded. */
   @Override
   public void onLoad() {
     // Do nothing
   }
 
+  /**
+   * Progresses the highlighting state to a new state based on the current game state. If the new
+   * state is the expected next state, it updates the highlighting accordingly.
+   *
+   * @param newState The new highlighting state to progress to.
+   */
   public void progressHighlightStateTo(HighlightState newState) {
     if (newState == null) {
       return;
@@ -75,6 +87,12 @@ public class GameController implements Screen {
     }
   }
 
+  /**
+   * Forces the highlighting state to the specified new state. Updates the game state's highlighting
+   * based on the new state provided.
+   *
+   * @param newState The new state to force the highlighting to.
+   */
   private void forceHighlightStateTo(HighlightState newState) {
     GameState.highlightState = newState;
 
@@ -97,21 +115,36 @@ public class GameController implements Screen {
     }
   }
 
+  /** Unhighlights all map buttons by removing any highlighting effects applied to them. */
   private void unhiglightAllMapButtons() {
     for (HighlightButton button : mapButtons.values()) {
       button.unhighlight();
     }
   }
 
+  /**
+   * Retrieves the controller responsible for handling pop-up interactions.
+   *
+   * @return The controller managing the pop-up functionality.
+   */
   public PopupController getPopupController() {
     return popupController;
   }
 
+  /**
+   * Highlights the reactor map button by applying a highlighting effect. Unhighlights all other map
+   * buttons to ensure only the reactor is highlighted.
+   */
   private void highlightReactor() {
     unhiglightAllMapButtons();
     mapButtons.get("btnReactor").highlight();
   }
 
+  /**
+   * Highlights all map buttons of a specific type by applying a highlighting effect.
+   *
+   * @param group The group of buttons to be highlighted.
+   */
   private void highlightAllMapButtonsOfType(Group group) {
     unhiglightAllMapButtons();
 
@@ -122,6 +155,10 @@ public class GameController implements Screen {
     }
   }
 
+  /**
+   * Initializes all map buttons by iterating through the groups and initializing map buttons in
+   * each group.
+   */
   private void intialiseMapButtons() {
     // Iterate through all the groups and initialise the map buttons in each group
     for (Node node : grpPanZoom.getChildren()) {
@@ -138,6 +175,11 @@ public class GameController implements Screen {
     }
   }
 
+  /**
+   * Initializes map buttons in a specific group by iterating through all the nodes in the group.
+   *
+   * @param mapButtonGroup The group of map buttons to be initialized.
+   */
   private void intialiseMapButtonsInGroup(Group mapButtonGroup) {
     // Iterate through all the nodes in the group and initialise the map buttons
     for (Node node : mapButtonGroup.getChildren()) {
@@ -155,39 +197,63 @@ public class GameController implements Screen {
     }
   }
 
+  /** Initializes the countdown timer based on the time limit specified in the game state. */
   public void initialiseTimer() {
     int initialSeconds = GameState.timeLimit * 60 + 1;
     countdownTimer = new Timer(initialSeconds, sidePanelController.getTimerLabel());
     countdownTimer.start();
   }
 
+  /** Resets the gameplay tutorial popup controller by loading the specified fxml file. */
   public void resetGpt() {
     popupController.load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
   }
 
+  /**
+   * Event handler for mouse press events.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onPress(MouseEvent event) {
     zoomAndPanHandler.onPress(event);
   }
 
+  /**
+   * Event handler for mouse drag events.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onDrag(MouseEvent event) {
     zoomAndPanHandler.onDrag(event);
   }
 
+  /**
+   * Event handler for scroll events.
+   *
+   * @param event The scroll event.
+   */
   @FXML
   private void onScroll(ScrollEvent event) {
     zoomAndPanHandler.onScroll(event);
   }
 
+  /** Provides a random clue to the user through the side panel controller. */
   public void giveRandomClue() {
     sidePanelController.getRandomClue();
   }
 
+  /** Updates the hint text based on the current game state. */
   public void updateHintText() {
     sidePanelController.setHintText(getHintsLeftText());
   }
 
+  /**
+   * Retrieves the appropriate hint text based on the current game state's difficulty.
+   *
+   * @return A string indicating the remaining hints or the hint policy based on the difficulty.
+   */
   private String getHintsLeftText() {
     if (GameState.difficulty == "easy") {
       return "You Have Unlimited Hints";
@@ -227,9 +293,14 @@ public class GameController implements Screen {
     }
   }
 
+  /**
+   * Handles the action when a suspect button is clicked. Sets the visibility of the corresponding
+   * group and opens the corresponding popup controller.
+   *
+   * @param event The mouse event representing the click action on the suspect button.
+   */
   @FXML
   private void onSuspectButtonClicked(MouseEvent event) {
-
     // Set the visibility of the corresponding group
     if (event.getSource() == gptScientist) {
       clickedSuspect = Suspect.Name.SCIENTIST;
@@ -242,25 +313,51 @@ public class GameController implements Screen {
     popupController.show(PopupController.Name.SUSPECT);
   }
 
+  /**
+   * Retrieves the name of the suspect that was clicked.
+   *
+   * @return The name of the suspect as an enum constant.
+   */
   public Suspect.Name getClickedSuspectName() {
     return clickedSuspect;
   }
 
+  /**
+   * Retrieves the mapping between the animated buttons and puzzle names from the puzzle loader.
+   *
+   * @return A HashMap containing the mapping between the animated buttons and puzzle names.
+   */
   private HashMap<AnimatedButton, PuzzleName> getButtonToPuzzleMap() {
     return puzzleLoader.getButtonToPuzzleMap();
   }
 
+  /**
+   * Opens the popup controller when the riddle is clicked.
+   *
+   * @throws IOException If an I/O error occurs during the process of displaying the popup
+   *     controller.
+   */
   @FXML
   private void onRiddleClicked() throws IOException {
     popupController.show(PopupController.Name.RIDDLE);
   }
 
+  /**
+   * Handles the action when the restart button is clicked. (Temporary development tool.)
+   *
+   * @throws IOException If an I/O error occurs during the restart process.
+   */
   @FXML
   private void onRestartClicked() throws IOException {
     // TODO: TEMPORARY DEV TOOL
     App.restart();
   }
 
+  /**
+   * Handles the action when the end button is clicked. (Temporary development tool.)
+   *
+   * @throws IOException If an I/O error occurs during the process of showing the end screen.
+   */
   @FXML
   private void onEndClicked() throws IOException {
     // TODO: TEMPORARY DEV TOOL
@@ -268,6 +365,11 @@ public class GameController implements Screen {
     endController.showEndOnLose();
   }
 
+  /**
+   * Handles the action when the test button is clicked. (Temporary development tool.)
+   *
+   * @throws IOException If an I/O error occurs during the testing process.
+   */
   @FXML
   private void onTestClicked() throws IOException {
     // TODO: TEMPORARY DEV TOOL
@@ -275,21 +377,41 @@ public class GameController implements Screen {
     System.out.println("You are filled with determination!");
   }
 
+  /**
+   * Handles the action when the logo is entered.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onLogoEntered(MouseEvent event) {
     notificationPanelController.onMouseEntered();
   }
 
+  /**
+   * Handles the action when the logo is exited.
+   *
+   * @param event The mouse event.
+   */
   @FXML
   private void onLogoExited(MouseEvent event) {
     notificationPanelController.onMouseExited();
   }
 
+  /**
+   * Adds a map button to the map of buttons.
+   *
+   * @param mapButton The map button to be added.
+   */
   public void addMapButton(HighlightButton mapButton) {
     mapButton.initialise();
     mapButtons.put(mapButton.getId(), mapButton);
   }
 
+  /**
+   * Retrieves the notification panel controller.
+   *
+   * @return The notification panel controller associated with this game controller.
+   */
   public NotificationpanelController getNotificationpanelController() {
     return notificationPanelController;
   }

@@ -14,7 +14,9 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
-/** Controller class for the title screen. */
+/**
+ * Controller class for the title screen, managing the introductory slideshow and game initiation.
+ */
 public class ExpositionController implements Screen {
 
   private static final int DELAY_MILLIS = 1000;
@@ -39,17 +41,23 @@ public class ExpositionController implements Screen {
   };
   private TaggedThread delayManager;
 
+  /** Invoked when the screen is loaded, performing necessary setup. */
   @Override
   public void onLoad() {
     // Do nothing
   }
 
+  /** Initiates the slideshow feature on the title screen. */
   public void startSlideshow() {
     btnContinue.setVisible(false); // Make button unclickable
     btnContinue.setOpacity(0);
     showNextImage();
   }
 
+  /**
+   * Displays the next image in the slideshow, or shows the continue button if the slideshow is
+   * finished.
+   */
   private void showNextImage() {
     // Check if slideshow is finished
     if (currentImageIndex >= imagePaths.length) {
@@ -63,10 +71,11 @@ public class ExpositionController implements Screen {
     delayManager.start();
   }
 
+  /** Displays the continue button, allowing the user to proceed to the next screen. */
   private void showContinueButton() {
     currentImageIndex = 0;
     btnContinue.setVisible(true); // Allow button to be clicked
-    
+
     Timeline btnFadeTransition =
         new Timeline(
             new KeyFrame(
@@ -74,6 +83,7 @@ public class ExpositionController implements Screen {
     btnFadeTransition.play();
   }
 
+  /** Updates the current image in the slideshow with the next image in the sequence. */
   private void updateImage() {
     // Load image
     String imagePath = imagePaths[currentImageIndex];
@@ -87,6 +97,10 @@ public class ExpositionController implements Screen {
     currentImageIndex++;
   }
 
+  /**
+   * Delays the display of the next image in the slideshow after the fade transition. If
+   * interrupted, the method will return without displaying the next image.
+   */
   private void delayAndShowImage() {
     // Fade
     Timeline fadeTransition =
@@ -123,6 +137,10 @@ public class ExpositionController implements Screen {
     App.setScreen(Screen.Name.GAME);
   }
 
+  /**
+   * Handles the event when the background is clicked. If there is an ongoing slideshow, it cancels
+   * the automatic image change and displays the next image.
+   */
   @FXML
   private void onBackgroundClicked() {
     if (delayManager != null) {
