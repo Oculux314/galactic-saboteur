@@ -277,12 +277,12 @@ public class GameController implements Screen {
 
   @FXML
   private void onLogoEntered(MouseEvent event) {
-    notificationPanelController.onMouseEntered(event);
+    notificationPanelController.onMouseEntered();
   }
 
   @FXML
   private void onLogoExited(MouseEvent event) {
-    notificationPanelController.onMouseExited(event);
+    notificationPanelController.onMouseExited();
   }
 
   public void addMapButton(HighlightButton mapButton) {

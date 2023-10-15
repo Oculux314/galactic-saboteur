@@ -3,10 +3,15 @@ package nz.ac.auckland.se206.gamechildren;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -14,13 +19,6 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.misc.TaggedThread;
-import javafx.scene.Group;
-import javafx.scene.control.Label;
-import javafx.scene.shape.Rectangle;
-import javafx.application.Platform;
-import javafx.scene.input.MouseEvent;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 
 public class NotificationpanelController {
 
@@ -48,12 +46,24 @@ public class NotificationpanelController {
     recHide.setVisible(false);
   }
 
-  public void onMouseEntered(MouseEvent event) {
+  /**
+   * Called when logo is being hovered.
+   *
+   * @param event the mouse event
+   * @return
+   */
+  public void onMouseEntered() {
     System.out.println("Mouse entered");
     holdNotification = true;
   }
 
-  public void onMouseExited(MouseEvent event) {
+  /**
+   * Called when logo is exited.
+   *
+   * @param event the mouse event
+   * @return
+   */
+  public void onMouseExited() {
     System.out.println("Mouse exited");
     holdNotification = false;
   }
@@ -143,11 +153,12 @@ public class NotificationpanelController {
    * @return
    */
   private void buildText(String response) {
-    Platform.runLater(() -> {
-      // Set label text as response
-      gptTextLabel.setText(response);
-      transition();
-  });
+    Platform.runLater(
+        () -> {
+          // Set label text as response
+          gptTextLabel.setText(response);
+          transition();
+        });
   }
 
   /**
@@ -165,44 +176,68 @@ public class NotificationpanelController {
 
     // Create a pause transition for 5 seconds
     pauseTransition = new PauseTransition(Duration.seconds(5));
-    pauseTransition.setOnFinished(event -> {
-        if (holdNotification) {
+    pauseTransition.setOnFinished(
+        event -> {
+          if (holdNotification) {
             setupHoldTimeline();
-        } else {
+          } else {
             performSlideOutTransition();
-        }
-    });
+          }
+        });
+
+    // Start the slide-in animation
+    slideInTransition.setOnFinished(
+        event -> {
+          recHide.setVisible(false); // Hide recHide when slide-in is complete
+        });
 
     // Start the slide-in animation
     slideInTransition.play();
     pauseTransition.play();
-}
+  }
 
-private void setupHoldTimeline() {
-  holdTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-      if (!holdNotification) {
-          // If holdNotification becomes false, stop the timeline and start the slide-out transition
-          holdTimeline.stop();
-          performSlideOutTransition();
-      }
-  }));
-  holdTimeline.setCycleCount(Timeline.INDEFINITE);
-  holdTimeline.play();
-}
+  /**
+   * Holds the notification
+   *
+   * @param
+   * @return
+   */
+  private void setupHoldTimeline() {
+    holdTimeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  if (!holdNotification) {
+                    holdTimeline.stop();
+                    performSlideOutTransition();
+                  }
+                }));
+    holdTimeline.setCycleCount(Timeline.INDEFINITE);
+    holdTimeline.play();
+  }
 
-// Method to perform the slide-out transition
-private void performSlideOutTransition() {
-  slideOutTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
-  slideOutTransition.setFromX(grpTextArea.getLayoutBounds().getWidth() + 85);
-  slideOutTransition.setToX(0);
-  slideOutTransition.setOnFinished(event2 -> {
-      grpTextArea.setTranslateX(0);
-      isTransitioning = false;
-      processNextNotification();
-      recHide.setVisible(false);
-  });
-  slideOutTransition.play();
-}
+  /**
+   * Performs the slide out transition.
+   *
+   * @param
+   * @return
+   */
+  private void performSlideOutTransition() {
+    recHide.setVisible(true);
+    slideOutTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
+    slideOutTransition.setFromX(grpTextArea.getLayoutBounds().getWidth() + 85);
+    slideOutTransition.setToX(0);
+    slideOutTransition.setOnFinished(
+        event2 -> {
+          // Reset notification parameters
+          grpTextArea.setTranslateX(0);
+          isTransitioning = false;
+          processNextNotification();
+          recHide.setVisible(false);
+        });
+    slideOutTransition.play();
+  }
 
   /**
    * Returns whether a notification is in progress.
