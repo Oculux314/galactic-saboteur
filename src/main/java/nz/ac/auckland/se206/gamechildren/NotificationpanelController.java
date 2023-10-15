@@ -180,9 +180,12 @@ public class NotificationpanelController {
    * @return
    */
   public void generateTimeDependentNotification(Integer initialSeconds, Integer secondsLeft) {
-    if (secondsLeft == initialSeconds / 2 || secondsLeft == 60 || secondsLeft == 15 || secondsLeft == 5) {
+    if (secondsLeft == initialSeconds / 2
+        || secondsLeft == 60
+        || secondsLeft == 15
+        || secondsLeft == 5) {
       generateNotification(true, secondsLeft);
-    } else if (secondsLeft == initialSeconds - 1) {
+    } else if (secondsLeft == initialSeconds - 1 || secondsLeft == initialSeconds - 2) {
       generateNotification();
     } else if (secondsLeft == 3 * initialSeconds / 4 || secondsLeft == initialSeconds / 4) {
       if (!isNotificationInProgress()) {
@@ -201,13 +204,13 @@ public class NotificationpanelController {
     int random = (int) (Math.random() * 3);
     switch (random) {
       case 0:
-        generateNotification("Tell the user each room has one problem to solve.");
+        generateNotification("Tell me each room has one problem to solve.");
         break;
       case 1:
-        generateNotification("Tell the user they can pan and zoom on their helmet overlay.");
+        generateNotification("Tell me the clues I recieve will unlock the reactor.");
         break;
       case 2:
-        generateNotification("Tell the user they can talk to the astronauts for help.");
+        generateNotification("Tell me I can talk to the astronauts for help.");
         break;
     }
   }

@@ -129,8 +129,8 @@ public class GptPromptEngineering {
 
   public static String getMainNotificationPrompt() {
     return "You are the onboard ship AI of the Brain-E Explorer spaceship. Someone has sabotaged"
-        + " the ship reactor and the user needs to fix it or the ship will explode. Your job"
-        + " is to assist the user. Respond in 15 words or less and do not quote using speech"
+        + " the ship reactor and I need to fix it or the ship will explode. Your job"
+        + " is to assist me. Respond in 15 words or less and do not quote using speech"
         + " marks.";
   }
 
@@ -140,22 +140,22 @@ public class GptPromptEngineering {
 
   private static String getGameState() {
     if (GameState.cluesFound) {
-      return "The user has found all three clues. Instruct them to deactivate the reactor meltdown"
-          + " using the combination of clues they have found.";
+      return "I have found all three clues. Instruct me to deactivate the reactor meltdown"
+          + " using the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
-      return "The user has solved a problem. Congratulate the user.";
+      return "I have solved a problem. Congratulate me.";
+    } else if (GameState.userWelcomed) {
+      return "Tell me I can pan and zoom on their helmet overlay, and that you will"
+          + " highlight the most critical element at each stage for them to examine.";
     } else {
-      return "Formally welcome the user on deck. Introduce the situation. Tell the"
-          + " user that you will highlight the most critical element at each stage on their"
-          + " helmet overlay for them to examine.";
+      GameState.userWelcomed = true;
+      return "Formally welcome the user onto the command deck. Introduce the situation.";
     }
   }
 
   public static String getTimeWarning(Integer timeLeft) {
-    return "Let the user know they has less than "
-        + timeLeft
-        + " seconds left to deactivate the meltdown.";
+    return "Let me I have less than " + timeLeft + " seconds left to deactivate the meltdown.";
   }
 }

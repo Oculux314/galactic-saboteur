@@ -29,7 +29,7 @@ public class GameState {
   public static boolean laboratoryPuzzleSolved;
   public static boolean navigationPuzzleSolved;
   public static boolean suspectsFound;
-  
+
   public static String correctSuspect;
   public static String correctRoom;
   public static String correctTime;
@@ -47,26 +47,34 @@ public class GameState {
 
   public static String notificationGameState;
   public static String notificationNextStep;
+  public static boolean userWelcomed;
 
   public static void reset() {
+    // General
     isGameover = false;
     currentScreen = null;
     numberOfHintsAsked = 0;
     highlightState = HighlightState.PAN_ARROWS;
 
+    // Puzzle states
     cluesFound = false;
     reactorPuzzleSolved = false;
     laboratoryPuzzleSolved = false;
     navigationPuzzleSolved = false;
     suspectsFound = false;
 
+    // Clues
     correctSuspect = null;
     correctRoom = null;
     correctTime = null;
 
+    // Randomly-chosen puzzles
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
+
+    // Notifications
+    userWelcomed = false;
 
     initialiseRoomStates();
   }
@@ -107,6 +115,4 @@ public class GameState {
     }
     return num;
   }
-
-  
 }
