@@ -180,12 +180,11 @@ public class NotificationpanelController {
    * @return
    */
   public void generateTimeDependentNotification(Integer initialSeconds, Integer secondsLeft) {
-    if (secondsLeft == initialSeconds / 2 || secondsLeft == 30) {
+    if (secondsLeft == initialSeconds / 2 || secondsLeft == 60 || secondsLeft == 15 || secondsLeft == 5) {
       generateNotification(true, secondsLeft);
     } else if (secondsLeft == initialSeconds - 1) {
       generateNotification();
-    } else if (secondsLeft == initialSeconds - initialSeconds / 4
-        || secondsLeft == initialSeconds / 4) {
+    } else if (secondsLeft == 3 * initialSeconds / 4 || secondsLeft == initialSeconds / 4) {
       if (!isNotificationInProgress()) {
         selectGeneralNotification();
       }
