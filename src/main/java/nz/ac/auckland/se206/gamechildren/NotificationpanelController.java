@@ -7,12 +7,12 @@ import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -144,7 +144,7 @@ public class NotificationpanelController {
    * @return
    */
   private void transition() {
-     recHide.setVisible(true);
+    recHide.setVisible(true);
     // Create the slide-in animation
     slideInTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
     slideInTransition.setFromX(0); // Start off-screen
@@ -190,11 +190,14 @@ public class NotificationpanelController {
    * @return
    */
   public void generateTimeDependentNotification(Integer initialSeconds, Integer secondsLeft) {
-    if (secondsLeft == initialSeconds / 2 || secondsLeft == 30) {
+    if (secondsLeft == initialSeconds / 2
+        || secondsLeft == 60
+        || secondsLeft == 15
+        || secondsLeft == 5) {
       generateNotification(true, secondsLeft);
-    } else if (secondsLeft == initialSeconds - 1) {
+    } else if (secondsLeft == initialSeconds - 1 || secondsLeft == initialSeconds - 2) {
       generateNotification();
-    } else if (secondsLeft == initialSeconds - initialSeconds / 4 || secondsLeft == initialSeconds / 4) {
+    } else if (secondsLeft % 60 == 0 && secondsLeft != initialSeconds) {
       if (!isNotificationInProgress()) {
         selectGeneralNotification();
       }
@@ -211,13 +214,13 @@ public class NotificationpanelController {
     int random = (int) (Math.random() * 3);
     switch (random) {
       case 0:
-        generateNotification("Each room has one puzzle to solve");
+        generateNotification("Tell me each room has one problem to solve.");
         break;
       case 1:
-        generateNotification("Some objects are highlighted for a reason");
+        generateNotification("Tell me the clues I recieve will unlock the reactor.");
         break;
       case 2:
-        generateNotification("They can talk to the astronauts for help");
+        generateNotification("Tell me I can talk to the astronauts for help.");
         break;
     }
   }
