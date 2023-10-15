@@ -9,6 +9,11 @@
 
 <Pane fx:id="panSpaceship" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.GameController">
    <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/background.jpg" />
+         </image>
+      </ImageView>
    <Group fx:id="grpPanZoom" onDragDetected="#onDrag" onMouseDragged="#onDrag" onMousePressed="#onPress" onScroll="#onScroll" onScrollStarted="#onScroll">
          <children>
             <ImageView fx:id="spaceship" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">

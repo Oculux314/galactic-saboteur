@@ -27,22 +27,23 @@ public class EndController implements Screen {
     imgEnd.setImage(new Image("images/" + imageUrl));
     App.speak(speech);
     lblEnd.setText(labelText);
-    lblEnd.setStyle("-fx-text-fill: " + labelColor + ";");
+    lblEnd.setStyle(lblEnd.getStyle() + "-fx-text-fill: " + labelColor + ";");
   }
 
   public void showEndOnWin() {
     showEndScreen();
-    setEndElements("expo1.jpg", "You win!", "You Saved The Ship And Escaped!", "WHITE");
+    setEndElements(
+        "expo1.jpg", "You win!", "CONGRATULATIONS\nYou Saved The Ship And Escaped!", "WHITE");
   }
 
   public void showEndOnLose() {
     showEndScreen();
-    setEndElements("gameover.png", "Gameover.", "Gameover.\nWrong Keycard Combination.", "RED");
+    setEndElements("gameover.png", "Gameover.", "GAMEOVER\nWrong Keycard Combination.", "RED");
   }
 
   public void showEndOnTimeout() {
     showEndScreen();
-    setEndElements("gameover.png", "Gameover.", "Gameover.\nReactor meltdown complete.", "RED");
+    setEndElements("gameover.png", "Gameover.", "GAMEOVER\nReactor meltdown complete.", "RED");
   }
 
   @FXML
