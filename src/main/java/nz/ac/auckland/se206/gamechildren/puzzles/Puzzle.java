@@ -98,12 +98,12 @@ public class Puzzle implements RootPair.Controller {
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
       GameState.navigationPuzzleSolved = true;
+      GameState.unsolvedRooms.remove("navigation");
     }
 
     GameState.solvedPuzzles++;
     if (isAllSolved()) {
       GameState.cluesFound = true;
-      GameState.unsolvedRooms.remove("navigation");
     }
 
     GameController gameController =
