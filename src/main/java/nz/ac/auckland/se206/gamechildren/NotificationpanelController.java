@@ -203,7 +203,8 @@ public class NotificationpanelController {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  // If the notification should not be held, stop the timeline and perform the slide out transition
+                  // If the notification should not be held, stop the timeline and perform the slide
+                  // out transition
                   if (!holdNotification) {
                     holdTimeline.stop();
                     performSlideOutTransition();
@@ -259,7 +260,8 @@ public class NotificationpanelController {
    * @return
    */
   public void generateTimeDependentNotification(Integer initialSeconds, Integer secondsLeft) {
-    // If the seconds left is half of the initial seconds, or 60, or 15, or 5, generate a time warning
+    // If the seconds left is half of the initial seconds, or 60, or 15, or 5, generate a time
+    // warning
     if (secondsLeft == initialSeconds / 2
         || secondsLeft == 60
         || secondsLeft == 15
@@ -268,7 +270,8 @@ public class NotificationpanelController {
     } else if (secondsLeft == initialSeconds - 1 || secondsLeft == initialSeconds - 2) {
       generateNotification();
     } else if (secondsLeft == initialSeconds / 4 || secondsLeft == 3 * initialSeconds / 4) {
-      // If the seconds left is a quarter or three quarters of the initial seconds, generate a general notification
+      // If the seconds left is a quarter or three quarters of the initial seconds, generate a
+      // general notification
       if (!isNotificationInProgress()) {
         selectGeneralNotification();
       }
@@ -282,15 +285,19 @@ public class NotificationpanelController {
    * @return
    */
   private void selectGeneralNotification() {
+    // Generate a random number between 0 and 2
     int random = (int) (Math.random() * 3);
     switch (random) {
       case 0:
+        // room related notification
         generateNotification("Tell me each room has one problem to solve.");
         break;
       case 1:
+        // puzzle related notification
         generateNotification("Tell me the clues I recieve will unlock the reactor.");
         break;
       case 2:
+        // assistant reminder related notification
         generateNotification("Tell me I can talk to the astronauts for help.");
         break;
     }

@@ -132,9 +132,11 @@ public class Assistant {
   }
 
   private TaggedThread executeApiCall() {
+    // Create a request to the GPT-3.5 model API
     ChatCompletionRequest request =
         new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(80);
 
+    // Add the chat messages to the request
     if (!onlySystemMessage) {
       for (ChatMessage message : chatMessages) {
         request.addMessage(message);
@@ -142,10 +144,16 @@ public class Assistant {
     }
     request.addMessage(systemMessage);
 
+    // Create a task to execute the API call
     Task<Void> apiCallTask = new ApiCallTask(request);
 
+    // Create a thread to run the task
     TaggedThread apiCallThread = new TaggedThread(apiCallTask);
+
+    // Start the thread
     apiCallThread.start();
+
+    // Return the thread
     return apiCallThread;
   }
 
@@ -190,18 +198,26 @@ public class Assistant {
   }
 
   public void respondToUser() {
+    // Disable user response while waiting for response
     narrationBox.disableUserResponse();
+
+    // Get user message
     String userMessage = narrationBox.getUserResponse();
 
+    // Clear user response
     narrationBox.clearUserResponse();
+
+    // Add user message to chat messages
     if (userMessage.equals("")) {
       narrationBox.enableUserResponse();
       return;
     }
 
+    // Add user message to chat messages
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
 
+    // Execute API call and render narration box, update hint text once finished
     executeApiCallWithCallback(
         () -> {
           renderNarrationBox();

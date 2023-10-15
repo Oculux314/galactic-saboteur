@@ -122,6 +122,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML
   private void onSubmitClicked() {
     // Check if all tools are in the correct place
+    // create a thread to clear the label after 1.5 seconds
     TaggedThread labelThread =
         new TaggedThread(
             () -> {
@@ -133,15 +134,18 @@ public class ReactorToolboxPuzzleController extends Puzzle {
               }
             });
 
+    // Check if all tools are in the correct place
     boolean allToolsInRectangles =
         isToolInRectangle(imvTool2, rec2)
             && isToolInRectangle(imvTool3, rec3)
             && isToolInRectangle(imvTool1, rec1);
 
+    // If all tools are in the correct place, set the puzzle as solved
     if (allToolsInRectangles) {
       setSolved();
       clearPuzzle(panReactorToolbox);
     } else {
+      // If not, display a message
       lblVerdict.setText("Incorrect \n Try again");
       labelThread.start();
     }

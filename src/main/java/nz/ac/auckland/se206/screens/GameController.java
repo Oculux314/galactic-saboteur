@@ -39,8 +39,7 @@ public class GameController implements Screen {
   private PuzzleLoader puzzleLoader;
   @FXML private SidepanelController sidePanelController;
   @FXML private SuspectController suspectController;
-  @FXML
-  private PopupController popupController;
+  @FXML private PopupController popupController;
   @FXML private NotificationpanelController notificationPanelController;
 
   private Timer countdownTimer;
@@ -124,9 +123,11 @@ public class GameController implements Screen {
   }
 
   private void intialiseMapButtons() {
+    // Iterate through all the groups and initialise the map buttons in each group
     for (Node node : grpPanZoom.getChildren()) {
       Group mapButtonGroup;
 
+      // If the node is not a group, skip it
       try {
         mapButtonGroup = (Group) node;
       } catch (ClassCastException e) {

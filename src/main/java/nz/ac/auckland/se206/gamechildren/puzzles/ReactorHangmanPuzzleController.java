@@ -106,12 +106,15 @@ public class ReactorHangmanPuzzleController extends Puzzle {
    * @return true if the input is valid, false otherwise
    */
   private boolean checkValidInput(String letter) {
+    // Check if the input is valid
     if (letter.length() > 1
         || !letter.matches("[a-zA-Z]+")
         || lblGuessedLetters1.getText().contains(letter.toUpperCase())
         || lblGuessedLetters2.getText().contains(letter.toUpperCase())) {
+      // If the input is invalid return false
       return false;
     } else {
+      // If the input is valid
       return true;
     }
   }

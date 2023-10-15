@@ -90,14 +90,19 @@ public class GameState {
   }
 
   private static void initialiseRoomStates() {
+    // Initialise room states
     reactorRoomGameState = "User hasn't found where the puzzle is yet.";
     labRoomGameState = "User hasn't found where the puzzle is yet.";
     controlRoomGameState = "User hasn't found where the puzzle is yet.";
+
+    // initlise puzzle messages
     puzzleSolvedMessage =
         "User has solved the puzzle in this room already. They have got a clue which they can get"
             + " more information about if the hover over the clues in the bottom bar.";
     puzzleOpenedMessage =
         "User has found the puzzle, but is having difficulty completing the puzzle.";
+
+    // add rooms to the unsolved rooms list
     unsolvedRooms.add("reactor");
     unsolvedRooms.add("labaoratory");
     unsolvedRooms.add("navigation");

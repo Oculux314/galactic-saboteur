@@ -8,13 +8,18 @@ import nz.ac.auckland.se206.misc.GameState;
 public class GptPromptEngineering {
 
   public static String getMainPrompt(String job) {
+    // create an empty string to store the prompt
     String prompt;
+    // check if the user is allowed hints
     boolean isUserAllowedHints = !GameState.isHintLimitReached();
 
+    // get the suspect information and puzzle information
     String suspectInformation = getSuspectInformation(job);
     String puzzleInformation = getPuzzleInformation(job);
 
     if (isUserAllowedHints) {
+      // if the user is allowed hints, add the hint information to the prompt and say hints are
+      // allowed to the gpt api
       prompt =
           suspectInformation
               + " Assist users in finding and solving the puzzle discreetly through hints and be a"
@@ -27,6 +32,8 @@ public class GptPromptEngineering {
               + " 'hint:' with nothing before it. Do this only if the user asks for help."
               + " Please respond in 18 words or fewer.";
     } else {
+      // if the user is not allowed hints, don't add the hint information to the prompt and say no
+      // hints to the gpt api
       prompt =
           suspectInformation
               + " The user can only escape the ship when they find out what time, which suspect,"
@@ -35,6 +42,7 @@ public class GptPromptEngineering {
               + " hints of any form. Do not, for any reason, give the user any new hints or help"
               + " the user solve the game. Please respond in 18 words or fewer.";
     }
+    // return the prompt
     return prompt;
   }
 
@@ -51,18 +59,22 @@ public class GptPromptEngineering {
   }
 
   public static String getSuspectInformation(String job) {
+    // get the suspect information depending on what suspect the user is talking to
     String suspectInformation = "";
     if (job == "Spacey's mechanic") {
+      // set the suspect information to the mechanic information
       suspectInformation =
           "Your role: Mechanic on the Brain-e Explorer spaceship which is going to Mars. You love"
               + " problem solving, suduko and all board games. You hate pinapple on pizza. Feel"
               + " free to bring up these details in small-talk.";
     } else if (job == "Spacey's scientist") {
+      // set the suspect information to the scientist information
       suspectInformation =
           "Your role: Scientist on the Brain-e Explorer spaceship which is going to Mars. You love"
               + " atoms and chemsitry, star gazing and love exercising your brain. You don't like"
               + " mushrooms. Feel free to bring up these details in small-talk.";
     } else if (job == "Spacey's captain") {
+      // set the suspect information to the captain information
       suspectInformation =
           "Your role: Captain on the Brain-e Explorer which is going to Mars. You are amazing at"
               + " cooking and love to eat pizza. You are scared that the reactor is going to"
@@ -209,17 +221,21 @@ public class GptPromptEngineering {
   }
 
   private static String getGameState() {
+    // check if the user has solved all the puzzles
     if (GameState.cluesFound) {
       return "I have found all three clues. Instruct me to deactivate the reactor meltdown"
           + " using the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
+      // check if the user has solved any of the puzzles
       return "I have solved a problem. Congratulate me.";
     } else if (GameState.userWelcomed) {
+      // check if the user has been welcomed
       return "Tell me I can pan and zoom on their helmet overlay, and that you will"
           + " highlight the most critical element at each stage for them to examine.";
     } else {
+      // if the user hasn't been welcomed, welcome them
       GameState.userWelcomed = true;
       return "Formally welcome the user onto the command deck. Introduce the situation.";
     }
