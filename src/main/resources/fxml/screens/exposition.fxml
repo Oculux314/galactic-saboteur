@@ -7,10 +7,8 @@
 
 <Pane fx:id="panFullScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onBackgroundClicked" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.screens.ExpositionController">
    <children>
-      <ImageView fx:id="imageView" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
-         <image>
-            <Image url="@../../images/expo6.png" />
-         </image></ImageView>
+      <ImageView fx:id="fadeInImage" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" />
+      <ImageView fx:id="fadeOutImage" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" />
       <AnimatedButton fx:id="btnContinue" fitHeight="80.0" fitWidth="80.0" layoutX="360.0" layoutY="473.0" onMouseClicked="#onContinueClicked" preserveRatio="true">
          <image>
             <Image url="@../../images/play.png" />
