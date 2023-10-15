@@ -196,6 +196,10 @@ public class GptPromptEngineering {
     return getMainNotificationPrompt() + getGameState();
   }
 
+  public static String getTimeWarning(Integer timeLeft) {
+    return "Let me I have less than " + timeLeft + " seconds left to deactivate the meltdown.";
+  }
+
   private static String getGameState() {
     if (GameState.cluesFound) {
       return "I have found all three clues. Instruct me to deactivate the reactor meltdown"
@@ -211,9 +215,5 @@ public class GptPromptEngineering {
       GameState.userWelcomed = true;
       return "Formally welcome the user onto the command deck. Introduce the situation.";
     }
-  }
-
-  public static String getTimeWarning(Integer timeLeft) {
-    return "Let me I have less than " + timeLeft + " seconds left to deactivate the meltdown.";
   }
 }

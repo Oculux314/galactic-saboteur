@@ -2,19 +2,21 @@ package nz.ac.auckland.se206.gamechildren;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
-import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
-import nz.ac.auckland.se206.misc.GameState.HighlightState;
+import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.misc.GameState.HighlightState;
+import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
+import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;
-import nz.ac.auckland.se206.misc.GameState;
 
 public class PopupController implements RootPair.Controller {
 
