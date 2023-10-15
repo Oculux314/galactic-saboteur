@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -26,8 +25,6 @@ public class NotificationpanelController {
   @FXML private Rectangle recHide;
   @FXML private Group grpTextArea;
 
-  private String notification;
-  private String gamestate;
   private RiddleController riddleController;
   private ChatCompletionRequest chatCompletionRequest;
   private TranslateTransition slideInTransition;
@@ -35,7 +32,6 @@ public class NotificationpanelController {
   private TranslateTransition slideOutTransition;
   private Queue<String> notificationQueue = new LinkedList<>();
   private boolean isTransitioning = false;
-  private int notificationsgiven = 0;
   private boolean holdNotification = false;
   private Timeline holdTimeline;
 
@@ -91,7 +87,6 @@ public class NotificationpanelController {
     if (!isTransitioning) {
       processNextNotification();
     }
-    notificationsgiven++;
   }
 
   /**
@@ -116,7 +111,6 @@ public class NotificationpanelController {
     if (!isTransitioning) {
       processNextNotification();
     }
-    notificationsgiven++;
   }
 
   /**
