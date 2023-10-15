@@ -52,8 +52,13 @@ public class GameState {
     isGameover = false;
     currentScreen = null;
     numberOfHintsAsked = 0;
-    cluesFound = false;
     highlightState = HighlightState.PAN_ARROWS;
+
+    cluesFound = false;
+    reactorPuzzleSolved = false;
+    laboratoryPuzzleSolved = false;
+    navigationPuzzleSolved = false;
+    suspectsFound = false;
 
     correctSuspect = null;
     correctRoom = null;
