@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.NotificationpanelController">
    <children>
       <Group fx:id="grpTextArea">
          <children>
-            <TextArea fx:id="gptTextArea" editable="false" layoutX="-334.0" layoutY="10.0" prefHeight="60.0" prefWidth="412.0" style="-fx-control-inner-background: #808080;" wrapText="true" />
+            <TextArea fx:id="gptTextArea" editable="false" layoutX="-434.0" layoutY="10.0" prefHeight="60.0" prefWidth="412.0" style="-fx-control-inner-background: #808080;" wrapText="true" />
          </children>
       </Group>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#131d23" height="65.0" layoutX="-137.0" layoutY="8.0" stroke="BLACK" strokeWidth="0.0" width="217.0" />
+      <Rectangle fx:id="recHide" arcHeight="5.0" arcWidth="5.0" fill="#131d23" height="65.0" layoutX="-137.0" layoutY="8.0" stroke="BLACK" strokeWidth="0.0" width="217.0" />
       <ImageView fitHeight="80.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/logo.png" />

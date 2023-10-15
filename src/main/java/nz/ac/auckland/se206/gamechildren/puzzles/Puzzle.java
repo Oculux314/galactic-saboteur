@@ -107,10 +107,13 @@ public class Puzzle implements RootPair.Controller {
     GameController gameController =
         (GameController) App.getScreen(Screen.Name.GAME).getController();
     NotificationpanelController notificationpanelcontroller = gameController.getNotificationpanelController();
-    notificationpanelcontroller.generateNotification();
+    
+    // If there is no notification in progress, generate a notification
+    if (!notificationpanelcontroller.isNotificationInProgress()) {
+      notificationpanelcontroller.generateNotification();
+    }
 
     gameController.giveRandomClue();
-    
   }
 
   public Parent getRoot() {
