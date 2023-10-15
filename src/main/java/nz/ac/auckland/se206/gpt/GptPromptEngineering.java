@@ -7,6 +7,13 @@ import nz.ac.auckland.se206.misc.GameState;
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
+  /**
+   * Generates the main prompt for the GPT API based on the provided job, including information
+   * about suspects and puzzles, as well as hint availability.
+   *
+   * @param job The job title associated with the prompt.
+   * @return The main prompt to be used for the GPT API call.
+   */
   public static String getMainPrompt(String job) {
     // create an empty string to store the prompt
     String prompt;
@@ -46,18 +53,45 @@ public class GptPromptEngineering {
     return prompt;
   }
 
+  /**
+   * Generates the user interaction prompt based on the provided job, including the main prompt
+   * followed by an instruction to respond to the user's latest message.
+   *
+   * @param job The job title associated with the prompt.
+   * @return The user interaction prompt.
+   */
   public static String getUserInteractionPrompt(String job) {
     return getMainPrompt(job) + "Respond to the user's latest message.";
   }
 
+  /**
+   * Generates the welcome prompt based on the provided job, including the main prompt followed by
+   * an instruction to introduce oneself and welcome the user.
+   *
+   * @param job The job title associated with the prompt.
+   * @return The welcome prompt.
+   */
   public static String getWelcomePrompt(String job) {
-    return getMainPrompt(job) + "Introduce yourself what your role is and welcome the user.";
+    return getMainPrompt(job)
+        + "Introduce yourself and explain what your role is, then welcome the user.";
   }
 
+  /**
+   * Retrieves the internet error message when there are issues with the internet connection.
+   *
+   * @return The internet error message.
+   */
   public static String getInternetErrorMessage() {
-    return "Sorry, I'm having trouble picking you up! Please check your internet connection.";
+    return "Sorry, I'm having trouble connecting! Please check your internet connection.";
   }
 
+  /**
+   * Retrieves the suspect information based on the provided job, including details specific to each
+   * suspect on the Brain-e Explorer spaceship.
+   *
+   * @param job The job title associated with the suspect.
+   * @return The suspect information associated with the job.
+   */
   public static String getSuspectInformation(String job) {
     // get the suspect information depending on what suspect the user is talking to
     String suspectInformation = "";
@@ -84,7 +118,15 @@ public class GptPromptEngineering {
     return suspectInformation;
   }
 
+  /**
+   * Retrieves the puzzle information based on the provided job, including details about the
+   * specific puzzle associated with each job on the Brain-e Explorer spaceship.
+   *
+   * @param job The job title associated with the puzzle.
+   * @return The puzzle information associated with the job.
+   */
   public static String getPuzzleInformation(String job) {
+    // get the puzzle information depending on what suspect the user is talking to
     String puzzleInformation = "";
     if (job == "Spacey's mechanic") { // reactor puzzle
       puzzleInformation = getReactorPuzzleInformation();
@@ -96,6 +138,12 @@ public class GptPromptEngineering {
     return puzzleInformation;
   }
 
+  /**
+   * Retrieves the specific information related to the reactor puzzle, depending on the type of
+   * reactor puzzle the user is currently attempting.
+   *
+   * @return The details and instructions associated with the reactor puzzle currently in progress.
+   */
   public static String getReactorPuzzleInformation() {
     // start with an empty string incase this puzzle is not the one the user is doing
     String puzzle = "";
@@ -134,6 +182,13 @@ public class GptPromptEngineering {
     return puzzle;
   }
 
+  /**
+   * Retrieves the specific information related to the laboratory puzzle, depending on the type of
+   * laboratory puzzle the user is currently attempting.
+   *
+   * @return The details and instructions associated with the laboratory puzzle currently in
+   *     progress.
+   */
   public static String getLaboratoryPuzzleInformation() {
     // start with an empty string incase this puzzle is not the one the user is doing
     String puzzle = "";
@@ -155,6 +210,13 @@ public class GptPromptEngineering {
     return puzzle;
   }
 
+  /**
+   * Retrieves the specific information related to the control room puzzle, depending on the type of
+   * control room puzzle the user is currently attempting.
+   *
+   * @return The details and instructions associated with the control room puzzle currently in
+   *     progress.
+   */
   public static String getControlRoomPuzzleInformation() {
     // start with an empty string incase this puzzle is not the one the user is doing
     String puzzle = "";
@@ -170,27 +232,42 @@ public class GptPromptEngineering {
     return puzzle;
   }
 
+  /**
+   * Retrieves the current game state based on the suspect the user is interacting with.
+   *
+   * @param job The role of the suspect the user is currently interacting with.
+   * @return The current game state information depending on the suspect's role.
+   */
   public static String getGameState(String job) {
-    // return game state depending on what suspect the user is talking to
+    // get the game state depending on what suspect the user is talking to
     String gameState = "";
-    if (job == "Spacey's mechanic") { // reactor puzzle
+    if (job == "Spacey's mechanic") { // Reactor puzzle
       gameState = GameState.reactorRoomGameState;
-    } else if (job == "Spacey's scientist") { // lab puzzle
+    } else if (job == "Spacey's scientist") { // Lab puzzle
       gameState = GameState.labRoomGameState;
-    } else if (job == "Spacey's captain") { // navigation puzzle
+    } else if (job == "Spacey's captain") { // Navigation puzzle
       gameState = GameState.controlRoomGameState;
     }
 
+    // check if the user has solved the puzzle
     if (gameState == GameState.puzzleSolvedMessage) {
       gameState = gameState + whatOtherRoomToLookIn();
     }
+    // return the game state
     return gameState;
   }
 
+  /**
+   * Provides information about the next room the user should investigate based on which rooms
+   * remain unsolved.
+   *
+   * @return Information about the next room the user should investigate.
+   */
   private static String whatOtherRoomToLookIn() {
-    // retreieve what rooms are unsolved
+    // get the list of unsolved rooms
     List<String> unsolvedRooms = GameState.unsolvedRooms;
 
+    // check if there are no unsolved rooms
     if (unsolvedRooms.isEmpty()) {
       return "The user has solved all the puzzles, go to the unstable reactor to escape the ship."
           + " Be quick.";
@@ -199,34 +276,67 @@ public class GptPromptEngineering {
     }
   }
 
+  /**
+   * Retrieves the riddle for the AI of the space-themed Cluedo escape room.
+   *
+   * @return The riddle for the AI, prompting the user to find the correct combination of clues to
+   *     save the ship.
+   */
   public static String getRiddle() {
-    // get the riddle
-    return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
-        + " spaceship named Spacey. Tell me a four line riddle in the style of a space"
-        + " themed poem in a modern tone. The riddle needs to tell me to find the correct"
-        + " combination of clues to save the ship. Respond in less than 40 characters.";
+    // return the riddle for the AI
+    return "You are the AI of a space-themed cluedo escape room, you are the built-in AI of the"
+        + " spaceship named Spacey. Tell me a four-line riddle in the style of a"
+        + " space-themed poem in a modern tone. The riddle needs to tell me to find the"
+        + " correct combination of clues to save the ship. Respond in less than 40"
+        + " characters.";
   }
 
+  /**
+   * Retrieves the main notification prompt for the onboard ship AI of the Brain-E Explorer
+   * spaceship.
+   *
+   * @return The main notification prompt for the AI, providing instructions for assisting the user
+   *     within the specified word limit.
+   */
   public static String getMainNotificationPrompt() {
     return "You are the onboard ship AI of the Brain-E Explorer spaceship. Someone has sabotaged"
-        + " the ship reactor and I need to fix it or the ship will explode. Your job"
-        + " is to assist me. Respond in 15 words or less and do not quote using speech"
-        + " marks.";
+        + " the ship reactor and I need to fix it or the ship will explode. Your job is to"
+        + " assist me. Respond in 15 words or less and do not quote using speech marks.";
   }
 
+  /**
+   * Retrieves the main notification prompt for the onboard ship AI of the Brain-E Explorer
+   * spaceship, along with the current game state.
+   *
+   * @return The main notification prompt for the AI, including instructions for assisting the user
+   *     and the current game state.
+   */
   public static String getNotification() {
     return getMainNotificationPrompt() + getGameState();
   }
 
+  /**
+   * Generates a time warning for the AI based on the time left to deactivate the meltdown.
+   *
+   * @param timeLeft The remaining time in seconds to deactivate the meltdown.
+   * @return A time warning for the AI, indicating the remaining time to resolve the situation.
+   */
   public static String getTimeWarning(Integer timeLeft) {
     return "Let me I have less than " + timeLeft + " seconds left to deactivate the meltdown.";
   }
 
+  /**
+   * Retrieves the current game state information for the AI, based on the progress and actions of
+   * the user.
+   *
+   * @return The current game state information for the AI to provide suitable instructions to the
+   *     user.
+   */
   private static String getGameState() {
-    // check if the user has solved all the puzzles
+    // check if the user has found all three clues
     if (GameState.cluesFound) {
-      return "I have found all three clues. Instruct me to deactivate the reactor meltdown"
-          + " using the combination of clues I have found.";
+      return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
+          + " the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
@@ -234,8 +344,8 @@ public class GptPromptEngineering {
       return "I have solved a problem. Congratulate me.";
     } else if (GameState.userWelcomed) {
       // check if the user has been welcomed
-      return "Tell me I can pan and zoom on their helmet overlay, and that you will"
-          + " highlight the most critical element at each stage for them to examine.";
+      return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
+          + " most critical element at each stage for them to examine.";
     } else {
       // if the user hasn't been welcomed, welcome them
       GameState.userWelcomed = true;
