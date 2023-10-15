@@ -8,7 +8,7 @@ import nz.ac.auckland.se206.misc.GameState;
 public class GptPromptEngineering {
 
   public static String getMainPrompt(String job) {
-    String prompt = "";
+    String prompt;
     boolean isUserAllowedHints = !GameState.isHintLimitReached();
 
     String suspectInformation = getSuspectInformation(job);

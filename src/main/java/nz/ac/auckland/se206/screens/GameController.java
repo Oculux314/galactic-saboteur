@@ -50,10 +50,6 @@ public class GameController implements Screen {
   @FXML private HighlightButton gptMechanic;
   private Suspect.Name clickedSuspect;
 
-  // private boolean captainWelcomeShown = false;
-  // private boolean scientistWelcomeShown = false;
-  // private boolean mechanicWelcomeShown = false;
-
   @FXML
   private void initialize() {
     zoomAndPanHandler = new ZoomAndPanHandler(grpPanZoom, panSpaceship);
@@ -241,10 +237,6 @@ public class GameController implements Screen {
 
     popupController.show(PopupController.Name.SUSPECT);
   }
-
-  // private SuspectController getSuspectController() {
-  //   return suspectController;
-  // }
 
   public Suspect.Name getClickedSuspectName() {
     return clickedSuspect;

@@ -5,10 +5,6 @@ import nz.ac.auckland.se206.misc.Utils;
 
 public class HighlightButton extends StateButton {
 
-  public HighlightButton() {
-    super();
-  }
-
   public void initialise() {
     setupStates();
   }
