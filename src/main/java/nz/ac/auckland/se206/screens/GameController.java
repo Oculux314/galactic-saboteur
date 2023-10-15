@@ -38,6 +38,8 @@ public class GameController implements Screen {
   private PuzzleLoader puzzleLoader;
   @FXML private SidepanelController sidePanelController;
   @FXML private SuspectController suspectController;
+  @FXML
+  public PopupController popupController;
 
   private Timer countdownTimer;
 

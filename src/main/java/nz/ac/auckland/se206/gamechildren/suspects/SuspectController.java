@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.StateButton;
+import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.suspects.Suspect.Name;
 import nz.ac.auckland.se206.gpt.Assistant;
 import nz.ac.auckland.se206.misc.GameState;
@@ -29,9 +30,9 @@ public class SuspectController implements RootPair.Controller {
   private Name currentSuspect;
   private int numberOfHintsAskedToSuspect;
 
-  private static boolean captainWelcomeShown = false;
-  private static boolean scientistWelcomeShown = false;
-  private static boolean mechanicWelcomeShown = false;
+  private boolean captainWelcomeShown = false;
+  private boolean scientistWelcomeShown = false;
+  private boolean mechanicWelcomeShown = false;
 
   @FXML
   private void initialize() {
@@ -99,18 +100,25 @@ public class SuspectController implements RootPair.Controller {
   @FXML
   private void onUserMessage(ActionEvent event) {
 
-    if (currentSuspect == Name.CAPTAIN && !captainWelcomeShown) {
-      getCurrentSuspect().getAssistant().welcome();
-      captainWelcomeShown = true;
-    } else if (currentSuspect == Name.SCIENTIST && !scientistWelcomeShown) {
-      getCurrentSuspect().getAssistant().welcome();
-      scientistWelcomeShown = true;
-    } else if (currentSuspect == Name.MECHANIC && !mechanicWelcomeShown) {
-      getCurrentSuspect().getAssistant().welcome();
-      mechanicWelcomeShown = true;
+    if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
+      GameState.difficulty = "hard";
+      getGameController()
+          .popupController
+          .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     }
 
-    
+    // if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
+    //   GameState.difficulty = "hard";
+    //   TaggedThread loadHardState =
+    //       new TaggedThread(
+    //           () -> {
+    //             getGameController()
+    //                 .popupController
+    //                 .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
+    //           });
+    //   loadHardState.start();
+    // }
+
     System.out.println();
     System.out.println();
 
