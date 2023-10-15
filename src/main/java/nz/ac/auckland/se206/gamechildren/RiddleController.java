@@ -74,7 +74,8 @@ public class RiddleController implements RootPair.Controller {
         && btnWhen.getState().equals(GameState.correctTime);
   }
 
-  public ChatMessage runGpt(ChatMessage msg, ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
+  public ChatMessage runGpt(ChatMessage msg, ChatCompletionRequest chatCompletionRequest)
+      throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
     Choice result = chatCompletionResult.getChoices().iterator().next();

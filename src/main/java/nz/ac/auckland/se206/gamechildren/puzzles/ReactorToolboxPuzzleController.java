@@ -29,7 +29,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML private Rectangle rec1;
   @FXML private Label lblVerdict;
 
-  private double pressedX, pressedY;
+  private double pressedX;
+  private double pressedY;
   private Node selectedNode;
   private List<ImageView> tools = new ArrayList<>();
   private List<Rectangle> rects = new ArrayList<>();
