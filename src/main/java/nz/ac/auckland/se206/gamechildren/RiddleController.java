@@ -26,7 +26,7 @@ public class RiddleController implements RootPair.Controller {
   @FXML private AnimatedButton btnAnswer;
   @FXML private TextArea gptTextArea = new TextArea();
 
-  private ChatCompletionRequest chatCompletionRequest;
+  private ChatCompletionRequest riddleChatCompletionRequest;
 
   @FXML
   private void initialize() throws ApiProxyException, IOException {
@@ -42,7 +42,7 @@ public class RiddleController implements RootPair.Controller {
     btnWhen.addState("Afternoon", "times/time2.jpg");
     btnWhen.addState("Night", "times/time3.jpg");
 
-    chatCompletionRequest =
+    riddleChatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(75);
 
     generateRiddle();
@@ -74,7 +74,7 @@ public class RiddleController implements RootPair.Controller {
         && btnWhen.getState().equals(GameState.correctTime);
   }
 
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  public ChatMessage runGpt(ChatMessage msg, ChatCompletionRequest chatCompletionRequest) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
     Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -90,7 +90,7 @@ public class RiddleController implements RootPair.Controller {
         new TaggedThread(
             () -> {
               try {
-                ChatMessage response = runGpt(msg);
+                ChatMessage response = runGpt(msg, riddleChatCompletionRequest);
                 gptTextArea.appendText(response.getContent());
               } catch (ApiProxyException e) {
                 e.printStackTrace();

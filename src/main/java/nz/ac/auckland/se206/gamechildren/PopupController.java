@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;
+import nz.ac.auckland.se206.misc.GameState;
 
 public class PopupController implements RootPair.Controller {
 
@@ -69,6 +70,7 @@ public class PopupController implements RootPair.Controller {
   public void show(Name name) {
     setRoot(name);
     show();
+    GameState.suspectsFound = true;
   }
 
   private void show() {
@@ -100,6 +102,8 @@ public class PopupController implements RootPair.Controller {
     switch (currentPopup) {
       case RIDDLE:
         return HighlightState.SUSPECTS;
+      case SUSPECT:
+        return HighlightState.PUZZLES;
       case PUZZLE_REACTOR:
       case PUZZLE_LABORATORY:
       case PUZZLE_NAVIGATION:

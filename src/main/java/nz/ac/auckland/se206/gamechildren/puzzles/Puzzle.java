@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.GameController;
@@ -81,27 +82,41 @@ public class Puzzle implements RootPair.Controller {
   }
 
   public boolean isAllSolved() {
-    return solvedPuzzles.size() == 3;
+    return GameState.solvedPuzzles == 3;
   }
 
   public void setSolved() {
     isPuzzleSolved = true;
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
       GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.reactorPuzzleSolved = true;
       GameState.unsolvedRooms.remove("reactor");
     } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.laboratoryPuzzleSolved = true;
       GameState.unsolvedRooms.remove("laboratory");
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
+      GameState.navigationPuzzleSolved = true;
       GameState.unsolvedRooms.remove("navigation");
+    }
+
+    GameState.solvedPuzzles++;
+    if (isAllSolved()) {
+      GameState.cluesFound = true;
     }
 
     GameController gameController =
         (GameController) App.getScreen(Screen.Name.GAME).getController();
+    NotificationpanelController notificationpanelcontroller =
+        gameController.getNotificationpanelController();
+
+    // If there is no notification in progress, generate a congratulatory notification
+    if (!notificationpanelcontroller.isNotificationInProgress()) {
+      notificationpanelcontroller.generateNotification();
+    }
 
     gameController.giveRandomClue();
-    solvedPuzzles.add(this);
   }
 
   public Parent getRoot() {

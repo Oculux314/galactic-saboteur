@@ -6,15 +6,18 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.EndController;
+import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;
 
 public class Timer {
   private int secondsLeft;
   private Thread timerThread;
   private Label timerDisplay;
+  private int initialSeconds;
 
   public Timer(int initialSeconds, Label timerDisplay) {
-    this.secondsLeft = initialSeconds;
+    this.initialSeconds = initialSeconds;
+    this.secondsLeft = this.initialSeconds;
     this.timerDisplay = timerDisplay;
     this.timerThread = new TaggedThread(() -> run());
   }
@@ -44,6 +47,19 @@ public class Timer {
 
   private void decrementSeconds() {
     secondsLeft--;
+    NotificationpanelController notificationpanelController =
+        ((NotificationpanelController)
+            ((GameController) App.getScreen(Screen.Name.GAME).getController())
+                .getNotificationpanelController());
+
+    // Create a thread to run the time dependent notifications
+    TaggedThread notificationThread =
+        new TaggedThread(
+            () -> {
+              notificationpanelController.generateTimeDependentNotification(
+                  initialSeconds, secondsLeft);
+            });
+    notificationThread.start();
   }
 
   private void showTimeout() {

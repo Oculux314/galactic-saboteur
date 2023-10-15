@@ -180,10 +180,40 @@ public class GptPromptEngineering {
   public static String getRiddle() {
     // get the riddle
     return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
-        + " spaceship named Spacey. Tell me a five line riddle in the style of a space"
-        + " themed poem in a modern tone. This riddle should only tell the user to select"
-        + " the correct key card combination,tell the user to answer correctly to save the"
-        + " ship and tell the user to solve the puzzles to get the clues. Keep the riddle"
-        + " short and simple (you have a maximum token size of 60).";
+        + " spaceship named Spacey. Tell me a four line riddle in the style of a space"
+        + " themed poem in a modern tone. The riddle needs to tell me to find the correct"
+        + " combination of clues to save the ship. Respond in less than 40 characters.";
+  }
+
+  public static String getMainNotificationPrompt() {
+    return "You are the onboard ship AI of the Brain-E Explorer spaceship. Someone has sabotaged"
+        + " the ship reactor and I need to fix it or the ship will explode. Your job"
+        + " is to assist me. Respond in 15 words or less and do not quote using speech"
+        + " marks.";
+  }
+
+  public static String getNotification() {
+    return getMainNotificationPrompt() + getGameState();
+  }
+
+  private static String getGameState() {
+    if (GameState.cluesFound) {
+      return "I have found all three clues. Instruct me to deactivate the reactor meltdown"
+          + " using the combination of clues I have found.";
+    } else if (GameState.reactorPuzzleSolved
+        || GameState.navigationPuzzleSolved
+        || GameState.laboratoryPuzzleSolved) {
+      return "I have solved a problem. Congratulate me.";
+    } else if (GameState.userWelcomed) {
+      return "Tell me I can pan and zoom on their helmet overlay, and that you will"
+          + " highlight the most critical element at each stage for them to examine.";
+    } else {
+      GameState.userWelcomed = true;
+      return "Formally welcome the user onto the command deck. Introduce the situation.";
+    }
+  }
+
+  public static String getTimeWarning(Integer timeLeft) {
+    return "Let me I have less than " + timeLeft + " seconds left to deactivate the meltdown.";
   }
 }

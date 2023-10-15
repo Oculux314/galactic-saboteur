@@ -23,8 +23,14 @@ public class GameState {
   public static boolean isGameover;
   public static Screen.Name currentScreen;
   public static int numberOfHintsAsked;
-  public static boolean cluesFound;
   public static HighlightState highlightState;
+  public static int solvedPuzzles = 0;
+
+  public static boolean cluesFound;
+  public static boolean reactorPuzzleSolved;
+  public static boolean laboratoryPuzzleSolved;
+  public static boolean navigationPuzzleSolved;
+  public static boolean suspectsFound;
 
   public static String correctSuspect;
   public static String correctRoom;
@@ -33,6 +39,7 @@ public class GameState {
   public static String reactorRoomGameState;
   public static String labRoomGameState;
   public static String controlRoomGameState;
+  public static String riddleGameState;
   public static String puzzleSolvedMessage;
   public static String puzzleOpenedMessage;
   public static List<String> unsolvedRooms = new ArrayList<>();
@@ -41,23 +48,40 @@ public class GameState {
   public static PuzzleName laboratoryPuzzle;
   public static PuzzleName navigationPuzzle;
 
+  public static String notificationGameState;
+  public static String notificationNextStep;
+  public static boolean userWelcomed;
+
   public static String[] reactorPuzzleInformation;
   public static String[] laboratoryPuzzleInformation;
 
   public static void reset() {
+    // General
     isGameover = false;
     currentScreen = null;
     numberOfHintsAsked = 0;
-    cluesFound = false;
     highlightState = HighlightState.PAN_ARROWS;
+    solvedPuzzles = 0;
 
+    // Puzzle states
+    cluesFound = false;
+    reactorPuzzleSolved = false;
+    laboratoryPuzzleSolved = false;
+    navigationPuzzleSolved = false;
+    suspectsFound = false;
+
+    // Clues
     correctSuspect = null;
     correctRoom = null;
     correctTime = null;
 
+    // Randomly-chosen puzzles
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
+
+    // Notifications
+    userWelcomed = false;
 
     reactorPuzzleInformation = new String[2];;
     laboratoryPuzzleInformation = new String[3];;

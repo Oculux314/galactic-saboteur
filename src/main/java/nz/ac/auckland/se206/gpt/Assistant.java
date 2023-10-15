@@ -146,11 +146,6 @@ public class Assistant {
 
     TaggedThread apiCallThread = new TaggedThread(apiCallTask);
     apiCallThread.start();
-
-    System.out.println(request);
-    System.out.println(chatMessages.toString());
-    System.out.println(systemMessage);
-
     return apiCallThread;
   }
 

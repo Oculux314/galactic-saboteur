@@ -82,11 +82,21 @@
       </Group>
       <fx:include fx:id="sidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
       <fx:include fx:id="popup" source="../gamechildren/popup.fxml" />
+      <fx:include fx:id="notificationPanel" layoutX="15.0" layoutY="15.0" source="../gamechildren/notificationpanel.fxml" />
       <Group fx:id="grpDevTools" layoutX="564.0">
          <children>
             <Button fx:id="btnRestart" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
             <Button fx:id="btnEnd" layoutX="88.0" layoutY="14.0" mnemonicParsing="false" onAction="#onEndClicked" prefWidth="60.0" text="End" />
             <Button fx:id="btnTest" layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#onTestClicked" prefWidth="60.0" text="Test" />
+         </children>
+      </Group>
+      <Group fx:id="misc">
+         <children>
+            <ImageView fx:id="logo" fitHeight="80.0" fitWidth="80.0" layoutX="15.0" layoutY="15.0" onMouseEntered="#onLogoEntered" onMouseExited="#onLogoExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/logo-AI.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
    </children>

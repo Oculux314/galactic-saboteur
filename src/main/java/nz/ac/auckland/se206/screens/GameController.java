@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
+import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
 import nz.ac.auckland.se206.gamechildren.Timer;
@@ -40,6 +41,7 @@ public class GameController implements Screen {
   @FXML private SuspectController suspectController;
   @FXML
   public PopupController popupController;
+  @FXML private NotificationpanelController notificationPanelController;
 
   private Timer countdownTimer;
 
@@ -273,8 +275,22 @@ public class GameController implements Screen {
     System.out.println("You are filled with determination!");
   }
 
+  @FXML
+  private void onLogoEntered(MouseEvent event) {
+    notificationPanelController.onMouseEntered();
+  }
+
+  @FXML
+  private void onLogoExited(MouseEvent event) {
+    notificationPanelController.onMouseExited();
+  }
+
   public void addMapButton(HighlightButton mapButton) {
     mapButton.initialise();
     mapButtons.put(mapButton.getId(), mapButton);
+  }
+
+  public NotificationpanelController getNotificationpanelController() {
+    return notificationPanelController;
   }
 }
