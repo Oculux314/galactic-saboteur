@@ -12,8 +12,13 @@ import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;
 
+/**
+ * The Puzzle class represents a puzzle in the game. It implements the RootPair.Controller
+ * interface, providing methods for managing and interacting with puzzles in the game.
+ */
 public class Puzzle implements RootPair.Controller {
 
+  /** An enumeration representing different puzzle names in the game. */
   public enum PuzzleName {
     REACTOR_TOOLBOX,
     REACTOR_BUTTONPAD,
@@ -21,6 +26,11 @@ public class Puzzle implements RootPair.Controller {
     LABORATORY_TESTTUBES,
     NAVIGATION_COMPUTER;
 
+    /**
+     * Converts the enum value to camel case.
+     *
+     * @return the string in camel case format.
+     */
     private String toCamelCase() {
       String[] words = this.toString().split("_");
       StringBuilder camelCase = new StringBuilder();
@@ -30,10 +40,20 @@ public class Puzzle implements RootPair.Controller {
       return camelCase.toString();
     }
 
+    /**
+     * Generates the relative path to the corresponding FXML file.
+     *
+     * @return the relative path to the FXML file associated with this PuzzleName.
+     */
     public String toFxmlUrl() {
       return ("/fxml/puzzles/" + this.toString().toLowerCase().replace("_", "") + ".fxml");
     }
 
+    /**
+     * Generates the FXML button ID for the corresponding PuzzleName.
+     *
+     * @return the FXML button ID associated with this PuzzleName.
+     */
     public String toFxmlButtonId() {
       return ("#btn" + this.toCamelCase());
     }
@@ -45,6 +65,11 @@ public class Puzzle implements RootPair.Controller {
   private Parent root;
   private PuzzleName puzzleName;
 
+  /**
+   * Sets the PuzzleName for this Puzzle.
+   *
+   * @param puzzleName the PuzzleName to be set for this Puzzle.
+   */
   public void setPuzzleName(PuzzleName puzzleName) {
     this.puzzleName = puzzleName;
   }
@@ -74,14 +99,30 @@ public class Puzzle implements RootPair.Controller {
     }
   }
 
+  /**
+   * Checks whether the puzzle is marked as solved.
+   *
+   * @return true if the puzzle is solved, false otherwise.
+   */
   public boolean isSolved() {
     return isPuzzleSolved;
   }
 
+  /**
+   * Checks whether all puzzles in the game are solved.
+   *
+   * @return true if the number of solved puzzles is equal to the total number of puzzles in the
+   *     game, false otherwise.
+   */
   public boolean isAllSolved() {
     return GameState.solvedPuzzles == 3;
   }
 
+  /**
+   * Marks the puzzle as solved, updates the game state, and triggers various game events.
+   * Additionally, updates the status of the relevant rooms and generates notifications and hints
+   * accordingly.
+   */
   public void setSolved() {
     isPuzzleSolved = true;
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
@@ -121,10 +162,20 @@ public class Puzzle implements RootPair.Controller {
     gameController.giveRandomClue();
   }
 
+  /**
+   * Retrieves the root Parent of the Puzzle.
+   *
+   * @return the root Parent of the Puzzle.
+   */
   public Parent getRoot() {
     return root;
   }
 
+  /**
+   * Sets the root Parent of the Puzzle.
+   *
+   * @param root the Parent to be set as the root of the Puzzle.
+   */
   public void setRoot(Parent root) {
     this.root = root;
   }
