@@ -156,8 +156,10 @@ public class GptPromptEngineering {
   }
 
   public static String getControlRoomPuzzleInformation() {
+    // start with an empty string incase this puzzle is not the one the user is doing
     String puzzle = "";
     if (GameState.navigationPuzzle == PuzzleName.NAVIGATION_COMPUTER) {
+      // set the puzzle string to the navigation puzzle information
       puzzle =
           "The puzzle in the naviation room can be found by the main screen just above the space"
               + " ship's controls. Users can solve it by making a path from the bottom left side of"

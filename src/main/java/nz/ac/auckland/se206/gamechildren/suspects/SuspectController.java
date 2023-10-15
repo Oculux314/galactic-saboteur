@@ -127,7 +127,10 @@ public class SuspectController implements RootPair.Controller {
 
   @FXML
   private void onHintButtonClick(MouseEvent event) {
+    // If hint button is clicked, ask the assistant for a hint
     if (btnHints.getState() == "hint") {
+      // If the user has asked for a hint before, change the phrasing of the text to get a better
+      // response
       if (numberOfHintsAskedToSuspect % 2 == 0) {
         textResponse.setText("I want a hint.");
       } else {
@@ -136,6 +139,7 @@ public class SuspectController implements RootPair.Controller {
       onUserMessage(new ActionEvent());
       numberOfHintsAskedToSuspect++;
     } else {
+      // If the user is turning the hint button off reset the response text
       textResponse.setText("");
     }
   }
@@ -161,5 +165,4 @@ public class SuspectController implements RootPair.Controller {
   public ImageView getThinkingImage() {
     return thinkingImage;
   }
-
 }

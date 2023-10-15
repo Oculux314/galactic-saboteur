@@ -30,21 +30,24 @@ public class RiddleController implements RootPair.Controller {
 
   @FXML
   private void initialize() throws ApiProxyException, IOException {
+    // set up the suspect option state button
     btnWho.addState("Scientist", "suspects/suspect1.png");
     btnWho.addState("Captain", "suspects/suspect2.png");
     btnWho.addState("Mechanic", "suspects/suspect3.png");
 
+    // set up the room option state button
     btnWhere.addState("Navigation", "rooms/room1.png");
     btnWhere.addState("Laboratory", "rooms/room2.jpg");
     btnWhere.addState("Reactor Room", "rooms/room3.png");
 
+    // set up the time option state button
     btnWhen.addState("Morning", "times/time1.jpg");
     btnWhen.addState("Afternoon", "times/time2.jpg");
     btnWhen.addState("Night", "times/time3.jpg");
 
+    // set up the riddle
     riddleChatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(75);
-
     generateRiddle();
   }
 
@@ -76,21 +79,26 @@ public class RiddleController implements RootPair.Controller {
 
   public ChatMessage runGpt(ChatMessage msg, ChatCompletionRequest chatCompletionRequest)
       throws ApiProxyException {
+    // Add the chat messages to the request
     chatCompletionRequest.addMessage(msg);
     ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
     Choice result = chatCompletionResult.getChoices().iterator().next();
     chatCompletionRequest.addMessage(result.getChatMessage());
+    // Return the response
     return result.getChatMessage();
   }
 
   private void generateRiddle() throws ApiProxyException, IOException {
+    // Generate the riddle
     String riddle = GptPromptEngineering.getRiddle();
     ChatMessage msg = new ChatMessage("user", riddle);
 
+    // make a thread to run the gpt
     TaggedThread runThread =
         new TaggedThread(
             () -> {
               try {
+                // run the gpt
                 ChatMessage response = runGpt(msg, riddleChatCompletionRequest);
                 gptTextArea.appendText(response.getContent());
               } catch (ApiProxyException e) {
@@ -98,6 +106,7 @@ public class RiddleController implements RootPair.Controller {
               }
             });
 
+    // start the thread
     runThread.start();
   }
 

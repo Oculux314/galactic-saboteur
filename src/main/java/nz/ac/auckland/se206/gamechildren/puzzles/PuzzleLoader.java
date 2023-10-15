@@ -36,6 +36,7 @@ public class PuzzleLoader {
   }
 
   private void loadAllPuzzles() {
+    // load all puzzles
     try {
       loadPuzzle(PuzzleName.REACTOR_TOOLBOX);
       loadPuzzle(PuzzleName.REACTOR_BUTTONPAD);
@@ -43,6 +44,7 @@ public class PuzzleLoader {
       loadPuzzle(PuzzleName.NAVIGATION_COMPUTER);
       loadPuzzle(PuzzleName.REACTOR_HANGMAN);
     } catch (IllegalStateException | IOException e) {
+      // catch exception if no puzzles in room
       e.printStackTrace();
     }
   }

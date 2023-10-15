@@ -139,15 +139,18 @@ public class GameController implements Screen {
   }
 
   private void intialiseMapButtonsInGroup(Group mapButtonGroup) {
+    // Iterate through all the nodes in the group and initialise the map buttons
     for (Node node : mapButtonGroup.getChildren()) {
       HighlightButton mapButton;
 
+      // If the node is not a map button, skip it
       try {
         mapButton = (HighlightButton) node;
       } catch (ClassCastException e) {
         continue;
       }
 
+      // Add the map button to the map
       addMapButton(mapButton);
     }
   }

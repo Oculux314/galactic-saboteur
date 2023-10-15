@@ -48,14 +48,18 @@ public class Utils {
    * @param millis The number of milliseconds to wait before exiting.
    */
   public static void exitAfterMillis(int millis) {
+    // Exit after a given number of milliseconds
     new Thread(
             () -> {
               try {
+                // Wait for a given number of milliseconds
                 Thread.sleep(millis);
               } catch (InterruptedException e) {
+                // Do nothing but print stack trace
                 e.printStackTrace();
               }
 
+              // Exit application
               Platform.exit();
             })
         .start();

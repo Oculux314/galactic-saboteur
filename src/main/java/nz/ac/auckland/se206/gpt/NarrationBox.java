@@ -17,6 +17,7 @@ public class NarrationBox {
     protected Void call() throws Exception {
       int i = 0;
 
+      // While the response field is disabled, animate the loading effect
       while (textResponse.isDisabled()) {
         int numberOfDots = i;
         Platform.runLater(
@@ -25,10 +26,13 @@ public class NarrationBox {
                   getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
             });
 
+        // Cycle through the ellipsis animation
         i = (i + 1) % ellipsisAnimation.length;
+        // Wait 200ms before updating the text
         Thread.sleep(200);
       }
 
+      // Once the response field is enabled, clear the loading effect
       Platform.runLater(() -> setUserResponse(""));
       return null;
     }

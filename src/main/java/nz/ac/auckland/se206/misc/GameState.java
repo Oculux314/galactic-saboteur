@@ -83,8 +83,10 @@ public class GameState {
     // Notifications
     userWelcomed = false;
 
-    reactorPuzzleInformation = new String[2];;
-    laboratoryPuzzleInformation = new String[3];;
+    reactorPuzzleInformation = new String[2];
+    ;
+    laboratoryPuzzleInformation = new String[3];
+    ;
 
     initialiseRoomStates();
   }
