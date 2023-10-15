@@ -105,8 +105,15 @@ public class GptPromptEngineering {
     if (GameState.laboratoryPuzzle == PuzzleName.LABORATORY_TESTTUBES) {
       puzzle =
           "The laboratory puzzle can be found by clicking the testtubes on the lab's counter (this"
-              + " is in the middle of the room)Users should solve it trying to mix two testtube's"
-              + " together to create the right colour.";
+              + " is in the middle of the room). The user has been asked to "
+              + GameState.laboratoryPuzzleInformation[0]
+              + " Users should solve it by selecting 2 different testtubes (test tube are on the"
+              + " left part of the table) to make the colour "
+              + GameState.laboratoryPuzzleInformation[1]
+              + ", and"
+              + " pick the "
+              + GameState.laboratoryPuzzleInformation[2]
+              + " glitter mixture (glitter is found on the right side of the table).   ";
     }
     return puzzle;
   }

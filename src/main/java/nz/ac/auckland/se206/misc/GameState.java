@@ -41,6 +41,10 @@ public class GameState {
   public static PuzzleName laboratoryPuzzle;
   public static PuzzleName navigationPuzzle;
 
+  public static String[] reactorPuzzleInformation;
+  public static String[] laboratoryPuzzleInformation;
+  public static String[] navigationPuzzleInformation;
+
   public static void reset() {
     isGameover = false;
     currentScreen = null;
@@ -55,6 +59,10 @@ public class GameState {
     reactorPuzzle = null;
     laboratoryPuzzle = null;
     navigationPuzzle = null;
+
+    reactorPuzzleInformation = new String[3];;
+    laboratoryPuzzleInformation = new String[3];;
+    navigationPuzzleInformation = new String[3];;
 
     initialiseRoomStates();
   }
