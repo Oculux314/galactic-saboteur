@@ -15,19 +15,18 @@ public class GptPromptEngineering {
     String puzzleInformation = getPuzzleInformation(job);
 
     if (isUserAllowedHints) {
-      System.out.println("prompt where user is allowed hints " + isUserAllowedHints);
       prompt =
           suspectInformation
-              + " Assist users in finding and solving the puzzle discreetly through hints. The user"
-              + " can only escape when they find out what time, which suspect, and in what room the"
-              + " sabotage occurred. There is one puzzle in each room that leads to a clue."
+              + " Assist users in finding and solving the puzzle discreetly through hints and be a"
+              + " friend to have conversation with. The user can only escape when they find out"
+              + " what time, which suspect, and in what room the sabotage occurred. There is one"
+              + " puzzle in each room that leads to a clue."
               + puzzleInformation
               + " Please respond in 12 words or fewer."
               + getGameState(job)
               + " If you give a hint or help with the solving the game, start your response with 'A"
               + " hint is:' with nothing before it. Do this only if the user asks for help.";
     } else {
-      System.out.println("prompt where user is not allowed hints " + isUserAllowedHints);
       prompt =
           suspectInformation
               + " The user can only escape the ship when they find out what time,"
@@ -56,14 +55,20 @@ public class GptPromptEngineering {
     String suspectInformation = "";
     if (job == "Spacey's mechanic") {
       suspectInformation =
-          "Your role: Mechanic on the Brain-e Explorer spaceship escape room adventure.";
+          "Your role: Mechanic on the Brain-e Explorer spaceship which is going to Mars. You love"
+              + " problem solving, suduko and all board games. You hate pinapple on pizza. Feel"
+              + " free to bring up these details in small-talk.";
     } else if (job == "Spacey's scientist") {
       suspectInformation =
-          "Your role: Scientist on the Brain-e Explorer spaceship escape room adventure You love"
-              + " atoms and chemsitry, sunny days and love exercising your brain.";
+          "Your role: Scientist on the Brain-e Explorer spaceship which is going to Mars. You love"
+              + " atoms and chemsitry, star gazing and love exercising your brain. You don't like"
+              + " mushrooms. Feel free to bring up these details in small-talk.";
     } else if (job == "Spacey's captain") {
       suspectInformation =
-          "Your role: Captain on the Brain-e Explorer spaceship escape room adventure.";
+          "Your role: Captain on the Brain-e Explorer which is going to Mars. You are amazing at"
+              + " cooking and love to eat pizza. You are scared that the reactor is going to"
+              + " explode, but you're putting on a brave face for the team. Feel free to bring up"
+              + " these details in small-talk.";
     }
     return suspectInformation;
   }

@@ -95,7 +95,7 @@ public class Assistant {
 
   private TaggedThread executeApiCall() {
     ChatCompletionRequest request =
-        new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(100);
+        new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(80);
 
     if (!onlySystemMessage) {
       for (ChatMessage message : chatMessages) {
@@ -153,7 +153,6 @@ public class Assistant {
   public void respondToUser() {
     narrationBox.disableUserResponse();
     String userMessage = narrationBox.getUserResponse();
-
 
     narrationBox.clearUserResponse();
     if (userMessage.equals("")) {
