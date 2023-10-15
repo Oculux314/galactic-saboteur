@@ -2,8 +2,8 @@ package nz.ac.auckland.se206.gpt;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
+import java.util.concurrent.atomic.AtomicBoolean;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.image.ImageView;
@@ -47,30 +47,33 @@ public class Assistant {
       TaggedThread loadEffectThread = new TaggedThread(narrationBox.new LoadEffectTask());
       loadEffectThread.start();
 
-      // rotate the question marks
-      TaggedThread animationThread = new TaggedThread(() -> {
-        RotateTransition rotateLeft = new RotateTransition(Duration.seconds(0.5), imageView);
-        rotateLeft.setByAngle(-20);
-        rotateLeft.setCycleCount(1);
-        rotateLeft.setInterpolator(Interpolator.LINEAR);
+      // Fade in and out animation
+      AtomicBoolean animationRunning = new AtomicBoolean(true); // Flag to track animation status
+      TaggedThread animationThread =
+          new TaggedThread(
+              () -> {
+                while (animationRunning.get()) {
+                  Platform.runLater(
+                      () -> {
+                        FadeTransition fadeInOut =
+                            new FadeTransition(Duration.seconds(1), imageView);
+                        fadeInOut.setFromValue(1.0);
+                        fadeInOut.setToValue(0.0);
+                        fadeInOut.setAutoReverse(true);
+                        fadeInOut.setCycleCount(FadeTransition.INDEFINITE);
+                        fadeInOut.play();
+                      });
 
-        RotateTransition rotateRight = new RotateTransition(Duration.seconds(0.5), imageView);
-        rotateRight.setByAngle(20);
-        rotateRight.setCycleCount(1);
-        rotateRight.setInterpolator(Interpolator.LINEAR);
+                  try {
+                    Thread.sleep(1000); // Adjust the timing here
+                  } catch (InterruptedException e) {
+                    break;
+                  }
+                }
+              });
 
-        rotateLeft.setOnFinished(
-                event -> {
-                    rotateRight.play();
-                    // Reset the rotation to 0 degrees
-                    //narrationBox.setThinkingImageToOriginalRotation();
-                });
-
-        // Play the animation
-        rotateLeft.play();
-    });
-
-    animationThread.start();
+      animationThread.setDaemon(true);
+      animationThread.start();
 
       // API call
       try {
@@ -83,6 +86,7 @@ public class Assistant {
         addChatMessage("assistant", responseText);
       }
 
+      animationRunning.set(false); // Stop the animation thread
       narrationBox.enableUserResponse();
       narrationBox.hideQuestionmarks();
       isWaitingForResponse = false;

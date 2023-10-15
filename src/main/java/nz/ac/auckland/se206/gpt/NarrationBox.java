@@ -109,11 +109,6 @@ public class NarrationBox {
     return suspectController.getThinkingImage();
   }
 
-  public void setThinkingImageToOriginalRotation() {
-    System.out.println("Setting rotation to 0");
-    suspectController.thinkingImage.setRotate(0);
-  }
-
   public void hideQuestionmarks() {
     suspectController.thinkingImage.setVisible(false);
   }

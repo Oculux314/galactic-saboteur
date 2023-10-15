@@ -25,8 +25,7 @@ public class SuspectController implements RootPair.Controller {
   @FXML TextField textResponse;
   @FXML ImageView imgSuspect;
   @FXML StateButton btnHints;
-  @FXML
-  public ImageView thinkingImage;
+  @FXML public ImageView thinkingImage;
 
   private Map<Name, Suspect> suspects = new HashMap<>();
   private Name currentSuspect;
@@ -161,5 +160,9 @@ public class SuspectController implements RootPair.Controller {
 
   public ImageView getThinkingImage() {
     return thinkingImage;
+  }
+
+  public void setThinkingImageToOriginalRotation() {
+    thinkingImage.setRotate(0);
   }
 }
