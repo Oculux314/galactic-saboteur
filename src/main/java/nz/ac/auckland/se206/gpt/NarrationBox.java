@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 
 public class NarrationBox {
@@ -102,6 +103,15 @@ public class NarrationBox {
 
   public void showQuestionmarks() {
     suspectController.thinkingImage.setVisible(true);
+  }
+
+  public ImageView getThinkingImage() {
+    return suspectController.getThinkingImage();
+  }
+
+  public void setThinkingImageToOriginalRotation() {
+    System.out.println("Setting rotation to 0");
+    suspectController.thinkingImage.setRotate(0);
   }
 
   public void hideQuestionmarks() {

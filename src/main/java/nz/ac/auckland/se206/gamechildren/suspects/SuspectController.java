@@ -158,4 +158,8 @@ public class SuspectController implements RootPair.Controller {
     textResponse.setDisable(false);
     btnHints.setDisable(false);
   }
+
+  public ImageView getThinkingImage() {
+    return thinkingImage;
+  }
 }

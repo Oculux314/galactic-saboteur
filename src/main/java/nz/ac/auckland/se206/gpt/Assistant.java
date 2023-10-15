@@ -2,8 +2,12 @@ package nz.ac.auckland.se206.gpt;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
@@ -32,6 +36,8 @@ public class Assistant {
         }
       }
 
+      ImageView imageView = narrationBox.getThinkingImage();
+
       narrationBox.disableUserResponse();
       narrationBox.showQuestionmarks();
 
@@ -40,6 +46,31 @@ public class Assistant {
       // Modulate ... loading effect in response field
       TaggedThread loadEffectThread = new TaggedThread(narrationBox.new LoadEffectTask());
       loadEffectThread.start();
+
+      // rotate the question marks
+      TaggedThread animationThread = new TaggedThread(() -> {
+        RotateTransition rotateLeft = new RotateTransition(Duration.seconds(0.5), imageView);
+        rotateLeft.setByAngle(-20);
+        rotateLeft.setCycleCount(1);
+        rotateLeft.setInterpolator(Interpolator.LINEAR);
+
+        RotateTransition rotateRight = new RotateTransition(Duration.seconds(0.5), imageView);
+        rotateRight.setByAngle(20);
+        rotateRight.setCycleCount(1);
+        rotateRight.setInterpolator(Interpolator.LINEAR);
+
+        rotateLeft.setOnFinished(
+                event -> {
+                    rotateRight.play();
+                    // Reset the rotation to 0 degrees
+                    //narrationBox.setThinkingImageToOriginalRotation();
+                });
+
+        // Play the animation
+        rotateLeft.play();
+    });
+
+    animationThread.start();
 
       // API call
       try {
