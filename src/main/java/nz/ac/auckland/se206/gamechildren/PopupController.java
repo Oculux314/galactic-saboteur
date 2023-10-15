@@ -44,7 +44,6 @@ public class PopupController implements RootPair.Controller {
 
   private void loadAllPopups() {
     load(Name.RIDDLE, "/fxml/gamechildren/riddle.fxml");
-    load(Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());
     load(Name.PUZZLE_LABORATORY, puzzleLoader.getLaboratoryPuzzle());
     load(Name.PUZZLE_NAVIGATION, puzzleLoader.getNavigationPuzzle());
@@ -54,7 +53,7 @@ public class PopupController implements RootPair.Controller {
     popups.put(name, popup);
   }
 
-  private void load(Name name, String popupUrl) {
+  public void load(Name name, String popupUrl) {
     TaggedThread popupLoader = new TaggedThread(() -> load(name, new RootPair(popupUrl)));
     popupLoader.start();
   }

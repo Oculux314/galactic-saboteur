@@ -153,8 +153,7 @@ public class Assistant {
   public void respondToUser() {
     narrationBox.disableUserResponse();
     String userMessage = narrationBox.getUserResponse();
-    // String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
-    System.out.println(userMessage);
+
 
     narrationBox.clearUserResponse();
     if (userMessage.equals("")) {
@@ -164,6 +163,7 @@ public class Assistant {
 
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
+
     executeApiCallWithCallback(
         () -> {
           renderNarrationBox();

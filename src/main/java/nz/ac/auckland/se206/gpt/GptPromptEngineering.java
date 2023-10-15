@@ -15,6 +15,7 @@ public class GptPromptEngineering {
     String puzzleInformation = getPuzzleInformation(job);
 
     if (isUserAllowedHints) {
+      System.out.println("prompt where user is allowed hints " + isUserAllowedHints);
       prompt =
           suspectInformation
               + " Assist users in finding and solving the puzzle discreetly through hints. The user"
@@ -26,25 +27,21 @@ public class GptPromptEngineering {
               + " If you give a hint or help with the solving the game, start your response with 'A"
               + " hint is:' with nothing before it. Do this only if the user asks for help.";
     } else {
+      System.out.println("prompt where user is not allowed hints " + isUserAllowedHints);
       prompt =
           suspectInformation
-              + "Support users in finding and solving the puzzle but don't give any information"
-              + " they don't know. The user can only escape the ship when they find out what time,"
+              + " The user can only escape the ship when they find out what time,"
               + " which suspect, and in what room the sabotage occurred. There is one puzzle in"
               + " each room that leads to a clue."
-              // + puzzleInformation
               + " Respond in 11 words or fewer. You can have small-talk with the user. You must not"
               + " include new hints of any form. Do not, for any reason, give the user any new"
               + " hints or help with solving the game.";
     }
-
-    System.out.println("is user allowed hints" + isUserAllowedHints);
-
     return prompt;
   }
 
   public static String getUserInteractionPrompt(String job) {
-    return getMainPrompt(job) + "Respond to the user's latest query.";
+    return getMainPrompt(job) + "Respond to the user's latest message.";
   }
 
   public static String getWelcomePrompt(String job) {

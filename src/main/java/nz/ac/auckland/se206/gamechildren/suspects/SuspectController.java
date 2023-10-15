@@ -29,6 +29,10 @@ public class SuspectController implements RootPair.Controller {
   private Name currentSuspect;
   private int numberOfHintsAskedToSuspect;
 
+  private static boolean captainWelcomeShown = false;
+  private static boolean scientistWelcomeShown = false;
+  private static boolean mechanicWelcomeShown = false;
+
   @FXML
   private void initialize() {
     loadAllSuspects();
@@ -39,9 +43,20 @@ public class SuspectController implements RootPair.Controller {
   @Override
   public void onLoad() {
     updateSuspect(getGameController().getClickedSuspectName());
+
+    if (currentSuspect == Name.CAPTAIN && !captainWelcomeShown) {
+      getCurrentSuspect().getAssistant().welcome();
+      captainWelcomeShown = true;
+    } else if (currentSuspect == Name.SCIENTIST && !scientistWelcomeShown) {
+      getCurrentSuspect().getAssistant().welcome();
+      scientistWelcomeShown = true;
+    } else if (currentSuspect == Name.MECHANIC && !mechanicWelcomeShown) {
+      getCurrentSuspect().getAssistant().welcome();
+      mechanicWelcomeShown = true;
+    }
   }
 
-  private void loadAllSuspects() {
+  public void loadAllSuspects() {
     suspects.put(
         Name.SCIENTIST, new Suspect("Spacey's scientist", loadSuspectImage("scientist.png"), this));
     suspects.put(
@@ -73,7 +88,7 @@ public class SuspectController implements RootPair.Controller {
     textNarration.setText(suspect.getNarration());
   }
 
-  private Suspect getCurrentSuspect() {
+  public Suspect getCurrentSuspect() {
     return suspects.get(currentSuspect);
   }
 
@@ -83,13 +98,24 @@ public class SuspectController implements RootPair.Controller {
 
   @FXML
   private void onUserMessage(ActionEvent event) {
+
+    if (currentSuspect == Name.CAPTAIN && !captainWelcomeShown) {
+      getCurrentSuspect().getAssistant().welcome();
+      captainWelcomeShown = true;
+    } else if (currentSuspect == Name.SCIENTIST && !scientistWelcomeShown) {
+      getCurrentSuspect().getAssistant().welcome();
+      scientistWelcomeShown = true;
+    } else if (currentSuspect == Name.MECHANIC && !mechanicWelcomeShown) {
+      getCurrentSuspect().getAssistant().welcome();
+      mechanicWelcomeShown = true;
+    }
+
+    
     System.out.println();
     System.out.println();
-    System.out.println(event);
 
     // Respond to the user's message
     Assistant assistant = getCurrentSuspect().getAssistant();
-    System.out.println(assistant.getJob());
     assistant.respondToUser(textResponse.getText());
 
     // reset the accessibility of the hint button

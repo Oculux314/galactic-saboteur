@@ -19,6 +19,7 @@ import nz.ac.auckland.se206.gamechildren.ZoomAndPanHandler;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
 import nz.ac.auckland.se206.gamechildren.suspects.Suspect;
+import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 
@@ -37,12 +38,18 @@ public class GameController implements Screen {
   private PuzzleLoader puzzleLoader;
   @FXML private SidepanelController sidePanelController;
   @FXML private PopupController popupController;
+  @FXML private SuspectController suspectController;
+
   private Timer countdownTimer;
 
   @FXML private HighlightButton gptScientist;
   @FXML private HighlightButton gptCaptain;
   @FXML private HighlightButton gptMechanic;
   private Suspect.Name clickedSuspect;
+
+  // private boolean captainWelcomeShown = false;
+  // private boolean scientistWelcomeShown = false;
+  // private boolean mechanicWelcomeShown = false;
 
   @FXML
   private void initialize() {
@@ -147,6 +154,10 @@ public class GameController implements Screen {
     countdownTimer.start();
   }
 
+  public void resetGpt() {
+    popupController.load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
+  }
+
   @FXML
   private void onPress(MouseEvent event) {
     zoomAndPanHandler.onPress(event);
@@ -211,6 +222,7 @@ public class GameController implements Screen {
 
   @FXML
   private void onSuspectButtonClicked(MouseEvent event) {
+
     // Set the visibility of the corresponding group
     if (event.getSource() == gptScientist) {
       clickedSuspect = Suspect.Name.SCIENTIST;
@@ -220,8 +232,28 @@ public class GameController implements Screen {
       clickedSuspect = Suspect.Name.MECHANIC;
     }
 
+    // if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
+    //   GameState.difficulty = "hard";
+    //   popupController.load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
+    // }
+
+    // if (event.getSource() == gptCaptain && !captainWelcomeShown) {
+    //   suspectController.getCurrentSuspect().getAssistant().welcome();
+    //   captainWelcomeShown = true;
+    // } else if (event.getSource() == gptScientist && !scientistWelcomeShown) {
+    //   suspectController.getCurrentSuspect().getAssistant().welcome();
+    //   scientistWelcomeShown = true;
+    // } else if (event.getSource() == gptMechanic && !mechanicWelcomeShown) {
+    //   suspectController.getCurrentSuspect().getAssistant().welcome();
+    //   mechanicWelcomeShown = true;
+    // }
+
     popupController.show(PopupController.Name.SUSPECT);
   }
+
+  // private SuspectController getSuspectController() {
+  //   return suspectController;
+  // }
 
   public Suspect.Name getClickedSuspectName() {
     return clickedSuspect;
