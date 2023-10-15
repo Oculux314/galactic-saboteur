@@ -46,6 +46,10 @@ public class SuspectController implements RootPair.Controller {
   public void onLoad() {
     updateSuspect(getGameController().getClickedSuspectName());
 
+    // if (GameState.difficulty == "medium" && GameState.numberOfHintsAsked > 4) {
+    //   btnHints.setDisable(true);
+    // }
+
     if (currentSuspect == Name.CAPTAIN && !captainWelcomeShown) {
       getCurrentSuspect().getAssistant().welcome();
       captainWelcomeShown = true;

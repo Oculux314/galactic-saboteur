@@ -22,19 +22,18 @@ public class GptPromptEngineering {
               + " what time, which suspect, and in what room the sabotage occurred. There is one"
               + " puzzle in each room that leads to a clue."
               + puzzleInformation
-              + " Please respond in 12 words or fewer."
               + getGameState(job)
-              + " If you give a hint or help with the solving the game, start your response with 'A"
-              + " hint is:' with nothing before it. Do this only if the user asks for help.";
+              + " If you give a hint or help with the solving the puzzle, start your response with "
+              + " 'hint:' with nothing before it. Do this only if the user asks for help."
+              + " Please respond in 18 words or fewer.";
     } else {
       prompt =
           suspectInformation
-              + " The user can only escape the ship when they find out what time,"
-              + " which suspect, and in what room the sabotage occurred. There is one puzzle in"
-              + " each room that leads to a clue."
-              + " Respond in 11 words or fewer. You can have small-talk with the user. You must not"
-              + " give new hints of any form. Do not, for any reason, give the user any new"
-              + " hints or help the user solve the game.";
+              + " The user can only escape the ship when they find out what time, which suspect,"
+              + " and in what room the sabotage occurred. There is one puzzle in each room that"
+              + " leads to a clue. You can have small-talk with the user. You must not give new"
+              + " hints of any form. Do not, for any reason, give the user any new hints or help"
+              + " the user solve the game. Please respond in 18 words or fewer.";
     }
     return prompt;
   }

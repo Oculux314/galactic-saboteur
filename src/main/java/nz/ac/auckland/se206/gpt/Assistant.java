@@ -213,9 +213,7 @@ public class Assistant {
     String stringToCheck =
         narrationBox.getText().trim(); // Trim any leading or trailing white spaces
 
-    if (stringToCheck
-        .toLowerCase()
-        .startsWith("a hint is:")) { // Convert to lowercase before checking
+    if (stringToCheck.toLowerCase().contains("hint")) { // Convert to lowercase before checking
       GameState.numberOfHintsAsked++;
     }
   }
