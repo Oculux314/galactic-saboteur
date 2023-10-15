@@ -128,9 +128,10 @@ public class GptPromptEngineering {
   }
 
   public static String getMainNotificationPrompt() {
-    return "Your role: Game master on the Brain-E explorer spaceship escape room adventure, your job is"
-    + " to give the user short notifications (maximum 15 words)" 
-    + "based off of where they are in the game, do not quote using speech marks";
+    return "You are the onboard ship AI of the Brain-E Explorer spaceship. Someone has sabotaged"
+        + " the ship reactor and the user needs to fix it or the ship will explode. Your job"
+        + " is to assist the user. Respond in 15 words or less and do not quote using speech"
+        + " marks.";
   }
 
   public static String getNotification() {
@@ -139,17 +140,22 @@ public class GptPromptEngineering {
 
   private static String getGameState() {
     if (GameState.cluesFound) {
-      return ". The user has found all the clues, pay attention to the highlighted objects";
-    } else if (GameState.reactorPuzzleSolved || GameState.navigationPuzzleSolved || GameState.laboratoryPuzzleSolved) {
-      return ". The user has solved a puzzle, congratulate the user";
+      return "The user has found all three clues. Instruct them to deactivate the reactor meltdown"
+          + " using the combination of clues they have found.";
+    } else if (GameState.reactorPuzzleSolved
+        || GameState.navigationPuzzleSolved
+        || GameState.laboratoryPuzzleSolved) {
+      return "The user has solved a problem. Congratulate the user.";
     } else {
-      return ". The user has just entered the game, welcome the user. They can pan and zoom around the screen";
-
+      return "Formally welcome the user on deck. Introduce the situation. Tell the"
+          + " user that you will highlight the most critical element at each stage on their"
+          + " helmet overlay for them to examine.";
     }
   }
 
   public static String getTimeWarning(Integer timeLeft) {
-    return "The user has less than " + timeLeft + " seconds left to escape (convert to minutes), let them know.";
+    return "Let the user know they has less than "
+        + timeLeft
+        + " seconds left to deactivate the meltdown.";
   }
 }
-
