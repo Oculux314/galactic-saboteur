@@ -1,11 +1,15 @@
 package nz.ac.auckland.se206.screens;
 
 import java.io.IOException;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.misc.TaggedThread;
@@ -13,15 +17,16 @@ import nz.ac.auckland.se206.misc.TaggedThread;
 /** Controller class for the title screen. */
 public class ExpositionController implements Screen {
 
-  private static final int DELAY_MILLIS = 2000;
+  private static final int DELAY_MILLIS = 1000;
+  private static final int FADE_MILLIS = 500;
 
   /** Pane that takes up the entire screen. */
   @FXML private Pane panFullScreen;
 
-  @FXML private Pane replayPane;
-  @FXML private AnimatedButton btnReplay;
   @FXML private AnimatedButton btnContinue;
-  @FXML private ImageView imageView;
+
+  @FXML private ImageView fadeInImage;
+  @FXML private ImageView fadeOutImage;
 
   private int currentImageIndex = 0;
   private String[] imagePaths = {
@@ -29,7 +34,8 @@ public class ExpositionController implements Screen {
     "/images/expo2.png",
     "/images/expo3.png",
     "/images/expo4.png",
-    "/images/expo5.png"
+    "/images/expo5.png",
+    "/images/expo6.png"
   };
   private TaggedThread delayManager;
 
@@ -39,13 +45,15 @@ public class ExpositionController implements Screen {
   }
 
   public void startSlideshow() {
+    btnContinue.setVisible(false); // Make button unclickable
+    btnContinue.setOpacity(0);
     showNextImage();
   }
 
   private void showNextImage() {
     // Check if slideshow is finished
     if (currentImageIndex >= imagePaths.length) {
-      showReplayPane();
+      showContinueButton();
       return;
     }
 
@@ -55,38 +63,48 @@ public class ExpositionController implements Screen {
     delayManager.start();
   }
 
-  private void showReplayPane() {
+  private void showContinueButton() {
     currentImageIndex = 0;
-    replayPane.setVisible(true);
+    btnContinue.setVisible(true); // Allow button to be clicked
+    
+    Timeline btnFadeTransition =
+        new Timeline(
+            new KeyFrame(
+                Duration.millis(FADE_MILLIS), new KeyValue(btnContinue.opacityProperty(), 1)));
+    btnFadeTransition.play();
   }
 
   private void updateImage() {
     // Load image
     String imagePath = imagePaths[currentImageIndex];
-    Image image = new Image(getClass().getResourceAsStream(imagePath));
-    imageView.setImage(image);
+    Image nextImage = new Image(getClass().getResourceAsStream(imagePath));
+
+    fadeOutImage.setImage(fadeInImage.getImage());
+    fadeOutImage.setOpacity(1);
+    fadeInImage.setImage(nextImage);
+    fadeInImage.setOpacity(0);
+
     currentImageIndex++;
   }
 
   private void delayAndShowImage() {
+    // Fade
+    Timeline fadeTransition =
+        new Timeline(
+            new KeyFrame(
+                Duration.millis(FADE_MILLIS),
+                new KeyValue(fadeOutImage.opacityProperty(), 0),
+                new KeyValue(fadeInImage.opacityProperty(), 1)));
+    fadeTransition.play();
+
+    // Wait
     try {
-      Thread.sleep(DELAY_MILLIS);
+      Thread.sleep(FADE_MILLIS + DELAY_MILLIS);
     } catch (InterruptedException e) {
       return;
     }
 
     showNextImage();
-  }
-
-  /**
-   * Called when the replay button is clicked. Replays exposition.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onReplayClicked(MouseEvent event) throws IOException {
-    replayPane.setVisible(false);
-    startSlideshow();
   }
 
   /**
