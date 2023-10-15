@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
 /** Controller class for the reactor button puzzle. */
@@ -53,6 +54,9 @@ public class ReactorButtonPuzzleController extends Puzzle {
     randomNumber = generateRandomNumber();
     String randomSymbol = convertNumberToSymbol(randomNumber);
     lblNumberPrompt.setText(randomSymbol);
+    
+    // update the game state
+    GameState.reactorPuzzleInformation[0] = randomSymbol;
   }
 
   /**

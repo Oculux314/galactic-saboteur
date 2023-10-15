@@ -89,14 +89,21 @@ public class GptPromptEngineering {
               + " to the solar system, stars and galaxies";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_BUTTONPAD) {
       puzzle =
-          "The reactor puzzle can be found by clicking button pad in the top half of the"
-              + " reactor room. Users should solve it by clicking the buttons in the right order.";
+          "The puzzle in the reactor room can be found by clicking the calendar which is hanging up"
+              + " on the wall to the right of the reactor, by the window. Users have been asked to"
+              + " decrpt the code "
+              + GameState.reactorPuzzleInformation[0]
+              + ". User's should solve it by decrpting every sybmol to a number. Each decrpted"
+              + " number is the keyboard key you press to get the symol. For example to get the"
+              + " symbol & you press number 7 key of the keyboards. The user then needs to enter"
+              + " the fully decrpted numeric number into the calculor and press submit.";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_TOOLBOX) {
       puzzle =
-          "The reactor puzzle can be found by clicking on the toolbox in the bottom half of the"
-              + " reactor room. Users should inspect the toolbox and solve it by placing tools"
-              + " inside the right spots.";
+          "The puzzle in the reactor room can be found by clicking on the toolbox which is on the"
+              + " work bench to the left of the reactor. Users should inspect the"
+              + " toolbox and solve it by placing tools inside the right spots.";
     }
+    System.out.println("puzzle " + puzzle);
     return puzzle;
   }
 
