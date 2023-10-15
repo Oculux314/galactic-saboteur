@@ -5,7 +5,13 @@ import java.util.List;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.screens.Screen;
 
-/** Represents the state of the game. */
+/**
+ * The GameState class represents the current state of the game, including puzzle information, user
+ * progress, and notifications. It keeps track of various game-related data and provides methods for
+ * updating and retrieving this information. This class manages the state of puzzles, user progress,
+ * and notifications within the game, ensuring a coherent and consistent experience for the user
+ * throughout gameplay.
+ */
 public class GameState {
   public enum HighlightState {
     PAN_ARROWS,
@@ -55,6 +61,11 @@ public class GameState {
   public static String[] reactorPuzzleInformation;
   public static String[] laboratoryPuzzleInformation;
 
+  /**
+   * Resets the state of the game to its initial state, ensuring that various game-related
+   * variables, puzzles, and notifications are reinitialized. This method is responsible for
+   * resetting the game to its starting point, allowing for a fresh gameplay experience.
+   */
   public static void reset() {
     // General
     isGameover = false;
@@ -91,6 +102,7 @@ public class GameState {
     initialiseRoomStates();
   }
 
+  /** Initializes the room states, puzzle messages, and the list of unsolved rooms in the game. */
   private static void initialiseRoomStates() {
     // Initialise room states
     reactorRoomGameState = "User hasn't found where the puzzle is yet.";
@@ -110,6 +122,11 @@ public class GameState {
     unsolvedRooms.add("navigation");
   }
 
+  /**
+   * Gets the hint limit based on the game difficulty.
+   *
+   * @return The limit for the number of hints based on the difficulty level.
+   */
   public static int getHintLimit() {
     // Set hint limit based on difficulty
     int hintLimit;
@@ -123,10 +140,20 @@ public class GameState {
     return hintLimit;
   }
 
+  /**
+   * Checks if the hint limit has been reached.
+   *
+   * @return true if the hint limit has been reached, false otherwise.
+   */
   public static boolean isHintLimitReached() {
     return numberOfHintsAsked >= getHintLimit();
   }
 
+  /**
+   * Gets the remaining number of hints that can be asked based on the hint limit.
+   *
+   * @return The number of hints remaining before the hint limit is reached.
+   */
   public static int getHintLimitRemaining() {
     int num = getHintLimit() - numberOfHintsAsked;
     // If the number of hints remaining is negative, set it to 0 so it appears correctly on screen
