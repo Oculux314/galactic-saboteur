@@ -43,7 +43,6 @@ public class GameState {
 
   public static String[] reactorPuzzleInformation;
   public static String[] laboratoryPuzzleInformation;
-  public static String[] navigationPuzzleInformation;
 
   public static void reset() {
     isGameover = false;
@@ -60,9 +59,8 @@ public class GameState {
     laboratoryPuzzle = null;
     navigationPuzzle = null;
 
-    reactorPuzzleInformation = new String[3];;
+    reactorPuzzleInformation = new String[2];;
     laboratoryPuzzleInformation = new String[3];;
-    navigationPuzzleInformation = new String[3];;
 
     initialiseRoomStates();
   }

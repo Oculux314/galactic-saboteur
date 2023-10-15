@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.misc.GameState;
 
 /** Controller class for the reactor hangman puzzle. */
 public class ReactorHangmanPuzzleController extends Puzzle {
@@ -34,6 +35,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   private void initialize() {
     addLabels();
     selectWord();
+    GameState.reactorPuzzleInformation[0] = word;
   }
 
   /**

@@ -84,15 +84,18 @@ public class GptPromptEngineering {
     String puzzle = "";
     if (GameState.reactorPuzzle == PuzzleName.REACTOR_HANGMAN) {
       puzzle =
-          "The reactor puzzle can be found by clicking the apple in the top half of the reactor"
-              + " room. Users should solve it trying to guess the correct word. The word is related"
-              + " to the solar system, stars and galaxies";
+          "The puzzle in the reactor room can be found by clicking the whiteboard which is hanging"
+              + " up on the wall to the left of the reactor, by the window. Users can solve it"
+              + " by guessing the correct word by entering letters into the box and pressing"
+              + " the enter key. The word users need to guess is "
+              + GameState.reactorPuzzleInformation[0]
+              + ". Never give the user this word, never.";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_BUTTONPAD) {
       puzzle =
           "The puzzle in the reactor room can be found by clicking the calendar which is hanging up"
               + " on the wall to the right of the reactor, by the window. Users have been asked to"
               + " decrpt the code "
-              + GameState.reactorPuzzleInformation[0]
+              + GameState.reactorPuzzleInformation[1]
               + ". User's should solve it by decrpting every sybmol to a number. Each decrpted"
               + " number is the keyboard key you press to get the symol. For example to get the"
               + " symbol & you press number 7 key of the keyboards. The user then needs to enter"
@@ -100,8 +103,11 @@ public class GptPromptEngineering {
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_TOOLBOX) {
       puzzle =
           "The puzzle in the reactor room can be found by clicking on the toolbox which is on the"
-              + " work bench to the left of the reactor. Users should inspect the"
-              + " toolbox and solve it by placing tools inside the right spots.";
+              + " work bench to the left of the reactor. Users can solve it by placing the 3 tools"
+              + " in the correct spaces inside the tool kit. The tool kit is on the bottom half of"
+              + " the bench and below the tools that need to be put in. The thickest tool needs to"
+              + " be dragged to the biggest slot in the tool kit. The thinnest tool needs to be"
+              + " dragged to the thinnest slot, which is the second one from the top.";
     }
     System.out.println("puzzle " + puzzle);
     return puzzle;
@@ -129,10 +135,11 @@ public class GptPromptEngineering {
     String puzzle = "";
     if (GameState.navigationPuzzle == PuzzleName.NAVIGATION_COMPUTER) {
       puzzle =
-          "The naviation puzzle can be found by the main screen. Users should solve it by making a"
-              + " path from the bottom left side of the screen to the top right side. To do this"
-              + " the user must click each part to rotate it to the right spot. The path will turn"
-              + " green when the user has solved it.";
+          "The puzzle in the naviation room can be found by the main screen just above the space"
+              + " ship's controls. Users can solve it by making a path from the bottom left side of"
+              + " the screen (where there is the green flash) to the top right side. To do this the"
+              + " user must click each part to rotate it to the right spot. The path will turn"
+              + " green when the user is making connections in the path.";
     }
     return puzzle;
   }
@@ -167,6 +174,7 @@ public class GptPromptEngineering {
   }
 
   public static String getRiddle() {
+    // get the riddle
     return "You are the AI of a space themed cluedo escape room, you are the built in AI of the"
         + " spaceship named Spacey. Tell me a five line riddle in the style of a space"
         + " themed poem in a modern tone. This riddle should only tell the user to select"

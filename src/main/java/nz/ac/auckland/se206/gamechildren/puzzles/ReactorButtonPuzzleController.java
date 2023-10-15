@@ -56,7 +56,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
     lblNumberPrompt.setText(randomSymbol);
     
     // update the game state
-    GameState.reactorPuzzleInformation[0] = randomSymbol;
+    GameState.reactorPuzzleInformation[1] = randomSymbol;
   }
 
   /**
