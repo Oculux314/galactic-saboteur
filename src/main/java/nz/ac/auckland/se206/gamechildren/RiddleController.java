@@ -20,11 +20,11 @@ import nz.ac.auckland.se206.screens.Screen;
 
 public class RiddleController implements RootPair.Controller {
 
-  @FXML private StateButton btnWho = new StateButton();
-  @FXML private StateButton btnWhere = new StateButton();
-  @FXML private StateButton btnWhen = new StateButton();
+  @FXML private StateButton btnWho;
+  @FXML private StateButton btnWhere;
+  @FXML private StateButton btnWhen;
   @FXML private AnimatedButton btnAnswer;
-  @FXML private TextArea gptTextArea = new TextArea();
+  @FXML private TextArea gptTextArea;
 
   private ChatCompletionRequest riddleChatCompletionRequest;
 

@@ -22,7 +22,7 @@ import nz.ac.auckland.se206.misc.TaggedThread;
 
 public class NotificationpanelController {
 
-  @FXML private Label gptTextLabel = new Label();
+  @FXML private Label gptTextLabel;
   @FXML private Rectangle recHide;
   @FXML private Group grpTextArea;
 
