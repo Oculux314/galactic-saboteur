@@ -18,6 +18,9 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.application.Platform;
+import javafx.scene.input.MouseEvent;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 public class NotificationpanelController {
 
@@ -35,12 +38,24 @@ public class NotificationpanelController {
   private Queue<String> notificationQueue = new LinkedList<>();
   private boolean isTransitioning = false;
   private int notificationsgiven = 0;
+  private boolean holdNotification = false;
+  private Timeline holdTimeline;
 
   public void initialize() throws ApiProxyException, IOException {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
     riddleController = new RiddleController();
     recHide.setVisible(false);
+  }
+
+  public void onMouseEntered(MouseEvent event) {
+    System.out.println("Mouse entered");
+    holdNotification = true;
+  }
+
+  public void onMouseExited(MouseEvent event) {
+    System.out.println("Mouse exited");
+    holdNotification = false;
   }
 
   /**
@@ -130,9 +145,7 @@ public class NotificationpanelController {
   private void buildText(String response) {
     Platform.runLater(() -> {
       // Set label text as response
-      System.out.println(response);
       gptTextLabel.setText(response);
-      System.out.println("GPT TEXT LABEL: " + gptTextLabel.getText());
       transition();
   });
   }
@@ -147,30 +160,49 @@ public class NotificationpanelController {
     recHide.setVisible(true);
     // Create the slide-in animation
     slideInTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
-    slideInTransition.setFromX(0); // Start off-screen
+    slideInTransition.setFromX(0);
     slideInTransition.setToX(grpTextArea.getLayoutBounds().getWidth() + 85);
 
     // Create a pause transition for 5 seconds
     pauseTransition = new PauseTransition(Duration.seconds(5));
-    pauseTransition.setOnFinished(
-        event -> {
-          slideOutTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
-          slideOutTransition.setFromX(grpTextArea.getLayoutBounds().getWidth() + 85);
-          slideOutTransition.setToX(0); // Move off-screen to the left
-          slideOutTransition.setOnFinished(
-              event2 -> {
-                grpTextArea.setTranslateX(0); // Hide it off-screen
-                isTransitioning = false;
-                processNextNotification();
-                recHide.setVisible(false);
-              });
-          slideOutTransition.play();
-        });
+    pauseTransition.setOnFinished(event -> {
+        if (holdNotification) {
+            setupHoldTimeline();
+        } else {
+            performSlideOutTransition();
+        }
+    });
 
     // Start the slide-in animation
     slideInTransition.play();
     pauseTransition.play();
-  }
+}
+
+private void setupHoldTimeline() {
+  holdTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+      if (!holdNotification) {
+          // If holdNotification becomes false, stop the timeline and start the slide-out transition
+          holdTimeline.stop();
+          performSlideOutTransition();
+      }
+  }));
+  holdTimeline.setCycleCount(Timeline.INDEFINITE);
+  holdTimeline.play();
+}
+
+// Method to perform the slide-out transition
+private void performSlideOutTransition() {
+  slideOutTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
+  slideOutTransition.setFromX(grpTextArea.getLayoutBounds().getWidth() + 85);
+  slideOutTransition.setToX(0);
+  slideOutTransition.setOnFinished(event2 -> {
+      grpTextArea.setTranslateX(0);
+      isTransitioning = false;
+      processNextNotification();
+      recHide.setVisible(false);
+  });
+  slideOutTransition.play();
+}
 
   /**
    * Returns whether a notification is in progress.

@@ -258,6 +258,16 @@ public class GameController implements Screen {
     System.out.println("You are filled with determination!");
   }
 
+  @FXML
+  private void onLogoEntered(MouseEvent event) {
+    notificationPanelController.onMouseEntered(event);
+  }
+
+  @FXML
+  private void onLogoExited(MouseEvent event) {
+    notificationPanelController.onMouseExited(event);
+  }
+
   public void addMapButton(HighlightButton mapButton) {
     mapButton.initialise();
     mapButtons.put(mapButton.getId(), mapButton);
