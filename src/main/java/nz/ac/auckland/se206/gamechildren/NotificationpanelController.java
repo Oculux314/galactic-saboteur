@@ -197,7 +197,7 @@ public class NotificationpanelController {
       generateNotification(true, secondsLeft);
     } else if (secondsLeft == initialSeconds - 1 || secondsLeft == initialSeconds - 2) {
       generateNotification();
-    } else if (secondsLeft % 60 == 0 && secondsLeft != initialSeconds) {
+    } else if (secondsLeft == initialSeconds / 4 || secondsLeft == 3 * initialSeconds / 4) {
       if (!isNotificationInProgress()) {
         selectGeneralNotification();
       }
