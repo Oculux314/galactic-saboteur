@@ -33,6 +33,8 @@ public class Assistant {
       }
 
       narrationBox.disableUserResponse();
+      narrationBox.showQuestionmarks();
+
       isWaitingForResponse = true;
 
       // Modulate ... loading effect in response field
@@ -51,6 +53,7 @@ public class Assistant {
       }
 
       narrationBox.enableUserResponse();
+      narrationBox.hideQuestionmarks();
       isWaitingForResponse = false;
       return null;
     }
@@ -166,7 +169,6 @@ public class Assistant {
     executeApiCallWithCallback(
         () -> {
           renderNarrationBox();
-          System.out.println("rendered narration box");
           increaseNumberOfHintsAskedIfHintGiven();
           getGameController().updateHintText();
         });
@@ -175,7 +177,6 @@ public class Assistant {
   private void increaseNumberOfHintsAskedIfHintGiven() {
     String stringToCheck =
         narrationBox.getText().trim(); // Trim any leading or trailing white spaces
-    System.out.println("String to check: " + stringToCheck);
 
     if (stringToCheck
         .toLowerCase()

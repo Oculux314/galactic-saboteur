@@ -25,6 +25,8 @@ public class SuspectController implements RootPair.Controller {
   @FXML TextField textResponse;
   @FXML ImageView imgSuspect;
   @FXML StateButton btnHints;
+  @FXML
+  public ImageView thinkingImage;
 
   private Map<Name, Suspect> suspects = new HashMap<>();
   private Name currentSuspect;
@@ -107,19 +109,6 @@ public class SuspectController implements RootPair.Controller {
           .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     }
 
-    // if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
-    //   GameState.difficulty = "hard";
-    //   TaggedThread loadHardState =
-    //       new TaggedThread(
-    //           () -> {
-    //             getGameController()
-    //                 .popupController
-    //                 .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
-    //           });
-    //   loadHardState.start();
-    // }
-
-    System.out.println();
     System.out.println();
 
     // Respond to the user's message

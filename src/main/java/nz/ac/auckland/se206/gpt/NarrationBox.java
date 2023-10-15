@@ -20,7 +20,8 @@ public class NarrationBox {
         int numberOfDots = i;
         Platform.runLater(
             () -> {
-              setUserResponse(getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
+              setUserResponse(
+                  getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
             });
 
         i = (i + 1) % ellipsisAnimation.length;
@@ -97,5 +98,13 @@ public class NarrationBox {
   public void enableUserResponse() {
     textResponse.setDisable(false);
     suspectController.enableUserResponse();
+  }
+
+  public void showQuestionmarks() {
+    suspectController.thinkingImage.setVisible(true);
+  }
+
+  public void hideQuestionmarks() {
+    suspectController.thinkingImage.setVisible(false);
   }
 }

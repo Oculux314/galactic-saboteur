@@ -34,5 +34,10 @@
             <Image url="@../../images/btnhint.png" />
          </image>
       </StateButton>
+      <ImageView fx:id="thinkingImage" fitHeight="73.0" fitWidth="109.0" layoutX="25.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" rotate="-11.9" visible="false">
+         <image>
+            <Image url="@../../images/questionmarks.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
