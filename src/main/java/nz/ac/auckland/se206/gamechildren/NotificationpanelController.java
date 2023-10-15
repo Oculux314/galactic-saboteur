@@ -197,17 +197,20 @@ public class NotificationpanelController {
    * @return
    */
   private void setupHoldTimeline() {
+    // Create a timeline over 1 second to check if the notification should be held
     holdTimeline =
         new Timeline(
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
+                  // If the notification should not be held, stop the timeline and perform the slide out transition
                   if (!holdNotification) {
                     holdTimeline.stop();
                     performSlideOutTransition();
                   }
                 }));
     holdTimeline.setCycleCount(Timeline.INDEFINITE);
+    // Start the hold timeline
     holdTimeline.play();
   }
 
@@ -218,10 +221,13 @@ public class NotificationpanelController {
    * @return
    */
   private void performSlideOutTransition() {
+    // Create the base for the slide-out animation
     recHide.setVisible(true);
     slideOutTransition = new TranslateTransition(Duration.seconds(1), grpTextArea);
     slideOutTransition.setFromX(grpTextArea.getLayoutBounds().getWidth() + 85);
     slideOutTransition.setToX(0);
+
+    // create instructions for when the slide-out animation is finished
     slideOutTransition.setOnFinished(
         event2 -> {
           // Reset notification parameters
@@ -230,6 +236,8 @@ public class NotificationpanelController {
           processNextNotification();
           recHide.setVisible(false);
         });
+
+    // Start the slide-out animation
     slideOutTransition.play();
   }
 
@@ -251,6 +259,7 @@ public class NotificationpanelController {
    * @return
    */
   public void generateTimeDependentNotification(Integer initialSeconds, Integer secondsLeft) {
+    // If the seconds left is half of the initial seconds, or 60, or 15, or 5, generate a time warning
     if (secondsLeft == initialSeconds / 2
         || secondsLeft == 60
         || secondsLeft == 15
@@ -259,6 +268,7 @@ public class NotificationpanelController {
     } else if (secondsLeft == initialSeconds - 1 || secondsLeft == initialSeconds - 2) {
       generateNotification();
     } else if (secondsLeft == initialSeconds / 4 || secondsLeft == 3 * initialSeconds / 4) {
+      // If the seconds left is a quarter or three quarters of the initial seconds, generate a general notification
       if (!isNotificationInProgress()) {
         selectGeneralNotification();
       }

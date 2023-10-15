@@ -150,22 +150,28 @@ public class Assistant {
   }
 
   private void executeApiCallWithCallback(Runnable callback) {
+    // Execute API call in a separate tagged thread for concurrency reasons
     TaggedThread apiCallThread =
         new TaggedThread(
             () -> {
               TaggedThread sendMessageThread = executeApiCall();
 
+              // this thread will join the current thread to make sure the API call is completed
+              // before the callback is finished
               try {
                 sendMessageThread.join();
               } catch (InterruptedException e) {
                 return;
               }
 
+              // Run callback on JavaFX thread
               Platform.runLater(
                   () -> {
                     callback.run();
                   });
             });
+
+    // Start the thread
     apiCallThread.start();
   }
 

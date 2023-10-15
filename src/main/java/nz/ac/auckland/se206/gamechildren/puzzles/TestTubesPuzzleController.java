@@ -154,8 +154,10 @@ public class TestTubesPuzzleController extends Puzzle {
 
   @FXML
   private void btnMixClicked(MouseEvent event) {
+    // Check if the solution is correct
     boolean isSolutionCorrect = checkSolution();
 
+    // Display messages if the solution is correct
     if (isSolutionCorrect) {
       completePuzzle();
       instructions.setText(
@@ -165,6 +167,7 @@ public class TestTubesPuzzleController extends Puzzle {
               + glitterColour
               + " glitter in it!");
     } else {
+      // Increment the incorrect count
       incorrectCount++;
 
       // Display different messages depending on the amount of incorrect attempts

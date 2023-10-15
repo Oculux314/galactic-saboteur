@@ -85,8 +85,11 @@ public class GptPromptEngineering {
   }
 
   public static String getReactorPuzzleInformation() {
+    // start with an empty string incase this puzzle is not the one the user is doing
     String puzzle = "";
+    // check that it's the reactor puzzle the user is doing
     if (GameState.reactorPuzzle == PuzzleName.REACTOR_HANGMAN) {
+      // set the puzzle string to the reactor puzzle information if it's the hangman puzzle
       puzzle =
           "The puzzle in the reactor room can be found by clicking the whiteboard which is hanging"
               + " up on the wall to the left of the reactor, by the window. Users can solve it"
@@ -95,6 +98,7 @@ public class GptPromptEngineering {
               + GameState.reactorPuzzleInformation[0]
               + ". Never give the user this word, never.";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_BUTTONPAD) {
+      // set the puzzle string to the reactor puzzle information if it's the button pad puzzle
       puzzle =
           "The puzzle in the reactor room can be found by clicking the calendar which is hanging up"
               + " on the wall to the right of the reactor, by the window. Users have been asked to"
@@ -105,6 +109,7 @@ public class GptPromptEngineering {
               + " symbol & you press number 7 key of the keyboards. The user then needs to enter"
               + " the fully decrpted numeric number into the calculor and press submit.";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_TOOLBOX) {
+      // set the puzzle string to the reactor puzzle information if it's the toolbox puzzle
       puzzle =
           "The puzzle in the reactor room can be found by clicking on the toolbox which is on the"
               + " work bench to the left of the reactor. Users can solve it by placing the 3 tools"
@@ -113,13 +118,16 @@ public class GptPromptEngineering {
               + " be dragged to the biggest slot in the tool kit. The thinnest tool needs to be"
               + " dragged to the thinnest slot, which is the second one from the top.";
     }
-    System.out.println("puzzle " + puzzle);
+    // return the puzzle string
     return puzzle;
   }
 
   public static String getLaboratoryPuzzleInformation() {
+    // start with an empty string incase this puzzle is not the one the user is doing
     String puzzle = "";
+    // check that it's the lab puzzle the user is doing
     if (GameState.laboratoryPuzzle == PuzzleName.LABORATORY_TESTTUBES) {
+      // set the puzzle string to the lab puzzle information
       puzzle =
           "The laboratory puzzle can be found by clicking the testtubes on the lab's counter (this"
               + " is in the middle of the room). The user has been asked to "

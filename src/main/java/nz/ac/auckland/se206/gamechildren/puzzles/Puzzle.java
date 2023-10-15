@@ -1,7 +1,5 @@
 package nz.ac.auckland.se206.gamechildren.puzzles;
 
-import java.util.HashSet;
-import java.util.Set;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -87,14 +85,17 @@ public class Puzzle implements RootPair.Controller {
   public void setSolved() {
     isPuzzleSolved = true;
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
+      // if the user has soleved the reactor puzzle, update the game state
       GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
       GameState.reactorPuzzleSolved = true;
       GameState.unsolvedRooms.remove("reactor");
     } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
+      // if the user has soleved the laboratory puzzle, update the game state
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
       GameState.laboratoryPuzzleSolved = true;
       GameState.unsolvedRooms.remove("laboratory");
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
+      // if the user has soleved the navigation puzzle, update the game state
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
       GameState.navigationPuzzleSolved = true;
       GameState.unsolvedRooms.remove("navigation");
@@ -105,6 +106,7 @@ public class Puzzle implements RootPair.Controller {
       GameState.cluesFound = true;
     }
 
+    // get references for game controller and notification panel controller
     GameController gameController =
         (GameController) App.getScreen(Screen.Name.GAME).getController();
     NotificationpanelController notificationpanelcontroller =
@@ -115,6 +117,7 @@ public class Puzzle implements RootPair.Controller {
       notificationpanelcontroller.generateNotification();
     }
 
+    // update the hint text
     gameController.giveRandomClue();
   }
 
