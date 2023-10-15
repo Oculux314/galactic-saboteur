@@ -90,9 +90,11 @@ public class Puzzle implements RootPair.Controller {
     if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
       GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
       GameState.reactorPuzzleSolved = true;
+      GameState.unsolvedRooms.remove("reactor");
     } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
       GameState.laboratoryPuzzleSolved = true;
+      GameState.unsolvedRooms.remove("laboratory");
     } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
       GameState.navigationPuzzleSolved = true;
@@ -101,6 +103,7 @@ public class Puzzle implements RootPair.Controller {
     GameState.solvedPuzzles++;
     if (isAllSolved()) {
       GameState.cluesFound = true;
+      GameState.unsolvedRooms.remove("navigation");
     }
 
     GameController gameController =

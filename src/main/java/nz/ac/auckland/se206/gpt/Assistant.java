@@ -2,13 +2,20 @@ package nz.ac.auckland.se206.gpt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.screens.GameController;
+import nz.ac.auckland.se206.screens.Screen;
 
 public class Assistant {
 
@@ -29,12 +36,44 @@ public class Assistant {
         }
       }
 
+      ImageView imageView = narrationBox.getThinkingImage();
+
       narrationBox.disableUserResponse();
+      narrationBox.showQuestionmarks();
+
       isWaitingForResponse = true;
 
       // Modulate ... loading effect in response field
       TaggedThread loadEffectThread = new TaggedThread(narrationBox.new LoadEffectTask());
       loadEffectThread.start();
+
+      // Fade in and out animation
+      AtomicBoolean animationRunning = new AtomicBoolean(true); // Flag to track animation status
+      TaggedThread animationThread =
+          new TaggedThread(
+              () -> {
+                while (animationRunning.get()) {
+                  Platform.runLater(
+                      () -> {
+                        FadeTransition fadeInOut =
+                            new FadeTransition(Duration.seconds(1), imageView);
+                        fadeInOut.setFromValue(1.0);
+                        fadeInOut.setToValue(0.0);
+                        fadeInOut.setAutoReverse(true);
+                        fadeInOut.setCycleCount(FadeTransition.INDEFINITE);
+                        fadeInOut.play();
+                      });
+
+                  try {
+                    Thread.sleep(1000); // Adjust the timing here
+                  } catch (InterruptedException e) {
+                    break;
+                  }
+                }
+              });
+
+      animationThread.setDaemon(true);
+      animationThread.start();
 
       // API call
       try {
@@ -47,7 +86,9 @@ public class Assistant {
         addChatMessage("assistant", responseText);
       }
 
+      animationRunning.set(false); // Stop the animation thread
       narrationBox.enableUserResponse();
+      narrationBox.hideQuestionmarks();
       isWaitingForResponse = false;
       return null;
     }
@@ -92,7 +133,7 @@ public class Assistant {
 
   private TaggedThread executeApiCall() {
     ChatCompletionRequest request =
-        new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(100);
+        new ChatCompletionRequest().setTemperature(0.4).setTopP(0.6).setMaxTokens(80);
 
     if (!onlySystemMessage) {
       for (ChatMessage message : chatMessages) {
@@ -144,16 +185,8 @@ public class Assistant {
 
   public void respondToUser() {
     narrationBox.disableUserResponse();
-    String userMessage = narrationBox.getUserResponse() + " " + getGameStateOfPuzzle(job);
-    System.out.println(userMessage);
+    String userMessage = narrationBox.getUserResponse();
 
-    // increment number of hints asked - temp solutions
-    if (userMessage.toLowerCase().contains("hint")
-        || userMessage.toLowerCase().contains("advice")
-        || userMessage.toLowerCase().contains("help")
-        || userMessage.toLowerCase().contains("clue")) {
-      GameState.numberOfHintsAsked++;
-    }
     narrationBox.clearUserResponse();
     if (userMessage.equals("")) {
       narrationBox.enableUserResponse();
@@ -162,7 +195,26 @@ public class Assistant {
 
     setSystemMessage(GptPromptEngineering.getUserInteractionPrompt(job), false);
     addChatMessage("user", userMessage);
-    executeApiCallWithCallback(this::renderNarrationBox);
+
+    executeApiCallWithCallback(
+        () -> {
+          renderNarrationBox();
+          increaseNumberOfHintsAskedIfHintGiven();
+          getGameController().updateHintText();
+        });
+  }
+
+  private void increaseNumberOfHintsAskedIfHintGiven() {
+    String stringToCheck =
+        narrationBox.getText().trim(); // Trim any leading or trailing white spaces
+
+    if (stringToCheck.toLowerCase().contains("hint")) { // Convert to lowercase before checking
+      GameState.numberOfHintsAsked++;
+    }
+  }
+
+  private GameController getGameController() {
+    return (GameController) App.getScreen(Screen.Name.GAME).getController();
   }
 
   public void welcome() {

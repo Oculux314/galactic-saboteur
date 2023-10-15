@@ -24,7 +24,6 @@ public class Suspect {
     this.image = image;
     this.narrationBox = generateNarrationBox(suspectController);
     assistant = new Assistant(narrationBox, title);
-    assistant.welcome();
   }
 
   private NarrationBox generateNarrationBox(SuspectController suspectController) {
