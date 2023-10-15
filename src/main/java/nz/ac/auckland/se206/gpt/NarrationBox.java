@@ -102,7 +102,7 @@ public class NarrationBox {
   }
 
   public void showQuestionmarks() {
-    suspectController.thinkingImage.setVisible(true);
+    suspectController.getThinkingImage().setVisible(true);
   }
 
   public ImageView getThinkingImage() {
@@ -110,6 +110,6 @@ public class NarrationBox {
   }
 
   public void hideQuestionmarks() {
-    suspectController.thinkingImage.setVisible(false);
+    suspectController.getThinkingImage().setVisible(false);
   }
 }

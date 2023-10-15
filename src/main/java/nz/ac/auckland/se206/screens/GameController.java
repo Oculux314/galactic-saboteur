@@ -40,7 +40,7 @@ public class GameController implements Screen {
   @FXML private SidepanelController sidePanelController;
   @FXML private SuspectController suspectController;
   @FXML
-  public PopupController popupController;
+  private PopupController popupController;
   @FXML private NotificationpanelController notificationPanelController;
 
   private Timer countdownTimer;
@@ -106,6 +106,10 @@ public class GameController implements Screen {
     for (HighlightButton button : mapButtons.values()) {
       button.unhighlight();
     }
+  }
+
+  public PopupController getPopupController() {
+    return popupController;
   }
 
   private void highlightReactor() {

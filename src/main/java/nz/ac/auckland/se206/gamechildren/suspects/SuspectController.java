@@ -21,11 +21,11 @@ import nz.ac.auckland.se206.screens.Screen;
 
 public class SuspectController implements RootPair.Controller {
 
-  @FXML TextArea textNarration;
-  @FXML TextField textResponse;
-  @FXML ImageView imgSuspect;
-  @FXML StateButton btnHints;
-  @FXML public ImageView thinkingImage;
+  @FXML private TextArea textNarration;
+  @FXML private TextField textResponse;
+  @FXML private ImageView imgSuspect;
+  @FXML private StateButton btnHints;
+  @FXML private ImageView thinkingImage;
 
   private Map<Name, Suspect> suspects = new HashMap<>();
   private Name currentSuspect;
@@ -108,7 +108,7 @@ public class SuspectController implements RootPair.Controller {
     if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
       GameState.difficulty = "hard";
       getGameController()
-          .popupController
+          .getPopupController()
           .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     }
 
@@ -166,7 +166,4 @@ public class SuspectController implements RootPair.Controller {
     return thinkingImage;
   }
 
-  public void setThinkingImageToOriginalRotation() {
-    thinkingImage.setRotate(0);
-  }
 }
