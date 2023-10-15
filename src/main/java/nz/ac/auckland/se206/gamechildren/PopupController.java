@@ -54,7 +54,7 @@ public class PopupController implements RootPair.Controller {
     popups.put(name, popup);
   }
 
-  private void load(Name name, String popupUrl) {
+  public void load(Name name, String popupUrl) {
     TaggedThread popupLoader = new TaggedThread(() -> load(name, new RootPair(popupUrl)));
     popupLoader.start();
   }

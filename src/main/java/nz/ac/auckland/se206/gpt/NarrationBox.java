@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 
 public class NarrationBox {
@@ -20,7 +21,8 @@ public class NarrationBox {
         int numberOfDots = i;
         Platform.runLater(
             () -> {
-              setUserResponse(getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
+              setUserResponse(
+                  getWaitingMessage() + " is thinking" + ellipsisAnimation[numberOfDots]);
             });
 
         i = (i + 1) % ellipsisAnimation.length;
@@ -97,5 +99,17 @@ public class NarrationBox {
   public void enableUserResponse() {
     textResponse.setDisable(false);
     suspectController.enableUserResponse();
+  }
+
+  public void showQuestionmarks() {
+    suspectController.thinkingImage.setVisible(true);
+  }
+
+  public ImageView getThinkingImage() {
+    return suspectController.getThinkingImage();
+  }
+
+  public void hideQuestionmarks() {
+    suspectController.thinkingImage.setVisible(false);
   }
 }

@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.gamechildren.PopupController;
 
 /** Controller class for the title screen. */
 public class TitleController implements Screen {
@@ -13,6 +14,7 @@ public class TitleController implements Screen {
   @FXML private Pane panBackground;
   @FXML private Pane panFullScreen;
   @FXML private AnimatedButton btnPlay;
+  @FXML private PopupController popupController;
 
   @Override
   public void onLoad() {
@@ -29,6 +31,10 @@ public class TitleController implements Screen {
   private void onPlayClicked(MouseEvent event) throws IOException {
     App.setScreen(Screen.Name.EXPOSITION);
     ((ExpositionController) App.getScreen(Screen.Name.EXPOSITION).getController()).startSlideshow();
+
+    GameController gameController =
+        ((GameController) App.getScreen(Screen.Name.GAME).getController());
+    gameController.resetGpt();
   }
 
   /**

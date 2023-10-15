@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Ellipse;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.GameState;
 
 public class TestTubesPuzzleController extends Puzzle {
 
@@ -61,6 +62,9 @@ public class TestTubesPuzzleController extends Puzzle {
     initializeButtonToEllipseMap();
     hideAllChosenCircles();
     initializeSelectedMaps();
+    GameState.laboratoryPuzzleInformation[0] = getInstructions();
+    GameState.laboratoryPuzzleInformation[1] = colour;
+    GameState.laboratoryPuzzleInformation[2] = glitterColour;
   }
 
   public void hideAllChosenCircles() {
@@ -230,6 +234,10 @@ public class TestTubesPuzzleController extends Puzzle {
       }
     }
     return count;
+  }
+
+  public String getInstructions() {
+    return instructions.getText();
   }
 
   private void completePuzzle() {
