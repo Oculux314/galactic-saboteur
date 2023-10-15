@@ -18,8 +18,6 @@ public class ExpositionController implements Screen {
   /** Pane that takes up the entire screen. */
   @FXML private Pane panFullScreen;
 
-  @FXML private Pane replayPane;
-  @FXML private AnimatedButton btnReplay;
   @FXML private AnimatedButton btnContinue;
   @FXML private ImageView imageView;
 
@@ -29,7 +27,8 @@ public class ExpositionController implements Screen {
     "/images/expo2.png",
     "/images/expo3.png",
     "/images/expo4.png",
-    "/images/expo5.png"
+    "/images/expo5.png",
+    "/images/expo6.png"
   };
   private TaggedThread delayManager;
 
@@ -39,6 +38,7 @@ public class ExpositionController implements Screen {
   }
 
   public void startSlideshow() {
+    btnContinue.setVisible(false);
     showNextImage();
   }
 
@@ -57,7 +57,7 @@ public class ExpositionController implements Screen {
 
   private void showReplayPane() {
     currentImageIndex = 0;
-    replayPane.setVisible(true);
+    btnContinue.setVisible(true);
   }
 
   private void updateImage() {
@@ -76,17 +76,6 @@ public class ExpositionController implements Screen {
     }
 
     showNextImage();
-  }
-
-  /**
-   * Called when the replay button is clicked. Replays exposition.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onReplayClicked(MouseEvent event) throws IOException {
-    replayPane.setVisible(false);
-    startSlideshow();
   }
 
   /**
