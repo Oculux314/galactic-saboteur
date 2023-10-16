@@ -19,6 +19,11 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
+/**
+ * The NotificationpanelController class manages the notifications displayed in the game. It handles
+ * the generation and display of various types of notifications, including general notifications,
+ * time-dependent notifications, and specific message-based notifications.
+ */
 public class NotificationpanelController {
 
   @FXML private Label gptTextLabel;
@@ -35,6 +40,14 @@ public class NotificationpanelController {
   private boolean holdNotification = false;
   private Timeline holdTimeline;
 
+  /**
+   * Initializes the NotificationpanelController by setting up the chat completion request and the
+   * riddle controller, as well as hiding the rectangle used for transitions.
+   *
+   * @throws ApiProxyException if there is an issue with the API proxy during the execution of the
+   *     request.
+   * @throws IOException if there is an I/O issue during initialization.
+   */
   public void initialize() throws ApiProxyException, IOException {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.4).setTopP(0.6).setMaxTokens(50);
@@ -57,7 +70,6 @@ public class NotificationpanelController {
    * Called when logo is exited.
    *
    * @param event the mouse event
-   * @return
    */
   public void onMouseExited() {
     System.out.println("Mouse exited");
@@ -69,7 +81,6 @@ public class NotificationpanelController {
    *
    * @param timeWarning whether the notification is a time warning
    * @param timeLeft the time left
-   * @return
    */
   public void generateNotification(Boolean timeWarning, Integer timeLeft) {
     String newNotification;
@@ -89,12 +100,7 @@ public class NotificationpanelController {
     }
   }
 
-  /**
-   * Called when wanting to generate a notification that is not a time warning
-   *
-   * @param
-   * @return
-   */
+  /** Called when wanting to generate a notification that is not a time warning */
   public void generateNotification() {
     generateNotification(false, null);
   }
@@ -103,7 +109,6 @@ public class NotificationpanelController {
    * Called when wanting to generate a notification with a specific message
    *
    * @param notification The notification message.
-   * @return
    */
   public void generateNotification(String notification) {
     notificationQueue.add(notification);
@@ -113,11 +118,7 @@ public class NotificationpanelController {
     }
   }
 
-  /**
-   * Processes the queue of notifications. Called when a notification is finished.
-   *
-   * @param
-   */
+  /** Processes the queue of notifications. Called when a notification is finished. */
   private void processNextNotification() {
     if (!notificationQueue.isEmpty()) {
       String nextNotification = notificationQueue.poll();
@@ -141,10 +142,10 @@ public class NotificationpanelController {
   }
 
   /**
-   * Builds the text for the notification.
+   * Builds the text for the notification using the provided response from GPT-3.5. It sets the
+   * label text with the response and triggers the transition for the notification panel.
    *
-   * @param response The response from GPT-3.5.
-   * @return
+   * @param response The response obtained from the GPT-3.5 model.
    */
   private void buildText(String response) {
     Platform.runLater(
@@ -156,10 +157,8 @@ public class NotificationpanelController {
   }
 
   /**
-   * Transitions the notification in and out.
-   *
-   * @param
-   * @return
+   * Transitions the notification panel in and out by setting up various animations, including
+   * slide-in and slide-out transitions.
    */
   private void transition() {
     recHide.setVisible(true);
@@ -190,12 +189,7 @@ public class NotificationpanelController {
     pauseTransition.play();
   }
 
-  /**
-   * Holds the notification
-   *
-   * @param
-   * @return
-   */
+  /** Holds the notification */
   private void setupHoldTimeline() {
     // Create a timeline over 1 second to check if the notification should be held
     holdTimeline =
@@ -203,7 +197,8 @@ public class NotificationpanelController {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  // If the notification should not be held, stop the timeline and perform the slide out transition
+                  // If the notification should not be held, stop the timeline and perform the slide
+                  // out transition
                   if (!holdNotification) {
                     holdTimeline.stop();
                     performSlideOutTransition();
@@ -214,12 +209,7 @@ public class NotificationpanelController {
     holdTimeline.play();
   }
 
-  /**
-   * Performs the slide out transition.
-   *
-   * @param
-   * @return
-   */
+  /** Performs the slide out transition. */
   private void performSlideOutTransition() {
     // Create the base for the slide-out animation
     recHide.setVisible(true);
@@ -241,12 +231,7 @@ public class NotificationpanelController {
     slideOutTransition.play();
   }
 
-  /**
-   * Returns whether a notification is in progress.
-   *
-   * @param
-   * @return
-   */
+  /** Returns whether a notification is in progress. */
   public boolean isNotificationInProgress() {
     return isTransitioning;
   }
@@ -256,10 +241,10 @@ public class NotificationpanelController {
    *
    * @param initialSeconds The initial seconds.
    * @param secondsLeft The seconds left.
-   * @return
    */
   public void generateTimeDependentNotification(Integer initialSeconds, Integer secondsLeft) {
-    // If the seconds left is half of the initial seconds, or 60, or 15, or 5, generate a time warning
+    // If the seconds left is half of the initial seconds, or 60, or 15, or 5, generate a time
+    // warning
     if (secondsLeft == initialSeconds / 2
         || secondsLeft == 60
         || secondsLeft == 15
@@ -268,7 +253,8 @@ public class NotificationpanelController {
     } else if (secondsLeft == initialSeconds - 1 || secondsLeft == initialSeconds - 2) {
       generateNotification();
     } else if (secondsLeft == initialSeconds / 4 || secondsLeft == 3 * initialSeconds / 4) {
-      // If the seconds left is a quarter or three quarters of the initial seconds, generate a general notification
+      // If the seconds left is a quarter or three quarters of the initial seconds, generate a
+      // general notification
       if (!isNotificationInProgress()) {
         selectGeneralNotification();
       }
@@ -276,21 +262,24 @@ public class NotificationpanelController {
   }
 
   /**
-   * Selects a general notification.
-   *
-   * @param
-   * @return
+   * Selects a general notification randomly from a set of predefined options and generates the
+   * selected notification message. It generates a random number between 0 and 2 and selects the
+   * notification based on the generated number using a switch statement.
    */
   private void selectGeneralNotification() {
+    // Generate a random number between 0 and 2
     int random = (int) (Math.random() * 3);
     switch (random) {
       case 0:
+        // room related notification
         generateNotification("Tell me each room has one problem to solve.");
         break;
       case 1:
+        // puzzle related notification
         generateNotification("Tell me the clues I recieve will unlock the reactor.");
         break;
       case 2:
+        // assistant reminder related notification
         generateNotification("Tell me I can talk to the astronauts for help.");
         break;
     }

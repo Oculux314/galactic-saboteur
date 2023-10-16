@@ -18,6 +18,11 @@ public class SettingsController implements Screen {
   @FXML private StateButton btnTime;
   @FXML private StateButton btnTts;
 
+  /**
+   * Initializes the user interface, populating it with the persistent settings stored in the
+   * GameState. The method retrieves and sets the stored difficulty, time limit, and text-to-speech
+   * settings.
+   */
   @FXML
   private void initialize() {
     // Store persistent settings
@@ -33,11 +38,16 @@ public class SettingsController implements Screen {
     btnTts.setState(ttsEnabled);
   }
 
+  /** Specifies the actions to be performed during the loading process. */
   @Override
   public void onLoad() {
     // Do nothing
   }
 
+  /**
+   * Creates button states for the difficulty, time, and text-to-speech settings. Each button state
+   * is associated with an image and corresponding update action.
+   */
   private void createButtonStates() {
     // Difficulty
     btnDifficulty.addState("easy", "settings_buttons/easy.png", this::updateDifficulty, null);
@@ -54,14 +64,17 @@ public class SettingsController implements Screen {
     btnTts.addState("on", "settings_buttons/on.png", this::updateTts, null);
   }
 
+  /** Updates the difficulty setting in the GameState based on the selected button state. */
   private void updateDifficulty() {
     GameState.difficulty = btnDifficulty.getState();
   }
 
+  /** Updates the time limit setting in the GameState based on the selected button state. */
   private void updateTime() {
     GameState.timeLimit = Integer.parseInt(btnTime.getState());
   }
 
+  /** Updates the text-to-speech setting in the GameState based on the selected button state. */
   private void updateTts() {
     GameState.ttsEnabled = btnTts.getState().equals("on");
   }
@@ -77,6 +90,11 @@ public class SettingsController implements Screen {
     App.setScreen(Screen.Name.TITLE);
   }
 
+  /**
+   * Retrieves the current state of the time setting from the button.
+   *
+   * @return The current state of the time setting.
+   */
   public String getTimeState() {
     return btnTime.getState();
   }

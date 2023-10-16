@@ -25,6 +25,7 @@ public class AnimatedButton extends ImageView {
     attachEventListeners();
   }
 
+  /** Creates a new animated button with the given image. */
   private void attachEventListeners() {
     setOnMouseEntered((event) -> onMouseEntered(event));
     setOnMouseExited((event) -> onMouseExited(event));
@@ -32,6 +33,7 @@ public class AnimatedButton extends ImageView {
     setOnMouseReleased((event) -> onMouseReleased(event));
   }
 
+  /** Creates a new animated button with the given image. */
   private void loadImages() {
     normalImage = getImage();
     hoverImage = Utils.getImageWithSuffix(normalImage, "_hover");
@@ -65,6 +67,10 @@ public class AnimatedButton extends ImageView {
     isHovering = false;
   }
 
+  /**
+   * Updates the image of the button to the correct image (normal or hover) based on whether the
+   * mouse is hovering over the button.
+   */
   protected void updateImage() {
     if (isHovering) {
       changeImageToHover();
@@ -73,10 +79,12 @@ public class AnimatedButton extends ImageView {
     }
   }
 
+  /** Changes the image of the button to the hover image. */
   protected void changeImageToHover() {
     setImage(hoverImage);
   }
 
+  /** Changes the image of the button to the normal image. */
   protected void changeImageToNormal() {
     setImage(normalImage);
   }

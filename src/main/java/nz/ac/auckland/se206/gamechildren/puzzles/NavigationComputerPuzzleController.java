@@ -15,14 +15,20 @@ import nz.ac.auckland.se206.components.RotateButton.Orientation;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
+/**
+ * Controller class for the navigation computer puzzle. Handles the interaction and logic of the
+ * navigation computer puzzle.
+ */
 public class NavigationComputerPuzzleController extends Puzzle {
 
+  // Enum representing the various states of the puzzle
   private enum State {
     UNCLICKED,
     CLICKED,
     COMPLETE,
   }
 
+  // Represents a coordinate in the puzzle grid
   private class Coordinate {
     private int row;
     private int col;
@@ -32,10 +38,20 @@ public class NavigationComputerPuzzleController extends Puzzle {
       this.col = col;
     }
 
+    /**
+     * Returns the row of the coordinate.
+     *
+     * @return The row of the coordinate.
+     */
     public int getRow() {
       return row;
     }
 
+    /**
+     * Returns the column of the coordinate.
+     *
+     * @return The column of the coordinate.
+     */
     public int getCol() {
       return col;
     }

@@ -54,7 +54,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
     randomNumber = generateRandomNumber();
     String randomSymbol = convertNumberToSymbol(randomNumber);
     lblNumberPrompt.setText(randomSymbol);
-    
+
     // update the game state
     GameState.reactorPuzzleInformation[1] = randomSymbol;
   }
@@ -62,7 +62,6 @@ public class ReactorButtonPuzzleController extends Puzzle {
   /**
    * Called when the puzzle is initialized. Generates a random number.
    *
-   * @param
    * @return A random 5 digit number.
    */
   private String generateRandomNumber() {

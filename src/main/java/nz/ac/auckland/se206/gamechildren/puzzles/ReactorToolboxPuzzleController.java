@@ -48,10 +48,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Called when the mouse is pressed
+   * Called when the mouse is pressed.
    *
-   * @param event the mouse event
-   * @return
+   * @param event the mouse event.
    */
   @FXML
   private void onMousePressed(MouseEvent event) {
@@ -69,10 +68,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Called when the mouse is dragged
+   * Called when the mouse is dragged.
    *
-   * @param event the mouse event
-   * @return
+   * @param event the mouse event.
    */
   @FXML
   private void onMouseDragged(MouseEvent event) {
@@ -102,10 +100,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Called when the mouse is released
+   * Called when the mouse is released.
    *
-   * @param event the mouse event
-   * @return
+   * @param event the mouse event.
    */
   @FXML
   private void onMouseReleased(MouseEvent event) {
@@ -122,6 +119,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML
   private void onSubmitClicked() {
     // Check if all tools are in the correct place
+    // create a thread to clear the label after 1.5 seconds
     TaggedThread labelThread =
         new TaggedThread(
             () -> {
@@ -133,26 +131,29 @@ public class ReactorToolboxPuzzleController extends Puzzle {
               }
             });
 
+    // Check if all tools are in the correct place
     boolean allToolsInRectangles =
         isToolInRectangle(imvTool2, rec2)
             && isToolInRectangle(imvTool3, rec3)
             && isToolInRectangle(imvTool1, rec1);
 
+    // If all tools are in the correct place, set the puzzle as solved
     if (allToolsInRectangles) {
       setSolved();
       clearPuzzle(panReactorToolbox);
     } else {
+      // If not, display a message
       lblVerdict.setText("Incorrect \n Try again");
       labelThread.start();
     }
   }
 
   /**
-   * Checks if a tool is in the corresponding rectangle
+   * Checks if a tool is in the corresponding rectangle.
    *
-   * @param tool the tool to check
-   * @param rectangle the rectangle to check
-   * @return true if the tool is in the rectangle, false otherwise
+   * @param tool the tool to check.
+   * @param rectangle the rectangle to check.
+   * @return true if the tool is in the rectangle, false otherwise.
    */
   private boolean isToolInRectangle(ImageView tool, Rectangle rectangle) {
 
@@ -166,7 +167,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * get screen zoom
+   * get screen zoom.
    *
    * @param event The mouse event.
    */
@@ -175,19 +176,19 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Clamps a value between a minimum and maximum value
+   * Clamps a value between a minimum and maximum value.
    *
-   * @param value the value to clamp
-   * @param min the minimum value
-   * @param max the maximum value
-   * @return the clamped value
+   * @param value the value to clamp.
+   * @param min the minimum value.
+   * @param max the maximum value.
+   * @return the clamped value.
    */
   private double clamp(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
   }
 
   /**
-   * Called when the puzzle is solved
+   * Called when the puzzle is solved.
    *
    * @param event The mouse event.
    */
@@ -198,10 +199,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Snaps a tool to a rectangle if it meets conditions
+   * Snaps a tool to a rectangle if it meets conditions.
    *
-   * @param source the node to snap
-   * @return
+   * @param source the node to snap.
    */
   private void snapToPosition(Node source) {
     for (Rectangle rect : rects) {
@@ -210,11 +210,10 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Checks if a tool is close to a rectangle
+   * Checks if a tool is close to a rectangle.
    *
-   * @param source the node to check
-   * @param rect the rectangle to check
-   * @return
+   * @param source the node to check.
+   * @param rect the rectangle to check.
    */
   private void checkCloseToRectangle(Node source, Rectangle rect) {
     if (!checkRectangleAvailable(rect)) {
@@ -237,24 +236,18 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Sets position of a tool node
+   * Sets position of a tool node.
    *
-   * @param source the node to set the position of
-   * @param x the x position to set
-   * @param y the y position to set
-   * @return
+   * @param source the node to set position.
+   * @param x the x position to set.
+   * @param y the y position to set.
    */
   private void setPosition(Node source, double x, double y) {
     source.setTranslateX(x - source.getLayoutX());
     source.setTranslateY(y - source.getLayoutY());
   }
 
-  /**
-   * Adds tools and rectangles to lists
-   *
-   * @param
-   * @return
-   */
+  /** Adds tools and rectangles to lists. */
   private void addToolsAndRectangles() {
     tools.add(imvTool2);
     tools.add(imvTool3);
@@ -266,10 +259,9 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Checks if a rectangle is available to snap to
+   * Checks if a rectangle is available to snap to.
    *
-   * @param rect the rectangle to check
-   * @return
+   * @param rect the rectangle to check.
    */
   private boolean checkRectangleAvailable(Rectangle rect) {
     for (ImageView tool : tools) {
