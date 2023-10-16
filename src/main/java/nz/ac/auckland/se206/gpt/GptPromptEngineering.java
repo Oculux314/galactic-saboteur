@@ -49,7 +49,7 @@ public class GptPromptEngineering {
               + " hints of any form. Do not, for any reason, give the user any new hints or help"
               + " the user solve the game. Please respond in 18 words or fewer.";
     }
-    // return the prompt
+    // Give the updated prompt
     return prompt;
   }
 
@@ -253,7 +253,7 @@ public class GptPromptEngineering {
     if (gameState == GameState.puzzleSolvedMessage) {
       gameState = gameState + whatOtherRoomToLookIn();
     }
-    // return the game state
+    // give the updated value of the game state
     return gameState;
   }
 

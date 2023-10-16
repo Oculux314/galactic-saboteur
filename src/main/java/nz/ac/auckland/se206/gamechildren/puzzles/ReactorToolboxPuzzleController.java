@@ -204,20 +204,23 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @param rect the rectangle to check.
    */
   private void checkCloseToRectangle(Node source, Rectangle rect) {
+    // if the rectangle is not available, do not try and snap to it
     if (!checkRectangleAvailable(rect)) {
       return;
     }
-    ;
 
+    // get the coordinates of the tool and rectangle
     double sourceX = source.getTranslateX() + source.getLayoutX();
     double sourceY = source.getTranslateY() + source.getLayoutY();
 
     double rectX = rect.getLayoutX();
     double rectY = rect.getLayoutY();
 
+    // calculate the distance between the tool and rectangle
     double distanceX = Math.abs(sourceX - rectX);
     double distanceY = Math.abs(sourceY - rectY);
 
+    // if the tool is close enough to the rectangle, snap it to the rectangle
     if (distanceX < 30 && distanceY < 15) {
       setPosition(source, rectX + marginX, rectY + marginY);
     }

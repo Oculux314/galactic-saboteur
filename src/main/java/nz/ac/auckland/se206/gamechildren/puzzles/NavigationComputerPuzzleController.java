@@ -260,14 +260,17 @@ public class NavigationComputerPuzzleController extends Puzzle {
   }
 
   private void completePuzzle() {
+    // Update specific components to reflect completion
     state = State.COMPLETE;
     tilEnd.setImage(new Image("/images/puzzle/connector_end_green.png"));
     grpTiles.setDisable(true);
 
+    // Update the label to reflect completion
     lblWarning.setText("LOGS RESTORED");
     lblWarning.setVisible(true);
     lblWarning.setStyle("-fx-text-fill: #58DD94;");
 
+    // Complete the puzzle
     completePuzzle(this, panBackground);
   }
 }

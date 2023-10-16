@@ -50,8 +50,10 @@ public class SuspectController implements RootPair.Controller {
    */
   @Override
   public void onLoad() {
+    // retrieve the current suspect and update the popup
     updateSuspect(getGameController().getClickedSuspectName());
 
+    // display a welcome message if applicable
     if (currentSuspect == Name.CAPTAIN && !captainWelcomeShown) {
       getCurrentSuspect().getAssistant().welcome();
       captainWelcomeShown = true;
