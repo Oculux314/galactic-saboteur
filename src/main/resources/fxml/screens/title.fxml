@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -23,6 +22,5 @@
             <Image url="@../../images/play.png" />
          </image>
       </AnimatedButton>
-      <Label fx:id="lblSubtitle" alignment="CENTER" layoutY="359.0" prefHeight="23.0" prefWidth="800.0" text="Escape by finding the saboteur" textAlignment="CENTER" />
    </children>
 </Pane>
