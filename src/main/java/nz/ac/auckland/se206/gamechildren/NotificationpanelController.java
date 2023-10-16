@@ -17,7 +17,9 @@ import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
+import nz.ac.auckland.se206.misc.TextToSpeech;
 
 /**
  * The NotificationpanelController class manages the notifications displayed in the game. It handles
@@ -38,7 +40,9 @@ public class NotificationpanelController {
   private Queue<String> notificationQueue = new LinkedList<>();
   private boolean isTransitioning = false;
   private boolean holdNotification = false;
+  private boolean ttsFinished = false;
   private Timeline holdTimeline;
+  private TextToSpeech tts = new TextToSpeech();
 
   /**
    * Initializes the NotificationpanelController by setting up the chat completion request and the
@@ -150,7 +154,21 @@ public class NotificationpanelController {
   private void buildText(String response) {
     Platform.runLater(
         () -> {
-          // Set label text as response
+          TaggedThread ttsThread =
+              new TaggedThread(
+                  () -> {
+                    try {
+                      tts.speak(response);
+                      ttsFinished = true; // Set the flag to true when TTS finishes
+                    } catch (Exception e) {
+                      e.printStackTrace();
+                    }
+                  });
+
+          if (GameState.ttsEnabled) {
+            ttsThread.start();
+          }
+
           gptTextLabel.setText(response);
           transition();
         });
@@ -171,7 +189,8 @@ public class NotificationpanelController {
     pauseTransition = new PauseTransition(Duration.seconds(5));
     pauseTransition.setOnFinished(
         event -> {
-          if (holdNotification) {
+          // Hold if needed
+          if (holdNotification || !ttsFinished) {
             setupHoldTimeline();
           } else {
             performSlideOutTransition();
@@ -197,11 +216,17 @@ public class NotificationpanelController {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  // If the notification should not be held, stop the timeline and perform the slide
-                  // out transition
-                  if (!holdNotification) {
-                    holdTimeline.stop();
-                    performSlideOutTransition();
+                  // When tts is finished and the notification is not being held, perform the slide out
+                  if (GameState.ttsEnabled) {
+                    if (!holdNotification && ttsFinished) {
+                      holdTimeline.stop();
+                      performSlideOutTransition();
+                    }
+                  } else {
+                    if (!holdNotification) {
+                      holdTimeline.stop();
+                      performSlideOutTransition();
+                    }
                   }
                 }));
     holdTimeline.setCycleCount(Timeline.INDEFINITE);
