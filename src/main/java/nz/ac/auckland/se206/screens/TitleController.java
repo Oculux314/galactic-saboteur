@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.gamechildren.PopupController;
+import nz.ac.auckland.se206.misc.GameState;
 
 /** Controller class for the title screen. */
 public class TitleController implements Screen {
@@ -19,7 +20,7 @@ public class TitleController implements Screen {
   /** This method is called when the screen is loaded, performing no specific action. */
   @Override
   public void onLoad() {
-    // Do nothing
+    GameState.ttsEnabled = false;
   }
 
   /**
@@ -36,6 +37,7 @@ public class TitleController implements Screen {
     GameController gameController =
         ((GameController) App.getScreen(Screen.Name.GAME).getController());
     gameController.resetGpt();
+    gameController.setupTtsButton();
   }
 
   /**

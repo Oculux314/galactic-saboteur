@@ -13,10 +13,12 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
 /**
@@ -62,7 +64,6 @@ public class NotificationpanelController {
    * @return
    */
   public void onMouseEntered() {
-    System.out.println("Mouse entered");
     holdNotification = true;
   }
 
@@ -72,7 +73,6 @@ public class NotificationpanelController {
    * @param event the mouse event
    */
   public void onMouseExited() {
-    System.out.println("Mouse exited");
     holdNotification = false;
   }
 
@@ -149,8 +149,8 @@ public class NotificationpanelController {
    */
   private void buildText(String response) {
     Platform.runLater(
-        () -> {
-          // Set label text as response
+        () -> { 
+          App.speak(response);
           gptTextLabel.setText(response);
           transition();
         });
@@ -171,11 +171,7 @@ public class NotificationpanelController {
     pauseTransition = new PauseTransition(Duration.seconds(5));
     pauseTransition.setOnFinished(
         event -> {
-          if (holdNotification) {
-            setupHoldTimeline();
-          } else {
-            performSlideOutTransition();
-          }
+          hold();
         });
 
     // Start the slide-in animation
@@ -190,16 +186,15 @@ public class NotificationpanelController {
   }
 
   /** Holds the notification */
-  private void setupHoldTimeline() {
+  private void hold() {
     // Create a timeline over 1 second to check if the notification should be held
     holdTimeline =
         new Timeline(
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  // If the notification should not be held, stop the timeline and perform the slide
-                  // out transition
-                  if (!holdNotification) {
+                  // If the notification should not be held, slide notification out
+                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished)) || (GameState.ttsInterrupted && GameState.ttsFinished)) {
                     holdTimeline.stop();
                     performSlideOutTransition();
                   }
@@ -225,6 +220,10 @@ public class NotificationpanelController {
           isTransitioning = false;
           processNextNotification();
           recHide.setVisible(false);
+
+          if (GameState.ttsInterrupted) {
+            GameState.ttsInterrupted = false;
+          }
         });
 
     // Start the slide-out animation
@@ -283,5 +282,9 @@ public class NotificationpanelController {
         generateNotification("Tell me I can talk to the astronauts for help.");
         break;
     }
+  }
+
+  public void clearQueue() {
+    notificationQueue.clear();
   }
 }

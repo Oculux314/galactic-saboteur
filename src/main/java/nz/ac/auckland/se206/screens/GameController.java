@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
+import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
@@ -49,6 +50,8 @@ public class GameController implements Screen {
   @FXML private HighlightButton gptCaptain;
   @FXML private HighlightButton gptMechanic;
   private Suspect.Name clickedSuspect;
+
+  @FXML private StateButton btnTts;
 
   /**
    * Initializes the controller with the necessary components and sets up the zoom and pan handler,
@@ -398,6 +401,17 @@ public class GameController implements Screen {
   }
 
   /**
+   * Handles the action when the tts button is clicked.
+   *
+   * @param event The mouse event.
+   */
+  @FXML
+  private void onTtsClicked(MouseEvent event) {
+    GameState.ttsInterrupted = notificationPanelController.isNotificationInProgress();
+    GameState.ttsEnabled = !GameState.ttsEnabled;
+  }
+
+  /**
    * Adds a map button to the map of buttons.
    *
    * @param mapButton The map button to be added.
@@ -414,5 +428,14 @@ public class GameController implements Screen {
    */
   public NotificationpanelController getNotificationpanelController() {
     return notificationPanelController;
+  }
+
+  /** Called when game is initialised to set up the tts button */
+  public void setupTtsButton() {
+    String ttsEnabled = GameState.ttsEnabled ? "on" : "off";
+    // Set state button
+    btnTts.addState("off", "settings_buttons/off.png");
+    btnTts.addState("on", "settings_buttons/on.png");
+    btnTts.setState(ttsEnabled);
   }
 }
