@@ -149,7 +149,7 @@ public class NotificationpanelController {
    */
   private void buildText(String response) {
     Platform.runLater(
-        () -> { 
+        () -> {
           App.speak(response);
           gptTextLabel.setText(response);
           transition();
@@ -194,7 +194,8 @@ public class NotificationpanelController {
                 Duration.seconds(1),
                 event -> {
                   // If the notification should not be held, slide notification out
-                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished)) || (GameState.ttsInterrupted && GameState.ttsFinished)) {
+                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished))
+                      || (GameState.ttsInterrupted && GameState.ttsFinished)) {
                     holdTimeline.stop();
                     performSlideOutTransition();
                   }
