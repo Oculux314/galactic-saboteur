@@ -139,8 +139,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
     // If all tools are in the correct place, set the puzzle as solved
     if (allToolsInRectangles) {
-      setSolved();
-      clearPuzzle(panReactorToolbox);
+      completePuzzle(this, panReactorToolbox);
     } else {
       // If not, display a message
       lblVerdict.setText("Incorrect \n Try again");
@@ -185,17 +184,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    */
   private double clamp(double value, double min, double max) {
     return Math.min(Math.max(value, min), max);
-  }
-
-  /**
-   * Called when the puzzle is solved.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onSolved() {
-    setSolved();
-    clearPuzzle(panReactorToolbox);
   }
 
   /**

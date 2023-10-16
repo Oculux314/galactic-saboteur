@@ -246,7 +246,6 @@ public class TestTubesPuzzleController extends Puzzle {
   }
 
   private void completePuzzle() {
-    setSolved();
-    clearPuzzle(puzzlePane);
+    completePuzzle(this, puzzlePane);
   }
 }

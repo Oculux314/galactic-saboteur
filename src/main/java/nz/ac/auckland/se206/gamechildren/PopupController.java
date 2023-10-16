@@ -2,10 +2,14 @@ package nz.ac.auckland.se206.gamechildren;
 
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.Interpolator;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
@@ -30,8 +34,15 @@ public class PopupController implements RootPair.Controller {
     PUZZLE_NAVIGATION
   }
 
-  @FXML private Pane panRoot;
+  private static final int TRANSITION_DURATION_BIG = 300;
+  private static final int TRANSITION_DURATION_SMALL = 300;
+  private static final int TRANSITION_DISTANCE_BIG = 750;
+  private static final int TRANSITION_DISTANCE_SMALL = 50;
+
+  @FXML private Rectangle recBackground;
+  @FXML private Group grpPopup;
   @FXML private Group grpContent;
+
   private Map<Name, RootPair> popups = new HashMap<>();
   private PuzzleLoader puzzleLoader;
   private Name currentPopup;
@@ -45,7 +56,8 @@ public class PopupController implements RootPair.Controller {
   public void initialise(PuzzleLoader puzzleLoader) {
     this.puzzleLoader = puzzleLoader;
     loadAllPopups();
-    hide();
+    grpPopup.setVisible(false);
+    minimise();
   }
 
   @Override
@@ -94,26 +106,70 @@ public class PopupController implements RootPair.Controller {
    *
    * @param name the Name enum representing the popup's type.
    */
-  public void show(Name name) {
+  public void maximise(Name name) {
     setRoot(name);
-    show();
+    maximise();
     GameState.suspectsFound = true;
   }
 
   /** Displays the current popup. */
-  private void show() {
-    panRoot.setVisible(true);
+  private void maximise() {
+    grpPopup.setVisible(true);
+    recBackground.setVisible(true);
     getCurrentPopup().getController().onLoad();
+    performMaximiseTransition();
   }
 
-  private void hide() {
-    panRoot.setVisible(false);
+  private void minimise() {
+    recBackground.setVisible(false);
+    performMinimiseTransition();
+  }
+
+  /** Performs the popup maximise transition */
+  private void performMaximiseTransition() {
+    // Big UP motion
+    TranslateTransition bigMovement = new TranslateTransition();
+    bigMovement.setNode(grpPopup);
+    bigMovement.setDuration(Duration.millis(TRANSITION_DURATION_BIG));
+    bigMovement.setByY(-TRANSITION_DISTANCE_BIG);
+    bigMovement.setInterpolator(Interpolator.SPLINE(0, 1, 0.5, 1));
+
+    // Small DOWN motion
+    TranslateTransition smallMovement = new TranslateTransition();
+    smallMovement.setNode(grpPopup);
+    smallMovement.setDuration(Duration.millis(TRANSITION_DURATION_SMALL));
+    smallMovement.setByY(TRANSITION_DISTANCE_SMALL);
+    smallMovement.setInterpolator(Interpolator.SPLINE(0.5, 0, 0.5, 1));
+
+    bigMovement.setFromY(TRANSITION_DISTANCE_BIG - TRANSITION_DISTANCE_SMALL); // Below viewport
+    SequentialTransition transitionSequence = new SequentialTransition(bigMovement, smallMovement);
+    transitionSequence.play();
+  }
+
+  /** Performs the popup maximise transition */
+  private void performMinimiseTransition() {
+    // Small UP motion
+    TranslateTransition smallMovement = new TranslateTransition();
+    smallMovement.setNode(grpPopup);
+    smallMovement.setDuration(Duration.millis(TRANSITION_DURATION_SMALL));
+    smallMovement.setByY(-TRANSITION_DISTANCE_SMALL);
+    smallMovement.setInterpolator(Interpolator.SPLINE(0.5, 0, 0.5, 1));
+
+    // Big DOWN motion
+    TranslateTransition bigMovement = new TranslateTransition();
+    bigMovement.setNode(grpPopup);
+    bigMovement.setDuration(Duration.millis(TRANSITION_DURATION_BIG));
+    bigMovement.setByY(TRANSITION_DISTANCE_BIG);
+    bigMovement.setInterpolator(Interpolator.SPLINE(0.5, 0, 1, 0));
+
+    SequentialTransition transitionSequence = new SequentialTransition(smallMovement, bigMovement);
+    transitionSequence.play();
   }
 
   /** Handles the action when the exit button of the popup is clicked. */
   @FXML
   private void onExitClicked() {
-    hide();
+    minimise();
     updateHighlightState();
   }
 
