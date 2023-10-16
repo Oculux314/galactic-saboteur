@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.screens.Screen;
  * throughout gameplay.
  */
 public class GameState {
+  /** Naming enum for highlight state timeline of the game. */
   public enum HighlightState {
     PAN_ARROWS,
     REACTOR_INITAL,

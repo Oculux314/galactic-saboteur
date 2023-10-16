@@ -125,6 +125,7 @@ public class Puzzle implements RootPair.Controller {
    * Additionally, updates the status of the relevant rooms and generates notifications and hints
    * accordingly.
    * 
+   * 
    * @param puzzle the puzzle to be marked as solved.
    */
   private void setPuzzleSolved(Puzzle puzzle) {

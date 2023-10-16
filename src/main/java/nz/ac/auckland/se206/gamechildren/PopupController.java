@@ -26,6 +26,7 @@ import nz.ac.auckland.se206.screens.Screen;
  */
 public class PopupController implements RootPair.Controller {
 
+  /** An enumeration representing different popup names in the game. */
   public enum Name {
     RIDDLE,
     SUSPECT,
@@ -112,7 +113,7 @@ public class PopupController implements RootPair.Controller {
     GameState.suspectsFound = true;
   }
 
-  /** Displays the current popup. */
+  /** Displays and shows the animation transition for opening a pop-up. */
   private void maximise() {
     grpPopup.setVisible(true);
     recBackground.setVisible(true);
@@ -125,7 +126,7 @@ public class PopupController implements RootPair.Controller {
     performMinimiseTransition();
   }
 
-  /** Performs the popup maximise transition */
+  /** Performs the popup maximise transition. */
   private void performMaximiseTransition() {
     // Big UP motion
     TranslateTransition bigMovement = new TranslateTransition();
@@ -146,7 +147,7 @@ public class PopupController implements RootPair.Controller {
     transitionSequence.play();
   }
 
-  /** Performs the popup maximise transition */
+  /** Performs the popup maximise transition. */
   private void performMinimiseTransition() {
     // Small UP motion
     TranslateTransition smallMovement = new TranslateTransition();

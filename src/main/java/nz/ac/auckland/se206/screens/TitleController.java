@@ -31,11 +31,15 @@ public class TitleController implements Screen {
    */
   @FXML
   private void onPlayClicked(MouseEvent event) throws IOException {
+    // Start the exposition slideshow
     App.setScreen(Screen.Name.EXPOSITION);
     ((ExpositionController) App.getScreen(Screen.Name.EXPOSITION).getController()).startSlideshow();
 
+    // Retrieve the game controller
     GameController gameController =
         ((GameController) App.getScreen(Screen.Name.GAME).getController());
+    
+    // Reset components which were initialised before the game started
     gameController.resetGpt();
     gameController.setupTtsButton();
   }

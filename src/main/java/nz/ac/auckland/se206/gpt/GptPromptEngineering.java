@@ -49,7 +49,7 @@ public class GptPromptEngineering {
               + " hints of any form. Do not, for any reason, give the user any new hints or help"
               + " the user solve the game. Please respond in 18 words or fewer.";
     }
-    // return the prompt
+    // Give the updated prompt
     return prompt;
   }
 
@@ -253,7 +253,7 @@ public class GptPromptEngineering {
     if (gameState == GameState.puzzleSolvedMessage) {
       gameState = gameState + whatOtherRoomToLookIn();
     }
-    // return the game state
+    // give the updated value of the game state
     return gameState;
   }
 
@@ -333,23 +333,23 @@ public class GptPromptEngineering {
    *     user.
    */
   private static String getGameState() {
-    // check if the user has found all three clues
-    if (GameState.cluesFound) {
-      return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
-          + " the combination of clues I have found.";
+    if (!GameState.userWelcomed) {
+        // if the user hasn't been welcomed, welcome them
+        GameState.userWelcomed = true;
+        return "Formally welcome the user onto the command deck. Introduce the situation.";
+    } else if (GameState.cluesFound) {
+        // check if the user has found all three clues
+        return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
+            + " the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
-      // check if the user has solved any of the puzzles
-      return "I have solved a problem. Congratulate me.";
-    } else if (GameState.userWelcomed) {
-      // check if the user has been welcomed
-      return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
-          + " most critical element at each stage for them to examine.";
+        // check if the user has solved any of the puzzles
+        return "I have solved a problem. Congratulate me.";
     } else {
-      // if the user hasn't been welcomed, welcome them
-      GameState.userWelcomed = true;
-      return "Formally welcome the user onto the command deck. Introduce the situation.";
+        // check if the user has been welcomed
+        return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
+            + " most critical element at each stage for them to examine.";
     }
   }
 }

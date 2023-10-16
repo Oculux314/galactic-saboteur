@@ -50,8 +50,10 @@ public class SuspectController implements RootPair.Controller {
    */
   @Override
   public void onLoad() {
+    // retrieve the current suspect and update the popup
     updateSuspect(getGameController().getClickedSuspectName());
 
+    // display a welcome message if applicable
     if (currentSuspect == Name.CAPTAIN && !captainWelcomeShown) {
       getCurrentSuspect().getAssistant().welcome();
       captainWelcomeShown = true;
@@ -116,7 +118,7 @@ public class SuspectController implements RootPair.Controller {
   }
 
   /**
-   * Retrieves the current suspect.
+   * Retrieves the current suspect from the suspects hashmap.
    *
    * @return the current suspect
    */
@@ -148,8 +150,6 @@ public class SuspectController implements RootPair.Controller {
           .getPopupController()
           .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     }
-
-    System.out.println();
 
     // Respond to the user's message
     Assistant assistant = getCurrentSuspect().getAssistant();

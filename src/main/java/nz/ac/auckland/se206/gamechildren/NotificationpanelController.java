@@ -57,21 +57,12 @@ public class NotificationpanelController {
     recHide.setVisible(false);
   }
 
-  /**
-   * Called when logo is being hovered.
-   *
-   * @param event the mouse event
-   * @return
-   */
+  /** Called when logo is being hovered by the mouse. */
   public void onMouseEntered() {
     holdNotification = true;
   }
 
-  /**
-   * Called when logo is exited.
-   *
-   * @param event the mouse event
-   */
+  /** Called when the logo is no longer being hovered. */
   public void onMouseExited() {
     holdNotification = false;
   }
@@ -100,13 +91,13 @@ public class NotificationpanelController {
     }
   }
 
-  /** Called when wanting to generate a notification that is not a time warning */
+  /** Called when wanting to generate a notification that is not a time warning. */
   public void generateNotification() {
     generateNotification(false, null);
   }
 
   /**
-   * Called when wanting to generate a notification with a specific message
+   * Called when wanting to generate a notification with a specific message.
    *
    * @param notification The notification message.
    */
@@ -149,7 +140,7 @@ public class NotificationpanelController {
    */
   private void buildText(String response) {
     Platform.runLater(
-        () -> { 
+        () -> {
           App.speak(response);
           gptTextLabel.setText(response);
           transition();
@@ -185,7 +176,7 @@ public class NotificationpanelController {
     pauseTransition.play();
   }
 
-  /** Holds the notification */
+  /** Holds the notification until it can be slid out. */
   private void hold() {
     // Create a timeline over 1 second to check if the notification should be held
     holdTimeline =
@@ -194,7 +185,8 @@ public class NotificationpanelController {
                 Duration.seconds(1),
                 event -> {
                   // If the notification should not be held, slide notification out
-                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished)) || (GameState.ttsInterrupted && GameState.ttsFinished)) {
+                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished))
+                      || (GameState.ttsInterrupted && GameState.ttsFinished)) {
                     holdTimeline.stop();
                     performSlideOutTransition();
                   }
@@ -204,7 +196,7 @@ public class NotificationpanelController {
     holdTimeline.play();
   }
 
-  /** Performs the slide out transition. */
+  /** Performs the slide out transition for the notification panel. */
   private void performSlideOutTransition() {
     // Create the base for the slide-out animation
     recHide.setVisible(true);
@@ -236,7 +228,7 @@ public class NotificationpanelController {
   }
 
   /**
-   * Called when wanting to generate a notification that is time dependent
+   * Called when wanting to generate a notification that is time dependent.
    *
    * @param initialSeconds The initial seconds.
    * @param secondsLeft The seconds left.
