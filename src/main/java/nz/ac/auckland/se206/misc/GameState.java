@@ -26,6 +26,7 @@ public class GameState {
   public static int timeLimit = 2; // In minutes
   public static boolean ttsEnabled = false;
   public static boolean ttsInterrupted = false;
+  public static boolean ttsFinished = true;
 
   public static boolean isGameover;
   public static Screen.Name currentScreen;

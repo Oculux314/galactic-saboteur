@@ -408,13 +408,8 @@ public class GameController implements Screen {
    */
   @FXML
   private void onTtsClicked(MouseEvent event) {
-    if (notificationPanelController.isNotificationInProgress()) {
-      // tts has been changed while a notification is in progress
-      GameState.ttsInterrupted = true;
-    } else {
-      // toggle tts
-      GameState.ttsEnabled = !GameState.ttsEnabled;
-    }
+    GameState.ttsInterrupted = notificationPanelController.isNotificationInProgress();
+    GameState.ttsEnabled = !GameState.ttsEnabled;
   }
 
   /**

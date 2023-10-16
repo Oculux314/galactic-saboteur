@@ -204,11 +204,14 @@ public class App extends Application {
       return text;
     }
 
+    GameState.ttsFinished = false;
+
     TaggedThread ttsThread =
         new TaggedThread(
             () -> {
               try {
                 tts.speak(text);
+                GameState.ttsFinished = true;
               } catch (TextToSpeechException e) {
                 return;
               }

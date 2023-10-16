@@ -40,7 +40,6 @@ public class NotificationpanelController {
   private Queue<String> notificationQueue = new LinkedList<>();
   private boolean isTransitioning = false;
   private boolean holdNotification = false;
-  private boolean ttsFinished = false;
   private Timeline holdTimeline;
 
   /**
@@ -150,23 +149,8 @@ public class NotificationpanelController {
    */
   private void buildText(String response) {
     Platform.runLater(
-        () -> {
-          TaggedThread ttsThread =
-              new TaggedThread(
-                  () -> {
-                    try {
-                      ttsFinished = false;
-                      App.speak(response);
-                      ttsFinished = true; // Set the flag to true when TTS finishes
-                    } catch (Exception e) {
-                      e.printStackTrace();
-                    }
-                  });
-
-          if (GameState.ttsEnabled) {
-            ttsThread.start();
-          }
-
+        () -> { 
+          App.speak(response);
           gptTextLabel.setText(response);
           transition();
         });
@@ -184,10 +168,9 @@ public class NotificationpanelController {
     slideInTransition.setToX(grpTextArea.getLayoutBounds().getWidth() + 85);
 
     // Create a pause transition for 5 seconds
-    pauseTransition = new PauseTransition(Duration.seconds(5));
+    pauseTransition = new PauseTransition(Duration.seconds(3));
     pauseTransition.setOnFinished(
         event -> {
-          // Hold if needed
           setupHoldTimeline();
         });
 
@@ -211,7 +194,7 @@ public class NotificationpanelController {
                 Duration.seconds(1),
                 event -> {
                   // If the notification should not be held, slide notification out
-                  if (!holdNotification && (!GameState.ttsEnabled || ttsFinished)) {
+                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished)) || (GameState.ttsInterrupted && GameState.ttsFinished)) {
                     holdTimeline.stop();
                     performSlideOutTransition();
                   }
@@ -238,9 +221,7 @@ public class NotificationpanelController {
           processNextNotification();
           recHide.setVisible(false);
 
-          // If the TTS was interrupted, toggle the TTS
           if (GameState.ttsInterrupted) {
-            GameState.ttsEnabled = !GameState.ttsEnabled;
             GameState.ttsInterrupted = false;
           }
         });
