@@ -13,6 +13,7 @@ public class Audio {
   /** Constructs a new Audio object with the given audio file name. */
   public Audio(String fileName) {
     mediaPlayer = makeMediaPlayer(fileName);
+    preload();
   }
 
   /** Constructs a new MediaPlayer object with the given audio file name. */
@@ -25,6 +26,12 @@ public class Audio {
     }
 
     return new MediaPlayer(sound);
+  }
+
+  /** Preload it for being played properly. This ensures the timing is correct on the first execution */
+  private void preload() {
+    mediaPlayer.play();
+    mediaPlayer.stop();
   }
 
   /** Plays the sound file. */
