@@ -260,7 +260,7 @@ public class App extends Application {
 
     // Properties
     scene.setFill(Color.web("#131d23"));
-    stage.setTitle("Galactic Saboteur");
+    stage.setTitle("Galactic Saboteur: AI-Assisted Cognitive Development");
     stage.getIcons().add(new Image("/images/logo.png"));
     stage.setMaximized(true);
 
