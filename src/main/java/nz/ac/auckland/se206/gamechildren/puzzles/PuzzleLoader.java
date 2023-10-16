@@ -10,10 +10,20 @@ import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle.PuzzleName;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 
+/**
+ * The PuzzleLoader class is responsible for managing and loading puzzles in the game. It
+ * facilitates the loading, choosing, and displaying of puzzles, as well as their associated UI
+ * elements.
+ */
 public class PuzzleLoader {
 
+  /** The list of puzzles associated with the reactor room. */
   public static List<PuzzleName> reactorPuzzles;
+
+  /** The list of puzzles associated with the laboratory room. */
   public static List<PuzzleName> laboratoryPuzzles;
+
+  /** The list of puzzles associated with the navigation room. */
   public static List<PuzzleName> navigationPuzzles;
 
   private Group grpPuzzleButtons;
@@ -21,6 +31,12 @@ public class PuzzleLoader {
   private HashMap<PuzzleName, RootPair> puzzleMap;
   private HashMap<AnimatedButton, PuzzleName> buttonToPuzzleMap;
 
+  /**
+   * Constructor for the PuzzleLoader class. Initializes the necessary data structures and loads the
+   * puzzles.
+   *
+   * @param grpPuzzleButtons the group of puzzle buttons to be managed by the PuzzleLoader.
+   */
   public PuzzleLoader(Group grpPuzzleButtons) {
     this.grpPuzzleButtons = grpPuzzleButtons;
 
@@ -35,7 +51,12 @@ public class PuzzleLoader {
     displayChosenPuzzleButtons();
   }
 
+  /**
+   * Loads all the puzzles associated with the different rooms in the game. It catches exceptions
+   * and prints the stack trace if no puzzles are found in the room.
+   */
   private void loadAllPuzzles() {
+    // load all puzzles
     try {
       loadPuzzle(PuzzleName.REACTOR_TOOLBOX);
       loadPuzzle(PuzzleName.REACTOR_BUTTONPAD);
@@ -43,10 +64,15 @@ public class PuzzleLoader {
       loadPuzzle(PuzzleName.NAVIGATION_COMPUTER);
       loadPuzzle(PuzzleName.REACTOR_HANGMAN);
     } catch (IllegalStateException | IOException e) {
+      // catch exception if no puzzles in room
       e.printStackTrace();
     }
   }
 
+  /**
+   * Chooses a random puzzle for each room from the available puzzle lists. Updates the GameState
+   * with the chosen puzzles for each room.
+   */
   private void choosePuzzles() {
     // select a random puzzle
     GameState.reactorPuzzle = getRandomPuzzle(reactorPuzzles);

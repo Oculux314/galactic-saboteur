@@ -19,10 +19,16 @@ public class RootPair {
   /** The controller for the screen. */
   private Controller controller;
 
+  /**
+   * Constructs a RootPair object with the specified FXML URL.
+   *
+   * @param fxmlUrl The URL of the FXML file.
+   */
   public RootPair(String fxmlUrl) {
     this(new FXMLLoader(RootPair.class.getResource(fxmlUrl)), fxmlUrl);
   }
 
+  /** Constructs a default RootPair screen. */
   public RootPair() {
     // Constructs default screen
     fxml = getDefaultParent();
@@ -48,6 +54,12 @@ public class RootPair {
     checkErrors(url);
   }
 
+  /**
+   * Checks for errors in the specified location.
+   *
+   * @param location The location to check for errors.
+   * @throws RuntimeException if the FXML file or the controller fails to load.
+   */
   private void checkErrors(String location) {
     if (fxml == null) {
       throw new RuntimeException(location + ": Failed to load fxml file.");
@@ -58,6 +70,11 @@ public class RootPair {
     }
   }
 
+  /**
+   * Returns the default Parent object.
+   *
+   * @return A Parent object representing the default pane.
+   */
   private Parent getDefaultParent() {
     return (Parent) new Pane();
   }

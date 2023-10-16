@@ -152,12 +152,17 @@ public class App extends Application {
     return stage.getScene();
   }
 
+  /**
+   * Restarts the game by stopping all active threads, resetting the game state, and resetting
+   * screens.
+   */
   public static void restart() {
     killAllThreads();
     GameState.reset();
     resetScreens();
   }
 
+  /** Kills all active threads and resets the game over state. */
   private static void killAllThreads() {
     GameState.isGameover = true;
 
@@ -168,6 +173,9 @@ public class App extends Application {
     threads.clear();
   }
 
+  /**
+   * Resets all screens except for the main screen, setting the current screen to the title screen.
+   */
   private static void resetScreens() {
     for (Screen.Name screenName : Screen.Name.values()) {
       if (screenName == Screen.Name.MAIN) { // Main screen is persistent

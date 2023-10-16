@@ -90,12 +90,15 @@ public class TestTubesPuzzleController extends Puzzle {
   }
 
   private void initializeButtonToEllipseMap() {
+    // Create a map of buttons to ellipses
     buttonToEllipseMap = new HashMap<>();
+    // Add all test tube buttons and ellipses to the map
     buttonToEllipseMap.put(yellowOption, yellowChosen);
     buttonToEllipseMap.put(blueOption, blueChosen);
     buttonToEllipseMap.put(redOption, redChosen);
     buttonToEllipseMap.put(greenOption, greenChosen);
     buttonToEllipseMap.put(whiteOption, whiteChosen);
+    // Add all glitter buttons and ellipses to the map
     buttonToEllipseMap.put(yellowGlitter, yellowGlitterChosen);
     buttonToEllipseMap.put(blueGlitter, blueGlitterChosen);
     buttonToEllipseMap.put(pinkGlitter, pinkGlitterChosen);

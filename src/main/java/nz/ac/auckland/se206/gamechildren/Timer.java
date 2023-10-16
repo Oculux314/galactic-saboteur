@@ -9,12 +9,20 @@ import nz.ac.auckland.se206.screens.EndController;
 import nz.ac.auckland.se206.screens.GameController;
 import nz.ac.auckland.se206.screens.Screen;
 
+/** Represents a countdown timer with specified initial seconds and a display label. */
 public class Timer {
   private int secondsLeft;
   private Thread timerThread;
   private Label timerDisplay;
   private int initialSeconds;
 
+  /**
+   * Initializes a new Timer object with the provided initial seconds and the label for displaying
+   * the countdown.
+   *
+   * @param initialSeconds The initial time for the countdown in seconds.
+   * @param timerDisplay The label used to display the countdown.
+   */
   public Timer(int initialSeconds, Label timerDisplay) {
     this.initialSeconds = initialSeconds;
     this.secondsLeft = this.initialSeconds;
@@ -22,6 +30,7 @@ public class Timer {
     this.timerThread = new TaggedThread(() -> run());
   }
 
+  /** Starts the countdown timer. */
   public void start() {
     timerThread.start();
   }

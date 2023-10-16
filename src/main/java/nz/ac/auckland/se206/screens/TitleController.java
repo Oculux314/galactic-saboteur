@@ -16,6 +16,7 @@ public class TitleController implements Screen {
   @FXML private AnimatedButton btnPlay;
   @FXML private PopupController popupController;
 
+  /** This method is called when the screen is loaded, performing no specific action. */
   @Override
   public void onLoad() {
     // Do nothing

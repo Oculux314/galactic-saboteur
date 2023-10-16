@@ -41,9 +41,6 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   /**
    * Called when the guess button is clicked. Adds valid input into lblGuessedLetters1 or
    * lblGuessedLetters2.
-   *
-   * @param
-   * @return
    */
   @FXML
   private void onGuess() {
@@ -52,10 +49,9 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   }
 
   /**
-   * Adds a letter to the guessed letters text area
+   * Adds a letter to the guessed letters text area.
    *
-   * @param letter the letter to add
-   * @return
+   * @param letter the letter to add.
    */
   private void addLetter(String letter) {
     if (!checkValidInput(letter)) {
@@ -84,10 +80,9 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   }
 
   /**
-   * Checks if the letter is in the word and updates the word accordingly
+   * Checks if the letter is in the word and updates the word accordingly.
    *
-   * @param letter the letter to check
-   * @return
+   * @param letter the letter to check.
    */
   private void checkLetter(String letter) {
     for (int i = 0; i < word.length(); i++) {
@@ -100,28 +95,26 @@ public class ReactorHangmanPuzzleController extends Puzzle {
   }
 
   /**
-   * Checks if the input is valid
+   * Checks if the input is valid.
    *
-   * @param letter the letter to check
-   * @return true if the input is valid, false otherwise
+   * @param letter the letter to check.
+   * @return true if the input is valid, false otherwise.
    */
   private boolean checkValidInput(String letter) {
+    // Check if the input is valid
     if (letter.length() > 1
         || !letter.matches("[a-zA-Z]+")
         || lblGuessedLetters1.getText().contains(letter.toUpperCase())
         || lblGuessedLetters2.getText().contains(letter.toUpperCase())) {
+      // If the input is invalid return false
       return false;
     } else {
+      // If the input is valid
       return true;
     }
   }
 
-  /**
-   * Checks if the word has been solved
-   *
-   * @param
-   * @return
-   */
+  /** Checks if the word has been solved. */
   private void checkIfSolved() {
     txtGuessLetter.clear();
     for (Label label : letters) {
@@ -135,12 +128,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
     clearPuzzle(panHangmanPuzzle);
   }
 
-  /**
-   * Adds the labels to the letters list
-   *
-   * @param
-   * @return
-   */
+  /** Adds the labels to the letters list. */
   private void addLabels() {
     letters.add(letter1);
     letters.add(letter2);
@@ -149,22 +137,16 @@ public class ReactorHangmanPuzzleController extends Puzzle {
     letters.add(letter5);
   }
 
-  /**
-   * Selects a random word from the words array
-   *
-   * @param
-   * @return
-   */
+  /** Selects a random word from the words array. */
   private void selectWord() {
     int random = (int) (Math.random() * words.length);
     word = words[random];
   }
 
   /**
-   * Sets the letter in the word to the letter guessed
+   * Sets the letter in the word to the letter guessed.
    *
-   * @param letter the letter to set
-   * @return
+   * @param letter the letter to set.
    */
   private void setLetter(String letter) {
     for (int i = 0; i < word.length(); i++) {
