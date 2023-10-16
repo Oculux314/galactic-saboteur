@@ -124,7 +124,7 @@ public class ReactorHangmanPuzzleController extends Puzzle {
     }
 
     // Puzzle is solved
-    completePuzzle(this);
+    completePuzzle(this, panHangmanPuzzle);
   }
 
   /** Adds the labels to the letters list. */

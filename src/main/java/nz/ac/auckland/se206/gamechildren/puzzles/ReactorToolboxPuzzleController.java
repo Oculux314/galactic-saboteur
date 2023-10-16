@@ -139,7 +139,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
 
     // If all tools are in the correct place, set the puzzle as solved
     if (allToolsInRectangles) {
-      completePuzzle(this);
+      completePuzzle(this, panReactorToolbox);
     } else {
       // If not, display a message
       lblVerdict.setText("Incorrect \n Try again");

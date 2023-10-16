@@ -132,7 +132,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
 
     // Verdict
     if (lblAnswer.getText().equals(randomNumber.toString())) {
-      completePuzzle(this);
+      completePuzzle(this, panReactorButtonpad);
     } else {
       lblVerdict.setText("Incorrect :(");
       labelThread.start();

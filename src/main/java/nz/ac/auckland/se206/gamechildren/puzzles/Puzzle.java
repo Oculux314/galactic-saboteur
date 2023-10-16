@@ -84,14 +84,13 @@ public class Puzzle implements RootPair.Controller {
    *
    * @param puzzle the puzzle to be marked as solved.
    */
-  public void completePuzzle(Puzzle puzzle) {
+  public void completePuzzle(Puzzle puzzle, Pane root) {
     setPuzzleSolved(puzzle);
-    Pane puzzlePane = (Pane) puzzle.getRoot();
 
     // clear the puzzle content and display the solved label
-    if (puzzlePane instanceof Pane) {
-      ((Pane) puzzlePane).getChildren().clear();
-      ((Pane) puzzlePane).getChildren().add(solvedLabel);
+    if (true) {
+      ((Pane) root).getChildren().clear();
+      ((Pane) root).getChildren().add(solvedLabel);
       solvedLabel.setLayoutX(0);
       solvedLabel.setLayoutY(230);
       solvedLabel.setPrefWidth(500);

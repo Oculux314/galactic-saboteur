@@ -268,6 +268,6 @@ public class NavigationComputerPuzzleController extends Puzzle {
     lblWarning.setVisible(true);
     lblWarning.setStyle("-fx-text-fill: #58DD94;");
 
-    completePuzzle(this);
+    completePuzzle(this, panBackground);
   }
 }
