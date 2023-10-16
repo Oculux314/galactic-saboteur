@@ -3,6 +3,9 @@ package nz.ac.auckland.se206.gamechildren;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+
+import org.w3c.dom.events.MouseEvent;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -66,7 +69,6 @@ public class NotificationpanelController {
    * @return
    */
   public void onMouseEntered() {
-    System.out.println("Mouse entered");
     holdNotification = true;
   }
 
@@ -76,7 +78,6 @@ public class NotificationpanelController {
    * @param event the mouse event
    */
   public void onMouseExited() {
-    System.out.println("Mouse exited");
     holdNotification = false;
   }
 
@@ -158,6 +159,7 @@ public class NotificationpanelController {
               new TaggedThread(
                   () -> {
                     try {
+                      ttsFinished = false;
                       tts.speak(response);
                       ttsFinished = true; // Set the flag to true when TTS finishes
                     } catch (Exception e) {
@@ -190,11 +192,7 @@ public class NotificationpanelController {
     pauseTransition.setOnFinished(
         event -> {
           // Hold if needed
-          if (holdNotification || !ttsFinished) {
-            setupHoldTimeline();
-          } else {
-            performSlideOutTransition();
-          }
+          setupHoldTimeline();
         });
 
     // Start the slide-in animation
@@ -250,6 +248,11 @@ public class NotificationpanelController {
           isTransitioning = false;
           processNextNotification();
           recHide.setVisible(false);
+
+          if (GameState.ttsInterrupted) {
+            GameState.ttsEnabled = !GameState.ttsEnabled;
+            GameState.ttsInterrupted = false;
+          }
         });
 
     // Start the slide-out animation

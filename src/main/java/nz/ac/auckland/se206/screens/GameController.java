@@ -65,7 +65,6 @@ public class GameController implements Screen {
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
     setupTtsButton();
-    
   }
 
   /** Represents the method called when the controller is loaded. */
@@ -403,10 +402,18 @@ public class GameController implements Screen {
   }
 
   @FXML
-  private void onTtsClicked(MouseEvent event) {
-    GameState.ttsEnabled = !GameState.ttsEnabled;
-    btnTts.setState(GameState.ttsEnabled ? "on" : "off");
-  }
+private void onTtsClicked(MouseEvent event) {
+    if (notificationPanelController.isNotificationInProgress()) {
+        GameState.ttsInterrupted = true;
+        boolean ttsEnabled = GameState.ttsEnabled;
+        ttsEnabled = !ttsEnabled;
+        btnTts.setState(ttsEnabled ? "on" : "off");
+    } else {
+        GameState.ttsInterrupted = false;
+        GameState.ttsEnabled = !GameState.ttsEnabled;
+        btnTts.setState(GameState.ttsEnabled ? "on" : "off");
+    }
+}
 
   /**
    * Adds a map button to the map of buttons.
