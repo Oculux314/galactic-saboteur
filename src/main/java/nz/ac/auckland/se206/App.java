@@ -233,7 +233,7 @@ public class App extends Application {
             ((GameController) getScreen(Screen.Name.GAME).getController())
                 .getNotificationpanelController());
     notificationpanelController.clearQueue();
-    tts.mute();
+    tts.stopTts();
   }
 
   @Override

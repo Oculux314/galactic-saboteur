@@ -112,7 +112,7 @@ public class TextToSpeech {
     }
   }
 
-  public void mute() {
+  public void stopTts() {
     synthesizer.pause();
     synthesizer.cancelAll();
   }
