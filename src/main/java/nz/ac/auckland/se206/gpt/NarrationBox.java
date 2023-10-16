@@ -77,7 +77,7 @@ public class NarrationBox {
   }
 
   /**
-   * Retrieves the waiting message.
+   * Retrieves the waiting message of the specific suspect.
    *
    * @return The waiting message currently stored in the NarrationBox.
    */

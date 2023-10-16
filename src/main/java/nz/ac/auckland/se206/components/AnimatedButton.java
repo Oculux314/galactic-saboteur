@@ -157,7 +157,7 @@ public class AnimatedButton extends ImageView {
   }
 
   /**
-   * Asynchronously animates a keyframe.
+   * Asynchronously animates a really cool and fun keyframe.
    *
    * @param keyFrame The keyframe to animate.
    */
