@@ -168,7 +168,7 @@ public class NotificationpanelController {
     slideInTransition.setToX(grpTextArea.getLayoutBounds().getWidth() + 85);
 
     // Create a pause transition for 5 seconds
-    pauseTransition = new PauseTransition(Duration.seconds(3));
+    pauseTransition = new PauseTransition(Duration.seconds(5));
     pauseTransition.setOnFinished(
         event -> {
           setupHoldTimeline();
