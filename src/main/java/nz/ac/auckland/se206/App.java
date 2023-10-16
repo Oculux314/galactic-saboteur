@@ -227,6 +227,7 @@ public class App extends Application {
     threads.add(thread);
   }
 
+  /** Takes the single tts instance and stops it temporarily */
   public static void stopTts() {
     NotificationpanelController notificationpanelController =
         ((NotificationpanelController)

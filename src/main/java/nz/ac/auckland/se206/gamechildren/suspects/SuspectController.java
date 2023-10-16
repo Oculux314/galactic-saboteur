@@ -118,7 +118,7 @@ public class SuspectController implements RootPair.Controller {
   }
 
   /**
-   * Retrieves the current suspect.
+   * Retrieves the current suspect from the suspects hashmap.
    *
    * @return the current suspect
    */

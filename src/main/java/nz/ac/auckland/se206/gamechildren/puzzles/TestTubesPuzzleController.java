@@ -12,6 +12,7 @@ import javafx.scene.shape.Ellipse;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.misc.GameState;
 
+/** Controller class for the Laboratory Test Tubes puzzle. */
 public class TestTubesPuzzleController extends Puzzle {
 
   private static String colour;
@@ -43,9 +44,9 @@ public class TestTubesPuzzleController extends Puzzle {
   @FXML private Group gameComponents;
   @FXML private Pane puzzlePane;
 
+  /** Initialises the test tubes puzzle controller with what it needs. */
   @FXML
   private void initialize() {
-
     // generate and store the color only if it hasn't been set before
     if (colour == null) {
       colour = selectRandomColor();
@@ -67,6 +68,7 @@ public class TestTubesPuzzleController extends Puzzle {
     GameState.laboratoryPuzzleInformation[2] = glitterColour;
   }
 
+  /** Hides all of the ellipses in the puzzle. */
   public void hideAllChosenCircles() {
 
     Ellipse[] ellipses = {
@@ -113,6 +115,7 @@ public class TestTubesPuzzleController extends Puzzle {
     }
   }
 
+  /** Selects a random colour from the test tubes each being unique. */
   public String selectRandomColor() {
     // Create an array of colors
     String[] colours = {"orange", "turquoise", "violet", "brown", "light blue", "pink"};
@@ -125,6 +128,7 @@ public class TestTubesPuzzleController extends Puzzle {
     return randomColor;
   }
 
+  /** Selects a random colour from the glitter provided each being unique. */
   public String selectRandomGlitterColor() {
     // Create an array of glitter colors
     String[] glitterColours = {"yellow", "blue", "black", "pink"};

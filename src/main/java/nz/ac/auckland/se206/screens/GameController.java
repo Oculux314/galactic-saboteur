@@ -26,7 +26,6 @@ import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 
 /** GameController class that manages the main gameplay interactions and controls. */
-/** Controller class for the game screens. */
 public class GameController implements Screen {
 
   @FXML private Pane panSpaceship;
@@ -430,7 +429,7 @@ public class GameController implements Screen {
     return notificationPanelController;
   }
 
-  /** Called when game is initialised to set up the tts button */
+  /** Called when game is initialised to set up the tts button. */
   public void setupTtsButton() {
     String ttsEnabled = GameState.ttsEnabled ? "on" : "off";
     // Set state button

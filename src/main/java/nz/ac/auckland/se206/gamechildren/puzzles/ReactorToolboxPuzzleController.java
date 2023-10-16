@@ -166,7 +166,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * get screen zoom.
+   * This method retrieves the screens zoom level taken from the main pane.
    *
    * @param event The mouse event.
    */
