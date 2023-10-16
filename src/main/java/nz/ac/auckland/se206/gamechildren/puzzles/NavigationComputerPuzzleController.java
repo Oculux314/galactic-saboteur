@@ -142,7 +142,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
 
   /**
    * Chooses a direction for the path to take at the specified coordinate.
-   * 
+   *
    * @param here The coordinate to choose a direction for.
    */
   private Orientation chooseDirection(Coordinate here) {
@@ -157,7 +157,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
 
   /**
    * Creates a tile at the specified index in the puzzle grid.
-   * 
+   *
    * @param n The index of the tile in the puzzle grid.
    */
   private void makeTile(int n) {
@@ -219,7 +219,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
 
   /**
    * Returns the tile adjacent to the specified tile in the specified direction.
-   * 
+   *
    * @param tile The tile to get the adjacent tile of.
    * @param direction The direction of the adjacent tile.
    * @return The tile adjacent to the specified tile in the specified direction.
@@ -236,7 +236,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
 
   /**
    * Returns the coordinate adjacent to the specified coordinate in the specified direction.
-   * 
+   *
    * @param here The coordinate to get the adjacent coordinate of.
    * @param direction The direction of the adjacent coordinate.
    * @return The coordinate adjacent to the specified coordinate in the specified direction.
@@ -253,7 +253,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
 
   /**
    * Returns the opposite direction of the specified direction.
-   * 
+   *
    * @param direction The direction to get the opposite direction of.
    * @return The opposite direction of the specified direction.
    */
