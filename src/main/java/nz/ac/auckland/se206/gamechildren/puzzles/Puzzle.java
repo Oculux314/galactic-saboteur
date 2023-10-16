@@ -126,6 +126,7 @@ public class Puzzle implements RootPair.Controller {
    * accordingly.
    * 
    * 
+   * 
    * @param puzzle the puzzle to be marked as solved.
    */
   private void setPuzzleSolved(Puzzle puzzle) {
