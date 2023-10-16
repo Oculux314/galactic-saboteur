@@ -29,6 +29,7 @@ public class EndController implements Screen {
   /** Sets the screen to the end screen and marks the game as over. */
   private void showEndScreen() {
     App.setScreen(Screen.Name.END);
+    App.stopTts();
     GameState.isGameover = true;
   }
 
@@ -42,7 +43,6 @@ public class EndController implements Screen {
    */
   private void setEndElements(String imageUrl, String speech, String labelText, String labelColor) {
     imgEnd.setImage(new Image("images/" + imageUrl));
-    App.stopTts();
     lblEnd.setText(labelText);
     lblEnd.setStyle(lblEnd.getStyle() + "-fx-text-fill: " + labelColor + ";");
   }

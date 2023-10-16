@@ -171,7 +171,7 @@ public class NotificationpanelController {
     pauseTransition = new PauseTransition(Duration.seconds(5));
     pauseTransition.setOnFinished(
         event -> {
-          setupHoldTimeline();
+          hold();
         });
 
     // Start the slide-in animation
@@ -186,7 +186,7 @@ public class NotificationpanelController {
   }
 
   /** Holds the notification */
-  private void setupHoldTimeline() {
+  private void hold() {
     // Create a timeline over 1 second to check if the notification should be held
     holdTimeline =
         new Timeline(
@@ -282,5 +282,9 @@ public class NotificationpanelController {
         generateNotification("Tell me I can talk to the astronauts for help.");
         break;
     }
+  }
+
+  public void clearQueue() {
+    notificationQueue.clear();
   }
 }

@@ -24,6 +24,8 @@ import nz.ac.auckland.se206.misc.TextToSpeech;
 import nz.ac.auckland.se206.misc.TextToSpeech.TextToSpeechException;
 import nz.ac.auckland.se206.screens.MainController;
 import nz.ac.auckland.se206.screens.Screen;
+import nz.ac.auckland.se206.screens.GameController;
+import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 
 /** The entry point of the JavaFX application, representing the top-level application. */
 public class App extends Application {
@@ -160,6 +162,7 @@ public class App extends Application {
     killAllThreads();
     GameState.reset();
     resetScreens();
+    stopTts();
   }
 
   /** Kills all active threads and resets the game over state. */
@@ -225,7 +228,12 @@ public class App extends Application {
   }
 
   public static void stopTts() {
-    tts.terminate();
+    NotificationpanelController notificationpanelController =
+        ((NotificationpanelController)
+            ((GameController) getScreen(Screen.Name.GAME).getController())
+                .getNotificationpanelController());
+    notificationpanelController.clearQueue();
+    tts.mute();
   }
 
   @Override
