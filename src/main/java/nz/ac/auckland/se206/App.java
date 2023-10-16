@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
-import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.misc.TaggedThread;
@@ -283,6 +282,5 @@ public class App extends Application {
 
     restart();
     stage.show();
-    new Audio("popup_open.mp3").play();
   }
 }

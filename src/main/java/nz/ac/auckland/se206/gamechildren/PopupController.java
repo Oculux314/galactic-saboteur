@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 import nz.ac.auckland.se206.misc.RootPair;
@@ -48,6 +49,9 @@ public class PopupController implements RootPair.Controller {
   private PuzzleLoader puzzleLoader;
   private Name currentPopup;
 
+  private Audio popupOpen = new Audio("popup_open.mp3");
+  private Audio popupClose = new Audio("popup_close.mp3");
+
   /**
    * Initializes the PopupController with the provided PuzzleLoader and loads all popups
    * accordingly.
@@ -58,7 +62,7 @@ public class PopupController implements RootPair.Controller {
     this.puzzleLoader = puzzleLoader;
     loadAllPopups();
     grpPopup.setVisible(false);
-    minimise();
+    recBackground.setVisible(false);
   }
 
   @Override
@@ -119,11 +123,13 @@ public class PopupController implements RootPair.Controller {
     recBackground.setVisible(true);
     getCurrentPopup().getController().onLoad();
     performMaximiseTransition();
+    popupOpen.play();
   }
 
   private void minimise() {
     recBackground.setVisible(false);
     performMinimiseTransition();
+    popupClose.play();
   }
 
   /** Performs the popup maximise transition. */

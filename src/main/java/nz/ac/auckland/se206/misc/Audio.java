@@ -5,14 +5,17 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 
+/** Represents a sound file that can be played. This class is immutable. */
 public class Audio {
 
   MediaPlayer mediaPlayer;
 
+  /** Constructs a new Audio object with the given audio file name. */
   public Audio(String fileName) {
     mediaPlayer = makeMediaPlayer(fileName);
   }
 
+  /** Constructs a new MediaPlayer object with the given audio file name. */
   private static MediaPlayer makeMediaPlayer(String fileName) {
     Media sound;
     try {
@@ -24,7 +27,9 @@ public class Audio {
     return new MediaPlayer(sound);
   }
 
+  /** Plays the sound file. */
   public void play() {
+    mediaPlayer.stop();
     mediaPlayer.play();
   }
 }
