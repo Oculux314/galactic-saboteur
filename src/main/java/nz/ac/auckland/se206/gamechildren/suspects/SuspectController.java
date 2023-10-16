@@ -151,8 +151,6 @@ public class SuspectController implements RootPair.Controller {
           .load(PopupController.Name.SUSPECT, "/fxml/gamechildren/suspect.fxml");
     }
 
-    System.out.println();
-
     // Respond to the user's message
     Assistant assistant = getCurrentSuspect().getAssistant();
     assistant.respondToUser(textResponse.getText());
