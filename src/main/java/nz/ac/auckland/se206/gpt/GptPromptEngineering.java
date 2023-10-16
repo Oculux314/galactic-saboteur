@@ -233,31 +233,6 @@ public class GptPromptEngineering {
   }
 
   /**
-   * Retrieves the current game state based on the suspect the user is interacting with.
-   *
-   * @param job The role of the suspect the user is currently interacting with.
-   * @return The current game state information depending on the suspect's role.
-   */
-  public static String getGameState(String job) {
-    // get the game state depending on what suspect the user is talking to
-    String gameState = "";
-    if (job == "Spacey's mechanic") { // Reactor puzzle
-      gameState = GameState.reactorRoomGameState;
-    } else if (job == "Spacey's scientist") { // Lab puzzle
-      gameState = GameState.labRoomGameState;
-    } else if (job == "Spacey's captain") { // Navigation puzzle
-      gameState = GameState.controlRoomGameState;
-    }
-
-    // check if the user has solved the puzzle
-    if (gameState == GameState.puzzleSolvedMessage) {
-      gameState = gameState + whatOtherRoomToLookIn();
-    }
-    // give the updated value of the game state
-    return gameState;
-  }
-
-  /**
    * Provides information about the next room the user should investigate based on which rooms
    * remain unsolved.
    *
@@ -323,6 +298,31 @@ public class GptPromptEngineering {
    */
   public static String getTimeWarning(Integer timeLeft) {
     return "Let me I have less than " + timeLeft + " seconds left to deactivate the meltdown.";
+  }
+
+  /**
+   * Retrieves the current game state based on the suspect the user is interacting with.
+   *
+   * @param job The role of the suspect the user is currently interacting with.
+   * @return The current game state information depending on the suspect's role.
+   */
+  public static String getGameState(String job) {
+    // get the game state depending on what suspect the user is talking to
+    String gameState = "";
+    if (job == "Spacey's mechanic") { // Reactor puzzle
+      gameState = GameState.reactorRoomGameState;
+    } else if (job == "Spacey's scientist") { // Lab puzzle
+      gameState = GameState.labRoomGameState;
+    } else if (job == "Spacey's captain") { // Navigation puzzle
+      gameState = GameState.controlRoomGameState;
+    }
+
+    // check if the user has solved the puzzle
+    if (gameState == GameState.puzzleSolvedMessage) {
+      gameState = gameState + whatOtherRoomToLookIn();
+    }
+    // give the updated value of the game state
+    return gameState;
   }
 
   /**
