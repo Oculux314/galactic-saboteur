@@ -336,19 +336,19 @@ public class GptPromptEngineering {
     if (!GameState.userWelcomed) {
         // if the user hasn't been welcomed, welcome them
         GameState.userWelcomed = true;
-        return "Formally welcome the user onto the command deck. Introduce the situation.";
+      return "Formally welcome the user onto the command deck. Introduce the situation.";
     } else if (GameState.cluesFound) {
         // check if the user has found all three clues
-        return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
+      return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
             + " the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
         // check if the user has solved any of the puzzles
-        return "I have solved a problem. Congratulate me.";
+      return "I have solved a problem. Congratulate me.";
     } else {
         // check if the user has been welcomed
-        return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
+      return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
             + " most critical element at each stage for them to examine.";
     }
   }
