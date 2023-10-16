@@ -3,9 +3,6 @@ package nz.ac.auckland.se206.gamechildren;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import org.w3c.dom.events.MouseEvent;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
@@ -16,13 +13,13 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
-import nz.ac.auckland.se206.misc.TextToSpeech;
 
 /**
  * The NotificationpanelController class manages the notifications displayed in the game. It handles
@@ -45,7 +42,6 @@ public class NotificationpanelController {
   private boolean holdNotification = false;
   private boolean ttsFinished = false;
   private Timeline holdTimeline;
-  private TextToSpeech tts = new TextToSpeech();
 
   /**
    * Initializes the NotificationpanelController by setting up the chat completion request and the
@@ -160,7 +156,7 @@ public class NotificationpanelController {
                   () -> {
                     try {
                       ttsFinished = false;
-                      tts.speak(response);
+                      App.speak(response);
                       ttsFinished = true; // Set the flag to true when TTS finishes
                     } catch (Exception e) {
                       e.printStackTrace();
@@ -214,17 +210,10 @@ public class NotificationpanelController {
             new KeyFrame(
                 Duration.seconds(1),
                 event -> {
-                  // When tts is finished and the notification is not being held, perform the slide out
-                  if (GameState.ttsEnabled) {
-                    if (!holdNotification && ttsFinished) {
-                      holdTimeline.stop();
-                      performSlideOutTransition();
-                    }
-                  } else {
-                    if (!holdNotification) {
-                      holdTimeline.stop();
-                      performSlideOutTransition();
-                    }
+                  // If the notification should not be held, slide notification out
+                  if (!holdNotification && (!GameState.ttsEnabled || ttsFinished)) {
+                    holdTimeline.stop();
+                    performSlideOutTransition();
                   }
                 }));
     holdTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -249,6 +238,7 @@ public class NotificationpanelController {
           processNextNotification();
           recHide.setVisible(false);
 
+          // If the TTS was interrupted, toggle the TTS
           if (GameState.ttsInterrupted) {
             GameState.ttsEnabled = !GameState.ttsEnabled;
             GameState.ttsInterrupted = false;

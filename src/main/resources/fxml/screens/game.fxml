@@ -98,7 +98,7 @@
                   <Image url="@../../images/logo-AI.png" />
                </image>
             </ImageView>
-            <StateButton fx:id="btnTts" fitHeight="99.0" fitWidth="80.0" layoutX="700.0" layoutY="15.0" onMouseClicked="#onTtsClicked" preserveRatio="true">
+            <StateButton fx:id="btnTts" fitHeight="52.0" fitWidth="54.0" layoutX="725.0" layoutY="25.0" onMouseClicked="#onTtsClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/settings_buttons/off.png" />
                </image>

@@ -401,19 +401,21 @@ public class GameController implements Screen {
     notificationPanelController.onMouseExited();
   }
 
+  /**
+   * Handles the action when the tts button is clicked.
+   *
+   * @param event The mouse event.
+   */
   @FXML
-private void onTtsClicked(MouseEvent event) {
+  private void onTtsClicked(MouseEvent event) {
     if (notificationPanelController.isNotificationInProgress()) {
-        GameState.ttsInterrupted = true;
-        boolean ttsEnabled = GameState.ttsEnabled;
-        ttsEnabled = !ttsEnabled;
-        btnTts.setState(ttsEnabled ? "on" : "off");
+      // tts has been changed while a notification is in progress
+      GameState.ttsInterrupted = true;
     } else {
-        GameState.ttsInterrupted = false;
-        GameState.ttsEnabled = !GameState.ttsEnabled;
-        btnTts.setState(GameState.ttsEnabled ? "on" : "off");
+      // toggle tts
+      GameState.ttsEnabled = !GameState.ttsEnabled;
     }
-}
+  }
 
   /**
    * Adds a map button to the map of buttons.
@@ -434,8 +436,10 @@ private void onTtsClicked(MouseEvent event) {
     return notificationPanelController;
   }
 
+  /** Called when game is initialised to set up the tts button */
   private void setupTtsButton() {
     String ttsEnabled = GameState.ttsEnabled ? "on" : "off";
+    // Set state button
     btnTts.addState("off", "settings_buttons/off.png");
     btnTts.addState("on", "settings_buttons/on.png");
     btnTts.setState(ttsEnabled);

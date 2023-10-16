@@ -221,6 +221,10 @@ public class App extends Application {
     threads.add(thread);
   }
 
+  public static void stopTts() {
+    tts.terminate();
+  }
+
   @Override
   public void stop() {
     GameState.isRunning = false;
