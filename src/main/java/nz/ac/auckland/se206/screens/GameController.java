@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.components.HighlightButton;
+import nz.ac.auckland.se206.components.StateButton;
 import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.gamechildren.PopupController;
 import nz.ac.auckland.se206.gamechildren.SidepanelController;
@@ -50,6 +51,8 @@ public class GameController implements Screen {
   @FXML private HighlightButton gptMechanic;
   private Suspect.Name clickedSuspect;
 
+  @FXML private StateButton btnTts;
+
   /**
    * Initializes the controller with the necessary components and sets up the zoom and pan handler,
    * puzzle loader, and other UI elements.
@@ -61,6 +64,8 @@ public class GameController implements Screen {
     popupController.initialise(puzzleLoader);
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
+    setupTtsButton();
+    
   }
 
   /** Represents the method called when the controller is loaded. */
@@ -397,6 +402,12 @@ public class GameController implements Screen {
     notificationPanelController.onMouseExited();
   }
 
+  @FXML
+  private void onTtsClicked(MouseEvent event) {
+    GameState.ttsEnabled = !GameState.ttsEnabled;
+    btnTts.setState(GameState.ttsEnabled ? "on" : "off");
+  }
+
   /**
    * Adds a map button to the map of buttons.
    *
@@ -414,5 +425,12 @@ public class GameController implements Screen {
    */
   public NotificationpanelController getNotificationpanelController() {
     return notificationPanelController;
+  }
+
+  private void setupTtsButton() {
+    String ttsEnabled = GameState.ttsEnabled ? "on" : "off";
+    btnTts.addState("off", "settings_buttons/off.png");
+    btnTts.addState("on", "settings_buttons/on.png");
+    btnTts.setState(ttsEnabled);
   }
 }
