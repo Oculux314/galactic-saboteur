@@ -282,13 +282,13 @@ public class GameController implements Screen {
       // Update the game state and show popup
       if (PuzzleLoader.reactorPuzzles.contains(puzzleName)) {
         GameState.reactorRoomGameState = GameState.puzzleOpenedMessage;
-        popupController.show(PopupController.Name.PUZZLE_REACTOR);
+        popupController.maximise(PopupController.Name.PUZZLE_REACTOR);
       } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzleName)) {
         GameState.labRoomGameState = GameState.puzzleOpenedMessage;
-        popupController.show(PopupController.Name.PUZZLE_LABORATORY);
+        popupController.maximise(PopupController.Name.PUZZLE_LABORATORY);
       } else if (PuzzleLoader.navigationPuzzles.contains(puzzleName)) {
         GameState.controlRoomGameState = GameState.puzzleOpenedMessage;
-        popupController.show(PopupController.Name.PUZZLE_NAVIGATION);
+        popupController.maximise(PopupController.Name.PUZZLE_NAVIGATION);
       }
     }
   }
@@ -310,7 +310,7 @@ public class GameController implements Screen {
       clickedSuspect = Suspect.Name.MECHANIC;
     }
 
-    popupController.show(PopupController.Name.SUSPECT);
+    popupController.maximise(PopupController.Name.SUSPECT);
   }
 
   /**
@@ -339,7 +339,7 @@ public class GameController implements Screen {
    */
   @FXML
   private void onRiddleClicked() throws IOException {
-    popupController.show(PopupController.Name.RIDDLE);
+    popupController.maximise(PopupController.Name.RIDDLE);
   }
 
   /**
