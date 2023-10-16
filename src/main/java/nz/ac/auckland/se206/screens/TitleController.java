@@ -36,6 +36,7 @@ public class TitleController implements Screen {
     GameController gameController =
         ((GameController) App.getScreen(Screen.Name.GAME).getController());
     gameController.resetGpt();
+    gameController.setupTtsButton();
   }
 
   /**

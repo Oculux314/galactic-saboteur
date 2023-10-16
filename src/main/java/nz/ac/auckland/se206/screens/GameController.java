@@ -64,7 +64,6 @@ public class GameController implements Screen {
     popupController.initialise(puzzleLoader);
     intialiseMapButtons();
     progressHighlightStateTo(HighlightState.REACTOR_INITAL);
-    setupTtsButton();
   }
 
   /** Represents the method called when the controller is loaded. */
@@ -432,7 +431,7 @@ public class GameController implements Screen {
   }
 
   /** Called when game is initialised to set up the tts button */
-  private void setupTtsButton() {
+  public void setupTtsButton() {
     String ttsEnabled = GameState.ttsEnabled ? "on" : "off";
     // Set state button
     btnTts.addState("off", "settings_buttons/off.png");
