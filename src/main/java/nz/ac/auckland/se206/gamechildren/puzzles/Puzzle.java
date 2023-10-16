@@ -82,9 +82,12 @@ public class Puzzle implements RootPair.Controller {
   /**
    * Called when a puzzle is solved. Clears puzzle.
    *
-   * @param puzzlePane. The pane containing the puzzle.
+   * @param puzzle the puzzle to be marked as solved.
    */
-  public void clearPuzzle(Parent puzzlePane) {
+  public void completePuzzle(Puzzle puzzle) {
+    setPuzzleSolved(puzzle);
+    Pane puzzlePane = (Pane) puzzle.getRoot();
+
     // clear the puzzle content and display the solved label
     if (puzzlePane instanceof Pane) {
       ((Pane) puzzlePane).getChildren().clear();
@@ -122,20 +125,22 @@ public class Puzzle implements RootPair.Controller {
    * Marks the puzzle as solved, updates the game state, and triggers various game events.
    * Additionally, updates the status of the relevant rooms and generates notifications and hints
    * accordingly.
+   * 
+   * @param puzzle the puzzle to be marked as solved.
    */
-  public void setSolved() {
+  private void setPuzzleSolved(Puzzle puzzle) {
     isPuzzleSolved = true;
-    if (PuzzleLoader.reactorPuzzles.contains(this.puzzleName)) {
+    if (PuzzleLoader.reactorPuzzles.contains(puzzle.puzzleName)) {
       // if the user has soleved the reactor puzzle, update the game state
       GameState.reactorRoomGameState = GameState.puzzleSolvedMessage;
       GameState.reactorPuzzleSolved = true;
       GameState.unsolvedRooms.remove("reactor");
-    } else if (PuzzleLoader.laboratoryPuzzles.contains(this.puzzleName)) {
+    } else if (PuzzleLoader.laboratoryPuzzles.contains(puzzle.puzzleName)) {
       // if the user has soleved the laboratory puzzle, update the game state
       GameState.labRoomGameState = GameState.puzzleSolvedMessage;
       GameState.laboratoryPuzzleSolved = true;
       GameState.unsolvedRooms.remove("laboratory");
-    } else if (PuzzleLoader.navigationPuzzles.contains(this.puzzleName)) {
+    } else if (PuzzleLoader.navigationPuzzles.contains(puzzle.puzzleName)) {
       // if the user has soleved the navigation puzzle, update the game state
       GameState.controlRoomGameState = GameState.puzzleSolvedMessage;
       GameState.navigationPuzzleSolved = true;

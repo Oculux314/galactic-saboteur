@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.gamechildren.puzzles;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -269,22 +268,6 @@ public class NavigationComputerPuzzleController extends Puzzle {
     lblWarning.setVisible(true);
     lblWarning.setStyle("-fx-text-fill: #58DD94;");
 
-    TaggedThread completeDelay =
-        new TaggedThread(
-            () -> {
-              try {
-                Thread.sleep(1500);
-              } catch (InterruptedException e) {
-                return;
-              }
-
-              Platform.runLater(
-                  () -> {
-                    setSolved();
-                    clearPuzzle(panBackground);
-                  });
-            });
-
-    completeDelay.start(); // Delay before setting solved
+    completePuzzle(this);
   }
 }

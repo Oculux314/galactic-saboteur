@@ -30,7 +30,7 @@ public class GameState {
   public static Screen.Name currentScreen;
   public static int numberOfHintsAsked;
   public static HighlightState highlightState;
-  public static int solvedPuzzles = 0;
+  public static int solvedPuzzles;
 
   public static boolean cluesFound;
   public static boolean reactorPuzzleSolved;
