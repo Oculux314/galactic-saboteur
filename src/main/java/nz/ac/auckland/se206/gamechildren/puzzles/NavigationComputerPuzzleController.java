@@ -268,8 +268,9 @@ public class NavigationComputerPuzzleController extends Puzzle {
                 lblWarning.setVisible(!lblWarning.isVisible()); // Flash warning until solved
 
                 if (state == State.UNCLICKED) {
-                  tilStart.setVisible(
-                      !tilStart.isVisible()); // Flash start tile until tiles clicked
+                  // Flash start and end until tiles clicked
+                  tilStart.setVisible(!tilStart.isVisible());
+                  tilEnd.setVisible(!tilEnd.isVisible());
                 }
 
                 try {
