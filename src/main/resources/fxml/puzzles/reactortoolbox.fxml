@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
-<?import nz.ac.auckland.se206.components.AnimatedButton?>
 
 <Pane fx:id="panReactorToolbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorToolboxPuzzleController">
    <children>
@@ -36,12 +35,7 @@
                </image>
             </ImageView>
             <Label layoutX="388.0" layoutY="180.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" text="Verdict:" />
-            <Label fx:id="lblVerdict" layoutX="390.0" layoutY="197.0" prefHeight="17.0" prefWidth="58.0" style="-fx-text-fill: #000000; -fx-font-size: 12;" />
-            <AnimatedButton fx:id="btnSubmit" fitHeight="100.0" fitWidth="94.0" layoutX="361.0" layoutY="360.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/btnSubmit.png" />
-               </image>
-            </AnimatedButton>
+            <Label fx:id="lblVerdict" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="390.0" layoutY="197.0" prefHeight="70.0" prefWidth="58.0" style="-fx-text-fill: #000000; -fx-font-size: 11;" />
          </children>
       </Group>
       <Group fx:id="grpTools" layoutY="-60.0">
