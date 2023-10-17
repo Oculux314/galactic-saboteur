@@ -380,26 +380,6 @@ public class GameController implements Screen {
   }
 
   /**
-   * Handles the action when the logo is entered.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onLogoEntered(MouseEvent event) {
-    notificationPanelController.onMouseEntered();
-  }
-
-  /**
-   * Handles the action when the logo is exited.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onLogoExited(MouseEvent event) {
-    notificationPanelController.onMouseExited();
-  }
-
-  /**
    * Handles the action when the tts button is clicked.
    *
    * @param event The mouse event.

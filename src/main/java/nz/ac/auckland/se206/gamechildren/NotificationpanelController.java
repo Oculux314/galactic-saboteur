@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -57,14 +58,26 @@ public class NotificationpanelController {
     recHide.setVisible(false);
   }
 
-  /** Called when logo is being hovered by the mouse. */
-  public void onMouseEntered() {
+  /**
+   * Handles the action when the logo is entered.
+   *
+   * @param event The mouse event.
+   */
+  @FXML
+  public void onMouseEntered(MouseEvent event) {
     holdNotification = true;
+    System.out.println("Mouse entered");
   }
 
-  /** Called when the logo is no longer being hovered. */
-  public void onMouseExited() {
+  /**
+   * Handles the action when the logo is exited.
+   *
+   * @param event The mouse event.
+   */
+  @FXML
+  public void onMouseExited(MouseEvent event) {
     holdNotification = false;
+    System.out.println("Mouse exited");
   }
 
   /**
