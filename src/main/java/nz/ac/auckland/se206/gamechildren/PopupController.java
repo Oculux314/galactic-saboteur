@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.gamechildren;
 
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
@@ -119,17 +120,41 @@ public class PopupController implements RootPair.Controller {
 
   /** Displays and shows the animation transition for opening a pop-up. */
   private void maximise() {
+    getCurrentPopup().getController().onLoad();
     grpPopup.setVisible(true);
     recBackground.setVisible(true);
-    getCurrentPopup().getController().onLoad();
+    fadeBackgroundOpacityTo(0.4);
     performMaximiseTransition();
     popupOpen.play();
   }
 
+  /** Minimises the current popup. */
   private void minimise() {
-    recBackground.setVisible(false);
+    fadeBackgroundOpacityTo(0);
     performMinimiseTransition();
     popupClose.play();
+  }
+
+  /**
+   * Fades the background opacity to the given value.
+   *
+   * @param opacity the double representing the opacity value to fade to.
+   */
+  private void fadeBackgroundOpacityTo(double opacity) {
+    FadeTransition fade = new FadeTransition();
+    fade.setNode(recBackground);
+    fade.setDuration(Duration.millis(300));
+    fade.setToValue(opacity);
+
+    // Allow main game screen to be clicked
+    fade.setOnFinished(
+        event -> {
+          if (opacity == 0) {
+            recBackground.setVisible(false);
+          }
+        });
+
+    fade.play();
   }
 
   /** Performs the popup maximise transition. */

@@ -1,10 +1,18 @@
 package nz.ac.auckland.se206.gamechildren.puzzles;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
 import nz.ac.auckland.se206.misc.GameState;
@@ -60,8 +68,6 @@ public class Puzzle implements RootPair.Controller {
   }
 
   private boolean isPuzzleSolved;
-  private Label solvedLabel =
-      new Label("Puzzle Solved!" + System.lineSeparator() + "Clue added to inventory.");
   private Parent root;
   private PuzzleName puzzleName;
 
@@ -86,19 +92,73 @@ public class Puzzle implements RootPair.Controller {
    */
   public void completePuzzle(Puzzle puzzle, Pane root) {
     setPuzzleSolved(puzzle);
+    disablePuzzle(root);
+    displayBanner(createBanner(), root);
+  }
 
-    // clear the puzzle content and display the solved label
-    if (true) {
-      ((Pane) root).getChildren().clear();
-      ((Pane) root).getChildren().add(solvedLabel);
-      solvedLabel.setLayoutX(0);
-      solvedLabel.setLayoutY(230);
-      solvedLabel.setPrefWidth(500);
+  private void disablePuzzle(Pane root) {
+    root.setDisable(true); // Just a precaution, veil should block mouse clicks anyway
 
-      // center the label
-      solvedLabel.setAlignment(Pos.CENTER);
-      solvedLabel.setTextAlignment(TextAlignment.CENTER);
-    }
+    // Create black "veil" rectangle
+    Rectangle veil = new Rectangle(0, 0, root.getWidth(), root.getHeight());
+    veil.setFill(Color.BLACK);
+    root.getChildren().add(veil);
+
+    // Fade in veil
+    FadeTransition fade = new FadeTransition();
+    fade.setNode(veil);
+    fade.setDuration(Duration.millis(300));
+    fade.setFromValue(0);
+    fade.setToValue(0.4);
+    fade.play();
+  }
+
+  /**
+   * Creates a banner to be displayed when a puzzle is solved.
+   *
+   * @return the banner to be displayed.
+   */
+  private Label createBanner() {
+    Label banner = new Label("Puzzle Complete");
+
+    // Text
+    banner.setStyle(banner.getStyle() + "-fx-font-size: 50px; -fx-text-fill: #58DD94;");
+
+    // Text alignment
+    banner.setAlignment(Pos.CENTER);
+    banner.setTextAlignment(TextAlignment.CENTER);
+
+    // Background
+    BackgroundFill fill = new BackgroundFill(Color.web("#000000cc"), null, null);
+    banner.setBackground(new Background(fill));
+    banner.setOpacity(1);
+
+    // Label dimensions
+    banner.setPrefWidth(520);
+    banner.setPrefHeight(80);
+    banner.setLayoutX(-20);
+
+    return banner;
+  }
+
+  /**
+   * Displays the banner on the screen.
+   *
+   * @param banner the banner to be displayed.
+   * @param root the root pane of the puzzle.
+   */
+  private void displayBanner(Label banner, Pane root) {
+    // Slide up from bottom of viewport
+    TranslateTransition translate = new TranslateTransition();
+    translate.setNode(banner);
+    translate.setDuration(Duration.millis(200));
+    translate.setInterpolator(Interpolator.SPLINE(0,1,0.5,1));
+    translate.setFromY(500);
+    translate.setToY(140);
+
+    root.getChildren().add(banner);
+    banner.setVisible(true);
+    translate.play();
   }
 
   /**
@@ -124,8 +184,7 @@ public class Puzzle implements RootPair.Controller {
    * Marks the puzzle as solved, updates the game state, and triggers various game events.
    * Additionally, updates the status of the relevant rooms and generates notifications and hints
    * accordingly.
-   * 
-   * 
+   *
    * @param puzzle the puzzle to be marked as solved.
    */
   private void setPuzzleSolved(Puzzle puzzle) {

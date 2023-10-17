@@ -21,11 +21,6 @@
                      </image>
                   </ImageView>
                   <Label fx:id="instructions" alignment="CENTER" layoutX="151.0" layoutY="304.0" prefHeight="34.0" prefWidth="195.0" stylesheets="@../../css/style.css" textAlignment="CENTER" wrapText="true" />
-                  <AnimatedButton fx:id="btnMix" fitHeight="35.0" fitWidth="65.0" layoutX="351.0" layoutY="299.0" onMouseClicked="#btnMixClicked">
-                     <image>
-                        <Image url="@../../images/btnSubmit.png" />
-                     </image>
-                  </AnimatedButton>
                   <Ellipse fx:id="yellowChosen" fill="#ffffff00" layoutX="114.0" layoutY="203.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
                   <Ellipse fx:id="greenChosen" fill="#ffffff00" layoutX="181.0" layoutY="155.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
                   <Ellipse fx:id="blueChosen" fill="#ffffff00" layoutX="152.0" layoutY="174.0" radiusX="16.0" radiusY="55.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
