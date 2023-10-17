@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.ComputerTile;
 import nz.ac.auckland.se206.components.ComputerTile.Type;
 import nz.ac.auckland.se206.components.RotateButton.Orientation;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
@@ -82,6 +83,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
   private ComputerTile.Type[][] tileTypes;
   private List<ComputerTile> activeTiles;
   private State state = State.UNCLICKED;
+  private Audio rotateSound = new Audio("nav_rotate.mp3");
 
   /** Initializes the components of the navigation computer puzzle. */
   public void initialize() {
@@ -295,6 +297,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
       tilStart.setVisible(true);
     }
 
+    rotateSound.play();
     updateActiveTiles();
   }
 

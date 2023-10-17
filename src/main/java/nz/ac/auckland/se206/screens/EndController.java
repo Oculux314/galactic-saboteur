@@ -18,8 +18,8 @@ public class EndController implements Screen {
   @FXML private Label lblEnd;
   @FXML private ImageView imgEnd;
 
-  Audio winSound = new Audio("end_win.mp3");
-  Audio loseSound = new Audio("end_lose.mp3");
+  private Audio winSound = new Audio("end_win.mp3");
+  private Audio loseSound = new Audio("end_lose.mp3");
 
   /**
    * Executes any necessary actions upon loading the end screen. This method does nothing in the
