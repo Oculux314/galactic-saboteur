@@ -11,7 +11,7 @@
 <Pane fx:id="panReactorButtonpad" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorButtonPuzzleController">
    <children>
       <Group />
-      <ImageView fitHeight="360.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="360.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/buttonpad-overlay.png" />
          </image>
@@ -21,18 +21,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblVerdict" layoutX="362.0" layoutY="273.0" prefHeight="17.0" prefWidth="82.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" />
+      <Label fx:id="lblVerdict" layoutX="377.0" layoutY="273.0" prefHeight="17.0" prefWidth="82.0" style="-fx-font-size: 12; -fx-text-fill: #000000;" />
       <Label fx:id="lblNumberPrompt" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="152.0" prefHeight="0.0" prefWidth="168.0" style="-fx-font-size: 20; -fx-text-fill: #000000;" text="NUMBER" textAlignment="CENTER">
          <font>
             <Font size="50.0" />
          </font>
       </Label>
       <Label layoutX="29.0" layoutY="187.0" style="-fx-text-fill: #000000; -fx-font-size: 12;" text="Decrypt the &#10;sequence" />
-      <Group layoutX="-10.0" layoutY="-65.0">
+      <Group layoutX="-10.0" layoutY="-71.0">
          <children>
             <Group>
                <children>
-                  <AnimatedButton fx:id="btn0" fitHeight="55.0" fitWidth="30.0" layoutX="230.0" layoutY="298.0" onMouseClicked="#onNumberClicked" preserveRatio="true">
+                  <AnimatedButton fx:id="btn0" fitHeight="55.0" fitWidth="30.0" layoutX="230.0" layoutY="302.0" onMouseClicked="#onNumberClicked" preserveRatio="true">
                      <image>
                         <Image url="@../../images/buttonpadbutton.png" />
                      </image>
@@ -108,7 +108,7 @@
             </AnimatedButton>
          </children>
       </Group>
-      <Group layoutX="-10.0" layoutY="-65.0">
+      <Group layoutX="-9.0" layoutY="-69.0">
          <children>
             <Label disable="true" layoutX="199.0" layoutY="195.0" style="-fx-font-size: 17;" text="1" />
             <Label disable="true" layoutX="239.0" layoutY="195.0" style="-fx-font-size: 17;" text="2" />
@@ -119,7 +119,7 @@
             <Label disable="true" layoutX="199.0" layoutY="267.0" style="-fx-font-size: 17;" text="7" />
             <Label disable="true" layoutX="239.0" layoutY="267.0" style="-fx-font-size: 17;" text="8" />
             <Label disable="true" layoutX="280.0" layoutY="267.0" style="-fx-font-size: 17;" text="9" />
-            <Label disable="true" layoutX="239.0" layoutY="300.0" style="-fx-font-size: 17;" text="0" />
+            <Label disable="true" layoutX="239.0" layoutY="301.0" style="-fx-font-size: 17;" text="0" />
          </children>
       </Group>
       <Label layoutX="48.0" layoutY="139.0" prefHeight="11.0" prefWidth="111.0" style="-fx-font-size: 10; -fx-text-fill: #000000;" text="Encrypted Number:" />

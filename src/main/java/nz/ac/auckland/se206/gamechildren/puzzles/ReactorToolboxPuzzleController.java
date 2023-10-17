@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.components.AnimatedButton;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.MainController;
 import nz.ac.auckland.se206.screens.Screen;
@@ -22,7 +21,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   @FXML private ImageView imvTool1;
   @FXML private ImageView imvTool2;
   @FXML private ImageView imvTool3;
-  @FXML private AnimatedButton btnExit;
   @FXML private Pane panReactorToolbox;
   @FXML private Rectangle rec2;
   @FXML private Rectangle rec3;
@@ -109,15 +107,13 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     selectedNode = null;
     Node source = (Node) event.getSource();
     snapToPosition(source);
+    if (isRectanglesFilled()) {
+      checkCorrect();
+    }
   }
 
-  /**
-   * Called when the submit button is clicked. Checks if the answer is correct.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onSubmitClicked() {
+  /** Called when there are three tools in place and the submit button is clicked. */
+  private void checkCorrect() {
     // Check if all tools are in the correct place
     // create a thread to clear the label after 1.5 seconds
     TaggedThread labelThread =
@@ -130,20 +126,18 @@ public class ReactorToolboxPuzzleController extends Puzzle {
                 e.printStackTrace();
               }
             });
-
-    // Check if all tools are in the correct place
-    boolean allToolsInRectangles =
-        isToolInRectangle(imvTool2, rec2)
-            && isToolInRectangle(imvTool3, rec3)
-            && isToolInRectangle(imvTool1, rec1);
-
+    boolean allToolsInRectangles = getAllToolsInRectangles();
     // If all tools are in the correct place, set the puzzle as solved
     if (allToolsInRectangles) {
-      setSolved();
-      clearPuzzle(panReactorToolbox);
+      completePuzzle(this, panReactorToolbox);
     } else {
       // If not, display a message
-      lblVerdict.setText("Incorrect \n Try again");
+      lblVerdict.setText(
+          "Incorrect"
+              + System.lineSeparator()
+              + "combination"
+              + System.lineSeparator()
+              + "try again");
       labelThread.start();
     }
   }
@@ -167,7 +161,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * get screen zoom.
+   * This method retrieves the screens zoom level taken from the main pane.
    *
    * @param event The mouse event.
    */
@@ -188,17 +182,6 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   }
 
   /**
-   * Called when the puzzle is solved.
-   *
-   * @param event The mouse event.
-   */
-  @FXML
-  private void onSolved() {
-    setSolved();
-    clearPuzzle(panReactorToolbox);
-  }
-
-  /**
    * Snaps a tool to a rectangle if it meets conditions.
    *
    * @param source the node to snap.
@@ -216,20 +199,23 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    * @param rect the rectangle to check.
    */
   private void checkCloseToRectangle(Node source, Rectangle rect) {
+    // if the rectangle is not available, do not try and snap to it
     if (!checkRectangleAvailable(rect)) {
       return;
     }
-    ;
 
+    // get the coordinates of the tool and rectangle
     double sourceX = source.getTranslateX() + source.getLayoutX();
     double sourceY = source.getTranslateY() + source.getLayoutY();
 
     double rectX = rect.getLayoutX();
     double rectY = rect.getLayoutY();
 
+    // calculate the distance between the tool and rectangle
     double distanceX = Math.abs(sourceX - rectX);
     double distanceY = Math.abs(sourceY - rectY);
 
+    // if the tool is close enough to the rectangle, snap it to the rectangle
     if (distanceX < 30 && distanceY < 15) {
       setPosition(source, rectX + marginX, rectY + marginY);
     }
@@ -274,5 +260,31 @@ public class ReactorToolboxPuzzleController extends Puzzle {
       }
     }
     return true;
+  }
+
+  /**
+   * Checks if all tools are in the correct place.
+   *
+   * @return true if all tools are in the correct place, false otherwise.
+   */
+  private boolean getAllToolsInRectangles() {
+    // Check if all tools are in the correct place
+    boolean allToolsInRectangles =
+        isToolInRectangle(imvTool2, rec2)
+            && isToolInRectangle(imvTool3, rec3)
+            && isToolInRectangle(imvTool1, rec1);
+
+    return allToolsInRectangles;
+  }
+
+  /**
+   * Checks if all rectangles are filled so that check can be called.
+   *
+   * @return true if all rectangles are filled, false otherwise.
+   */
+  private boolean isRectanglesFilled() {
+    return !checkRectangleAvailable(rec1)
+        && !checkRectangleAvailable(rec2)
+        && !checkRectangleAvailable(rec3);
   }
 }

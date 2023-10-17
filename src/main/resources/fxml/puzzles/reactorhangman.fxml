@@ -11,7 +11,7 @@
 
 <Pane fx:id="panHangmanPuzzle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.puzzles.ReactorHangmanPuzzleController">
    <children>
-      <ImageView fitHeight="390.0" fitWidth="500.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="360.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/hangman-puzzle-background.jpg" />
          </image>

@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.gamechildren.puzzles;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -84,6 +83,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
   private List<ComputerTile> activeTiles;
   private State state = State.UNCLICKED;
 
+  /** Initializes the components of the navigation computer puzzle. */
   public void initialize() {
 
     tiles = new ComputerTile[NUM_ROWS][NUM_COLS];
@@ -101,6 +101,10 @@ public class NavigationComputerPuzzleController extends Puzzle {
     startFlashing();
   }
 
+  /**
+   * Randomizes the types of tiles in the puzzle. The types are chosen randomly from the available
+   * types.
+   */
   private void randomizeTileTypes() {
     for (int i = 0; i < NUM_ROWS; i++) {
       for (int j = 0; j < NUM_COLS; j++) {
@@ -110,6 +114,10 @@ public class NavigationComputerPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Chooses a solution for the puzzle. The solution is a path from the start tile to the end tile.
+   * The path is chosen randomly, but must always exist.
+   */
   private void chooseSolution() {
     // Forces a path to exist from start to end
     // Only allow direction right and up
@@ -132,6 +140,11 @@ public class NavigationComputerPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Chooses a direction for the path to take at the specified coordinate.
+   *
+   * @param here The coordinate to choose a direction for.
+   */
   private Orientation chooseDirection(Coordinate here) {
     if (here.getRow() == end.getRow()) {
       return Orientation.RIGHT;
@@ -142,6 +155,11 @@ public class NavigationComputerPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Creates a tile at the specified index in the puzzle grid.
+   *
+   * @param n The index of the tile in the puzzle grid.
+   */
   private void makeTile(int n) {
     int row = n / NUM_COLS;
     int col = n % NUM_COLS;
@@ -161,6 +179,10 @@ public class NavigationComputerPuzzleController extends Puzzle {
     tile.setLayoutY(TILE_SIZE * row);
   }
 
+  /**
+   * Updates the active tiles in the puzzle. Starts from the start tile and follows the path until
+   * it terminates.
+   */
   public void updateActiveTiles() {
     // Start path from the start tile
     clearActiveTiles();
@@ -184,6 +206,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
     checkWinConditions();
   }
 
+  /** Clears the active tiles in the puzzle (adding in extra). */
   private void clearActiveTiles() {
     for (ComputerTile tile : activeTiles) {
       tile.setActive(false);
@@ -192,6 +215,13 @@ public class NavigationComputerPuzzleController extends Puzzle {
     activeTiles.clear();
   }
 
+  /**
+   * Returns the tile adjacent to the specified tile in the specified direction.
+   *
+   * @param tile The tile to get the adjacent tile of.
+   * @param direction The direction of the adjacent tile.
+   * @return The tile adjacent to the specified tile in the specified direction.
+   */
   private ComputerTile getNextTile(ComputerTile tile, Orientation direction) {
     Coordinate next = getNextCoordinate(new Coordinate(tile.getRow(), tile.getCol()), direction);
 
@@ -202,6 +232,13 @@ public class NavigationComputerPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Returns the coordinate adjacent to the specified coordinate in the specified direction.
+   *
+   * @param here The coordinate to get the adjacent coordinate of.
+   * @param direction The direction of the adjacent coordinate.
+   * @return The coordinate adjacent to the specified coordinate in the specified direction.
+   */
   private Coordinate getNextCoordinate(Coordinate here, Orientation direction) {
     int oldRow = here.getRow();
     int oldCol = here.getCol();
@@ -212,10 +249,17 @@ public class NavigationComputerPuzzleController extends Puzzle {
     return new Coordinate(oldRow + changeInRow, oldCol + changeInCol);
   }
 
+  /**
+   * Returns the opposite direction of the specified direction.
+   *
+   * @param direction The direction to get the opposite direction of.
+   * @return The opposite direction of the specified direction.
+   */
   private Orientation getOppositeDirection(Orientation direction) {
     return Orientation.values()[(direction.ordinal() + 2) % 4];
   }
 
+  /** Starts the flashing of the warning and start tiles (adding in extra). */
   private void startFlashing() {
     TaggedThread flashManager =
         new TaggedThread(
@@ -224,8 +268,9 @@ public class NavigationComputerPuzzleController extends Puzzle {
                 lblWarning.setVisible(!lblWarning.isVisible()); // Flash warning until solved
 
                 if (state == State.UNCLICKED) {
-                  tilStart.setVisible(
-                      !tilStart.isVisible()); // Flash start tile until tiles clicked
+                  // Flash start and end until tiles clicked
+                  tilStart.setVisible(!tilStart.isVisible());
+                  tilEnd.setVisible(!tilEnd.isVisible());
                 }
 
                 try {
@@ -239,6 +284,10 @@ public class NavigationComputerPuzzleController extends Puzzle {
     flashManager.start();
   }
 
+  /**
+   * Handles the event of the tiles being clicked. If the tiles have not been clicked before, the
+   * start tile is revealed.
+   */
   @FXML
   private void onTilesClicked() {
     if (state == State.UNCLICKED) {
@@ -249,6 +298,10 @@ public class NavigationComputerPuzzleController extends Puzzle {
     updateActiveTiles();
   }
 
+  /**
+   * Handles the event of the start tile being clicked. If the start tile is clicked, the puzzle is
+   * solved.
+   */
   private void checkWinConditions() {
     boolean endTileIsActive =
         activeTiles.get(activeTiles.size() - 1).equals(tiles[end.getRow()][end.getCol()]);
@@ -260,31 +313,22 @@ public class NavigationComputerPuzzleController extends Puzzle {
     }
   }
 
+  /**
+   * Completes the puzzle. Updates the components to reflect completion and completes the puzzle.
+   */
   private void completePuzzle() {
+    // Update specific components to reflect completion
     state = State.COMPLETE;
     tilEnd.setImage(new Image("/images/puzzle/connector_end_green.png"));
     grpTiles.setDisable(true);
 
+    // Update the label to reflect completion
     lblWarning.setText("LOGS RESTORED");
     lblWarning.setVisible(true);
-    lblWarning.setStyle("-fx-text-fill: #58DD94;");
+    lblWarning.setStyle(lblWarning.getStyle() + "-fx-text-fill: #58DD94;");
+    lblWarning.setOpacity(1);
 
-    TaggedThread completeDelay =
-        new TaggedThread(
-            () -> {
-              try {
-                Thread.sleep(1500);
-              } catch (InterruptedException e) {
-                return;
-              }
-
-              Platform.runLater(
-                  () -> {
-                    setSolved();
-                    clearPuzzle(panBackground);
-                  });
-            });
-
-    completeDelay.start(); // Delay before setting solved
+    // Complete the puzzle
+    completePuzzle(this, panBackground);
   }
 }

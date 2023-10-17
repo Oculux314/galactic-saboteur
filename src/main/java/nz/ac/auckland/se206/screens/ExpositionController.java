@@ -73,7 +73,6 @@ public class ExpositionController implements Screen {
 
   /** Displays the continue button, allowing the user to proceed to the next screen. */
   private void showContinueButton() {
-    currentImageIndex = 0;
     btnContinue.setVisible(true); // Allow button to be clicked
 
     Timeline btnFadeTransition =

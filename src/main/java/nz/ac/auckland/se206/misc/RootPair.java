@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 
 /** Represents a root in the application, consisting of an FXML file / controller pair. */
 public class RootPair {
+  /** Common Controller interface to allow polymorphism. */
   public interface Controller {
     void onLoad();
   }

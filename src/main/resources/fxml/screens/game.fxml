@@ -22,6 +22,15 @@
                   <Image url="@../../images/space-station.png" />
                </image>
             </ImageView>
+            <Group fx:id="grpOtherButtons">
+               <children>
+                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#onRiddleClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/reactor-machine.png" />
+                     </image>
+                  </HighlightButton>
+               </children>
+            </Group>
             <Group fx:id="grpSuspectButtons">
                <children>
                   <HighlightButton fx:id="gptScientist" fitHeight="105.0" fitWidth="85.0" layoutX="167.0" layoutY="255.0" onMouseClicked="#onSuspectButtonClicked" preserveRatio="true">
@@ -70,15 +79,6 @@
                   </HighlightButton>
                </children>
             </Group>
-            <Group fx:id="grpOtherButtons">
-               <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#onRiddleClicked" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/reactor-machine.png" />
-                     </image>
-                  </HighlightButton>
-               </children>
-            </Group>
          </children>
       </Group>
       <fx:include fx:id="sidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
@@ -93,11 +93,6 @@
       </Group>
       <Group fx:id="misc">
          <children>
-            <ImageView fx:id="logo" fitHeight="80.0" fitWidth="80.0" layoutX="15.0" layoutY="15.0" onMouseEntered="#onLogoEntered" onMouseExited="#onLogoExited" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/logo-AI.png" />
-               </image>
-            </ImageView>
             <StateButton fx:id="btnTts" fitHeight="52.0" fitWidth="54.0" layoutX="725.0" layoutY="25.0" onMouseClicked="#onTtsClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/settings_buttons/off.png" />

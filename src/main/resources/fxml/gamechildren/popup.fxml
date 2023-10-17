@@ -2,16 +2,15 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import nz.ac.auckland.se206.components.AnimatedButton?>
 
-<Pane fx:id="panRoot" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.PopupController">
+<Group fx:id="grpRoot" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.PopupController">
    <children>
-      <Rectangle fx:id="recBackground" fill="#00000033" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
+      <Rectangle fx:id="recBackground" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
       <Group fx:id="grpPopup">
          <children>
             <Rectangle fx:id="recPopupShape" arcHeight="30.0" arcWidth="30.0" height="400.0" layoutX="140.0" layoutY="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="520.0">
@@ -56,4 +55,4 @@
          </children>
       </Group>
    </children>
-</Pane>
+</Group>

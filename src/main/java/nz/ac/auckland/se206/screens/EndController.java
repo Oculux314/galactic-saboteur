@@ -53,7 +53,7 @@ public class EndController implements Screen {
   public void showEndOnWin() {
     showEndScreen();
     setEndElements(
-        "expo1.jpg", "You win!", "CONGRATULATIONS\nYou Saved The Ship And Escaped!", "WHITE");
+        "expo1.jpg", "You win!", "CONGRATULATIONS\nYou Saved The Ship And Escaped!", "#58DD94");
   }
 
   /**

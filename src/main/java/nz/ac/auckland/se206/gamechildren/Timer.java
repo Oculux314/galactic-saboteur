@@ -30,7 +30,7 @@ public class Timer {
     this.timerThread = new TaggedThread(() -> run());
   }
 
-  /** Starts the countdown timer. */
+  /** Starts the amazing and cool countdown timer thread. */
   public void start() {
     timerThread.start();
   }

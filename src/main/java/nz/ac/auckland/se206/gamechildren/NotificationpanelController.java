@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -58,22 +59,25 @@ public class NotificationpanelController {
   }
 
   /**
-   * Called when logo is being hovered.
+   * Handles the action when the logo is entered.
    *
-   * @param event the mouse event
-   * @return
+   * @param event The mouse event.
    */
-  public void onMouseEntered() {
+  @FXML
+  public void onMouseEntered(MouseEvent event) {
     holdNotification = true;
+    System.out.println("Mouse entered");
   }
 
   /**
-   * Called when logo is exited.
+   * Handles the action when the logo is exited.
    *
-   * @param event the mouse event
+   * @param event The mouse event.
    */
-  public void onMouseExited() {
+  @FXML
+  public void onMouseExited(MouseEvent event) {
     holdNotification = false;
+    System.out.println("Mouse exited");
   }
 
   /**
@@ -100,13 +104,13 @@ public class NotificationpanelController {
     }
   }
 
-  /** Called when wanting to generate a notification that is not a time warning */
+  /** Called when wanting to generate a notification that is not a time warning. */
   public void generateNotification() {
     generateNotification(false, null);
   }
 
   /**
-   * Called when wanting to generate a notification with a specific message
+   * Called when wanting to generate a notification with a specific message.
    *
    * @param notification The notification message.
    */
@@ -149,7 +153,7 @@ public class NotificationpanelController {
    */
   private void buildText(String response) {
     Platform.runLater(
-        () -> { 
+        () -> {
           App.speak(response);
           gptTextLabel.setText(response);
           transition();
@@ -185,7 +189,7 @@ public class NotificationpanelController {
     pauseTransition.play();
   }
 
-  /** Holds the notification */
+  /** Holds the notification until it can be slid out. */
   private void hold() {
     // Create a timeline over 1 second to check if the notification should be held
     holdTimeline =
@@ -194,7 +198,8 @@ public class NotificationpanelController {
                 Duration.seconds(1),
                 event -> {
                   // If the notification should not be held, slide notification out
-                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished)) || (GameState.ttsInterrupted && GameState.ttsFinished)) {
+                  if ((!holdNotification && (!GameState.ttsEnabled || GameState.ttsFinished))
+                      || (GameState.ttsInterrupted && GameState.ttsFinished)) {
                     holdTimeline.stop();
                     performSlideOutTransition();
                   }
@@ -204,7 +209,7 @@ public class NotificationpanelController {
     holdTimeline.play();
   }
 
-  /** Performs the slide out transition. */
+  /** Performs the slide out transition for the notification panel. */
   private void performSlideOutTransition() {
     // Create the base for the slide-out animation
     recHide.setVisible(true);
@@ -236,7 +241,7 @@ public class NotificationpanelController {
   }
 
   /**
-   * Called when wanting to generate a notification that is time dependent
+   * Called when wanting to generate a notification that is time dependent.
    *
    * @param initialSeconds The initial seconds.
    * @param secondsLeft The seconds left.

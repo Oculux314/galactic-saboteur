@@ -49,7 +49,7 @@ public class GptPromptEngineering {
               + " hints of any form. Do not, for any reason, give the user any new hints or help"
               + " the user solve the game. Please respond in 18 words or fewer.";
     }
-    // return the prompt
+    // Give the updated prompt
     return prompt;
   }
 
@@ -233,31 +233,6 @@ public class GptPromptEngineering {
   }
 
   /**
-   * Retrieves the current game state based on the suspect the user is interacting with.
-   *
-   * @param job The role of the suspect the user is currently interacting with.
-   * @return The current game state information depending on the suspect's role.
-   */
-  public static String getGameState(String job) {
-    // get the game state depending on what suspect the user is talking to
-    String gameState = "";
-    if (job == "Spacey's mechanic") { // Reactor puzzle
-      gameState = GameState.reactorRoomGameState;
-    } else if (job == "Spacey's scientist") { // Lab puzzle
-      gameState = GameState.labRoomGameState;
-    } else if (job == "Spacey's captain") { // Navigation puzzle
-      gameState = GameState.controlRoomGameState;
-    }
-
-    // check if the user has solved the puzzle
-    if (gameState == GameState.puzzleSolvedMessage) {
-      gameState = gameState + whatOtherRoomToLookIn();
-    }
-    // return the game state
-    return gameState;
-  }
-
-  /**
    * Provides information about the next room the user should investigate based on which rooms
    * remain unsolved.
    *
@@ -326,6 +301,31 @@ public class GptPromptEngineering {
   }
 
   /**
+   * Retrieves the current game state based on the suspect the user is interacting with.
+   *
+   * @param job The role of the suspect the user is currently interacting with.
+   * @return The current game state information depending on the suspect's role.
+   */
+  public static String getGameState(String job) {
+    // get the game state depending on what suspect the user is talking to
+    String gameState = "";
+    if (job == "Spacey's mechanic") { // Reactor puzzle
+      gameState = GameState.reactorRoomGameState;
+    } else if (job == "Spacey's scientist") { // Lab puzzle
+      gameState = GameState.labRoomGameState;
+    } else if (job == "Spacey's captain") { // Navigation puzzle
+      gameState = GameState.controlRoomGameState;
+    }
+
+    // check if the user has solved the puzzle
+    if (gameState == GameState.puzzleSolvedMessage) {
+      gameState = gameState + whatOtherRoomToLookIn();
+    }
+    // give the updated value of the game state
+    return gameState;
+  }
+
+  /**
    * Retrieves the current game state information for the AI, based on the progress and actions of
    * the user.
    *
@@ -333,23 +333,23 @@ public class GptPromptEngineering {
    *     user.
    */
   private static String getGameState() {
-    // check if the user has found all three clues
-    if (GameState.cluesFound) {
+    if (!GameState.userWelcomed) {
+        // if the user hasn't been welcomed, welcome them
+        GameState.userWelcomed = true;
+      return "Formally welcome the user onto the command deck. Introduce the situation.";
+    } else if (GameState.cluesFound) {
+        // check if the user has found all three clues
       return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
-          + " the combination of clues I have found.";
+            + " the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
-      // check if the user has solved any of the puzzles
+        // check if the user has solved any of the puzzles
       return "I have solved a problem. Congratulate me.";
-    } else if (GameState.userWelcomed) {
-      // check if the user has been welcomed
-      return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
-          + " most critical element at each stage for them to examine.";
     } else {
-      // if the user hasn't been welcomed, welcome them
-      GameState.userWelcomed = true;
-      return "Formally welcome the user onto the command deck. Introduce the situation.";
+        // check if the user has been welcomed
+      return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
+            + " most critical element at each stage for them to examine.";
     }
   }
 }

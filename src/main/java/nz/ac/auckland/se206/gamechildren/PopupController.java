@@ -2,13 +2,19 @@ package nz.ac.auckland.se206.gamechildren;
 
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
 import nz.ac.auckland.se206.misc.RootPair;
@@ -22,6 +28,7 @@ import nz.ac.auckland.se206.screens.Screen;
  */
 public class PopupController implements RootPair.Controller {
 
+  /** An enumeration representing different popup names in the game. */
   public enum Name {
     RIDDLE,
     SUSPECT,
@@ -30,11 +37,21 @@ public class PopupController implements RootPair.Controller {
     PUZZLE_NAVIGATION
   }
 
-  @FXML private Pane panRoot;
+  private static final int TRANSITION_DURATION_BIG = 300;
+  private static final int TRANSITION_DURATION_SMALL = 300;
+  private static final int TRANSITION_DISTANCE_BIG = 750;
+  private static final int TRANSITION_DISTANCE_SMALL = 50;
+
+  @FXML private Rectangle recBackground;
+  @FXML private Group grpPopup;
   @FXML private Group grpContent;
+
   private Map<Name, RootPair> popups = new HashMap<>();
   private PuzzleLoader puzzleLoader;
   private Name currentPopup;
+
+  private Audio popupOpen = new Audio("popup_open.mp3");
+  private Audio popupClose = new Audio("popup_close.mp3");
 
   /**
    * Initializes the PopupController with the provided PuzzleLoader and loads all popups
@@ -45,7 +62,8 @@ public class PopupController implements RootPair.Controller {
   public void initialise(PuzzleLoader puzzleLoader) {
     this.puzzleLoader = puzzleLoader;
     loadAllPopups();
-    hide();
+    grpPopup.setVisible(false);
+    recBackground.setVisible(false);
   }
 
   @Override
@@ -94,26 +112,96 @@ public class PopupController implements RootPair.Controller {
    *
    * @param name the Name enum representing the popup's type.
    */
-  public void show(Name name) {
+  public void maximise(Name name) {
     setRoot(name);
-    show();
+    maximise();
     GameState.suspectsFound = true;
   }
 
-  /** Displays the current popup. */
-  private void show() {
-    panRoot.setVisible(true);
+  /** Displays and shows the animation transition for opening a pop-up. */
+  private void maximise() {
     getCurrentPopup().getController().onLoad();
+    grpPopup.setVisible(true);
+    recBackground.setVisible(true);
+    fadeBackgroundOpacityTo(0.4);
+    performMaximiseTransition();
+    popupOpen.play();
   }
 
-  private void hide() {
-    panRoot.setVisible(false);
+  /** Minimises the current popup. */
+  private void minimise() {
+    fadeBackgroundOpacityTo(0);
+    performMinimiseTransition();
+    popupClose.play();
+  }
+
+  /**
+   * Fades the background opacity to the given value.
+   *
+   * @param opacity the double representing the opacity value to fade to.
+   */
+  private void fadeBackgroundOpacityTo(double opacity) {
+    FadeTransition fade = new FadeTransition();
+    fade.setNode(recBackground);
+    fade.setDuration(Duration.millis(300));
+    fade.setToValue(opacity);
+
+    // Allow main game screen to be clicked
+    fade.setOnFinished(
+        event -> {
+          if (opacity == 0) {
+            recBackground.setVisible(false);
+          }
+        });
+
+    fade.play();
+  }
+
+  /** Performs the popup maximise transition. */
+  private void performMaximiseTransition() {
+    // Big UP motion
+    TranslateTransition bigMovement = new TranslateTransition();
+    bigMovement.setNode(grpPopup);
+    bigMovement.setDuration(Duration.millis(TRANSITION_DURATION_BIG));
+    bigMovement.setByY(-TRANSITION_DISTANCE_BIG);
+    bigMovement.setInterpolator(Interpolator.SPLINE(0, 1, 0.5, 1));
+
+    // Small DOWN motion
+    TranslateTransition smallMovement = new TranslateTransition();
+    smallMovement.setNode(grpPopup);
+    smallMovement.setDuration(Duration.millis(TRANSITION_DURATION_SMALL));
+    smallMovement.setByY(TRANSITION_DISTANCE_SMALL);
+    smallMovement.setInterpolator(Interpolator.SPLINE(0.5, 0, 0.5, 1));
+
+    bigMovement.setFromY(TRANSITION_DISTANCE_BIG - TRANSITION_DISTANCE_SMALL); // Below viewport
+    SequentialTransition transitionSequence = new SequentialTransition(bigMovement, smallMovement);
+    transitionSequence.play();
+  }
+
+  /** Performs the popup maximise transition. */
+  private void performMinimiseTransition() {
+    // Small UP motion
+    TranslateTransition smallMovement = new TranslateTransition();
+    smallMovement.setNode(grpPopup);
+    smallMovement.setDuration(Duration.millis(TRANSITION_DURATION_SMALL));
+    smallMovement.setByY(-TRANSITION_DISTANCE_SMALL);
+    smallMovement.setInterpolator(Interpolator.SPLINE(0.5, 0, 0.5, 1));
+
+    // Big DOWN motion
+    TranslateTransition bigMovement = new TranslateTransition();
+    bigMovement.setNode(grpPopup);
+    bigMovement.setDuration(Duration.millis(TRANSITION_DURATION_BIG));
+    bigMovement.setByY(TRANSITION_DISTANCE_BIG);
+    bigMovement.setInterpolator(Interpolator.SPLINE(0.5, 0, 1, 0));
+
+    SequentialTransition transitionSequence = new SequentialTransition(smallMovement, bigMovement);
+    transitionSequence.play();
   }
 
   /** Handles the action when the exit button of the popup is clicked. */
   @FXML
   private void onExitClicked() {
-    hide();
+    minimise();
     updateHighlightState();
   }
 
