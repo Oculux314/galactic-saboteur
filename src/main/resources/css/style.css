@@ -43,15 +43,15 @@
 
 
 #timeClueInformationLabel {
-  -fx-font-size: 14px;
+  -fx-font-size: 11px;
 }
 
 #whereClueInformationLabel {
-  -fx-font-size: 14px;
+  -fx-font-size: 11px;
 }
 
 #whoClueInformationLabel {
-  -fx-font-size: 14px;
+  -fx-font-size: 11px;
 }
 
 #lblTimer {
