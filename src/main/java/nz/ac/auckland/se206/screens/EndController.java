@@ -85,6 +85,8 @@ public class EndController implements Screen {
    */
   @FXML
   private void onReplayClicked() throws IOException {
+    winSound.stop();
+    loseSound.stop();
     App.restart();
   }
 }
