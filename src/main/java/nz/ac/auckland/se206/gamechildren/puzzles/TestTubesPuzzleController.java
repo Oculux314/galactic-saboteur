@@ -15,8 +15,8 @@ import nz.ac.auckland.se206.misc.GameState;
 /** Controller class for the Laboratory Test Tubes puzzle. */
 public class TestTubesPuzzleController extends Puzzle {
 
-  private static String colour;
-  private static String glitterColour;
+  private String colour;
+  private String glitterColour;
   private int incorrectCount = 0;
   private Map<AnimatedButton, Ellipse> buttonToEllipseMap;
   private Map<AnimatedButton, Boolean> selectedMap;
@@ -157,10 +157,14 @@ public class TestTubesPuzzleController extends Puzzle {
         selectedMap.put(clickedButton, true);
       }
     }
+    
+     int totalSelected = countSelected(selectedMap);
+      if (totalSelected == 3){
+        btnMixClicked();
+      } 
   }
 
-  @FXML
-  private void btnMixClicked(MouseEvent event) {
+  private void btnMixClicked() {
     // Check if the solution is correct
     boolean isSolutionCorrect = checkSolution();
 
