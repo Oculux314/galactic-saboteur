@@ -39,7 +39,7 @@
             <Label fx:id="timeClueInformationLabel" alignment="CENTER" layoutX="20.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
             <Label fx:id="whereClueInformationLabel" alignment="CENTER" layoutX="180.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
             <Label fx:id="whoClueInformationLabel" alignment="CENTER" layoutX="340.0" layoutY="75.0" prefHeight="19.0" prefWidth="133.0" stylesheets="@../../css/style.css" />
-            <ImageView disable="true" fitHeight="23.0" fitWidth="93.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="32.0" fitWidth="110.0" layoutX="34.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/sidepanel/lbltime.png" />
                </image>
