@@ -318,7 +318,7 @@ public class Assistant {
     String stringToCheck =
         narrationBox.getText().trim(); // Trim any leading or trailing white spaces
 
-    if (stringToCheck.toLowerCase().contains("hint")) { // Convert to lowercase before checking
+     if (stringToCheck.toLowerCase().contains("hint")|| stringToCheck.toLowerCase().contains("whiteboard") || stringToCheck.toLowerCase().contains("letters") || stringToCheck.toLowerCase().contains("calendar") || stringToCheck.toLowerCase().contains("keyboard") || stringToCheck.toLowerCase().contains("colour") || stringToCheck.toLowerCase().contains("glitter") || stringToCheck.toLowerCase().contains("tool") || stringToCheck.toLowerCase().contains("whiteboard") || stringToCheck.toLowerCase().contains("navigation") || stringToCheck.toLowerCase().contains("rotate") || stringToCheck.toLowerCase().contains("test")) { // Convert to lowercase before checking
       GameState.numberOfHintsAsked++;
     }
   }

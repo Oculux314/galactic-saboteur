@@ -167,7 +167,7 @@ public class GptPromptEngineering {
               + ". User's should solve it by decrpting every sybmol to a number. Each decrpted"
               + " number is the keyboard key you press to get the symol. For example to get the"
               + " symbol & you press number 7 key of the keyboards. The user then needs to enter"
-              + " the fully decrpted numeric number into the calculor and press submit.";
+              + " the fully decrpted numeric number into the calculator and press submit.";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_TOOLBOX) {
       // set the puzzle string to the reactor puzzle information if it's the toolbox puzzle
       puzzle =
