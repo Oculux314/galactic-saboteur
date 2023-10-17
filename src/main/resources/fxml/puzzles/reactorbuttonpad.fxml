@@ -96,12 +96,12 @@
                   </AnimatedButton>
                </children>
             </Group>
-            <AnimatedButton fx:id="btnClear" fitHeight="20.0" fitWidth="50.0" layoutX="184.0" layoutY="335.0" onMouseClicked="#onClearClicked" preserveRatio="true">
+            <AnimatedButton fx:id="btnClear" fitHeight="24.0" fitWidth="41.0" layoutX="188.0" layoutY="329.0" onMouseClicked="#onClearClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/btnClear.png" />
                </image>
             </AnimatedButton>
-            <AnimatedButton fx:id="btnSubmit" fitHeight="20.0" fitWidth="65.0" layoutX="245.0" layoutY="335.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
+            <AnimatedButton fx:id="btnSubmit" fitHeight="23.0" fitWidth="37.0" layoutX="270.0" layoutY="329.0" onMouseClicked="#onSubmitClicked" preserveRatio="true">
                <image>
                   <Image url="@../../images/btnAnswer.png" />
                </image>
