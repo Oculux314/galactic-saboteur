@@ -267,12 +267,12 @@ public class NavigationComputerPuzzleController extends Puzzle {
         new TaggedThread(
             () -> {
               while (state != State.COMPLETE && GameState.isRunning) {
-                lblWarning.setVisible(!lblWarning.isVisible()); // Flash warning until solved
+                lblWarning.setVisible(!lblWarning.isVisible()); // Flash warning & end until solved
+                tilEnd.setVisible(!tilEnd.isVisible());
 
                 if (state == State.UNCLICKED) {
                   // Flash start and end until tiles clicked
                   tilStart.setVisible(!tilStart.isVisible());
-                  tilEnd.setVisible(!tilEnd.isVisible());
                 }
 
                 try {
