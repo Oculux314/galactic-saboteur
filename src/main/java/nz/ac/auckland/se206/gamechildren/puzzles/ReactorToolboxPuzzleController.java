@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.MainController;
 import nz.ac.auckland.se206.screens.Screen;
@@ -39,6 +40,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private int boundminY = 150;
   private int boundmaxX = 360;
   private int boundmaxY = 390;
+
+  private Audio wrongAnswerSound = new Audio("puzzle_wrong.mp3");
 
   @FXML
   private void initialize() {
@@ -131,7 +134,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     if (allToolsInRectangles) {
       completePuzzle(this, panReactorToolbox);
     } else {
-      // If not, display a message
+      // If not, display a message & play sound
       lblVerdict.setText(
           "Incorrect"
               + System.lineSeparator()
@@ -139,6 +142,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
               + System.lineSeparator()
               + "try again");
       labelThread.start();
+      wrongAnswerSound.play();
     }
   }
 
