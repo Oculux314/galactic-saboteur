@@ -352,7 +352,8 @@ public class GameController implements Screen {
   @FXML
   private void onRestartClicked() throws IOException {
     // TODO: TEMPORARY DEV TOOL
-    App.replay();
+    App.stopTts();
+    App.restart();
   }
 
   /**

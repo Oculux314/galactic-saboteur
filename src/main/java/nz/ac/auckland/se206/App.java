@@ -164,13 +164,6 @@ public class App extends Application {
     resetScreens();
   }
 
-  public static void replay() {
-    stopTts();
-    killAllThreads();
-    GameState.reset();
-    resetScreens();
-  }
-
   /** Kills all active threads and resets the game over state. */
   private static void killAllThreads() {
     GameState.isGameover = true;
