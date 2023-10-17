@@ -98,22 +98,27 @@ public class GptPromptEngineering {
     if (job == "Spacey's mechanic") {
       // set the suspect information to the mechanic information
       suspectInformation =
-          "Your role: Mechanic on the Brain-e Explorer spaceship which is going to Mars. You love"
-              + " problem solving, suduko and all board games. You hate pinapple on pizza. Feel"
-              + " free to bring up these details in small-talk.";
+          "Your role: Mechanic on the Brain-e Explorer spaceship which is going to Mars. You are"
+              + " panicked because the ship's reactor is going to blow up. Use"
+              + " rough, simple, colloquial words. You love problem solving, suduko and all board"
+              + " games. You hate pinapple on pizza. Feel free to bring up these details in"
+              + " small-talk.";
     } else if (job == "Spacey's scientist") {
       // set the suspect information to the scientist information
       suspectInformation =
-          "Your role: Scientist on the Brain-e Explorer spaceship which is going to Mars. You love"
-              + " atoms and chemsitry, star gazing and love exercising your brain. You don't like"
-              + " mushrooms. Feel free to bring up these details in small-talk.";
+          "Your role: Scientist on the Brain-e Explorer spaceship. You are panicked becaused the"
+              + " ship's reactor  is going to blow up. Use technical and"
+              + " proper words. You love atoms and chemsitry, star gazing and love exercising your"
+              + " brain. You don't like mushrooms. Feel free to bring up these details in"
+              + " small-talk.";
     } else if (job == "Spacey's captain") {
       // set the suspect information to the captain information
       suspectInformation =
-          "Your role: Captain on the Brain-e Explorer which is going to Mars. You are amazing at"
-              + " cooking and love to eat pizza. You are scared that the reactor is going to"
-              + " explode, but you're putting on a brave face for the team. Feel free to bring up"
-              + " these details in small-talk.";
+          "Your role: Captain on the Brain-e Explorer which is going to Mars but the ship's reactor"
+              + " is going to blow up so you're a bit panicked. Your responses should be "
+              + " confident. You are amazing at cooking and love to eat pizza. You"
+              + " are scared that the reactor is going to explode, but you're putting on a brave"
+              + " face for the team. Feel free to bring up these details in small-talk.";
     }
     return suspectInformation;
   }
@@ -167,7 +172,7 @@ public class GptPromptEngineering {
               + ". User's should solve it by decrpting every sybmol to a number. Each decrpted"
               + " number is the keyboard key you press to get the symol. For example to get the"
               + " symbol & you press number 7 key of the keyboards. The user then needs to enter"
-              + " the fully decrpted numeric number into the calculor and press submit.";
+              + " the fully decrpted numeric number into the calculator and press submit.";
     } else if (GameState.reactorPuzzle == PuzzleName.REACTOR_TOOLBOX) {
       // set the puzzle string to the reactor puzzle information if it's the toolbox puzzle
       puzzle =
@@ -334,22 +339,22 @@ public class GptPromptEngineering {
    */
   private static String getGameState() {
     if (!GameState.userWelcomed) {
-        // if the user hasn't been welcomed, welcome them
-        GameState.userWelcomed = true;
+      // if the user hasn't been welcomed, welcome them
+      GameState.userWelcomed = true;
       return "Formally welcome the user onto the command deck. Introduce the situation.";
     } else if (GameState.cluesFound) {
-        // check if the user has found all three clues
+      // check if the user has found all three clues
       return "I have found all three clues. Instruct me to deactivate the reactor meltdown using"
-            + " the combination of clues I have found.";
+          + " the combination of clues I have found.";
     } else if (GameState.reactorPuzzleSolved
         || GameState.navigationPuzzleSolved
         || GameState.laboratoryPuzzleSolved) {
-        // check if the user has solved any of the puzzles
+      // check if the user has solved any of the puzzles
       return "I have solved a problem. Congratulate me.";
     } else {
-        // check if the user has been welcomed
+      // check if the user has been welcomed
       return "Tell me I can pan and zoom on their helmet overlay, and that you will highlight the"
-            + " most critical element at each stage for them to examine.";
+          + " most critical element at each stage for them to examine.";
     }
   }
 }
