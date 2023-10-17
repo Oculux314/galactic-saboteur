@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Ellipse;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 
 /** Controller class for the Laboratory Test Tubes puzzle. */
@@ -20,6 +21,10 @@ public class TestTubesPuzzleController extends Puzzle {
   private int incorrectCount = 0;
   private Map<AnimatedButton, Ellipse> buttonToEllipseMap;
   private Map<AnimatedButton, Boolean> selectedMap;
+
+  private Audio wrongAnswerSound = new Audio("puzzle_wrong.mp3");
+  private Audio pickUpSound = new Audio("testtube_up.mp3");
+  private Audio putDownSound = new Audio("testtube_down.mp3");
 
   @FXML private Label instructions;
   @FXML private Ellipse yellowChosen;
@@ -150,18 +155,22 @@ public class TestTubesPuzzleController extends Puzzle {
     // Toggle the visibility of the corresponding ellipse and update selected map
     if (correspondingEllipse != null) {
       if (correspondingEllipse.isVisible()) {
+        // Put down
         correspondingEllipse.setVisible(false);
         selectedMap.put(clickedButton, false);
+        putDownSound.play();
       } else {
+        // Pick up
         correspondingEllipse.setVisible(true);
         selectedMap.put(clickedButton, true);
+        pickUpSound.play();
       }
     }
-    
-     int totalSelected = countSelected(selectedMap);
-      if (totalSelected == 3){
-        btnMixClicked();
-      } 
+
+    int totalSelected = countSelected(selectedMap);
+    if (totalSelected == 3) {
+      btnMixClicked();
+    }
   }
 
   private void btnMixClicked() {
@@ -180,6 +189,7 @@ public class TestTubesPuzzleController extends Puzzle {
     } else {
       // Increment the incorrect count
       incorrectCount++;
+      wrongAnswerSound.play();
 
       // Display different messages depending on the amount of incorrect attempts
       if (incorrectCount % 2 == 1) {

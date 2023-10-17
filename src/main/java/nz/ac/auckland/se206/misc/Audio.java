@@ -8,14 +8,6 @@ import nz.ac.auckland.se206.App;
 /** Represents a sound file that can be played. This class is immutable. */
 public class Audio {
 
-  MediaPlayer mediaPlayer;
-
-  /** Constructs a new Audio object with the given audio file name. */
-  public Audio(String fileName) {
-    mediaPlayer = makeMediaPlayer(fileName);
-    preload();
-  }
-
   /** Constructs a new MediaPlayer object with the given audio file name. */
   private static MediaPlayer makeMediaPlayer(String fileName) {
     Media sound;
@@ -28,15 +20,35 @@ public class Audio {
     return new MediaPlayer(sound);
   }
 
-  /** Preload it for being played properly. This ensures the timing is correct on the first execution */
+  private MediaPlayer mediaPlayer;
+
+  /** Constructs a new Audio object with the given audio file name. */
+  public Audio(String fileName) {
+    mediaPlayer = makeMediaPlayer(fileName);
+    preload();
+  }
+
+  /**
+   * Preload it for being played properly. This ensures the timing is correct on the first
+   * execution.
+   */
   private void preload() {
     mediaPlayer.play();
     mediaPlayer.stop();
   }
 
-  /** Plays the sound file. */
+  /**
+   * Plays the sound file. If the sound file is already playing, it will be stopped and restarted.
+   */
   public void play() {
     mediaPlayer.stop();
     mediaPlayer.play();
+  }
+
+  /**
+   * Stops the sound file. This is necessary to ensure the sound file is played from the beginning.
+   */
+  public void stop() {
+    mediaPlayer.stop();
   }
 }
