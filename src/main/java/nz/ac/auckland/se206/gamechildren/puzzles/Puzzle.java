@@ -152,7 +152,7 @@ public class Puzzle implements RootPair.Controller {
     TranslateTransition translate = new TranslateTransition();
     translate.setNode(banner);
     translate.setDuration(Duration.millis(200));
-    translate.setInterpolator(Interpolator.SPLINE(0,1,0.5,1));
+    translate.setInterpolator(Interpolator.SPLINE(0, 1, 0.5, 1));
     translate.setFromY(500);
     translate.setToY(140);
 

@@ -157,11 +157,11 @@ public class TestTubesPuzzleController extends Puzzle {
         selectedMap.put(clickedButton, true);
       }
     }
-    
-     int totalSelected = countSelected(selectedMap);
-      if (totalSelected == 3){
-        btnMixClicked();
-      } 
+
+    int totalSelected = countSelected(selectedMap);
+    if (totalSelected == 3) {
+      btnMixClicked();
+    }
   }
 
   private void btnMixClicked() {

@@ -130,7 +130,7 @@ public class PopupController implements RootPair.Controller {
     performMaximiseTransition();
   }
 
-  /** Minimises the current popup. */
+  /** Minimises the current popup. Also plays a sound and performs a transition. */
   private void minimise() {
     fadeBackgroundOpacityTo(0);
     performMinimiseTransition();
