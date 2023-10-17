@@ -12,7 +12,7 @@
       <Group fx:id="grpTextArea" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" style="-fx-font-size: 15;">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#131d23" height="60.0" layoutX="-434.0" layoutY="10.0" stroke="#58dd94" strokeType="INSIDE" width="412.0" />
-            <Label fx:id="gptTextLabel" contentDisplay="CENTER" layoutX="-412.0" layoutY="12.0" prefHeight="56.0" prefWidth="390.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 15;" text="Hello" wrapText="true" />
+            <Label fx:id="gptTextLabel" contentDisplay="CENTER" layoutX="-412.0" layoutY="12.0" prefHeight="56.0" prefWidth="390.0" style="-fx-text-fill: #FFFFFF; -fx-font-size: 14;" text="Hello" wrapText="true" />
             <Label layoutX="-65.0" layoutY="48.0" style="-fx-font-size: 12;" text="Ship AI" />
          </children>
       </Group>

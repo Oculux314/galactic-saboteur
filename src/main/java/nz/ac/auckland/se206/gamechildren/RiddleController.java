@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.gamechildren;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.AnimatedButton;
@@ -30,6 +32,8 @@ public class RiddleController implements RootPair.Controller {
   @FXML private StateButton btnWhen;
   @FXML private AnimatedButton btnAnswer;
   @FXML private TextArea gptTextArea;
+  @FXML private Label lblNote;
+  @FXML private Group grpAnswer;
 
   private ChatCompletionRequest riddleChatCompletionRequest;
 
@@ -71,9 +75,7 @@ public class RiddleController implements RootPair.Controller {
   @Override
   public void onLoad() {
     if (GameState.cluesFound) {
-      enableButton();
-    } else {
-      disableButton(); // To prevent accidentally submitting
+      showGroupAnswer();
     }
   }
 
@@ -158,13 +160,9 @@ public class RiddleController implements RootPair.Controller {
     runThread.start();
   }
 
-  /** Disables the answer button, preventing accidental submissions. */
-  public void disableButton() {
-    btnAnswer.setDisable(true);
-  }
-
-  /** Enables the answer button to allow users to submit their answer. */
-  public void enableButton() {
-    btnAnswer.setDisable(false);
+  /** Shows the group answer once the user has found all of the clues. */
+  private void showGroupAnswer() {
+    grpAnswer.setOpacity(1);
+    lblNote.setVisible(false);
   }
 }
