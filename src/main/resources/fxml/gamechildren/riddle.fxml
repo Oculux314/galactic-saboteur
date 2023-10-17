@@ -19,9 +19,10 @@
             <Image url="@../../images/reactor-backdrop.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="-2.0" prefHeight="265.0" prefWidth="500.0" stylesheets="@../../css/style.css">
+      <AnchorPane layoutY="-2.0" prefHeight="214.0" prefWidth="480.0" stylesheets="@../../css/style.css">
          <children>
-            <TextArea fx:id="gptTextArea" editable="false" layoutX="104.0" layoutY="71.0" prefHeight="130.0" prefWidth="272.0" />
+            <TextArea editable="false" layoutX="104.0" layoutY="71.0" prefHeight="130.0" prefWidth="272.0" />
+            <Label fx:id="lblRiddle" alignment="CENTER" contentDisplay="CENTER" layoutX="104.0" layoutY="71.0" prefHeight="130.0" prefWidth="272.0" style="-fx-text-fill: BLACK; -fx-font-size: 14;" text="Loading..." textAlignment="CENTER" />
             <Label fx:id="lblSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="44.0" prefWidth="480.0" style="-fx-text-fill: white; -fx-background-color: #00000088;" text="REACTOR" textAlignment="CENTER" />
          </children>
       </AnchorPane>
