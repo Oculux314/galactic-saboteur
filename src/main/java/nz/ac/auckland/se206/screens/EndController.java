@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 
 /**
@@ -16,6 +17,9 @@ public class EndController implements Screen {
 
   @FXML private Label lblEnd;
   @FXML private ImageView imgEnd;
+
+  private Audio winSound = new Audio("end_win.mp3");
+  private Audio loseSound = new Audio("end_lose.mp3");
 
   /**
    * Executes any necessary actions upon loading the end screen. This method does nothing in the
@@ -54,6 +58,7 @@ public class EndController implements Screen {
     showEndScreen();
     setEndElements(
         "expo1.jpg", "You win!", "CONGRATULATIONS\nYou Saved The Ship And Escaped!", "#58DD94");
+    winSound.play();
   }
 
   /**
@@ -63,12 +68,14 @@ public class EndController implements Screen {
   public void showEndOnLose() {
     showEndScreen();
     setEndElements("gameover.png", "Gameover.", "GAMEOVER\nWrong Keycard Combination.", "RED");
+    loseSound.play();
   }
 
   /** Displays the end screen when the reactor meltdown is complete due to a timeout. */
   public void showEndOnTimeout() {
     showEndScreen();
     setEndElements("gameover.png", "Gameover.", "GAMEOVER\nReactor meltdown complete.", "RED");
+    loseSound.play();
   }
 
   /**
@@ -78,6 +85,8 @@ public class EndController implements Screen {
    */
   @FXML
   private void onReplayClicked() throws IOException {
+    winSound.stop();
+    loseSound.stop();
     App.restart();
   }
 }

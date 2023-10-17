@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.components.AnimatedButton;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
@@ -33,6 +34,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
 
   private Map<AnimatedButton, String> buttonToNumberMap;
   private String randomNumber;
+  private Audio wrongAnswerSound = new Audio("puzzle_wrong.mp3");
 
   @FXML
   private void initialize() {
@@ -134,6 +136,7 @@ public class ReactorButtonPuzzleController extends Puzzle {
     if (lblAnswer.getText().equals(randomNumber.toString())) {
       completePuzzle(this, panReactorButtonpad);
     } else {
+      wrongAnswerSound.play();
       lblVerdict.setText("Incorrect :(");
       labelThread.start();
     }

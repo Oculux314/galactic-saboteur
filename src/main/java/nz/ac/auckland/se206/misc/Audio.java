@@ -29,7 +29,8 @@ public class Audio {
   }
 
   /**
-   * Preload it for being played properly. This ensures the timing is correct on the first execution
+   * Preload it for being played properly. This ensures the timing is correct on the first
+   * execution.
    */
   private void preload() {
     mediaPlayer.play();
@@ -42,5 +43,12 @@ public class Audio {
   public void play() {
     mediaPlayer.stop();
     mediaPlayer.play();
+  }
+
+  /**
+   * Stops the sound file. This is necessary to ensure the sound file is played from the beginning.
+   */
+  public void stop() {
+    mediaPlayer.stop();
   }
 }

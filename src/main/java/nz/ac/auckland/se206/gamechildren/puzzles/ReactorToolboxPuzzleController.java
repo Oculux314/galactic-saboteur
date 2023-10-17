@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.TaggedThread;
 import nz.ac.auckland.se206.screens.MainController;
 import nz.ac.auckland.se206.screens.Screen;
@@ -40,6 +41,10 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private int boundmaxX = 360;
   private int boundmaxY = 390;
 
+  private Audio wrongAnswerSound = new Audio("puzzle_wrong.mp3");
+  private Audio pickUpSound = new Audio("toolbox_pickup.mp3");
+  private Audio putDownSound = new Audio("toolbox_putdown.mp3");
+
   @FXML
   private void initialize() {
     addToolsAndRectangles();
@@ -61,6 +66,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
         selectedNode.toFront();
         pressedX = event.getSceneX();
         pressedY = event.getSceneY();
+        pickUpSound.play();
       }
     }
   }
@@ -104,9 +110,15 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    */
   @FXML
   private void onMouseReleased(MouseEvent event) {
+    if (selectedNode != null) {
+      putDownSound.play();
+    }
+
     selectedNode = null;
     Node source = (Node) event.getSource();
     snapToPosition(source);
+
+    // Check done
     if (isRectanglesFilled()) {
       checkCorrect();
     }
@@ -131,7 +143,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
     if (allToolsInRectangles) {
       completePuzzle(this, panReactorToolbox);
     } else {
-      // If not, display a message
+      // If not, display a message & play sound
       lblVerdict.setText(
           "Incorrect"
               + System.lineSeparator()
@@ -139,6 +151,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
               + System.lineSeparator()
               + "try again");
       labelThread.start();
+      wrongAnswerSound.play();
     }
   }
 
