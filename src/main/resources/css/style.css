@@ -36,16 +36,22 @@
   -fx-text-fill: -icon-grey;
 }
 
+#lblSubtitle2 {
+  -fx-font-size: 17px;
+  -fx-text-fill: -icon-grey;
+}
+
+
 #timeClueInformationLabel {
-  -fx-font-size: 14px;
+  -fx-font-size: 11px;
 }
 
 #whereClueInformationLabel {
-  -fx-font-size: 14px;
+  -fx-font-size: 11px;
 }
 
 #whoClueInformationLabel {
-  -fx-font-size: 14px;
+  -fx-font-size: 11px;
 }
 
 #lblTimer {

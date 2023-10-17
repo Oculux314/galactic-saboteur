@@ -295,6 +295,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
     if (state == State.UNCLICKED) {
       state = State.CLICKED;
       tilStart.setVisible(true);
+      tilEnd.setVisible(true);
     }
 
     rotateSound.play();
