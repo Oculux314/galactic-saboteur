@@ -22,6 +22,15 @@
                   <Image url="@../../images/space-station.png" />
                </image>
             </ImageView>
+            <Group fx:id="grpOtherButtons">
+               <children>
+                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#onRiddleClicked" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/reactor-machine.png" />
+                     </image>
+                  </HighlightButton>
+               </children>
+            </Group>
             <Group fx:id="grpSuspectButtons">
                <children>
                   <HighlightButton fx:id="gptScientist" fitHeight="105.0" fitWidth="85.0" layoutX="167.0" layoutY="255.0" onMouseClicked="#onSuspectButtonClicked" preserveRatio="true">
@@ -66,15 +75,6 @@
                   <HighlightButton fx:id="btnNavigationComputer" fitHeight="45.0" fitWidth="68.0" layoutX="630.0" layoutY="245.0" onMouseClicked="#onPuzzleButtonClicked">
                      <image>
                         <Image url="@../../images/computer.png" />
-                     </image>
-                  </HighlightButton>
-               </children>
-            </Group>
-            <Group fx:id="grpOtherButtons">
-               <children>
-                  <HighlightButton fx:id="btnReactor" fitHeight="159.0" fitWidth="92.0" layoutX="353.0" layoutY="208.0" onMouseClicked="#onRiddleClicked" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/reactor-machine.png" />
                      </image>
                   </HighlightButton>
                </children>
