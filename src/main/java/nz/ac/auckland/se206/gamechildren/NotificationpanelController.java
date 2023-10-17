@@ -19,6 +19,7 @@ import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.TaggedThread;
 
@@ -42,6 +43,7 @@ public class NotificationpanelController {
   private boolean isTransitioning = false;
   private boolean holdNotification = false;
   private Timeline holdTimeline;
+  private Audio timeWarningSound = new Audio("time.mp3");
 
   /**
    * Initializes the NotificationpanelController by setting up the chat completion request and the
@@ -92,6 +94,7 @@ public class NotificationpanelController {
     // If the notification is a time warning, get the time warning message
     if (timeWarning) {
       newNotification = GptPromptEngineering.getTimeWarning(timeLeft);
+      timeWarningSound.play();
     } else {
       newNotification = GptPromptEngineering.getNotification();
     }
