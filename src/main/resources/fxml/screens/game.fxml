@@ -84,7 +84,7 @@
       <fx:include fx:id="sidePanel" layoutY="500.0" source="../gamechildren/sidepanel.fxml" />
       <fx:include fx:id="notificationPanel" layoutX="15.0" layoutY="15.0" source="../gamechildren/notificationpanel.fxml" />
       <fx:include fx:id="popup" source="../gamechildren/popup.fxml" />
-      <Group fx:id="grpDevTools" layoutX="564.0" layoutY="250.0">
+      <Group fx:id="grpDevTools" layoutX="564.0" layoutY="250.0" visible="false">
          <children>
             <Button fx:id="btnRestart" layoutX="162.0" layoutY="86.0" mnemonicParsing="false" onAction="#onRestartClicked" prefWidth="60.0" text="Restart" />
             <Button fx:id="btnEnd" layoutX="162.0" layoutY="50.0" mnemonicParsing="false" onAction="#onEndClicked" prefWidth="60.0" text="End" />

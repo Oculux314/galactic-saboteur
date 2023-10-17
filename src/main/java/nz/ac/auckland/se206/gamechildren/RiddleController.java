@@ -31,7 +31,7 @@ public class RiddleController implements RootPair.Controller {
   @FXML private StateButton btnWhere;
   @FXML private StateButton btnWhen;
   @FXML private AnimatedButton btnAnswer;
-  @FXML private TextArea gptTextArea;
+  @FXML private Label lblRiddle;
   @FXML private Label lblNote;
   @FXML private Group grpAnswer;
 
@@ -150,7 +150,7 @@ public class RiddleController implements RootPair.Controller {
               try {
                 // run the gpt
                 ChatMessage response = runGpt(msg, riddleChatCompletionRequest);
-                gptTextArea.appendText(response.getContent());
+                lblRiddle.setText(response.getContent());
               } catch (ApiProxyException e) {
                 e.printStackTrace();
               }
