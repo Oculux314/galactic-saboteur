@@ -14,7 +14,7 @@
             <Image url="@../../images/backgroundsettings.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="24.0" prefHeight="68.0" prefWidth="800.0" style="-fx-text-fill: white; -fx-background-color: #00000088;" text="SETTINGS" textAlignment="CENTER" />
+      <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="24.0" prefHeight="68.0" prefWidth="800.0" style="-fx-text-fill: white; -fx-background-color: #00000099;" text="SETTINGS" textAlignment="CENTER" />
       <AnimatedButton fx:id="btnBack" fitHeight="59.0" fitWidth="59.0" layoutX="37.0" layoutY="29.0" onMouseClicked="#onBackClicked">
          <image>
             <Image url="@../../images/back.png" />
