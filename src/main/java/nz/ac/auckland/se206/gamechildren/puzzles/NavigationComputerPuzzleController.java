@@ -206,9 +206,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
     checkWinConditions();
   }
 
-  /**
-   * Clears the active tiles in the puzzle (adding in extra).
-   */
+  /** Clears the active tiles in the puzzle (adding in extra). */
   private void clearActiveTiles() {
     for (ComputerTile tile : activeTiles) {
       tile.setActive(false);
@@ -261,9 +259,7 @@ public class NavigationComputerPuzzleController extends Puzzle {
     return Orientation.values()[(direction.ordinal() + 2) % 4];
   }
 
-  /**
-   * Starts the flashing of the warning and start tiles (adding in extra).
-   */
+  /** Starts the flashing of the warning and start tiles (adding in extra). */
   private void startFlashing() {
     TaggedThread flashManager =
         new TaggedThread(
@@ -328,7 +324,8 @@ public class NavigationComputerPuzzleController extends Puzzle {
     // Update the label to reflect completion
     lblWarning.setText("LOGS RESTORED");
     lblWarning.setVisible(true);
-    lblWarning.setStyle("-fx-text-fill: #58DD94;");
+    lblWarning.setStyle(lblWarning.getStyle() + "-fx-text-fill: #58DD94;");
+    lblWarning.setOpacity(1);
 
     // Complete the puzzle
     completePuzzle(this, panBackground);

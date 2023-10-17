@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.gamechildren.puzzles;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -111,6 +113,11 @@ public class Puzzle implements RootPair.Controller {
     fade.play();
   }
 
+  /**
+   * Creates a banner to be displayed when a puzzle is solved.
+   *
+   * @return the banner to be displayed.
+   */
   private Label createBanner() {
     Label banner = new Label("Puzzle Complete");
 
@@ -134,10 +141,24 @@ public class Puzzle implements RootPair.Controller {
     return banner;
   }
 
+  /**
+   * Displays the banner on the screen.
+   *
+   * @param banner the banner to be displayed.
+   * @param root the root pane of the puzzle.
+   */
   private void displayBanner(Label banner, Pane root) {
-    banner.setLayoutY(140);
+    // Slide up from bottom of viewport
+    TranslateTransition translate = new TranslateTransition();
+    translate.setNode(banner);
+    translate.setDuration(Duration.millis(200));
+    translate.setInterpolator(Interpolator.SPLINE(0,1,0.5,1));
+    translate.setFromY(500);
+    translate.setToY(140);
+
     root.getChildren().add(banner);
     banner.setVisible(true);
+    translate.play();
   }
 
   /**
