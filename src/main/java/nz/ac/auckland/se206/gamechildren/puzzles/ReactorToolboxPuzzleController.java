@@ -42,6 +42,8 @@ public class ReactorToolboxPuzzleController extends Puzzle {
   private int boundmaxY = 390;
 
   private Audio wrongAnswerSound = new Audio("puzzle_wrong.mp3");
+  private Audio pickUpSound = new Audio("toolbox_pickup.mp3");
+  private Audio putDownSound = new Audio("toolbox_putdown.mp3");
 
   @FXML
   private void initialize() {
@@ -64,6 +66,7 @@ public class ReactorToolboxPuzzleController extends Puzzle {
         selectedNode.toFront();
         pressedX = event.getSceneX();
         pressedY = event.getSceneY();
+        pickUpSound.play();
       }
     }
   }
@@ -107,9 +110,15 @@ public class ReactorToolboxPuzzleController extends Puzzle {
    */
   @FXML
   private void onMouseReleased(MouseEvent event) {
+    if (selectedNode != null) {
+      putDownSound.play();
+    }
+
     selectedNode = null;
     Node source = (Node) event.getSource();
     snapToPosition(source);
+
+    // Check done
     if (isRectanglesFilled()) {
       checkCorrect();
     }

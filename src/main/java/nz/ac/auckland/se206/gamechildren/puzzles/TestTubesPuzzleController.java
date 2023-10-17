@@ -21,7 +21,10 @@ public class TestTubesPuzzleController extends Puzzle {
   private int incorrectCount = 0;
   private Map<AnimatedButton, Ellipse> buttonToEllipseMap;
   private Map<AnimatedButton, Boolean> selectedMap;
+
   private Audio wrongAnswerSound = new Audio("puzzle_wrong.mp3");
+  private Audio pickUpSound = new Audio("testtube_up.mp3");
+  private Audio putDownSound = new Audio("testtube_down.mp3");
 
   @FXML private Label instructions;
   @FXML private Ellipse yellowChosen;
@@ -152,11 +155,15 @@ public class TestTubesPuzzleController extends Puzzle {
     // Toggle the visibility of the corresponding ellipse and update selected map
     if (correspondingEllipse != null) {
       if (correspondingEllipse.isVisible()) {
+        // Put down
         correspondingEllipse.setVisible(false);
         selectedMap.put(clickedButton, false);
+        putDownSound.play();
       } else {
+        // Pick up
         correspondingEllipse.setVisible(true);
         selectedMap.put(clickedButton, true);
+        pickUpSound.play();
       }
     }
 
