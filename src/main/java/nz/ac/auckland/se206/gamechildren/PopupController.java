@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gamechildren.puzzles.Puzzle;
 import nz.ac.auckland.se206.gamechildren.puzzles.PuzzleLoader;
+import nz.ac.auckland.se206.gamechildren.suspects.SuspectController;
 import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.GameState.HighlightState;
@@ -45,6 +46,7 @@ public class PopupController implements RootPair.Controller {
   @FXML private Rectangle recBackground;
   @FXML private Group grpPopup;
   @FXML private Group grpContent;
+  @FXML private SuspectController suspectController;
 
   private Map<Name, RootPair> popups = new HashMap<>();
   private PuzzleLoader puzzleLoader;
@@ -78,6 +80,21 @@ public class PopupController implements RootPair.Controller {
     load(Name.PUZZLE_REACTOR, puzzleLoader.getReactorPuzzle());
     load(Name.PUZZLE_LABORATORY, puzzleLoader.getLaboratoryPuzzle());
     load(Name.PUZZLE_NAVIGATION, puzzleLoader.getNavigationPuzzle());
+  }
+
+  /**
+   * Retrieves the SuspectController associated with the SUSPECT popup.
+   *
+   * <p>This method fetches the SuspectController object associated with the SUSPECT popup from the
+   * popups map and returns it. The popups map is assumed to be a map containing different popups
+   * with their respective controllers. If the specified popup or controller is not found in the
+   * map, this method may return null.
+   *
+   * @return the SuspectController object associated with the SUSPECT popup if found in the popups
+   *     map; otherwise, it returns null.
+   */
+  public SuspectController getSuspectController() {
+    return (SuspectController) popups.get(Name.SUSPECT).getController();
   }
 
   private void load(Name name, RootPair popup) {

@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import nz.ac.auckland.se206.components.StateButton?>
+<?import nz.ac.auckland.se206.components.AnimatedButton?>
 
 <Pane fx:id="panSuspect" prefHeight="360.0" prefWidth="480.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.suspects.SuspectController">
    <children>
@@ -22,22 +22,22 @@
          <font>
             <Font size="16.0" />
          </font></TextArea>
-      <ImageView fx:id="imgSuspect" fitHeight="313.0" fitWidth="103.0" layoutX="20.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgSuspect" fitHeight="292.0" fitWidth="131.0" layoutX="30.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/suspects/captain.png" />
          </image>
       </ImageView>
       <Polygon fill="WHITE" layoutX="137.0" layoutY="121.0" points="-17.17962646484375, -6.2646026611328125, 14.5, -20.600006103515625, 14.5, -53.399993896484375" stroke="#aba7a700" strokeType="INSIDE" strokeWidth="0.8" />
       <Polyline fill="#80ff0000" layoutX="109.0" layoutY="94.0" points="42.5, 7.5044097900390625, 11.66998291015625, 20.233596801757812, 42.5, -26.0" stroke="#bfbcbc" strokeType="INSIDE" />
-      <StateButton fx:id="btnHints" fitHeight="47.0" fitWidth="172.0" layoutX="221.0" layoutY="229.0" onMouseClicked="#onHintButtonClick" preserveRatio="true">
-         <image>
-            <Image url="@../../images/btnhint.png" />
-         </image>
-      </StateButton>
-      <ImageView fx:id="thinkingImage" fitHeight="73.0" fitWidth="109.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="thinkingImage" fitHeight="73.0" fitWidth="109.0" layoutX="25.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../images/questionmarks.png" />
          </image>
       </ImageView>
+      <AnimatedButton fx:id="btnHints" fitHeight="47.0" fitWidth="114.0" layoutX="243.0" layoutY="232.0" onMouseClicked="#onHintButtonClick">
+         <image>
+            <Image url="@../../images/btnhint.png" />
+         </image>
+      </AnimatedButton>
    </children>
 </Pane>

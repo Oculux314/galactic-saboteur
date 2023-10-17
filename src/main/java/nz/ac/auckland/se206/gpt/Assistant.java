@@ -309,6 +309,15 @@ public class Assistant {
         () -> {
           renderNarrationBox();
           increaseNumberOfHintsAskedIfHintGiven();
+          if (GameState.numberOfHintsAsked > 4 && GameState.difficulty == "medium") {
+            System.out.println("changing difficulty");
+            GameState.difficulty = "hard";
+            getGameController()
+                .getPopupController()
+                .getSuspectController()
+                .getHintBtn()
+                .setDisable(true);
+          }
           getGameController().updateHintText();
         });
   }
@@ -329,6 +338,7 @@ public class Assistant {
         || stringToCheck.toLowerCase().contains("whiteboard")
         || stringToCheck.toLowerCase().contains("navigation")
         || stringToCheck.toLowerCase().contains("rotate")
+        || stringToCheck.toLowerCase().contains("counter")
         || stringToCheck.toLowerCase().contains("test")) { // Convert to lowercase before checking
       GameState.numberOfHintsAsked++;
     }

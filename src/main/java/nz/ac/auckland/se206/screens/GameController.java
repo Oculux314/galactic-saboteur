@@ -418,4 +418,5 @@ public class GameController implements Screen {
     btnTts.addState("on", "settings_buttons/on.png");
     btnTts.setState(ttsEnabled);
   }
+
 }
