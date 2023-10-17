@@ -162,7 +162,6 @@ public class App extends Application {
     killAllThreads();
     GameState.reset();
     resetScreens();
-    stopTts();
   }
 
   /** Kills all active threads and resets the game over state. */
