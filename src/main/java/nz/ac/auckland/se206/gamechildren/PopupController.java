@@ -121,11 +121,13 @@ public class PopupController implements RootPair.Controller {
   /** Displays and shows the animation transition for opening a pop-up. */
   private void maximise() {
     getCurrentPopup().getController().onLoad();
+    popupOpen.play();
+
+    // Animation
     grpPopup.setVisible(true);
     recBackground.setVisible(true);
     fadeBackgroundOpacityTo(0.4);
     performMaximiseTransition();
-    popupOpen.play();
   }
 
   /** Minimises the current popup. */

@@ -10,7 +10,7 @@
 
 <Group fx:id="grpRoot" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.gamechildren.PopupController">
    <children>
-      <Rectangle fx:id="recBackground" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
+      <Rectangle fx:id="recBackground" height="600.0" opacity="0.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
       <Group fx:id="grpPopup">
          <children>
             <Rectangle fx:id="recPopupShape" arcHeight="30.0" arcWidth="30.0" height="400.0" layoutX="140.0" layoutY="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="520.0">
