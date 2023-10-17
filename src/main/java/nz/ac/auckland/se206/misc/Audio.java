@@ -8,7 +8,7 @@ import nz.ac.auckland.se206.App;
 /** Represents a sound file that can be played. This class is immutable. */
 public class Audio {
 
-  MediaPlayer mediaPlayer;
+  private MediaPlayer mediaPlayer;
 
   /** Constructs a new Audio object with the given audio file name. */
   public Audio(String fileName) {
@@ -37,7 +37,9 @@ public class Audio {
     mediaPlayer.stop();
   }
 
-  /** Plays the sound file. */
+  /**
+   * Plays the sound file. If the sound file is already playing, it will be stopped and restarted.
+   */
   public void play() {
     mediaPlayer.stop();
     mediaPlayer.play();
