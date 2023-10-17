@@ -157,10 +157,14 @@ public class TestTubesPuzzleController extends Puzzle {
         selectedMap.put(clickedButton, true);
       }
     }
+    
+     int totalSelected = countSelected(selectedMap);
+      if (totalSelected == 3){
+        btnMixClicked();
+      } 
   }
 
-  @FXML
-  private void btnMixClicked(MouseEvent event) {
+  private void btnMixClicked() {
     // Check if the solution is correct
     boolean isSolutionCorrect = checkSolution();
 
