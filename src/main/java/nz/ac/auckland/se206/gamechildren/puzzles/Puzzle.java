@@ -15,6 +15,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.gamechildren.NotificationpanelController;
+import nz.ac.auckland.se206.misc.Audio;
 import nz.ac.auckland.se206.misc.GameState;
 import nz.ac.auckland.se206.misc.RootPair;
 import nz.ac.auckland.se206.screens.GameController;
@@ -70,6 +71,7 @@ public class Puzzle implements RootPair.Controller {
   private boolean isPuzzleSolved;
   private Parent root;
   private PuzzleName puzzleName;
+  private Audio completeSound = new Audio("puzzle_right.mp3");
 
   /**
    * Sets the PuzzleName for this Puzzle.
@@ -94,6 +96,7 @@ public class Puzzle implements RootPair.Controller {
     setPuzzleSolved(puzzle);
     disablePuzzle(root);
     displayBanner(createBanner(), root);
+    completeSound.play();
   }
 
   private void disablePuzzle(Pane root) {
@@ -152,7 +155,7 @@ public class Puzzle implements RootPair.Controller {
     TranslateTransition translate = new TranslateTransition();
     translate.setNode(banner);
     translate.setDuration(Duration.millis(200));
-    translate.setInterpolator(Interpolator.SPLINE(0,1,0.5,1));
+    translate.setInterpolator(Interpolator.SPLINE(0, 1, 0.5, 1));
     translate.setFromY(500);
     translate.setToY(140);
 
