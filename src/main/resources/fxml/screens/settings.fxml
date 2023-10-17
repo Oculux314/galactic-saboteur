@@ -20,12 +20,12 @@
             <Image url="@../../images/back.png" />
          </image>
       </AnimatedButton>
-      <StateButton fx:id="btnDifficulty" fitHeight="137.0" fitWidth="110.0" layoutX="156.0" layoutY="211.0">
+      <StateButton fx:id="btnDifficulty" fitHeight="130.0" fitWidth="110.0" layoutX="156.0" layoutY="220.0">
          <image>
             <Image url="@../../images/placeholder.png" />
          </image>
       </StateButton>
-      <StateButton fx:id="btnTime" fitHeight="127.0" fitWidth="110.0" layoutX="566.0" layoutY="216.0">
+      <StateButton fx:id="btnTime" fitHeight="130.0" fitWidth="110.0" layoutX="558.0" layoutY="220.0">
          <image>
             <Image url="@../../images/placeholder.png" />
          </image>
