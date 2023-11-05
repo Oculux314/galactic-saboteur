@@ -1,36 +1,52 @@
-# SOFTENG 206 - EscAIpe Room
+# Galactic Saboteur
 
-## To setup OpenAI's API
+## Quickstart
 
-- add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `apiproxy.config`
-- put inside the credentials that you received from no-reply@digitaledu.ac.nz (put the quotes "")
+Either:
+- Double click `start.bat`.
+- Run `./start.bat` in the terminal at the root (where `pom.xml` is located).
 
-  ```
-  email: "upi123@aucklanduni.ac.nz"
-  apiKey: "YOUR_KEY"
-  ```
-  these are your credentials to invoke the OpenAI GPT APIs
+## API Setup
 
-## To setup codestyle's API
+- Add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `apiproxy.config`.
+- Add OpenAI API credentials to `apiproxy.config`.
 
-- add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `codestyle.config`
-- put inside the credentials that you received from gradestyle@digitaledu.ac.nz (put the quotes "")
+Example:
 
-  ```
-  email: "upi123@aucklanduni.ac.nz"
-  accessToken: "YOUR_KEY"
-  ```
+```
+email: "upi123@aucklanduni.ac.nz"
+apiKey: "YOUR_KEY"
+```
 
- these are your credentials to invoke GradeStyle
+This will enable the project to use OpenAI's Chat-GPT 3.5 model to provide interaction.
 
-## To run the game
+## Codestyle Grading Setup
+
+- Repeat API setup process with codestyle credentials in `codestyle.config`.
+
+Example:
+
+```
+email: "upi123@aucklanduni.ac.nz"
+accessToken: "YOUR_KEY"
+```
+
+Not necessary to run the game, but retained for completeness.
+
+## Commands
+
+### Run the game
 
 `./mvnw clean javafx:run`
 
-## To debug the game
+### Debug the game
 
 `./mvnw clean javafx:run@debug` then in VS Code "Run & Debug", then run "Debug JavaFX"
 
-## To run codestyle
+### Execute codestyle grader
 
 `./mvnw clean compile exec:java@style`
+
+### Package the game as a jar file
+
+`./mvnw clean package`
