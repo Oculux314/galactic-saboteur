@@ -1,3 +1,0 @@
-We license this project under xxx license.
-
-Please refer to https://github.com/SOFTENG206-2023/escaipe-room-beta-and-final-team-05/wiki/License for full attribution.
